@@ -89,7 +89,6 @@ async def crawl_and_summarize(request: SectionRequest):
 
     return {
         "message": "Crawling and summarization completed",
-        "crawl_filename": filename,
         "summarize_filename": filename,
     }
 
