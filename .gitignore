@@ -23,7 +23,12 @@
 hs_err_pid*
 replay_pid*
 
-# junja
+## junja ##
+# 환경 변수 파일
 .env
+
+# 테스트 로그 파일
 data
+
+# 기타
 .DS_Store
