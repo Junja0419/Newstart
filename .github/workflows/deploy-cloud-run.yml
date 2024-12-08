@@ -35,18 +35,18 @@ jobs:
       # 5. Docker 이미지 빌드
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ARTIFACT_REPO }}/python-service:${{ github.sha }} .
+          docker build -t ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }} .
 
       # 6. Docker 이미지 푸시
       - name: Push Docker image to Artifact Registry
         run: |
-          docker push ${{ secrets.ARTIFACT_REPO }}/python-service:${{ github.sha }}
+          docker push ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }}
 
       # 7. Cloud Run에 배포
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy python-service \
-            --image ${{ secrets.ARTIFACT_REPO }}/python-service:${{ github.sha }} \
+          gcloud run deploy newstart \
+            --image ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }} \
             --region ${{ secrets.GCP_REGION }} \
             --platform managed \
             --allow-unauthenticated
