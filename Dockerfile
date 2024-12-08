@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 
 # Python 의존성 설치
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt --verbose
 
 # Playwright 브라우저 설치
 RUN pip install playwright && playwright install --with-deps
