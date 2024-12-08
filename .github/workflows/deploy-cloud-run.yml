@@ -30,7 +30,7 @@ jobs:
       # 4. Docker 인증 설정
       - name: Configure Docker authentication
         run: |
-          gcloud auth configure-docker us-central1-docker.pkg.dev
+          gcloud auth configure-docker asia-northeast3-docker.pkg.dev
 
       # 5. Docker 이미지 빌드
       - name: Build Docker image
