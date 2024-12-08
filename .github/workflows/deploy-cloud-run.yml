@@ -27,16 +27,16 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.ARTIFACT_REPO }}/python-service:${{ github.sha }} .
+        docker build -t ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }} .
 
     - name: Push Docker image to Artifact Registry
       run: |
-        docker push ${{ secrets.ARTIFACT_REPO }}/python-service:${{ github.sha }}
+        docker push ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }}
 
     - name: Deploy to Cloud Run
       run: |
-        gcloud run deploy python-service \
-          --image ${{ secrets.ARTIFACT_REPO }}/python-service:${{ github.sha }} \
+        gcloud run deploy newstart \
+          --image ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }} \
           --region ${{ secrets.GCP_REGION }} \
           --platform managed \
           --allow-unauthenticated
