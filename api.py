@@ -6,6 +6,8 @@ import json
 from crawler import NewsCrawler  # 동기 크롤러 모듈 가져오기
 from ai import update_content_with_ai  # AI 모듈 가져오기
 
+print("GROQ_API_KEY: ", os.environ.get("GROQ_API_KEY"))
+
 # 로깅 설정
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
