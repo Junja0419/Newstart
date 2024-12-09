@@ -52,5 +52,4 @@ jobs:
             --allow-unauthenticated \
             --port=8080 \
             --timeout=300 \
-            --set-traffic=0 \
             --heath-check-path=/healthz
