@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from groq import Groq
 import logging
 import json
@@ -10,8 +10,7 @@ logging.basicConfig(
 )
 
 # 환경 변수 로드 및 API 키 설정
-load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 
 if not GROQ_API_KEY:
     logging.error("GROQ_API_KEY가 환경 변수에 설정되어 있지 않습니다.")
