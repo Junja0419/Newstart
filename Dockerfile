@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y \
     libatk-bridge2.0-0 \
     libgtk-3-0 \
     libgbm1 \
+    # build-essential \
+    # libssl-dev \ 
+    # libffi-dev \
+    # python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Python 의존성 설치
