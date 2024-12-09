@@ -49,4 +49,8 @@ jobs:
             --image ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }} \
             --region ${{ secrets.GCP_REGION }} \
             --platform managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --port=8080 \
+            --timeout=300 \
+            --set-traffic=0 \
+            --heath-check-path=/healthz

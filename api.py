@@ -29,6 +29,9 @@ SECTIONS = {
 class SectionRequest(BaseModel):
     section: str
 
+@app.get("/healthz")
+def health_check():
+    return {"status": "ok"}
 
 @app.post("/crawl")
 def crawl_news(request: SectionRequest):
