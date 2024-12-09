@@ -29,9 +29,6 @@ SECTIONS = {
 class SectionRequest(BaseModel):
     section: str
 
-@app.get("/healthz")
-def health_check():
-    return {"status": "ok"}
 
 @app.post("/crawl")
 def crawl_news(request: SectionRequest):
@@ -186,5 +183,4 @@ if __name__ == "__main__":
 
     if not os.path.exists(DATA_DIRECTORY):
         os.makedirs(DATA_DIRECTORY)
-    port = int(os.environ.get("PORT", 8080))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
