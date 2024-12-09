@@ -37,4 +37,4 @@ COPY --from=build /app /app
 EXPOSE 8080
 
 # 애플리케이션 실행
-CMD ["python", "api.py"]
+CMD ["python", "api.py", "--host", "0.0.0.0", "--port", "8080"]
