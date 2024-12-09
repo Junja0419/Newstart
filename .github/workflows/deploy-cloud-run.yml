@@ -14,39 +14,44 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Google Cloud 인증
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
+      # 2. 변경 감지를 위한 Paths 필터 설정
+      - name: Set up paths filter
+        id: filter
+        uses: dorny/paths-filter@v2
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          filters: 
+            docker:
+              - 'Dockerfile'
+              - '**/*.py'  # 소스 코드 파일 확장자에 따라 조정
 
-      # 3. Cloud SDK 설정
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          install_components: ''  # 'docker' 제거
-
-      # 4. Docker 인증 설정
-      - name: Configure Docker authentication
-        run: |
-          gcloud auth configure-docker asia-northeast3-docker.pkg.dev
-
-      # 5. Docker 이미지 빌드
+      # 3. 변경된 경우에만 Docker 이미지 빌드 및 푸시
       - name: Build Docker image
+        if: steps.filter.outputs.docker == 'true'
         run: |
+          echo "${{ secrets.GCP_SA_KEY }}" > /tmp/gcp-key.json
+          gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
+          gcloud auth configure-docker asia-southeast3-docker.pkg.dev
           docker build -t ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }} .
-
-      # 6. Docker 이미지 푸시
-      - name: Push Docker image to Artifact Registry
-        run: |
           docker push ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }}
 
-      # 7. Cloud Run에 배포
+      # 4. 변경되지 않은 경우에만 기존 이미지 태그 설정 (선택 사항)
+      # 별도의 스텝이 필요하지 않으며, 배포 단계에서 처리됩니다.
+
+      # 5. Cloud Run에 배포
       - name: Deploy to Cloud Run
         run: |
+          if [ "${{ steps.filter.outputs.docker }}" = "true" ]; then
+            IMAGE="${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }}"
+          else
+            # 고정 태그를 사용하거나, 가장 최근 이미지를 조회합니다.
+            # 방법 1: 고정 태그 사용
+            IMAGE="${{ secrets.ARTIFACT_REPO }}/newstart:latest"
+            
+            # 방법 2: 가장 최근 이미지 조회
+            # IMAGE=$(gcloud artifacts docker images list ${{ secrets.ARTIFACT_REPO }}/newstart --limit=1 --sort-by=~TIMESTAMP --format='value(NAME)')
+          fi
           gcloud run deploy newstart \
-            --image ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }} \
+            --image $IMAGE \
             --region ${{ secrets.GCP_REGION }} \
             --platform managed \
             --allow-unauthenticated
