@@ -1,0 +1,151 @@
+  /* bookmark style */
+  .web-main-bookmark {
+    height: 24px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 24px;
+  }
+  
+  /* bookmarktab style */
+  .web-main-bookmark-tab {
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    height: 49px;
+    padding: 0px 13px;
+    position: relative;
+    width: 249px;
+  }
+  
+  .web-main-bookmark-tab .bookmark-instance {
+    left: unset !important;
+    position: relative !important;
+    top: unset !important;
+  }
+  
+  .web-main-bookmark-tab .bookmark-filled {
+    height: 24px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .web-main-bookmark-tab .text-wrapper-9 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 500;
+    height: 25px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    white-space: nowrap;
+    width: 159px;
+  }
+  
+  .web-main-bookmark-tab.state-4-hover {
+    background-color: #d6d6d680;
+    border-radius: 10px;
+  }
+  
+   /* HomeTabStyle */
+   .web-main-home-tab {
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    height: 48px;
+    padding: 0px 13px;
+    position: relative;
+    width: 249px;
+  }
+  
+  .web-main-home-tab .icon {
+    height: 24px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .web-main-home-tab .text-wrapper-8 {
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .web-main-home-tab:hover {
+    background-color: #dadbd680;
+    border-radius: 10px;
+  }
+
+  /* ProfileTabStyle */
+  .web-main-profile-tab {
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    height: 48px;
+    padding: 0px 13px;
+    position: relative;
+    width: 249px;
+  }
+  
+  .web-main-profile-tab .icon-3 {
+    height: 24px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .web-main-profile-tab .text-wrapper-11 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    width: 117px;
+  }
+  
+  .web-main-profile-tab.state-6-hover {
+    background-color: #e5e5e5;
+    border-radius: 10px;
+  }
+  
+  /* SearchTabStyle */
+  .web-main-search-tab {
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    height: 48px;
+    padding: 0px 13px;
+    position: relative;
+    width: 249px;
+  }
+  
+  .web-main-search-tab .icon-2 {
+    height: 24px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .web-main-search-tab .text-wrapper-10 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .web-main-search-tab.state-5-hover {
+    background-color: #e5e5e5;
+    border-radius: 10px;
+  }
+  

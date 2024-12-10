@@ -1,0 +1,239 @@
+  /* BookmarkHover Style */
+  .web-headline-bookmark.state-default {
+    background-image: url(https://c.animaapp.com/JmVmo2aX/img/bookmark-6@2x.png);
+    background-size: 100% 100%;
+    height: 30px;
+    width: 30px;
+  }
+  
+  .web-headline-bookmark.state-bookmark {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .web-headline-bookmark.web-headline-bookmark-filled {
+    height: 30px;
+  }
+  
+  .web-headline-bookmark.default {
+    height: 30px;
+  }
+  
+  .web-headline-bookmark.hover {
+    height: 30px;
+  }
+  
+  /* BookmarkIconForMobileTab Style */
+  .web-headline-bookmark-wrapper {
+    height: 24px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 24px;
+  }
+  
+  /* Frame Style */
+  .web-headline-frame {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 66px;
+    height: 1174px;
+    left: 655px;
+    min-width: 537px;
+    position: absolute;
+    top: 65px;
+  }
+  
+  .web-headline-title {
+    align-items: flex-start;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    position: relative;
+    width: 537px;
+  }
+  
+  .web-headline-newspaper {
+    align-items: flex-end;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    gap: 11px 418px;
+    padding: 7px 0px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .web-headline-newspaper-text {
+    color: #267bf1;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-top: -1.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .web-headline-newspaper-title {
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 40px;
+    position: relative;
+    width: 537px;
+  }
+  
+  .web-headline-newspaper-title-date {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 40px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .web-headline-bookmark-button {
+    position: relative !important;
+  }
+  
+  .web-headline-line-wrapper {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: -1.00px;
+    margin-top: -25px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .web-headline-line-image {
+    align-self: stretch;
+    height: 2px;
+    margin-top: -2.00px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .web-headline-article {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    width: 537px;
+  }
+  
+  .web-headline-article-text {
+    white-space: pre-wrap; /* 줄바꿈과 공백을 반영 */
+    align-self: stretch;
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 32px;
+    margin-top: -1.00px;
+    position: relative;
+  }
+  
+  /* FrameForMobile Style */
+  .mobile-headline-frame {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+    left: -10px;
+    position: absolute;
+    top: 42px;
+    width: 410px;
+  }
+  
+  .mobile-headline-title-wrapper {
+    height: 105px;
+    position: relative;
+    width: 348px;
+  }
+  
+  .mobile-headline-title {
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    top: 27px;
+    width: 346px;
+  }
+  
+  .mobile-headline-date {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    top: 80px;
+    white-space: nowrap;
+  }
+  
+  .mobile-headline-newspaper {
+    color: #267bf1;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    top: -1px;
+    white-space: nowrap;
+  }
+  
+  .mobile-headline-bookmark-button {
+    background-image: url(https://c.animaapp.com/JmVmo2aX/img/bookmark-4@2x.png) !important;
+    height: 20px !important;
+    left: 328px !important;
+    position: absolute !important;
+    top: 83px !important;
+    width: 20px !important;
+  }
+  
+  .mobile-headline-line-image {
+    height: 1px;
+    object-fit: cover;
+    position: relative;
+    width: 350px;
+  }
+  
+  .mobile-headline-article-text {
+    white-space: pre-wrap; /* 줄바꿈과 공백을 반영 */
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 25px;
+    position: relative;
+    width: 319px;
+  }
+  

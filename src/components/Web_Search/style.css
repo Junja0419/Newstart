@@ -1,0 +1,485 @@
+  /* Menu */
+  .search-menu {
+    height: 1525px;
+    width: 397px;
+  }
+  
+  .search-menu .overlap-group-4 {
+    background-color: #ffffff;
+    border-color: #e8eaee;
+    border-right-style: solid;
+    border-right-width: 2px;
+    height: 1504px;
+    left: -2px;
+    position: relative;
+    top: -2px;
+    width: 401px;
+  }
+  
+  .search-menu .div-2 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    left: 52px;
+    position: absolute;
+    top: 174px;
+    width: 249px;
+  }
+  
+  .search-menu .home-tab-instance {
+    align-self: stretch !important;
+    width: 100% !important;
+  }
+  
+  .search-menu .title {
+    color: var(--bananistyle);
+    font-family: "Inter", Helvetica;
+    font-size: 48px;
+    font-weight: 800;
+    left: 52px;
+    letter-spacing: 0;
+    line-height: 40px;
+    position: absolute;
+    top: 81px;
+    width: 280px;
+  }
+
+  /* PhoneSearchBar */
+  .phone-search-bar {
+    height: 83px;
+    width: 354px;
+  }
+  
+  .phone-search-bar .overlap-group {
+    height: 83px;
+    position: relative;
+  }
+  
+  .phone-search-bar .frame {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 83px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 354px;
+  }
+  
+  .phone-search-bar .div {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 83px;
+    justify-content: space-around;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .phone-search-bar .rectangle {
+    align-self: stretch;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-radius: 28px;
+    height: 54px;
+    margin-left: -1.00px;
+    margin-right: -1.00px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .phone-search-bar .input {
+    background-color: transparent;
+    border: 0;
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 15px;
+    font-weight: 500;
+    height: 24px;
+    left: 30px;
+    letter-spacing: 0;
+    line-height: 24px;
+    padding: 0;
+    position: absolute;
+    top: 29px;
+    white-space: nowrap;
+    width: 174px;
+  }
+  
+  .phone-search-bar .search-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 24px;
+    justify-content: flex-end;
+    left: 317px;
+    padding: 0px 9px;
+    position: absolute;
+    top: 30px;
+    width: 21px;
+  }
+  
+  .phone-search-bar .search-instance {
+    left: unset !important;
+    margin-left: -17.40px !important;
+    position: relative !important;
+    top: unset !important;
+  }
+  
+  .phone-search-bar .overlap-group-2 {
+    height: 127px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 354px;
+  }
+  
+  .phone-search-bar .rectangle-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: -115.00px;
+    padding: 10px;
+    position: relative;
+    width: 354px;
+  }
+  
+  .phone-search-bar .rectangle-2 {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #a09cab80;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px #0000001f;
+    height: 180px;
+    margin-bottom: -1.00px;
+    margin-left: -1.00px;
+    margin-right: -3.00px;
+    margin-top: -1.00px;
+    position: relative;
+    width: 338px;
+  }
+  
+  .phone-search-bar .frame-2 {
+    align-items: center;
+    display: flex;
+    gap: 25px;
+    height: 56px;
+    left: 10px;
+    padding: 0px 25px;
+    position: absolute;
+    top: 71px;
+    width: 327px;
+  }
+  
+  .phone-search-bar .icon {
+    height: 17.5px;
+    position: relative;
+    width: 17.5px;
+  }
+  
+  .phone-search-bar .text-wrapper {
+    color: #267bf1b2;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.50px;
+    line-height: 24px;
+    position: relative;
+    width: 94px;
+  }
+  
+  .phone-search-bar .line {
+    height: 1px;
+    left: 24px;
+    object-fit: cover;
+    position: absolute;
+    top: 70px;
+    width: 313px;
+  }
+  
+  .phone-search-bar .frame-3 {
+    align-items: center;
+    display: flex;
+    gap: 25px;
+    height: 56px;
+    left: 10px;
+    padding: 0px 25px;
+    position: absolute;
+    top: 127px;
+    width: 327px;
+  }
+  
+  .phone-search-bar.click {
+    position: relative;
+  }
+  
+  .phone-search-bar.hover .rectangle {
+    border-color: #a09cab80;
+    box-shadow: 0px 2px 5px #0000001f;
+  }
+  
+  .phone-search-bar.default .rectangle {
+    border-color: #a09cab;
+  }
+  
+  .phone-search-bar.click .rectangle {
+    border-color: #a09cab;
+  }
+
+  /* SearchIcon */
+  .search {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+  
+  .search.thirty-two {
+    height: 32px;
+    width: 32px;
+  }
+  
+  .search.forty {
+    height: 40px;
+    width: 40px;
+  }
+  
+  .search.twenty {
+    height: 20px;
+    width: 20px;
+  }
+  
+  .search.sixteen {
+    height: 16px;
+    width: 16px;
+  }
+  
+  .search.forty-eight {
+    height: 48px;
+    width: 48px;
+  }
+  
+  .search.twenty-four {
+    height: 24px;
+    width: 24px;
+  }
+  
+  /* SearchBar */
+  .search-bar .overlap-group-3 {
+    position: relative;
+  }
+  
+  .search-bar .frame-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 83px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 550px;
+  }
+  
+  .search-bar .frame-4 {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 83px;
+    justify-content: space-around;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .search-bar .rectangle-3 {
+    align-self: stretch;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-radius: 28px;
+    height: 54px;
+    margin-left: -1.00px;
+    margin-right: -1.00px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .search-bar .text-wrapper-2 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 15px;
+    font-weight: 500;
+    left: 30px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    top: 29px;
+    white-space: nowrap;
+  }
+  
+  .search-bar .search-instance-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 24px;
+    justify-content: flex-end;
+    left: 492px;
+    position: absolute;
+    top: 30px;
+    width: 32px;
+  }
+  
+  .search-bar .instance-node {
+    left: unset !important;
+    position: relative !important;
+    top: unset !important;
+  }
+  
+  .search-bar .div-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 205px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 540px;
+  }
+  
+  .search-bar .frame-5 {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    margin-right: -10.00px;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .search-bar .rectangle-4 {
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #a09cab80;
+    border-radius: 20px;
+    box-shadow: 0px 2px 5px #0000001f;
+    height: 180px;
+    margin-bottom: -1.00px;
+    margin-left: -1.00px;
+    margin-right: -1.00px;
+    margin-top: -1.00px;
+    position: relative;
+    width: 532px;
+  }
+  
+  .search-bar .frame-6 {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 59px;
+    justify-content: flex-end;
+    left: 483px;
+    position: absolute;
+    top: 73px;
+    width: 31px;
+  }
+  
+  .search-bar .frame-7 {
+    align-items: center;
+    display: flex;
+    gap: 25px;
+    height: 56px;
+    left: 10px;
+    padding: 0px 25px;
+    position: absolute;
+    top: 71px;
+    width: 530px;
+  }
+  
+  .search-bar .img {
+    height: 17.5px;
+    position: relative;
+    width: 17.5px;
+  }
+  
+  .search-bar .text-wrapper-3 {
+    color: #267bf1b2;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.50px;
+    line-height: 24px;
+    position: relative;
+    width: 94px;
+  }
+  
+  .search-bar .frame-8 {
+    align-items: center;
+    display: flex;
+    gap: 25px;
+    height: 56px;
+    left: 10px;
+    padding: 0px 25px;
+    position: absolute;
+    top: 127px;
+    width: 530px;
+  }
+  
+  .search-bar .line-2 {
+    height: 1px;
+    left: 21px;
+    object-fit: cover;
+    position: absolute;
+    top: 131px;
+    width: 499px;
+  }
+  
+  .search-bar.property-1-0-hover {
+    height: 83px;
+    width: 550px;
+  }
+  
+  .search-bar.property-1-0-default {
+    height: 83px;
+    width: 550px;
+  }
+  
+  .search-bar.property-1-0-click {
+    height: 205px;
+    width: 540px;
+  }
+  
+  .search-bar.property-1-0-hover .overlap-group-3 {
+    height: 83px;
+  }
+  
+  .search-bar.property-1-0-default .overlap-group-3 {
+    height: 83px;
+  }
+  
+  .search-bar.property-1-0-click .overlap-group-3 {
+    height: 205px;
+  }
+  
+  .search-bar.property-1-0-hover .rectangle-3 {
+    border-color: #a09cab80;
+    box-shadow: 0px 2px 5px #0000001f;
+  }
+  
+  .search-bar.property-1-0-default .rectangle-3 {
+    border-color: #a09cab;
+  }
+  
+  .search-bar.property-1-0-click .rectangle-3 {
+    border-color: #a09cab;
+  }
+  

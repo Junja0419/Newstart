@@ -1,0 +1,141 @@
+  .headline {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  /* 반응형 웹 */
+  .headline .div-3 { 
+    background-color: #ffffff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 모바일용 탭 메뉴 */
+  .headline .navigation-bottom {
+    align-items: flex-start;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0px -4px 4px #0000000f;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 77px;
+    padding: 8px 0px;
+    position: fixed;
+    bottom :0;
+    width: 380px;
+  }
+  
+  .headline .tab-bar-buttons {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    padding: 0px 36px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .headline .tab {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: space-between;
+    padding: 0px 13px;
+    position: relative;
+    width: 48px;
+  }
+  
+  .headline .icon-4 {
+    flex: 0 0 auto;
+    margin-left: -1.00px;
+    margin-right: -1.00px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .headline .label {
+    color: #1c1b1f;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -5.00px;
+    margin-right: -5.00px;
+    margin-top: -2px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .headline .bookmark-2 {
+    left: unset !important;
+    margin-left: -1.00px !important;
+    margin-right: -1.00px !important;
+    position: relative !important;
+    top: unset !important;
+  }
+  
+  .headline .label-2 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -16.00px;
+    margin-right: -16.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .headline .label-3 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -8.00px;
+    margin-right: -8.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .headline .icon-5 {
+    height: 24px;
+    margin-left: -1.00px;
+    margin-right: -1.00px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .headline .label-4 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -6.50px;
+    margin-right: -6.50px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  /* PC용 탭 메뉴 */
+  .headline .frame-51 {
+    left: 0 !important;
+    position: fixed !important;
+    top: 0 !important;
+  }
+  

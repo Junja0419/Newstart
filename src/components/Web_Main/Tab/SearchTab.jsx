@@ -1,0 +1,66 @@
+/*
+We're constantly improving the code you see. 
+Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
+*/
+
+import PropTypes from "prop-types";
+import React from "react";
+import { useReducer } from "react";
+import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
+import "./style.css";
+
+export const SearchTab = ({ stateProp }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    state: stateProp || "default",
+  });
+  const navigate = useNavigate(); // navigate 함수 정의
+
+  return (
+    <div
+      className={`web-main-search-tab state-5-${state.state}`}
+      onMouseLeave={() => {
+        dispatch("mouse_leave");
+      }}
+      onMouseEnter={() => {
+        dispatch("mouse_enter");
+      }}
+      onClick={() => navigate("/search")} // 클릭 시 "/search" 경로로 이동
+    >
+      <img
+        className="icon-2"
+        alt="Icon"
+        src={
+          state.state === "hover"
+            ? "https://c.animaapp.com/zuoomGM9/img/icon-6@2x.png"
+            : "https://c.animaapp.com/zuoomGM9/img/icon-10@2x.png"
+        }
+      />
+
+      <div className="text-wrapper-10">Search</div>
+    </div>
+  );
+};
+
+function reducer(state, action) {
+  switch (action) {
+    case "mouse_enter":
+      return {
+        ...state,
+        state: "hover",
+      };
+
+    case "mouse_leave":
+      return {
+        ...state,
+        state: "default",
+      };
+  }
+
+  return state;
+}
+
+SearchTab.propTypes = {
+  stateProp: PropTypes.oneOf(["hover", "default"]),
+};
+
+export default SearchTab;

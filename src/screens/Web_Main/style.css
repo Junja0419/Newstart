@@ -1,0 +1,317 @@
+  .web-main {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  /* 반응형 웹 */
+  .web-main .div-3 {
+    background-color: #ffffff;
+    position: relative;
+  }
+
+  /* 모바일용 화면 */
+  .web-main .mobile-frame-4 {
+    overflow : hidden;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    position: absolute;
+    top: 57px;
+    width: 390px;
+  }
+  
+  .web-main .frame-4 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    left: 639px;
+    /* overflow-y: scroll; */
+    position: absolute;
+    top: 57px;
+    width: 537px;
+  }
+  
+  .web-main .view {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 36px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .web-main .frame-5 {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    padding: 12px 0px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .web-main .title-2 {
+    align-self: stretch;
+    color: #1c1b1f;
+    font-family: "Inter", Helvetica;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-top: -1.00px;
+    position: relative;
+  }
+  
+  .web-main .component-374 {
+    flex: 0 0 auto !important;
+    padding: unset !important;
+  }
+  
+  .web-main .folder {
+    background-image: url(https://c.animaapp.com/zuoomGM9/img/free-icon-open-folder-5082720-1-1@2x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 243px;
+    position: relative;
+    width: 269px;
+  }
+  
+  .web-main .line-2 {
+    height: 1px;
+    margin-bottom: -1.00px;
+    position: relative;
+    width: 537px;
+  }
+  
+  .web-main .headline-2 {
+    align-items: flex-end;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    padding: 10px 0px;
+    position: relative;
+    width: 537px;
+  }
+  
+  .web-main .title-3 {
+    align-self: stretch;
+    color: #1c1b1f;
+    font-family: "Inter", Helvetica;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-top: -1.00px;
+    position: relative;
+    white-space: nowrap;
+    width: 421.06px;
+  }
+  
+  .web-main .text-wrapper-12 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    height: 46.36px;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: right;
+    white-space: nowrap;
+    width: 84px;
+  }
+  
+  .web-main .menu-bar-wrapper {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 537px;
+    overflow-x: hidden;
+    padding: 10px 0px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .web-main .menu-bar-instance {
+    align-self: stretch !important;
+    position: relative !important;
+    width: 100% !important;
+  }
+  
+  .web-main .design-component-instance-node {
+    width: 533px !important;
+  }
+  
+  .web-main .menu-bar-2 {
+    margin-right: -199.37px !important;
+  }
+  
+  .web-main .menu-bar-3 {
+    height: 1px !important;
+  }
+  
+  .web-main .headline-instance {
+    align-self: stretch !important;
+    flex: 0 0 auto !important;
+    width: 100% !important;
+  }
+  
+  .web-main .headline-3 {
+    width: 74px !important;
+  }
+  
+  .web-main .headline-4 {
+    flex: 1 !important;
+    flex-grow: 1 !important;
+  }
+  
+  .web-main .headline-5 {
+    margin-top: unset !important;
+  }
+  
+  .web-main .headline-6 {
+    margin-right: -16.00px !important;
+  }
+  
+  .web-main .headline-7 {
+    margin-right: -14.00px !important;
+  }
+  
+  /* 모바일용 네비게이터 */
+  .web-main .navigation-bottom {
+    align-items: flex-start;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0px -4px 4px #0000000f;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 77px;
+    padding: 8px 0px;
+    position: fixed;
+    bottom :0;
+    width: 380px;
+  }
+  
+  .web-main .navigation-bottom .tab-bar-buttons {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    padding: 0px 36px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .web-main .navigation-bottom .tab {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: space-between;
+    padding: 0px 13px;
+    position: relative;
+    width: 48px;
+  }
+  
+  .web-main .navigation-bottom .icon-4 {
+    flex: 0 0 auto;
+    margin-left: -1.00px;
+    margin-right: -1.00px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .web-main .navigation-bottom .label {
+    color: #1c1b1f;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -5.00px;
+    margin-right: -5.00px;
+    margin-top: -2px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .web-main .navigation-bottom .bookmark-2 {
+    left: unset !important;
+    margin-left: -1.00px !important;
+    margin-right: -1.00px !important;
+    position: relative !important;
+    top: unset !important;
+  }
+  
+  .web-main .navigation-bottom .label-2 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -16.00px;
+    margin-right: -16.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .web-main .navigation-bottom .label-3 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -8.00px;
+    margin-right: -8.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .web-main .navigation-bottom .icon-5 {
+    height: 24px;
+    margin-left: -1.00px;
+    margin-right: -1.00px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .web-main .navigation-bottom .label-4 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -6.50px;
+    margin-right: -6.50px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  /* PC용 네비게이터 */
+  .web-main .frame-51 {
+    left: 0 !important;
+    position: fixed !important;
+    top: 0 !important;
+  }
+  

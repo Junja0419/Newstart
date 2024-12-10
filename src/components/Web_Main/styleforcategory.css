@@ -1,0 +1,329 @@
+  .web-main-menu-bar {
+    width: 738px;
+  }
+  
+  .web-main-menu-bar .frame-wrapper {
+    align-items: flex-start;
+    display: flex;
+    height: 5px;
+    position: relative;
+    width: 732px;
+  }
+  
+  .web-main-menu-bar .frame-2 {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    position: relative;
+  }
+  
+  .web-main-menu-bar .menu-tab {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 122px;
+  }
+  
+  .web-main-menu-bar .text-wrapper-2 {
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    height: 40px;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: 100px;
+  }
+  
+  .web-main-menu-bar .line {
+    height: 2px;
+    margin-bottom: -1.00px;
+    position: relative;
+    width: 122px;
+  }
+  
+  .web-main-menu-bar .menu-tab-2 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    justify-content: center;
+    position: relative;
+    width: 122px;
+  }
+  
+  .web-main-menu-bar .text-wrapper-3 {
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-left: -10.50px;
+    margin-right: -10.50px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: center;
+    width: 143px;
+  }
+  
+  .web-main-menu-bar .img {
+    align-self: stretch;
+    height: 2px;
+    margin-bottom: -1.00px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .web-main-menu-bar .text-wrapper-4 {
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-left: -10.50px;
+    margin-right: -10.50px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: center;
+    width: 143px;
+  }
+  
+  .web-main-menu-bar .text-wrapper-5 {
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-left: -10.50px;
+    margin-right: -10.50px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: center;
+    width: 143px;
+  }
+  
+  .web-main-menu-bar .text-wrapper-6 {
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-left: -10.50px;
+    margin-right: -10.50px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: center;
+    width: 143px;
+  }
+  
+  .web-main-menu-bar .text-wrapper-7 {
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-left: -10.50px;
+    margin-right: -10.50px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: center;
+    width: 143px;
+  }
+  
+  .web-main-menu-bar.social {
+    height: 58px;
+  }
+  
+  .web-main-menu-bar.it {
+    height: 58px;
+  }
+  
+  .web-main-menu-bar.economy {
+    height: 58px;
+  }
+  
+  .web-main-menu-bar.life {
+    height: 58px;
+  }
+  
+  .web-main-menu-bar.politics {
+    height: 60px;
+  }
+  
+  .web-main-menu-bar.world {
+    height: 58px;
+  }
+  
+  .web-main-menu-bar.social .frame-2 {
+    margin-bottom: -35.49px;
+  }
+  
+  .web-main-menu-bar.it .frame-2 {
+    margin-bottom: -35.49px;
+  }
+  
+  .web-main-menu-bar.economy .frame-2 {
+    margin-bottom: -35.49px;
+  }
+  
+  .web-main-menu-bar.life .frame-2 {
+    margin-bottom: -35.49px;
+  }
+  
+  .web-main-menu-bar.politics .frame-2 {
+    margin-bottom: -35.33px;
+  }
+  
+  .web-main-menu-bar.world .frame-2 {
+    margin-bottom: -35.49px;
+  }
+  
+  .web-main-menu-bar.social .text-wrapper-2 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.it .text-wrapper-2 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.economy .text-wrapper-2 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.life .text-wrapper-2 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.politics .text-wrapper-2 {
+    color: #267bf1;
+  }
+  
+  .web-main-menu-bar.world .text-wrapper-2 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.social .text-wrapper-3 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.it .text-wrapper-3 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.economy .text-wrapper-3 {
+    color: #267bf1;
+  }
+  
+  .web-main-menu-bar.life .text-wrapper-3 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.politics .text-wrapper-3 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.world .text-wrapper-3 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.social .text-wrapper-4 {
+    color: #267bf1;
+  }
+  
+  .web-main-menu-bar.it .text-wrapper-4 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.economy .text-wrapper-4 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.life .text-wrapper-4 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.politics .text-wrapper-4 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.world .text-wrapper-4 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.social .text-wrapper-5 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.it .text-wrapper-5 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.economy .text-wrapper-5 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.life .text-wrapper-5 {
+    color: #267bf1;
+  }
+  
+  .web-main-menu-bar.politics .text-wrapper-5 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.world .text-wrapper-5 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.social .text-wrapper-6 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.it .text-wrapper-6 {
+    color: #267bf1;
+  }
+  
+  .web-main-menu-bar.economy .text-wrapper-6 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.life .text-wrapper-6 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.politics .text-wrapper-6 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.world .text-wrapper-6 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.social .text-wrapper-7 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.it .text-wrapper-7 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.economy .text-wrapper-7 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.life .text-wrapper-7 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.politics .text-wrapper-7 {
+    color: #a09cab;
+  }
+  
+  .web-main-menu-bar.world .text-wrapper-7 {
+    color: #267bf1;
+  }
+  

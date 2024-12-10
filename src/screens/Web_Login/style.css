@@ -1,0 +1,201 @@
+.login {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  /* 반응형 웹 */
+  .login .div {
+    background-color: #ffffff;
+  }
+  
+  /* 모바일용 화면 (대부분 PC에서도 공통으로 씀) */
+  .login .frame { 
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 66px;
+    left: 0;
+    position: absolute;
+    top: 30px;
+    width: 390px;
+  }
+  
+  .login .title-wrapper {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 8px;
+    justify-content: center;
+    padding: 8px 16px;
+    position: relative;
+    width: 390px;
+  }
+  
+  .login .title {
+    color: var(--bananistyle);
+    flex: 1;
+    font-family: "Inter", Helvetica;
+    font-size: 23px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-top: -1.00px;
+    position: relative;
+  }
+  
+  .login .frame-wrapper {
+    align-items: flex-end;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 38px;
+    padding: 0px 16px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .login .div-2 {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 28px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .login .view {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .login .text-wrapper-2 {
+    align-self: stretch;
+    color: #1c1b1f;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 24px;
+    margin-top: -1.00px;
+    position: relative;
+  }
+  
+  .login .text-input {
+    align-self: stretch;
+    background-color: transparent;
+    border: 0;
+    color: #a09cab;
+    flex: 0 0 auto;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+  }
+  
+  .login .line {
+    align-self: stretch;
+    height: 1px;
+    margin-bottom: -0.20px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .login .element {
+    align-self: stretch;
+    background-color: transparent;
+    border: 0;
+    color: #a09cab;
+    flex: 0 0 auto;
+    font-family: "Inter", Helvetica;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+  }
+  
+  .login .component-87 {
+    align-items:center;
+    position: fixed !important;
+    bottom: 5%;
+    width: 380px !important;
+  }
+  
+  /* PC용 화면 */
+  .login .frame-2 {
+    align-items: flex-start;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 50px;
+    justify-content: center;
+    left: 580px;
+    min-height: 409px;
+    min-width: 371px;
+    padding: 10px;
+    position: relative;
+    top: 96px;
+  }
+  
+  .login .title-2 {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 352px;
+  }
+  
+  .login .title-3 {
+    color: var(--bananistyle);
+    font-family: "Inter", Helvetica;
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-top: -1.00px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .login .text-wrapper-3 {
+    color: #267bf1;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .login .login-button {
+    left: 148px !important;
+  }
+  
+  .login .component-87-instance {
+    align-self: stretch !important;
+    width: 100% !important;
+  }
+  
