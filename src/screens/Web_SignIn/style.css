@@ -123,14 +123,6 @@
     height:63px;
   }
 
-  .web-signin .frame-4-for-mobile { 
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 17px;
-    width: 280px;
-  }
-
   .web-signin .p-for-mobile {
     justify-content: stretch;
     color: #267bf1;
@@ -140,4 +132,40 @@
     letter-spacing: 0;
     line-height: 24px;
     position: relative;
+  }
+
+  .web-signin .frame-4-for-mobile { 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    width: 280px;
+  }
+
+  .web-signin .button-for-mobile {
+    width : 280px;
+  }
+
+  .web-signin .button-text-for-mobile {
+    font-size : 17px;
+  }
+
+  .web-signin .classNameforpadding {
+    padding-left: 7px;
+  }
+
+  .web-signin .text-wrapper-3-for-mobile {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+
+  .web-signin .signupbutton-for-mobile {
+    font-size: 17px
   }

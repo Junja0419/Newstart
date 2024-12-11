@@ -50,18 +50,25 @@ export const Web_SignIn = () => {
           </div>
         
           <div className="frame-4-for-mobile">
-            <Google />
-            <Naver />
-            <div className="div-wrapper" //navigate
+            <Google 
+              className="button-for-mobile"
+              classNameforpadding="classNameforpadding"
+              classNameformobiletext="button-text-for-mobile"
+            />
+            <Naver 
+              className="button-for-mobile"
+              classNameformobiletext="button-text-for-mobile"
+            />
+            <div className="div-wrapper button-for-mobile" //navigate
             onClick={() => navigate("/login")} // 클릭 시 "/login" 경로로 이동
             style={{ cursor: "pointer" }} // 클릭 가능하도록 커서 변경
             >
-              <div className="text-wrapper-3">이메일 로그인</div>
+              <div className="text-wrapper-3-for-mobile">이메일 로그인</div>
             </div>
 
             <div className="group-wrapper">
               <div className="group">
-                <SignUpButton className="frame-56" />
+                <SignUpButton className="signupbutton-for-mobile" />
               </div>
             </div>
           </div>

@@ -10,11 +10,11 @@ import "./style.css";
 export const SignUpButton = ({ className }) => {
     const navigate = useNavigate(); // navigate 함수 정의
   return (
-    <div className={`web-signin-frame ${className}`}
+    <div className={`web-signin-frame`}
     onClick={() => navigate("/signup")} // 클릭 시 "/signup" 경로로 이동
     style={{ cursor: "pointer" }} // 클릭 가능하도록 커서 변경
     >
-      <div className="text-wrapper-2">회원가입</div>
+      <div className={`text-wrapper-2 ${className}`}>회원가입</div>
     </div>
   );
 };

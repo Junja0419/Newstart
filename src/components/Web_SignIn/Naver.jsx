@@ -6,9 +6,12 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 import React from "react";
 import "./style.css";
 
-export const Naver = () => {
+export const Naver = ({
+  className,
+  classNameformobiletext,
+ }) => {
   return (
-    <div className="web-signin-naver">
+    <div className={`web-signin-naver ${className}`}>
       <div className="logo">
         <div className="overlap-group">
           <div className="rectangle" />
@@ -22,7 +25,7 @@ export const Naver = () => {
           />
         </div>
       </div>
-      <div className="div">네이버로 로그인</div>
+      <div className={`div ${classNameformobiletext}`}>네이버로 로그인</div>
 
       
     </div>
