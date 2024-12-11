@@ -68,7 +68,7 @@ export const Web_SignUp = () => {
                     alt="Line"
                     src="https://c.animaapp.com/m1TRmDWZ/img/line-3-8@2x.png"
                   />
-                  {emailError && <span className="error">{emailError}</span>}
+                  {emailError && <span className="error-message">{emailError}</span>}
                 </div>
 
                 <div className="div-2">
@@ -86,7 +86,7 @@ export const Web_SignUp = () => {
                     alt="Line"
                     src="https://c.animaapp.com/m1TRmDWZ/img/line-3-8@2x.png"
                   />
-                  {passwordError && <span className="error">{passwordError}</span>}
+                  {passwordError && <span className="error-message">{passwordError}</span>}
                 </div>
 
                 <div className="div-2">
@@ -104,7 +104,7 @@ export const Web_SignUp = () => {
                     alt="Line"
                     src="https://c.animaapp.com/m1TRmDWZ/img/line-3-8@2x.png"
                   />
-                  {confirmPasswordError && <span className="error">{confirmPasswordError}</span>}
+                  {confirmPasswordError && <span className="error-message">{confirmPasswordError}</span>}
                 </div>
               </div>
 
@@ -178,7 +178,9 @@ export const Web_SignUp = () => {
               emailValid={!emailError}
               passwordValid={!passwordError}
               confirmPasswordValid={!confirmPasswordError}
-              navigateTo="/signupprofile" // 성공 시 이동할 경로
+              navigateTo="/auth/profile" // 성공 시 이동할 경로
+              email = {email}
+              password = {password}
           />
           </>
         )}
@@ -209,7 +211,7 @@ export const Web_SignUp = () => {
               alt="Line"
               src="https://c.animaapp.com/m1TRmDWZ/img/line-3-8@2x.png"
             />
-            {emailError && <span className="error">{emailError}</span>}
+            {emailError && <span className="error-message">{emailError}</span>}
           </div>
 
           <div className="div-2">
@@ -227,7 +229,7 @@ export const Web_SignUp = () => {
               alt="Line"
               src="https://c.animaapp.com/m1TRmDWZ/img/line-3-8@2x.png"
             />
-            {passwordError && <span className="error">{passwordError}</span>}
+            {passwordError && <span className="error-message">{passwordError}</span>}
           </div>
 
           <div className="div-2">
@@ -245,7 +247,7 @@ export const Web_SignUp = () => {
               alt="Line"
               src="https://c.animaapp.com/m1TRmDWZ/img/line-3-8@2x.png"
             />
-            {confirmPasswordError && <span className="error">{confirmPasswordError}</span>}
+            {confirmPasswordError && <span className="error-message">{confirmPasswordError}</span>}
           </div>
         </div>
 
@@ -317,7 +319,9 @@ export const Web_SignUp = () => {
           emailValid={!emailError}
           passwordValid={!passwordError}
           confirmPasswordValid={!confirmPasswordError}
-          navigateTo="/signupprofile" // 성공 시 이동할 경로
+          navigateTo="/auth/profile" // 성공 시 이동할 경로
+          email = {email}
+          password = {password}
         />
       </div>
       )}

@@ -26,7 +26,7 @@ export const Web_SignIn = () => {
             <Google />
             <Naver />
             <div className="div-wrapper" //navigate
-            onClick={() => navigate("/login")} // 클릭 시 "/login" 경로로 이동
+            onClick={() => navigate("/auth/email/login")} // 클릭 시 이메일 로그인 페이지로 이동
             style={{ cursor: "pointer" }} // 클릭 가능하도록 커서 변경
             >
               <div className="text-wrapper-3">이메일 로그인</div>
@@ -60,7 +60,7 @@ export const Web_SignIn = () => {
               classNameformobiletext="button-text-for-mobile"
             />
             <div className="div-wrapper button-for-mobile" //navigate
-            onClick={() => navigate("/login")} // 클릭 시 "/login" 경로로 이동
+            onClick={() => navigate("/auth/email/login")} // 클릭 시 이메일 로그인 페이지로 이동
             style={{ cursor: "pointer" }} // 클릭 가능하도록 커서 변경
             >
               <div className="text-wrapper-3-for-mobile">이메일 로그인</div>

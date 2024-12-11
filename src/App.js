@@ -17,18 +17,18 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Web_SignIn />} />
-        <Route path="/signup" element={<Web_SignUp />} />
-        <Route path="/signupprofile" element={<Web_SignUp_Profile />} />
-        <Route path="/login" element={<Web_Login />} />
-        <Route path="/main" element={<Web_Main />} />
-        <Route path="/bookmark" element={<Web_Bookmark />} />
-        <Route path="/search" element={<Web_Search />} />
-        <Route path="/profile" element={<Web_Profile />} />
-        <Route path="/profileset" element={<Web_Profile_Setting />} />
-        <Route path="/profilepass" element={<Web_Profile_Password />} />
-        <Route path="/headline" element={<Web_Headline />} />
-        <Route path="/summary" element={<Web_Summary />} />
+        <Route path="/login" element={<Web_SignIn />} />
+        <Route path="/auth/joinForm" element={<Web_SignUp />} />
+        <Route path="/auth/profile" element={<Web_SignUp_Profile />} />
+        <Route path="/auth/email/login" element={<Web_Login />} />
+        <Route path="/" element={<Web_Main />} />
+        <Route path="/bookmark/:id" element={<Web_Bookmark />} />
+        <Route path="/search/:id" element={<Web_Search />} />
+        <Route path="/profile/:id" element={<Web_Profile />} />
+        <Route path="/profile/update" element={<Web_Profile_Setting />} />
+        <Route path="/auth/password" element={<Web_Profile_Password />} />
+        <Route path="/headline/:headline_id" element={<Web_Headline />} />
+        <Route path="/summary/view" element={<Web_Summary />} />
       </Routes>
     </Router>
   );

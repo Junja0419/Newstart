@@ -1,11 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { useWindowWidth } from "../../breakpoints";
-import LoginButton from "../../components/Web_Login/LoginButton";
+import { useLocation } from "react-router-dom";
+import CompleteButton from "../../components/Web_SignUp_Profile/CompleteButton";
 import User from "../../components/Web_SignUp_Profile/User";
 import "./style.css";
 
 export const Web_SignUp_Profile = () => {
   const screenWidth = useWindowWidth();
+  const location = useLocation();
+  const { email, password } = location.state || {}; // 전달된 state에서 email과 password 추출
+  const [nickname, setNickname] = useState(""); // 닉네임 상태 관리
+
+  const onClickCompleteBtn = async () => {
+    try {
+      const bodyData = {
+        username: email, // 이메일
+        password: password, // 비밀번호
+        nickname: nickname, // 닉네임
+        image_url: "test", // 프로필 사진
+        platForName: "email", // 로그인 방법
+        noti_yn: "N", // 알림 여부 (N으로 고정)
+      };
+  
+      // body 내용을 console로 출력
+      console.log("전송할 데이터:", JSON.stringify(bodyData));
+  
+      const response = await fetch("/auth/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(bodyData),
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok && !data.ok) {
+        alert("회원가입 실패: 서버에서 오류가 발생했습니다.");
+      } 
+    } catch (error) {
+      console.error("API 요청 중 오류 발생:", error);
+      alert("서버와 통신 중 오류가 발생했습니다.");
+    }
+  };
 
   return (
     <div className="sign-up-profile"> 
@@ -43,6 +78,8 @@ export const Web_SignUp_Profile = () => {
 
                       <input className="text-input" 
                         placeholder="닉네임을 입력해주세요"
+                        value={nickname}
+                        onChange={(e) => setNickname(e.target.value)} // 닉네임 업데이트
                       />
 
                       <img
@@ -55,7 +92,12 @@ export const Web_SignUp_Profile = () => {
                 </div>
               </div>
             </div>
-            <LoginButton className="component-87" text="완료"/>
+            <CompleteButton 
+            className="component-87" 
+            text="완료"
+            disabled={!nickname.trim()} // 닉네임이 비어 있으면 disabled
+            onClick={onClickCompleteBtn} // 버튼 클릭 시 handleSubmit 실행
+            />
           </div>
           
         </>
@@ -95,6 +137,8 @@ export const Web_SignUp_Profile = () => {
 
                       <input className="input" 
                         placeholder="닉네임을 입력해주세요"
+                        value={nickname}
+                        onChange={(e) => setNickname(e.target.value)} // 닉네임 업데이트
                       />
 
                       <img
@@ -108,8 +152,10 @@ export const Web_SignUp_Profile = () => {
               </div>
 
               <div className="next-button">
-                <LoginButton
+                <CompleteButton
                   text="완료"
+                  disabled={!nickname.trim()} // 닉네임이 비어 있으면 disabled
+                  onClick={onClickCompleteBtn} // 버튼 클릭 시 handleSubmit 실행
                 />
               </div>
             </div>
