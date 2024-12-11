@@ -1,20 +1,17 @@
 /* SignUpButton Style */
 .web-signin-frame {
-  height: 24px;
+  height:100%;
   position: relative;
-  width: 45px;
+  width: 100%;
 }
   
 .web-signin-frame .text-wrapper-2 {
   color: #a09cab;
   font-family: "Inter", Helvetica;
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 500;
-  left: 0;
   letter-spacing: 0;
   line-height: 24px;
-  position: absolute;
-  top: -1px;
   white-space: nowrap;
 }
   
@@ -23,36 +20,38 @@
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 2px 4px 4px #00000040;
-  height: 50px;
+  height: 60px;
   position: relative;
-  width: 280px;
+  width: 300px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  justify-content: center;
+  gap : 10px
+
+}
+
+.for-google-icon-paddingormargin {
+  padding-left: 10px;
 }
   
 .web-signin-google .text-wrapper {
   color: #191919;
   font-family: "Inter", Helvetica;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
-  left: 102px;
   letter-spacing: 0;
   line-height: 24px;
-  position: absolute;
-  top: 12px;
   white-space: nowrap;
 }
 
 .web-signin-google .google-icon-instance {
   height: 23px !important;
-  left: 67px !important;
-  top: 14px !important;
   width: 23px !important;
 }
 
 /* GoogleSIcontyle */
 .web-signin-google-icon {
-  left: 0;
-  position: absolute;
-  top: 0;
 }
 
 .web-signin-google-icon.thirty-two-x-32 {
@@ -75,29 +74,28 @@
   background-color: #03c75a;
   border-radius: 5px;
   box-shadow: 0px 4px 4px #00000040;
-  height: 50px;
+  height: 60px;
   position: relative;
-  width: 280px;
+  width: 300px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  justify-content: center;
+  gap : 10px
 }
 
 .web-signin-naver .div {
   color: #ffffff;
   font-family: "Inter", Helvetica;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
-  left: 104px;
   letter-spacing: 0;
   line-height: 24px;
-  position: absolute;
-  top: 12px;
   white-space: nowrap;
 }
   
 .web-signin-naver .logo {
   height: 16px;
-  left: 75px;
-  position: absolute;
-  top: 17px;
   width: 17px;
 }
 

@@ -11,6 +11,12 @@
     background-color: #ffffff;
     position: relative;
   }
+
+  .web-profile-set .div-for-mobile { 
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
   
   /* 모바일 화면 (일부분은 PC 화면에서도 재사용됨) */
   .profile-password .frame-wrapper {
@@ -227,9 +233,8 @@
   }
   
   .profile-password .component-174 {
-    left: 20px !important;
     position: fixed !important;
-    top: 750px !important;
+    bottom: 5%;
   }
     
   /* PC용 화면 */

@@ -11,6 +11,17 @@
     background-color: #ffffff;
     position: relative;
   }
+
+  .web-profile-set .div-for-mobile { 
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* .web-profile-set .div-for-web { 
+  
+  } */
+  
   
   /* PC용 화면1 - Frame */
   .web-profile-set .frame-2 {
@@ -468,8 +479,7 @@
   }
   
   .web-profile-set .component-210-instance {
-    left: 20px !important;
     position: fixed !important;
-    top: 751px !important;
+    bottom: 5%;
   }
   

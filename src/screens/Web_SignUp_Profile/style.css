@@ -1,48 +1,61 @@
 .sign-up-profile {
   background-color: #ffffff;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   width: 100%;
+  min-height: 100vh;
 }
 
+/* 반응형 웹 */
 .sign-up-profile .div {
   background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+@media (max-width: 1511px) {
+  .web-signup { width: 100%; max-width: 390px; }
 }
 
+@media (min-width: 1512px) {
+  .web-signup { width: 100%; max-width: 1512px; }
+}
+
+
+/* 모바일용 화면인갑다... */
 .sign-up-profile .frame {
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
-  left: -10px;
-  padding: 10px;
-  position: absolute;
-  top: 20px;
-  width: 410px;
-  height : 100%;
+  width: 100%;
+  max-width: 390px;
+  min-height: 100vh;
 }
 
 .sign-up-profile .frame-2 {
   align-items: flex-start;
-  align-self: stretch;
   display: flex;
-  flex: 0 0 auto;
   flex-direction: column;
   gap: 41px;
-  position: relative;
+  max-width: 390px;
   width: 100%;
+  position: absolute;
+  top:5vh;
+
 }
 
 .sign-up-profile .title-wrapper {
   align-items: center;
   display: flex;
-  flex: 0 0 auto;
   gap: 8px;
   justify-content: center;
   padding: 8px 16px;
   position: relative;
   width: 390px;
+  
 }
 
 .sign-up-profile .title {
@@ -84,9 +97,6 @@
   background-color: #d9d9d9;
   border-radius: 30px;
   height: 60px;
-  left: 0;
-  position: absolute;
-  top: 0;
   width: 60px;
 }
 
@@ -175,16 +185,23 @@
   width: 100%;
 }
 
+.sign-up-profile .component-87 {
+  position: absolute;
+  bottom: 5%;
+  width: 95% ;
+  max-width : 380px;
+}
+
+/* PC 화면 */
 .sign-up-profile .frame-4 {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 69px;
-  height: 486px;
-  left: 580px;
-  top: 96px;
-  width: 380px;
-  position: relative;
+  align-items: center;
+  gap: 50px;
+  min-height: 450px;
+  min-width: 380px;
+  position : absolute;
+  top : 15vh;
 }
 
 /* .sign-up-profile .component-76 {
@@ -206,10 +223,10 @@
 .sign-up-profile .title-3 {
   color: var(--bananistyle);
   font-family: "Inter", Helvetica;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 800;
   letter-spacing: 0;
-  line-height: 40px;
+  line-height: 50px;
   margin-top: -1.00px;
   position: relative;
   white-space: nowrap;
@@ -220,7 +237,7 @@
   align-self: stretch;
   color: #267bf1;
   font-family: "Inter", Helvetica;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 24px;
@@ -264,18 +281,5 @@
 }
 
 .sign-up-profile .next-button {
-  align-items: flex-start;
-  align-self: stretch;
-  display: flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  gap: 17px;
-  position: relative;
   width: 100%;
-}
-
-.sign-up-profile .component-87 {
-  position: fixed !important;
-  bottom: 5%;
-  width: 380px !important;
 }

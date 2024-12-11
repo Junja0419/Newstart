@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useWindowWidth } from "../../breakpoints";
-import Bookmark from "../../components/Web_Search/Tab/Bookmark";
 import Menu from "../../components/Web_Search/Menu";
 import PhoneSearchBar from "../../components/Web_Search/PhoneSearchBar";
+import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import SearchBar from "../../components/Web_Search/SearchBar";
 import "./style.css";
 
@@ -60,7 +59,7 @@ export const Web_Search = () => {
           </>
         )}
 
-        {screenWidth < 1512 && (
+        {screenWidth < 1512 && (  // 모바일용 화면
           <>
             <div className="for-mobile-title-2" >
               <div className="title-wrapper">
@@ -77,47 +76,10 @@ export const Web_Search = () => {
         )}
 
         {screenWidth < 1512 && (
-          <div className="navigation-bottom">
-            <div className="tab-bar-buttons">
-              <Link className="tab" to="/main">
-                <img
-                  className="icon-5"
-                  alt="Icon"
-                  src="https://c.animaapp.com/nzh65NNa/img/icon-13@2x.png"
-                />
-
-                <div className="label">Home</div>
-              </Link>
-
-              <Link className="tab" to="/bookmark">
-                <Bookmark
-                  bookmark="https://c.animaapp.com/nzh65NNa/img/bookmark-3@2x.png"
-                  className="bookmark-2"
-                />
-                <div className="label-2">Bookmark</div>
-              </Link>
-
-              <Link className="tab" to="/search">
-                <img
-                  className="icon-6"
-                  alt="Icon"
-                  src="https://c.animaapp.com/nzh65NNa/img/icon-17@2x.png"
-                />
-
-                <div className="label-3">Search</div>
-              </Link>
-
-              <Link className="tab" to="/profile">
-                <img
-                  className="icon-6"
-                  alt="Icon"
-                  src="https://c.animaapp.com/nzh65NNa/img/icon-18@2x.png"
-                />
-
-                <div className="label-4">Profile</div>
-              </Link>
-            </div>
-          </div>
+          <MenuForMobile 
+            srcforsearchicon = "https://c.animaapp.com/nzh65NNa/img/icon-17@2x.png"
+            activeTab="search"
+          />
         )}
 
         {/* <div

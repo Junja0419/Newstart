@@ -1,5 +1,6 @@
 import React from "react";
 import { useWindowWidth } from "../../breakpoints";
+import classNames from "classnames";
 import Return from "../../components/Web_Profile_Setting/Return";
 import Menu from "../../components/Web_Profile/Menu";
 import CompleteButton from "../../components/Web_Profile_Setting/CompleteButton";
@@ -12,7 +13,10 @@ export const Web_Profile_Setting = () => {
   return (
     <div className="web-profile-set">
       <div                                 // 반응형 웹 기준 설정
-        className="div-3"
+        className={classNames("div-3", {
+          "div-for-mobile": screenWidth < 1512,
+          "div-for-web": screenWidth >= 1512,
+        })}
         style={{
           height:
             screenWidth < 1512

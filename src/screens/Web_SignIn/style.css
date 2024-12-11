@@ -3,65 +3,78 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    min-height: 100vh;
   }
   
+  /* 반응형 웹 */
   .web-signin .frame-wrapper {
     background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
   }
+  @media (max-width: 1511px) {
+    .web-signin .frame-wrapper { width: 100%; max-width: 390px; }
+  }
+  
+  @media (min-width: 1512px) {
+    .web-signin .frame-wrapper { width: 100%; max-width: 1512px; }
+  }
+  
   
   /* PC용 화면 (모바일에서도 대부분 사용) */
   .web-signin .frame-2 {
-    align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 94px;
+    align-items: center;
+    gap: 7vh;
+    /* position: relative;
     left: 596px;
-    position: relative;
-    top: 325px;
-    width: 350px;
+    top: 325px; */
+    width: 100%;
   }
   
   .web-signin .frame-3 {
-    align-items: center;
-    justify-content: center;
     display: flex;
     flex-direction: column;
-    position: relative;
-    width: 100%;
+    align-items: center;
+    justify-content: center;
+    max-width: 455px;
+    width : 100%;
+    max-height:100px ;
+    height: 100%;
   }
   
   .web-signin .title {
     color: var(--bananistyle);
     font-family: "Inter", Helvetica;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 800;
     letter-spacing: 0;
-    line-height: 40px;
-    margin-top: -1.00px;
-    position: relative;
+    line-height: 50px;
     white-space: nowrap;
     width: fit-content;
   }
   
   .web-signin .p {
-    align-self: stretch;
     color: #267bf1;
     font-family: "Inter", Helvetica;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 24px;
-    position: relative;
   }
   
   .web-signin .frame-4 {
     align-items: center;
     display: flex;
-    flex: 0 0 auto;
     flex-direction: column;
-    gap: 17px;
+    gap: 2vh;
     position: relative;
-    width: 280px;
+    max-width: 300px;
+    width : 100%
   }
   
   .web-signin .div-wrapper {
@@ -71,63 +84,51 @@
     box-shadow: 0px 4px 4px #00000040;
     display: flex;
     gap: 10px;
-    height: 50px;
+    height: 60px;
     justify-content: center;
     padding: 13px 96px;
     position: relative;
-    width: 280px;
+    width: 300px;
   }
   
   .web-signin .text-wrapper-3 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 24px;
-    margin-top: -1.00px;
     position: relative;
     white-space: nowrap;
     width: fit-content;
   }
-  
-  .web-signin .group-wrapper {
-    height: 24px;
-    position: relative;
-    width: 175px;
-  }
-  
-  .web-signin .group {
-    height: 24px;
-    left: 65px;
-    position: relative;
-    width: 45px;
-  }
-  
-  .web-signin .frame-56 {
-    width: unset !important;
-  }
-  
-
 
   /* 모바일만을 위한 스타일링 */
   .web-signin .frame-for-mobile-all-center {
-    position:relative;
     width:100%;
-    height:100%;
+    min-height:100vh;
     display:flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap:25vh;
   }
 
-  .web-signin .frame-for-mobile { 
+  .web-signin .frame-3-for-mobile { 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 350px;
+    height:63px;
+  }
+
+  .web-signin .frame-4-for-mobile { 
+    align-items: center;
+    display: flex;
     flex-direction: column;
-    left: 0;
-    position: absolute;
-    top: 30%;
-    width: 390px;
+    gap: 17px;
+    width: 280px;
   }
 
   .web-signin .p-for-mobile {
@@ -139,15 +140,4 @@
     letter-spacing: 0;
     line-height: 24px;
     position: relative;
-  }
-
-  .web-signin .frame-4-for-mobile { 
-    align-items: center;
-    display: flex;
-    flex: 0 0 auto;
-    flex-direction: column;
-    gap: 17px;
-    position: fixed;
-    width: 280px;
-    bottom : 20%;
   }

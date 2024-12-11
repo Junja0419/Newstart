@@ -40,23 +40,7 @@ export const Web_SignUp = () => {
 
   return (
    <div className="web-signup-top">
-    <div className="web-signup"
-    style={{
-      height:
-        screenWidth < 1512
-          ? "844px"
-          : screenWidth >= 1512
-            ? "982px"
-            : undefined,
-      position: screenWidth < 1512 ? "relative" : undefined,
-      width:
-        screenWidth < 1512
-          ? "390px"
-          : screenWidth >= 1512
-            ? "1512px"
-            : undefined,
-    }}
-    >
+    <div className="web-signup">
 
         {screenWidth < 1512 && ( // 모바일용 화면
           <>
@@ -186,6 +170,7 @@ export const Web_SignUp = () => {
                 </div>
               </div>
             </div>
+            
           </div>
           <NextButton
               className="for-mobile-component-141"

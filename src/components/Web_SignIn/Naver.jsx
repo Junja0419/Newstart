@@ -9,8 +9,6 @@ import "./style.css";
 export const Naver = () => {
   return (
     <div className="web-signin-naver">
-      <div className="div">네이버로 로그인</div>
-
       <div className="logo">
         <div className="overlap-group">
           <div className="rectangle" />
@@ -24,6 +22,9 @@ export const Naver = () => {
           />
         </div>
       </div>
+      <div className="div">네이버로 로그인</div>
+
+      
     </div>
   );
 };

@@ -96,7 +96,7 @@
   }
   
   /* 모바일 화면의 탭 메뉴 */
-  .bookmark-screen .navigation-bottom {
+  /* .bookmark-screen .navigation-bottom {
     align-items: flex-start;
     align-items: center;
     background-color: #ffffff;
@@ -212,7 +212,7 @@
     position: relative;
     white-space: nowrap;
     width: fit-content;
-  }
+  } */
   
   /* PC 화면의 전체 프레임 */
   .bookmark-screen .frame-2 {

@@ -1,21 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useWindowWidth } from "../../breakpoints";
 import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
-import Bookmark from "../../components/Web_Profile/Tab/Bookmark";
 import ProfileEdit from "../../components/Web_Profile/ProfileEdit";
 import Logout from "../../components/Web_Profile/Logout";
 import Menu from "../../components/Web_Profile/Menu";
 import ToggleButton from "../../components/Web_Profile/ToggleButton";
 import Toggle from "../../components/Web_Profile/Toggle";
 import User from "../../components/Web_Profile/User";
+import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import "./style.css";
 
 export const Web_Profile = () => {
   const screenWidth = useWindowWidth();
   const navigate = useNavigate(); // navigate 함수 정의
   return (
-    <div className="profile">
+    <div className="web-profile">
       <div                        // 반응형 웹 기준 설정
         className="div-3"
         style={{
@@ -84,7 +83,9 @@ export const Web_Profile = () => {
 
               <div className="frame-wrapper">
                 <div className="div-wrapper">
-                  <div className="text-wrapper-8">비밀번호 재설정</div>
+                  <div className="text-wrapper-8"
+                  onClick={() => navigate("/profilepass")} // 클릭 시 "/profilepass" 경로로 이동
+                  >비밀번호 재설정</div>
                 </div>
               </div>
 
@@ -96,7 +97,11 @@ export const Web_Profile = () => {
             </div>
 
             {/* 모바일용 네비게이터 */}
-            <div className="navigation-bottom"> 
+            <MenuForMobile
+              srcforprofileicon="https://c.animaapp.com/KaiTeIt5/img/icon-14@2x.png"
+              activeTab="profile"
+            />
+            {/* <div className="navigation-bottom"> 
               <div className="tab-bar-buttons">
                 <div className="tab">
                   <img
@@ -136,7 +141,7 @@ export const Web_Profile = () => {
                   <div className="label-4">Profile</div>
                 </Link>
               </div>
-            </div>
+            </div> */}
           </>
         )}
 

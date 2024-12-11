@@ -1,14 +1,26 @@
   .web-signup-top {
     background-color: #ffffff;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     width: 100%;
+    min-height: 100vh;
   }
 
   /* 반응형 웹 */
   .web-signup {
     background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  @media (max-width: 1511px) {
+    .web-signup { width: 100%; max-width: 390px; }
+  }
+  
+  @media (min-width: 1512px) {
+    .web-signup { width: 100%; max-width: 1512px; }
   }
   
   /* PC용 화면 (대부분 모바일에서도 공통으로 씀)*/
@@ -18,12 +30,10 @@
     flex-direction: column;
     gap: 50px;
     justify-content: center;
-    left: 580px;
     min-height: 409px;
-    min-width: 371px;
-    padding: 10px;
-    position: relative;
-    top: 96px;
+    min-width: 380px;
+    position: absolute;
+    top:10vh;
   }
   
   .web-signup .frame-2 {
@@ -40,11 +50,10 @@
   .web-signup .title {
     color: var(--bananistyle);
     font-family: "Inter", Helvetica;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 800;
     letter-spacing: 0;
-    line-height: 40px;
-    margin-top: -1.00px;
+    line-height: 50px;
     position: relative;
     white-space: nowrap;
     width: fit-content;
@@ -54,7 +63,7 @@
     align-self: stretch;
     color: #267bf1;
     font-family: "Inter", Helvetica;
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 24px;
@@ -243,21 +252,19 @@
   
   /* 모바일만을 위한 CSS */
   .web-signup .for-mobile-div { 
-    align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 66px;
-    left: 0;
+    align-items: flex-start;
+    max-width: 390px;
+    width: 100%;
+    gap:2vh;
     position: absolute;
-    top: 30px;
-    width: 390px;
+    top:5vh;
   }
 
   .web-signup .for-mobile-frame-2 {
     align-items: center;
     display: flex;
-    flex: 0 0 auto;
-    gap: 8px;
     justify-content: center;
     padding: 8px 16px;
     position: relative;
@@ -289,9 +296,9 @@
   }
 
   .web-signup .for-mobile-component-141 {
-    align-items:center;
-    position: fixed !important;
-    bottom: 5%;
-    width: 380px !important;
+    position: absolute;
+    bottom:5vh;
+    width: 95%;
+    max-width: 380px;
   }
   

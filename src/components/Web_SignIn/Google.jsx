@@ -10,13 +10,16 @@ import "./style.css";
 export const Google = () => {
   return (
     <div className="web-signin-google">
-      <div className="text-wrapper">Google로 로그인</div>
-
+      <div className = "for-google-icon-paddingormargin">
       <GoogleIcon
         className="google-icon-instance"
         size="thirty-two-x-32"
         sizeX="https://c.animaapp.com/IP5lyiL7/img/google-icon-1@2x.png"
       />
+      </div>
+      <div className="text-wrapper">Google로 로그인</div>
+
+      
     </div>
   );
 };

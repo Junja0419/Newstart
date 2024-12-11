@@ -11,7 +11,6 @@ import "./styleforcategory.css";
 export const Category = ({
   stateProp,
   className,
-  frameClassName,
   frameClassNameOverride,
   lineClassName,
   line = "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png",
@@ -32,7 +31,6 @@ export const Category = ({
 
   return (
     <div className={`web-main-menu-bar ${state.state} ${className}`}>
-      <div className={`frame-wrapper ${frameClassName}`}>
         <div className={`frame-2 ${frameClassNameOverride}`}>
           <div
             className="menu-tab"
@@ -54,7 +52,7 @@ export const Category = ({
           </div>
 
           <div
-            className="menu-tab-2"
+            className="menu-tab"
             onClick={() => {
               dispatch("click");
             }}
@@ -73,7 +71,7 @@ export const Category = ({
           </div>
 
           <div
-            className="menu-tab-2"
+            className="menu-tab"
             onClick={() => {
               dispatch("click_158");
             }}
@@ -91,7 +89,10 @@ export const Category = ({
             />
           </div>
 
-          <div className="menu-tab-2">
+          <div className="menu-tab"
+            onClick={() => {
+              dispatch("click_555");
+            }}>
             <div className="text-wrapper-5">생활/문화</div>
 
             <img
@@ -106,7 +107,7 @@ export const Category = ({
           </div>
 
           <div
-            className="menu-tab-2"
+            className="menu-tab"
             onClick={() => {
               dispatch("click_164");
             }}
@@ -125,7 +126,7 @@ export const Category = ({
           </div>
 
           <div
-            className="menu-tab-2"
+            className="menu-tab"
             onClick={() => {
               dispatch("click_167");
             }}
@@ -143,7 +144,6 @@ export const Category = ({
             />
           </div>
         </div>
-      </div>
     </div>
   );
 };
@@ -161,6 +161,12 @@ function reducer(state, action) {
         ...state,
         state: "social",
       };
+
+    case "click_555":
+    return {
+      ...state,
+      state: "life",
+    };
 
     case "click_164":
       return {

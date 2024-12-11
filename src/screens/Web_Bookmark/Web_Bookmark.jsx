@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useWindowWidth } from "../../breakpoints";
-import BookmarkFilled from "../../components/Web_Bookmark/Tab/BookmarkFilled";
+import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import Menu from "../../components/Web_Bookmark/Menu";
 import FrameForMobile from "../../components/Web_Bookmark/FrameForMobile";
 import Frame from "../../components/Web_Bookmark/Frame"
@@ -57,7 +56,11 @@ export const Web_Bookmark = () => {
           </div>
 
             {/* 모바일용 탭 메뉴, 임시 구현 상태.. */}
-            <div className="navigation-bottom">
+            <MenuForMobile 
+              srcforbookmarkicon = "https://c.animaapp.com/WStZlVhZ/img/bookmark-filled-2@2x.png"
+              activeTab="bookmark"
+            />
+            {/* <div className="navigation-bottom">
               <div className="tab-bar-buttons">
                 <div className="tab">
                   <img
@@ -97,7 +100,7 @@ export const Web_Bookmark = () => {
                   <div className="label-6">Profile</div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </>
         )}
 

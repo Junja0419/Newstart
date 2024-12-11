@@ -10,24 +10,7 @@ export const Web_SignUp_Profile = () => {
   return (
     <div className="sign-up-profile"> 
       <div
-        className="div" // 전체 화면 설정
-        style={{
-          height: // 너비에 따라 높이 결정
-            screenWidth < 1512 
-              ? "844px"
-              : screenWidth >= 1512
-                ? "982px"
-                : undefined,
-          overflow: screenWidth < 1512 ? "hidden" : undefined, // 너비에 따라 숨김 처리
-          position: screenWidth < 1512 ? "relative" : undefined, // 너비에 따라 상대/절대 위치 결정
-          width:
-            screenWidth < 1512 // 너비에 따라 너비 결정
-              ? "390px"
-              : screenWidth >= 1512
-                ? "1512px"
-                : undefined,
-        }}
-      >
+        className="div">
         {screenWidth < 1512 && ( // 화면 너비가 기준 미만일 경우
         <>
           <div className="frame">

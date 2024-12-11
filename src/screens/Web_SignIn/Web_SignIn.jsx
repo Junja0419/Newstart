@@ -11,23 +11,7 @@ export const Web_SignIn = () => {
   const screenWidth = useWindowWidth();
   return (
     <div className="web-signin">
-      <div className="frame-wrapper"
-      style={{
-        height:
-          screenWidth < 1512
-            ? "844px"
-            : screenWidth >= 1512
-              ? "982px"
-              : undefined,
-        position: screenWidth < 1512 ? "relative" : undefined,
-        width:
-          screenWidth < 1512
-            ? "390px"
-            : screenWidth >= 1512
-              ? "1512px"
-              : undefined,
-      }}
-      >
+      <div className="frame-wrapper">
        {screenWidth >= 1512 && ( // PC용 화면
         <div className="frame-2">
           <div className="frame-3">
@@ -49,9 +33,7 @@ export const Web_SignIn = () => {
             </div>
 
             <div className="group-wrapper">
-              <div className="group">
-                <SignUpButton className="frame-56" />
-              </div>
+                <SignUpButton />
             </div>
           </div>
         </div>
@@ -59,15 +41,14 @@ export const Web_SignIn = () => {
 
        {screenWidth < 1512 && ( // 모바일용 화면
         <div className='frame-for-mobile-all-center'>
-        <div className="frame-for-mobile">
-          <div className="frame-3">
+        
+          <div className="frame-3-for-mobile">
             <div className="title">NEWSTART</div>
 
             <p className="p-for-mobile">
               매일 새로운 소식과 함께하는 아티클을 만나보세요.</p>
           </div>
-        </div>
-
+        
           <div className="frame-4-for-mobile">
             <Google />
             <Naver />
@@ -84,7 +65,7 @@ export const Web_SignIn = () => {
               </div>
             </div>
           </div>
-          </div>
+        </div>
         )}
       </div>
     </div>

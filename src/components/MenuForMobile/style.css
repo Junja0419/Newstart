@@ -1,0 +1,63 @@
+  /* MenuForMobile */
+  .wsmfm-navigation-bottom {
+    background-color: #ffffff;
+    box-shadow: 0px -4px 4px #0000000f;
+    position: fixed;
+    height: 80px;
+    bottom:0;
+    max-width: 390px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+  }
+  
+  .wsmfm-navigation-bottom .tab-bar-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 36px;
+    align-self: center;
+  }
+  
+  .wsmfm-navigation-bottom .tab {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    width: 48px;
+    height: 40px;
+  }
+  
+  .wsmfm-navigation-bottom .mobile-navigator-icon {
+    flex: 0 0 auto;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .wsmfm-navigation-bottom .navigator-label {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .wsmfm-navigation-bottom .navigator-label.clicked {
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }

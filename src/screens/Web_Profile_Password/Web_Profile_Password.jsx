@@ -1,5 +1,6 @@
 import React from "react";
 import { useWindowWidth } from "../../breakpoints";
+import classNames from "classnames";
 import ChangeButton from "../../components/Web_Profile_Password/ChangeButton";
 import Return from "../../components/Web_Profile_Setting/Return";
 import Menu from "../../components/Web_Profile/Menu";
@@ -12,7 +13,10 @@ export const Web_Profile_Password = () => {
   return (
     <div className="profile-password">
       <div
-        className="div-3"              // 반응형 웹 기준 설정
+        className={classNames("div-3", {  // 반응형 웹 기준 설정
+          "div-for-mobile": screenWidth < 1512,
+          "div-for-web": screenWidth >= 1512,
+        })}         
         style={{
           height:
             screenWidth < 1512
