@@ -43,8 +43,15 @@ export const Web_Login = () => {
       });
 
       const data = await response.json();
+      const { token } = data; 
+      if (!token) {
+        throw new Error("토큰이 포함되지 않은 응답입니다.");
+      }
+
+      // JWT 토큰을 LocalStorage에 저장
+      localStorage.setItem("jwt", token);
+
       console.log("로그인 성공:", data);
-      
     } catch (error) {
       console.error("로그인 오류:", error);
     }
