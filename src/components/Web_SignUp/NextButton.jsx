@@ -3,7 +3,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 
-const NextButton = ({ className, agreement, navigateTo, emailValid, passwordValid, confirmPasswordValid }) => {
+const NextButton = ({ className, agreement, navigateTo, emailValid, 
+                      passwordValid, confirmPasswordValid, email, password, }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -13,7 +14,12 @@ const NextButton = ({ className, agreement, navigateTo, emailValid, passwordVali
     if (!confirmPasswordValid) return;
 
     // 모든 조건 만족 시 페이지 이동
-    navigate(navigateTo);
+    navigate(navigateTo, {
+      state: {
+        email,
+        password
+      }
+    });
   };
 
   const isButtonActive =

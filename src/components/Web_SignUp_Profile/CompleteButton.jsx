@@ -1,8 +1,3 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import PropTypes from "prop-types";
 import React from "react";
 import "./style.css";
@@ -11,10 +6,15 @@ export const CompleteButton = ({
   disabled = false,
   className,
   text = "다음",
+  divClassName,
+  onClick, 
 }) => {
   return (
-    <div className={`sign-up-profile-state-disabled-wrapper disabled-${disabled} ${className}`}>
-      <div className="text-wrapper">{text}</div>
+    <div className={`sign-up-profile-state-disabled-wrapper disabled-${disabled} ${className}`}
+      onClick={!disabled ? onClick : undefined} // disabled 상태가 아닐 때만 onClick 작동
+      style={{ cursor: disabled ? "not-allowed" : "pointer" }}
+      >
+      <div className= {`text-wrapper ${divClassName}`}>{text}</div>
     </div>
   );
 };
@@ -22,6 +22,7 @@ export const CompleteButton = ({
 CompleteButton.propTypes = {
   disabled: PropTypes.bool,
   text: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default CompleteButton;

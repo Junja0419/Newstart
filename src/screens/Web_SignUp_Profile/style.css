@@ -160,6 +160,7 @@
 }
 
 .sign-up-profile .text-input {
+  align-self: stretch;
   background-color: transparent;
   border: 0;
   color: #a09cab;
@@ -174,7 +175,7 @@
   position: absolute;
   top: 32px;
   white-space: nowrap;
-  width: 190px;
+  width: 100%
 }
 
 .sign-up-profile .line {
@@ -264,6 +265,7 @@
 }
 
 .sign-up-profile .input {
+  align-self: stretch;
   background-color: transparent;
   border: 0;
   color: #a09cab;
@@ -281,5 +283,6 @@
 }
 
 .sign-up-profile .next-button {
-  width: 100%;
+  align-self: stretch !important;
+  width: 100% !important;
 }

@@ -113,3 +113,8 @@
   background-color: #d4d4d4; /* 비활성 상태에서는 항상 회색 유지 */
 }
 
+.error-message {
+  color: #B3261E;
+  font-size: 13px;
+}
+
