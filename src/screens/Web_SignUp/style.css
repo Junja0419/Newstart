@@ -295,7 +295,7 @@
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  gap: 58px;
+  gap: 3.5vh;
   padding: 0px 16px;
   position: relative;
   width: 100%;
