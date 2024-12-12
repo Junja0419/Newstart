@@ -44,6 +44,7 @@
     max-width: 390px;
     width: 100%;
     margin-bottom: 15px;
+    padding: 0 16px;
   }
   
   .bookmark-screen .title-2 {
@@ -75,11 +76,11 @@
   
   /* 파란색 선 */
   .bookmark-screen .div-3 {
-    align-self: stretch;
+    align-self: center;
     background-color: #267bf1;
     height: 5px;
     position: relative;
-    width: 100%;
+    width: 95%;
   }
   
   /* PC 화면의 전체 프레임 */
