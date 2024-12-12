@@ -29,7 +29,7 @@ export const Headline = ({
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/headline")} // 클릭 시 "/headline" 경로로 이동
+      onClick={() => navigate("/headline/:headline_id")} // 클릭 시 "/headline" 경로로 이동
       onMouseLeave={() => {
         dispatch("mouse_leave");
       }}

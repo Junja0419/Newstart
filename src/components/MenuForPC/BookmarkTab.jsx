@@ -26,7 +26,7 @@ export const BookmarkTab = ({
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/bookmark")} // 클릭 시 "/bookmark" 경로로 이동
+      onClick={() => navigate("/bookmark/:id")} // 클릭 시 "/bookmark" 경로로 이동
     >
       {state.state === "default" && (
         <img

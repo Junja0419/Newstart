@@ -27,7 +27,7 @@ export const SearchTab = ({
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/search")} // 클릭 시 "/search" 경로로 이동
+      onClick={() => navigate("/search/:id")} // 클릭 시 "/search" 경로로 이동
     >
       {state.state === "default" && (
         <img

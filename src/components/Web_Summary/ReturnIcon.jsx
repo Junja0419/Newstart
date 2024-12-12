@@ -14,7 +14,7 @@ export const ReturnIcon = ({ className }) => {
       className={`outline-interface ${className}`}
       alt="Outline interface"
       src="https://c.animaapp.com/UCp2MqVE/img/outline-interface-caret-left-1@2x.png"
-      onClick={() => navigate("/main")} // 클릭 시 "/main" 경로로 이동
+      onClick={() => navigate("/")} // 클릭 시 "/main" 경로로 이동
     />
   );
 };

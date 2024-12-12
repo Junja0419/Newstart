@@ -11,7 +11,7 @@ export const ProfileEdit = ({ className, divClassName }) => {
   const navigate = useNavigate(); // navigate 함수 정의
   return (
     <button className={`web-profile-button ${className}`}
-    onClick={() => navigate("/profileset")} // 클릭 시 "/profileset" 경로로 이동
+    onClick={() => navigate("/profile/update")} // 클릭 시 "/profileset" 경로로 이동
     >
       <div className={`text-wrapper ${divClassName}`}>프로필 편집</div>
     </button>

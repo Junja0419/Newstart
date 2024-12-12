@@ -12,7 +12,7 @@ export const Return = ({ divClassName }) => {
   const navigate = useNavigate(); // navigate 함수 정의
   return (
     <div className="wps-frame"
-    onClick={() => navigate("/profile")} // 클릭 시 "/profile" 경로로 이동
+    onClick={() => navigate("/profile/:id")} // 클릭 시 "/profile" 경로로 이동
     >
       <div className={`text-wrapper ${divClassName}`}>프로필로 돌아가기</div>
 

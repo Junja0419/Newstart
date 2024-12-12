@@ -27,7 +27,7 @@ export const ToSummaryButton = ({
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/summary")} // 클릭 시 "/summary" 경로로 이동
+      onClick={() => navigate("/summary/view")} // 클릭 시 "/summary" 경로로 이동
 
     >
       <div className="div">

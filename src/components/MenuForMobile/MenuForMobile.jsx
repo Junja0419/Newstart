@@ -18,7 +18,7 @@ export const MenuForMobile = ({
   return (
     <div className="navigation-bottom-for-all-mobile">
             <div className="tab-bar-buttons-for-all-mobile">
-              <Link className="tab-for-all-mobile" to="/main">
+              <Link className="tab-for-all-mobile" to="/">
                 <img
                   className="mobile-navigator-icon-for-all-mobile"
                   src={srcformainicon}
@@ -29,7 +29,7 @@ export const MenuForMobile = ({
                 }`}>Home</div>
               </Link>
 
-              <Link className="tab-for-all-mobile" to="/bookmark">
+              <Link className="tab-for-all-mobile" to="/bookmark/:id">
                 <img
                   className="mobile-navigator-icon-for-all-mobile"
                   src={srcforbookmarkicon}
@@ -39,7 +39,7 @@ export const MenuForMobile = ({
                 }`}>Bookmark</div>
               </Link>
 
-              <Link className="tab-for-all-mobile" to="/search">
+              <Link className="tab-for-all-mobile" to="/search/:id">
                 <img
                   className="mobile-navigator-icon-for-all-mobile"
                   src={srcforsearchicon}
@@ -50,7 +50,7 @@ export const MenuForMobile = ({
                 }`}>Search</div>
               </Link>
 
-              <Link className="tab-for-all-mobile" to="/profile">
+              <Link className="tab-for-all-mobile" to="/profile/:id">
                 <img
                   className="mobile-navigator-icon-for-all-mobile"
                   src={srcforprofileicon}

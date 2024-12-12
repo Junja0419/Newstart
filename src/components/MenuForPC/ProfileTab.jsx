@@ -27,7 +27,7 @@ export const ProfileTab = ({
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/profile")} // 클릭 시 "/profile" 경로로 이동
+      onClick={() => navigate("/profile/:id")} // 클릭 시 "/profile" 경로로 이동
       
     >
       {state.state === "default" && (

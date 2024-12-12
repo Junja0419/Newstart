@@ -20,7 +20,7 @@ export const HomeTab = ({
   const navigate = useNavigate(); // navigate 함수 정의
   return (
     <div className={`for-pc-menu-home-tab`}
-    onClick={() => navigate("/main")} // 클릭 시 "/main" 경로로 이동
+    onClick={() => navigate("/")} // 클릭 시 "/main" 경로로 이동
     onMouseLeave={() => {
       dispatch("mouse_leave");
     }}

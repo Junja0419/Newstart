@@ -65,7 +65,7 @@ export const Web_Profile = () => {
               <div className="frame-wrapper">
                 <div className="div-wrapper">
                   <div className="text-wrapper-8"
-                  onClick={() => navigate("/profilepass")} // 클릭 시 "/profilepass" 경로로 이동
+                  onClick={() => navigate("/auth/password")} // 클릭 시 "/profilepass" 경로로 이동
                   >비밀번호 재설정</div>
                 </div>
               </div>
@@ -138,7 +138,7 @@ export const Web_Profile = () => {
                     
                     >
                       <div className="text-wrapper-11"
-                      onClick={() => navigate("/profilepass")} // 클릭 시 "/profilepass" 경로로 이동
+                      onClick={() => navigate("/auth/password")} // 클릭 시 "/profilepass" 경로로 이동
                       >비밀번호 재설정</div>
 
                       <Logout className="frame-16" />
