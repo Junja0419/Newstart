@@ -12,6 +12,8 @@ import "./style.css";
 export const ToSummaryButton = ({
   stateProp,
   className,
+  classNameformobilever,
+  classNameformobilearrow,
   arrowRight = "https://c.animaapp.com/zuoomGM9/img/arrow-right-1@2x.png",
 }) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -30,7 +32,7 @@ export const ToSummaryButton = ({
       onClick={() => navigate("/summary/view")} // 클릭 시 "/summary" 경로로 이동
 
     >
-      <div className="div">
+      <div className={`div ${classNameformobilever}`}>
         {state.state === "default" && <>아티클 요약 보러가기</>}
 
         {state.state === "hover" && (
@@ -38,7 +40,7 @@ export const ToSummaryButton = ({
         )}
       </div>
 
-      <img className="arrow-right" alt="Arrow right" src={arrowRight} />
+      <img className={`arrow-right ${classNameformobilearrow}`} alt="Arrow right" src={arrowRight} />
     </div>
   );
 };

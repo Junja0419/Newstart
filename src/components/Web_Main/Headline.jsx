@@ -18,6 +18,8 @@ export const Headline = ({
   headlineText,
   text1 = "텍스트텍스트텍스트텍스트텍스트텍스트<br/>가나다라마바사",
   headlineNewspaper,
+  textofpress="안준석일보",
+  textofcategory="경제",
 }) => {
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "default",
@@ -40,7 +42,7 @@ export const Headline = ({
           <div className="headlinetextwrapper">
             <div className={`label ${headlineText}`}>{text1}</div>
           </div>
-          <div className={`label-2 ${headlineNewspaper}`}>경제 | 한국일보</div>
+          <div className={`label-2 ${headlineNewspaper}`}>{textofcategory} | {textofpress}</div>
         </div>
     </div>
   );

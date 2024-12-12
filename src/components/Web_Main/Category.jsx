@@ -5,9 +5,25 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 
 import PropTypes from "prop-types";
 import React, { useReducer, useRef, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import "./styleforcategory.css";
 
+import Economy from "./HeadlineTab/Economy";
+import IT from "./HeadlineTab/IT";
+import Society from "./HeadlineTab/Society";
+import Life from "./HeadlineTab/Life"
+import Politics from "./HeadlineTab/Politics"
+import World from "./HeadlineTab/World"
+
+import EconomyM from "./HeadlineTabForMob/EconomyM";
+import ITM from "./HeadlineTabForMob/ITM";
+import SocietyM from "./HeadlineTabForMob/SocietyM";
+import LifeM from "./HeadlineTabForMob/LifeM"
+import PoliticsM from "./HeadlineTabForMob/PoliticsM"
+import WorldM from "./HeadlineTabForMob/WorldM"
+
 export const Category = ({
+  classNameForMobileCategoryFrame,
   stateProp,
   lineActivate = "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png",
   line = "https://c.animaapp.com/zuoomGM9/img/line-13-34@2x.png",
@@ -15,7 +31,7 @@ export const Category = ({
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "politics",
   });
-
+  const isMobile = useMediaQuery({ query: "(max-width: 1511px)" });
   // 드래그 스크롤 관련 상태
   const categoryRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -58,10 +74,30 @@ export const Category = ({
 
   const onTouchEnd = () => setIsDragging(false);
 
+  // 렌더링할 컴포넌트 선택
+  const renderComponent = () => {
+    switch (state.state) {
+      case "politics":
+        return isMobile ? <PoliticsM /> : <Politics />;
+      case "economy":
+        return isMobile ? <EconomyM /> : <Economy />;
+      case "social":
+        return isMobile ? <SocietyM /> : <Society />;
+      case "life":
+        return isMobile ? <LifeM /> : <Life />;
+      case "it":
+        return isMobile ? <ITM /> : <IT />;
+      case "world":
+        return isMobile ? <WorldM /> : <World />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={`web-main-menu-bar ${state.state}`}>
       <div
-        className="frame-2"
+        className={`frame-2 ${classNameForMobileCategoryFrame}`}
         ref={categoryRef}
         style={{ cursor: isDragging ? "grabbing" : "grab" }}
         onMouseDown={onMouseDown}
@@ -155,6 +191,10 @@ export const Category = ({
             src={state.state === "world" ? lineActivate : line}
           />
         </div>
+      </div>
+      {/* 선택된 카테고리에 따른 컴포넌트 렌더링 */}
+      <div className="content-wrapper-for-headline-change">
+        {renderComponent()}
       </div>
     </div>
   );

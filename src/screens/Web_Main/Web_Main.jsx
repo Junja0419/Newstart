@@ -20,17 +20,19 @@ export const Web_Main = () => {
           <div className="mobile-frame-4">
           <div className="main-view-for-mobile">
             <div className="frame-5">
-              <div className="title-2">오늘의 1분 요약!</div>
+              <div className="title-2 title-2-for-mobile" >오늘의 1분 요약!</div>
 
               <ToSummaryButton
                 arrowRight="https://c.animaapp.com/zuoomGM9/img/arrow-right-2@2x.png"
                 className="component-374"
                 stateProp="default"
+                classNameformobilever="tosummary-font-for-mobile"
+                classNameformobilearrow="arrow-size-for-mobile"
               />
             </div>
 
             <div className="main-folder-for-mobile" 
-              onClick={() => navigate("/summary")} // 클릭 시 "/summary" 경로로 이동
+              onClick={() => navigate("/summary/view")} // 클릭 시 "/summary" 경로로 이동
             />
 
             <img
@@ -41,47 +43,19 @@ export const Web_Main = () => {
           </div>
           <div className="main-headline-wrapper-for-mobile">
           <div className="main-headline-for-mobile">
-            <div className="title-3">최신 헤드라인</div>
+            <div className="title-3 title-3-for-mobile-font">최신 헤드라인</div>
 
             <div className="text-wrapper-12">08:00</div>
           </div>
 
           <div className="main-category-wrapper-for-mobile">
             <Category
+              classNameForMobileCategoryFrame="web-main-category-size-jojung"
               stateProp="politics"
             />
           </div>
-
-          <Headline
-            stateProp="default"
-            text="01"
-          />
-          <Headline
-            stateProp="default"
-            text="02"
-            text1="텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트"
-          />
-          <Headline
-            stateProp="default"
-            text="03"
-            text1="엔비디아 젠슨 황 “삼성 HBM 승인 위해 가능한 빠르게 작업 중”"
-          />
-          <Headline
-            stateProp="default"
-            text="04"
-            text1={
-              <>
-                텍스트텍스트텍스트텍스트텍스트텍스트
-                <br />
-                가나다라마바사
-              </>
-            }
-          />
-          <Headline
-            stateProp="default"
-            text="05"
-            text1="텍스트텍스트텍스트텍스트텍스트텍스트"
-          />
+          {/* 모바일 헤드라인이 있던 곳... */}
+          
         </div>
         {/* 모바일용 네비게이터 */}
         <MenuForMobile 
@@ -108,7 +82,7 @@ export const Web_Main = () => {
             </div>
 
             <div className="folder" 
-              onClick={() => navigate("/summary")} // 클릭 시 "/summary" 경로로 이동
+              onClick={() => navigate("/summary/view")} // 클릭 시 "/summary" 경로로 이동
             />
 
             <img
@@ -130,62 +104,8 @@ export const Web_Main = () => {
               stateProp="politics"
             />
           </div>
-
-          <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="01"
-            headlinetextGroup="headlinetextGroupforpc"
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-          />
-          <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="02"
-            headlinetextGroup="headlinetextGroupforpc"
-            text1="텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트"
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-          />
-          <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="03"
-            headlinetextGroup="headlinetextGroupforpc"
-            text1="엔비디아 젠슨 황 “삼성 HBM 승인 위해 가능한 빠르게 작업 중”"
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-          />
-          <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="04"
-            headlinetextGroup="headlinetextGroupforpc"
-            text1={
-              <>
-                텍스트텍스트텍스트텍스트텍스트텍스트
-                <br />
-                가나다라마바사
-              </>
-            }
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-          />
-          <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="05"
-            headlinetextGroup="headlinetextGroupforpc"
-            text1="텍스트텍스트텍스트텍스트텍스트텍스트"
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-          />
+          {/* PC용 헤드라인이 자리하던 곳... */}
+          
         </div>
         </div>
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Web_SignIn from "./screens/Web_SignIn/Web_SignIn";
 import Web_SignUp from "./screens/Web_SignUp/Web_SignUp";
@@ -13,7 +12,7 @@ import Web_Profile_Password from "./screens/Web_Profile_Password/Web_Profile_Pas
 import Web_Headline from "./screens/Web_Headline/Web_Headline";
 import Web_Summary from "./screens/Web_Summary/Web_Summary";
 
-function App() {
+function App () {
   return (
     <Router>
       <Routes>
@@ -32,6 +31,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

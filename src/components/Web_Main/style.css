@@ -95,11 +95,4 @@
     width: fit-content;
   }
   
-  .web-main-state-default-wrapper.hover .div {
-    align-items: flex-start;
-    display: inline-flex;
-    flex: 0 0 auto;
-    flex-direction: column;
-    justify-content: center;
-  }
   
