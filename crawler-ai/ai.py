@@ -27,8 +27,6 @@ prompt_kr = (
     "Tone: 간단하고 친근한 언어를 사용하며, 문장을 '~해요'로 끝내세요. 직접적인 인용문을 사용하지 말고, 모든 표현을 대화체로 바꿔 더 쉽게 이해할 수 있도록 해 주세요."
 )
 
-prompt_en = "Task: Summarize a news article in Korean within 5 sentences, focusing only on the core message. Use simple Korean expressions to make difficult or technical phrases easier to understand. Present the main point of the article in the very first sentence.\nContext: The target audience consists of younger generations with lower literacy skills. The goal is to simplify complex news articles and make them more accessible through easy-to-read language.\nPersona: Stick strictly to the content of the news article provided and avoid including unrelated information.\nFormat: Output the summary in the same text format as the input.\nTone: Use simple and friendly language, ending sentences with '~해요'. Avoid using direct quotes, and rephrase all expressions to be more conversational and accessible."
-
 
 def summarize_article(content):
     """
@@ -42,7 +40,7 @@ def summarize_article(content):
     """
     try:
         messages = [
-            {"role": "system", "content": prompt_en},
+            {"role": "system", "content": prompt_kr},
             {"role": "user", "content": content},
         ]
 
