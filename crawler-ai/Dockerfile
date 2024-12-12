@@ -9,12 +9,12 @@ RUN apt-get update && apt-get install -y \
     libgbm1 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
     # && \
     # pip install playwright && playwright install --with-deps
 
-COPY . .
+COPY . /app/
 
 EXPOSE 8080
 CMD ["uvicorn", "article_update_api:app", "--host", "0.0.0.0", "--port", "8080"]
