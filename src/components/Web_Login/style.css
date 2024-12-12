@@ -3,7 +3,7 @@
   height: 50px;
   position: relative;
   width: 380px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -26,7 +26,7 @@
 /* 활성화 상태 */
 .login-state-disabled-wrapper.disabled-false {
   background-color: #267bf1b2;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 /* 활성화 상태에서 호버 효과 */
@@ -36,6 +36,10 @@
 }
 
 .error-message {
-  color: #B3261E;
+  color: #b3261e;
   font-size: 13px;
+  top: 70px;
+  position: absolute;
+  padding: 0;
+  left: 0;
 }

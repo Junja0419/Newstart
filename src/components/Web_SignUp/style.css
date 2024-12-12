@@ -3,20 +3,20 @@
   height: 20px;
   width: 20px;
 }
-  
+
 .web-signup-on .class {
   background-color: #767676 !important;
 }
-  
+
 .web-signup-on .class-2 {
   position: unset !important;
   width: unset !important;
 }
-  
+
 .web-signup-on .class-3 {
   width: 20px !important;
 }
-  
+
 .web-signup-on .class-4 {
   border-color: #a09cab !important;
 }
@@ -25,11 +25,11 @@
 .web-signup-radio-button {
   position: relative;
 }
-  
+
 .web-signup-radio-button .frame {
   height: 20px;
 }
-  
+
 .web-signup-radio-button .overlap-group {
   border: 2px solid;
   border-radius: 12px;
@@ -114,7 +114,10 @@
 }
 
 .error-message {
-  color: #B3261E;
+  color: #b3261e;
   font-size: 13px;
+  top: 70px;
+  position: absolute;
+  padding: 0;
+  left: 0;
 }
-

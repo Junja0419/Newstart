@@ -20,7 +20,7 @@ export const Web_SignUp_Profile = () => {
         password: password, // 비밀번호
         nickname: nickname, // 닉네임
         image_url: "test", // 프로필 사진
-        platForName: "email", // 로그인 방법
+        platformName: "email", // 로그인 방법
         noti_yn: "N", // 알림 여부 (N으로 고정)
       };
 
@@ -157,6 +157,7 @@ export const Web_SignUp_Profile = () => {
                       alt="Line"
                       src="https://c.animaapp.com/AoZMr3Yn/img/line-3-1@2x.png"
                     />
+
                     {nicknameError && (
                       <div className="error-message">{nicknameError}</div> // 에러 메시지 표시
                     )}
