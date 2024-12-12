@@ -1,7 +1,9 @@
-name: Deploy to Cloud Run
+name: Deploy crawler-ai to Cloud Run
 
 on:
   push:
+    paths:
+      - 'crawler-ai/**'
     branches:
       - main  # main 브랜치에 푸시될 때 트리거
 
@@ -35,7 +37,7 @@ jobs:
       # 5. Docker 이미지 빌드
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ARTIFACT_REPO }}/newstart:${{ github.sha }} .
+          docker build -t ${{ secrets.ARTIFACT_REPO }}/newstart-project-444411:${{ github.sha }} .
 
       # 6. Docker 이미지 푸시
       - name: Push Docker image to Artifact Registry
