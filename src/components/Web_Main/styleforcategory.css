@@ -1,23 +1,15 @@
 
   .web-main-menu-bar .frame-2 {
-    align-items: center;
-    display: inline-flex;
-    flex: 0 0 auto;
-    position: relative;
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden; /* 드래그로 가로 스크롤 가능한 영역 */
   }
   
   .web-main-menu-bar .menu-tab {
     align-items: center;
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     justify-content: center;
-    position: relative;
-    width: 122px;
-  }
-  
-  .web-main-menu-bar .line {
-    height: 2px;
-    margin-bottom: -1.00px;
     position: relative;
     width: 122px;
   }

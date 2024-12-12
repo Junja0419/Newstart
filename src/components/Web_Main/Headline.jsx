@@ -12,12 +12,12 @@ import "./styleforheadline.css";
 export const Headline = ({
   stateProp,
   className,
-  divClassName,
+  headlinenumber,
   text = "02",
-  textGroupClassName,
-  labelClassName,
+  headlinetextGroup,
+  headlineText,
   text1 = "텍스트텍스트텍스트텍스트텍스트텍스트<br/>가나다라마바사",
-  frameClassName,
+  headlineNewspaper,
 }) => {
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "default",
@@ -35,17 +35,13 @@ export const Headline = ({
       }}
       
     >
-      <div className="frame-3">
-        <div className={`element ${divClassName}`}>{text}</div>
-
-        <div className={`text-group-wrapper ${frameClassName}`}>
-          <div className={`text-group ${textGroupClassName}`}>
-            <div className={`label ${labelClassName}`}>{text1}</div>
-
-            <div className="label-2">경제 | 한국일보</div>
+        <div className={`number ${headlinenumber}`}>{text}</div>
+        <div className={`text-group ${headlinetextGroup}`}>
+          <div className="headlinetextwrapper">
+            <div className={`label ${headlineText}`}>{text1}</div>
           </div>
+          <div className={`label-2 ${headlineNewspaper}`}>경제 | 한국일보</div>
         </div>
-      </div>
     </div>
   );
 };

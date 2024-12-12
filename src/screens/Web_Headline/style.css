@@ -1,136 +1,39 @@
   .headline {
     background-color: #ffffff;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     width: 100%;
+    min-height: 100vh;
   }
   
   /* 반응형 웹 */
   .headline .div-3 { 
     background-color: #ffffff;
-    overflow: hidden;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  @media (max-width: 1511px) {
+    .headline .div-3  { width: 100%; max-width: 390px; }
+  }
+  
+  @media (min-width: 1512px) {
+    .headline .div-3  { width: 100%; max-width: 1512px; }
   }
 
-  /* 모바일용 탭 메뉴 */
-  .headline .navigation-bottom {
-    align-items: flex-start;
+  .frame-for-all-mobile-headline {
     align-items: center;
-    background-color: #ffffff;
-    box-shadow: 0px -4px 4px #0000000f;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    height: 77px;
-    padding: 8px 0px;
-    position: fixed;
-    bottom :0;
-    width: 380px;
-  }
-  
-  .headline .tab-bar-buttons {
-    align-items: flex-start;
-    align-self: stretch;
-    display: flex;
-    flex: 0 0 auto;
-    justify-content: space-between;
-    padding: 0px 36px;
-    position: relative;
     width: 100%;
+    max-width: 390px;
+    min-height: 94vh;
+    top:3vh;
   }
-  
-  .headline .tab {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    height: 40px;
-    justify-content: space-between;
-    padding: 0px 13px;
-    position: relative;
-    width: 48px;
-  }
-  
-  .headline .icon-4 {
-    flex: 0 0 auto;
-    margin-left: -1.00px;
-    margin-right: -1.00px;
-    position: relative;
-    width: 24px;
-  }
-  
-  .headline .label {
-    color: #1c1b1f;
-    font-family: "Inter", Helvetica;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: normal;
-    margin-left: -5.00px;
-    margin-right: -5.00px;
-    margin-top: -2px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
-  
-  .headline .bookmark-2 {
-    left: unset !important;
-    margin-left: -1.00px !important;
-    margin-right: -1.00px !important;
-    position: relative !important;
-    top: unset !important;
-  }
-  
-  .headline .label-2 {
-    color: #a09cab;
-    font-family: "Inter", Helvetica;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: normal;
-    margin-left: -16.00px;
-    margin-right: -16.00px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
-  
-  .headline .label-3 {
-    color: #a09cab;
-    font-family: "Inter", Helvetica;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: normal;
-    margin-left: -8.00px;
-    margin-right: -8.00px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
-  
-  .headline .icon-5 {
-    height: 24px;
-    margin-left: -1.00px;
-    margin-right: -1.00px;
-    position: relative;
-    width: 24px;
-  }
-  
-  .headline .label-4 {
-    color: #a09cab;
-    font-family: "Inter", Helvetica;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: normal;
-    margin-left: -6.50px;
-    margin-right: -6.50px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
+
+  /* PC용 스타일링은 너무 짧아서 components/Web_headline/style.css에 명시해두었습니다! */
 
   /* PC용 탭 메뉴 */
   .headline .frame-51 {

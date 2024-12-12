@@ -27,10 +27,6 @@
     width: 249px;
   }
   
-  .web-main-frame .home-tab-instance {
-    align-self: stretch !important;
-    width: 100% !important;
-  }
   
   .web-main-frame .title {
     color: var(--bananistyle);

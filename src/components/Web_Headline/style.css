@@ -37,14 +37,13 @@
   /* Frame Style */
   .web-headline-frame {
     align-items: center;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     gap: 66px;
-    height: 1174px;
-    left: 655px;
-    min-width: 537px;
-    position: absolute;
-    top: 65px;
+    
+    position : absolute;
+    top: 5vh;
+    
   }
   
   .web-headline-title {
@@ -158,10 +157,6 @@
     display: flex;
     flex-direction: column;
     gap: 27px;
-    left: -10px;
-    position: absolute;
-    top: 42px;
-    width: 410px;
   }
   
   .mobile-headline-title-wrapper {

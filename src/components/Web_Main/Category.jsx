@@ -4,146 +4,158 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 */
 
 import PropTypes from "prop-types";
-import React from "react";
-import { useReducer } from "react";
+import React, { useReducer, useRef, useState } from "react";
 import "./styleforcategory.css";
 
 export const Category = ({
   stateProp,
-  className,
-  frameClassNameOverride,
-  lineClassName,
-  line = "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png",
-  lineClassNameOverride,
-  img = "https://c.animaapp.com/zuoomGM9/img/line-13-34@2x.png",
-  imgClassName,
-  line1 = "https://c.animaapp.com/zuoomGM9/img/line-13-34@2x.png",
-  imgClassNameOverride,
-  line2 = "https://c.animaapp.com/zuoomGM9/img/line-13-34@2x.png",
-  lineClassName1,
-  line3 = "https://c.animaapp.com/zuoomGM9/img/line-13-34@2x.png",
-  lineClassName2,
-  line4 = "https://c.animaapp.com/zuoomGM9/img/line-13-34@2x.png",
+  lineActivate = "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png",
+  line = "https://c.animaapp.com/zuoomGM9/img/line-13-34@2x.png",
 }) => {
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "politics",
   });
 
+  // 드래그 스크롤 관련 상태
+  const categoryRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(null);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  // 마우스 이벤트 핸들러
+  const onMouseDown = (e) => {
+    if (!categoryRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - categoryRef.current.offsetLeft);
+    setScrollLeft(categoryRef.current.scrollLeft);
+  };
+
+  const onMouseMove = (e) => {
+    if (!isDragging || startX === null || !categoryRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - categoryRef.current.offsetLeft;
+    const walk = x - startX;
+    categoryRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const onMouseUp = () => setIsDragging(false);
+  const onMouseLeave = () => setIsDragging(false);
+
+  // 터치 이벤트 핸들러
+  const onTouchStart = (e) => {
+    if (!categoryRef.current) return;
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - categoryRef.current.offsetLeft);
+    setScrollLeft(categoryRef.current.scrollLeft);
+  };
+
+  const onTouchMove = (e) => {
+    if (!isDragging || startX === null || !categoryRef.current) return;
+    const x = e.touches[0].pageX - categoryRef.current.offsetLeft;
+    const walk = x - startX;
+    categoryRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const onTouchEnd = () => setIsDragging(false);
+
   return (
-    <div className={`web-main-menu-bar ${state.state} ${className}`}>
-        <div className={`frame-2 ${frameClassNameOverride}`}>
-          <div
-            className="menu-tab"
-            onClick={() => {
-              dispatch("click_173");
-            }}
-          >
-            <div className="text-wrapper-2">정치</div>
-
-            <img
-              className={`line ${lineClassName}`}
-              alt="Line"
-              src={
-                state.state === "politics"
-                  ? line
-                  : "https://c.animaapp.com/zuoomGM9/img/line-13-34@2x.png"
-              }
-            />
-          </div>
-
-          <div
-            className="menu-tab"
-            onClick={() => {
-              dispatch("click");
-            }}
-          >
-            <div className="text-wrapper-3">경제</div>
-
-            <img
-              className={`img ${lineClassNameOverride}`}
-              alt="Line"
-              src={
-                state.state === "economy"
-                  ? "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png"
-                  : img
-              }
-            />
-          </div>
-
-          <div
-            className="menu-tab"
-            onClick={() => {
-              dispatch("click_158");
-            }}
-          >
-            <div className="text-wrapper-4">사회</div>
-
-            <img
-              className={`img ${imgClassName}`}
-              alt="Line"
-              src={
-                state.state === "social"
-                  ? "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png"
-                  : line1
-              }
-            />
-          </div>
-
-          <div className="menu-tab"
-            onClick={() => {
-              dispatch("click_555");
-            }}>
-            <div className="text-wrapper-5">생활/문화</div>
-
-            <img
-              className={`img ${imgClassNameOverride}`}
-              alt="Line"
-              src={
-                state.state === "life"
-                  ? "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png"
-                  : line2
-              }
-            />
-          </div>
-
-          <div
-            className="menu-tab"
-            onClick={() => {
-              dispatch("click_164");
-            }}
-          >
-            <div className="text-wrapper-6">IT/과학</div>
-
-            <img
-              className={`img ${lineClassName1}`}
-              alt="Line"
-              src={
-                state.state === "it"
-                  ? "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png"
-                  : line3
-              }
-            />
-          </div>
-
-          <div
-            className="menu-tab"
-            onClick={() => {
-              dispatch("click_167");
-            }}
-          >
-            <div className="text-wrapper-7">세계</div>
-
-            <img
-              className={`img ${lineClassName2}`}
-              alt="Line"
-              src={
-                state.state === "world"
-                  ? "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png"
-                  : line4
-              }
-            />
-          </div>
+    <div className={`web-main-menu-bar ${state.state}`}>
+      <div
+        className="frame-2"
+        ref={categoryRef}
+        style={{ cursor: isDragging ? "grabbing" : "grab" }}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseLeave}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <div
+          className="menu-tab"
+          onClick={() => {
+            dispatch("click_173");
+          }}
+        >
+          <div className="text-wrapper-2">정치</div>
+          <img
+            className="img"
+            alt="Line"
+            src={state.state === "politics" ? lineActivate : line}
+          />
         </div>
+
+        <div
+          className="menu-tab"
+          onClick={() => {
+            dispatch("click");
+          }}
+        >
+          <div className="text-wrapper-3">경제</div>
+          <img
+            className="img"
+            alt="Line"
+            src={state.state === "economy" ? lineActivate : line}
+          />
+        </div>
+
+        <div
+          className="menu-tab"
+          onClick={() => {
+            dispatch("click_158");
+          }}
+        >
+          <div className="text-wrapper-4">사회</div>
+          <img
+            className="img"
+            alt="Line"
+            src={state.state === "social" ? lineActivate : line}
+          />
+        </div>
+
+        <div
+          className="menu-tab"
+          onClick={() => {
+            dispatch("click_555");
+          }}
+        >
+          <div className="text-wrapper-5">생활/문화</div>
+          <img
+            className="img"
+            alt="Line"
+            src={state.state === "life" ? lineActivate : line}
+          />
+        </div>
+
+        <div
+          className="menu-tab"
+          onClick={() => {
+            dispatch("click_164");
+          }}
+        >
+          <div className="text-wrapper-6">IT/과학</div>
+          <img
+            className="img"
+            alt="Line"
+            src={state.state === "it" ? lineActivate : line}
+          />
+        </div>
+
+        <div
+          className="menu-tab"
+          onClick={() => {
+            dispatch("click_167");
+          }}
+        >
+          <div className="text-wrapper-7">세계</div>
+          <img
+            className="img"
+            alt="Line"
+            src={state.state === "world" ? lineActivate : line}
+          />
+        </div>
+      </div>
     </div>
   );
 };
@@ -151,60 +163,24 @@ export const Category = ({
 function reducer(state, action) {
   switch (action) {
     case "click":
-      return {
-        ...state,
-        state: "economy",
-      };
-
+      return { ...state, state: "economy" };
     case "click_158":
-      return {
-        ...state,
-        state: "social",
-      };
-
+      return { ...state, state: "social" };
     case "click_555":
-    return {
-      ...state,
-      state: "life",
-    };
-
+      return { ...state, state: "life" };
     case "click_164":
-      return {
-        ...state,
-        state: "it",
-      };
-
+      return { ...state, state: "it" };
     case "click_167":
-      return {
-        ...state,
-        state: "world",
-      };
-
+      return { ...state, state: "world" };
     case "click_173":
-      return {
-        ...state,
-        state: "politics",
-      };
+      return { ...state, state: "politics" };
   }
-
   return state;
 }
 
 Category.propTypes = {
-  stateProp: PropTypes.oneOf([
-    "social",
-    "world",
-    "politics",
-    "it",
-    "life",
-    "economy",
-  ]),
+  stateProp: PropTypes.oneOf(["social", "world", "politics", "it", "life", "economy"]),
   line: PropTypes.string,
-  img: PropTypes.string,
-  line1: PropTypes.string,
-  line2: PropTypes.string,
-  line3: PropTypes.string,
-  line4: PropTypes.string,
 };
 
 export default Category;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useWindowWidth } from "../../breakpoints";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
-import Menu from "../../components/Web_Bookmark/Menu";
+import MenuForPC from "../../components/MenuForPC/MenuForPC"
 import FrameForMobile from "../../components/Web_Bookmark/FrameForMobile";
 import Frame from "../../components/Web_Bookmark/Frame"
 import "./style.css";
@@ -11,38 +11,19 @@ export const Web_Bookmark = () => {
 
   return (
     <div className="bookmark-screen">
-      <div
-        className="bookmark-2"
-        style={{ // 반응형 웹 기준 설정
-          height:
-            screenWidth < 1512
-              ? "844px"
-              : screenWidth >= 1512
-                ? "982px"
-                : undefined,
-          overflow: screenWidth >= 1512 ? "hidden" : undefined,
-          width:
-            screenWidth < 1512
-              ? "390px"
-              : screenWidth >= 1512
-                ? "1512px"
-                : undefined,
-        }}
-      >
+      <div className="bookmark-2">
         {screenWidth < 1512 && ( // 모바일용 화면
           <>
-          <div className="formobilescreen">
-            <div className="bookmark-tab-2">
+        <div className="formobilescreen">
+              <div className="title-wrapper">
+                <div className="title-2">북마크</div>
+              </div>
               <div className="frame">
                 <div className="text-wrapper-4">아티클</div>
               </div>
 
               <div className="div-3" />
-            </div>
 
-            <div className="title-wrapper">
-              <div className="title-2">북마크</div>
-            </div>
 
             <FrameForMobile 
                 text = {`세줄텍스트입니다\n세줄\n텍스트입니다`}
@@ -52,55 +33,15 @@ export const Web_Bookmark = () => {
             <FrameForMobile 
               text = {`세줄텍스트입니다\n세줄\n텍스트입니다`}
               category = "경제"
-              newspaper = "한국일보" />     
-          </div>
-
-            {/* 모바일용 탭 메뉴, 임시 구현 상태.. */}
+              newspaper = "한국일보" />    
+              {/* 모바일용 탭 메뉴 */}
             <MenuForMobile 
               srcforbookmarkicon = "https://c.animaapp.com/WStZlVhZ/img/bookmark-filled-2@2x.png"
               activeTab="bookmark"
-            />
-            {/* <div className="navigation-bottom">
-              <div className="tab-bar-buttons">
-                <div className="tab">
-                  <img
-                    className="icon-3"
-                    alt="Icon"
-                    src="https://c.animaapp.com/WStZlVhZ/img/icon-9@2x.png"
-                  />
+            /> 
+        </div>
 
-                  <div className="label-3">Home</div> 
-                </div>
-
-                <Link className="tab" to="/bookmark">
-                  <BookmarkFilled
-                    bookmarkFilled="https://c.animaapp.com/WStZlVhZ/img/bookmark-filled-2@2x.png"
-                    className="bookmark-filled-instance"
-                  />
-                  <div className="label-4">Bookmark</div>
-                </Link>
-
-                <div className="tab">
-                  <img
-                    className="icon-4"
-                    alt="Icon"
-                    src="https://c.animaapp.com/WStZlVhZ/img/icon-13@2x.png"
-                  />
-
-                  <div className="label-5">Search</div>
-                </div>
-
-                <div className="tab">
-                  <img
-                    className="icon-4"
-                    alt="Icon"
-                    src="https://c.animaapp.com/WStZlVhZ/img/icon-14@2x.png"
-                  />
-
-                  <div className="label-6">Profile</div>
-                </div>
-              </div>
-            </div> */}
+            
           </>
         )}
 
@@ -137,13 +78,10 @@ export const Web_Bookmark = () => {
               
             </div>
 
-            <Menu
-              bookmarkTabBookmarkBookmark="https://c.animaapp.com/WStZlVhZ/img/bookmark-3@2x.png"
-              bookmarkTabDivClassName="menu-3"
+            <MenuForPC 
               className="menu-instance"
-              homeTabDivClassName="menu-2"
-              homeTabIcon="https://c.animaapp.com/WStZlVhZ/img/icon-12@2x.png"
-            />
+              IsActivated="yesbookmarkis"
+              BookmarkTabActivated="https://c.animaapp.com/WStZlVhZ/img/bookmark-3@2x.png" />
           </>
         )}
       </div>

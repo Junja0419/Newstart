@@ -33,7 +33,10 @@ export const PhoneSearchBar = ({ property1, className }) => {
             <div className="div">
               <div className="rectangle" />
 
-              <input className="input" />
+              <input 
+                className="input" 
+                placeholder="궁금한 아티클을 찾아보세요" 
+              />
             </div>
           </div>
 

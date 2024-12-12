@@ -16,11 +16,11 @@
     min-height: 100vh;
   }
   @media (max-width: 1511px) {
-    .web-signin .frame-wrapper { width: 100%; max-width: 390px; }
+    .web-main .div-3  { width: 100%; max-width: 390px; }
   }
   
   @media (min-width: 1512px) {
-    .web-signin .frame-wrapper { width: 100%; max-width: 1512px; }
+    .web-main .div-3  { width: 100%; max-width: 1512px; }
   }
 
   /* 모바일용 화면 */
@@ -31,9 +31,9 @@
     gap: 6vh;
     width: 100%;
     max-width: 390px;
-    padding-bottom: 100px;
+    padding-bottom: 90px;
     position: relative;
-    top:5vh;
+    top:2.5vh;
   }
 
   .web-main .main-view-for-mobile {
@@ -42,7 +42,7 @@
     flex-direction: column;
     gap: 36px;
     width: 100%;
-    max-width: 380px;
+    max-width: 390px;
   }
 
   .main-folder-for-mobile {
@@ -68,29 +68,57 @@
     width: 100%;
     max-width: 390px;
   }
+
+  .web-main .title-3 {
+    align-self: stretch;
+    color: #1c1b1f;
+    font-family: "Inter", Helvetica;
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-top: -1.00px;
+    position: relative;
+    white-space: nowrap;
+    width: 421.06px;
+  }
+  
+  .web-main .text-wrapper-12 {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    height: 46.36px;
+    letter-spacing: 0;
+    line-height: 40px;
+    margin-top: -1.00px;
+    position: relative;
+    text-align: right;
+    white-space: nowrap;
+    width: 84px;
+  }
   
   .web-main .main-category-wrapper-for-mobile {
     align-self: stretch;
     display: flex;
     flex-direction: column;
     max-width: 537px;
-    overflow-x: hidden;
     padding: 10px 0px;
     position: relative;
     width: 100%;
+    overflow-x: hidden;
   }
 
   /* PC용 화면 */
   .web-main .frame-4 {
-    align-items: flex-start;
+    position : absolute;
+    top: 3vh;
+
     display: flex;
     flex-direction: column;
-    gap: 19px;
-    left: 639px;
-    /* overflow-y: scroll; */
-    position: absolute;
-    top: 57px;
-    width: 537px;
+    align-items: center;
+    gap : 5vh;
+    padding-bottom: 2.5vh;
   }
   
   .web-main .view {
@@ -147,6 +175,10 @@
     max-width: 100%;
   }
   
+  .web-main .headlinewrapperforpc {
+
+  }
+
   .web-main .headline-2 {
     align-items: flex-end;
     display: flex;
@@ -155,24 +187,9 @@
     padding: 10px 0px;
     position: relative;
     width: 100%;
-    max-width: 390px;
   }
-  
-  .web-main .title-3 {
-    align-self: stretch;
-    color: #1c1b1f;
-    font-family: "Inter", Helvetica;
-    font-size: 36px;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: 40px;
-    margin-top: -1.00px;
-    position: relative;
-    white-space: nowrap;
-    width: 421.06px;
-  }
-  
-  .web-main .text-wrapper-12 {
+
+  .web-main .text-wrapper-12-for-pc {
     color: #a09cab;
     font-family: "Inter", Helvetica;
     font-size: 20px;
@@ -188,64 +205,77 @@
   }
   
   .web-main .menu-bar-wrapper {
-    align-items: flex-start;
     align-self: stretch;
     display: flex;
-    flex: 0 0 auto;
     flex-direction: column;
-    gap: 10px;
     max-width: 537px;
     overflow-x: hidden;
     padding: 10px 0px;
     position: relative;
     width: 100%;
   }
+
   
-  .web-main .menu-bar-instance {
-    align-self: stretch !important;
-    position: relative !important;
-    width: 100% !important;
+  .web-main .web-main-headline.headlineforpc {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    border: 1px solid;
+    border-color: #b1b1b1;
+    border-radius: 10px;
+    width: 100%;
+    height: 133px;
+
+    margin-top : 21px;
+  }
+
+  .web-main .number.headlinenumberforpc {
+    font-family: "Inter", Helvetica;
+    font-weight: 300;
+    letter-spacing: -5.12px;
+    line-height: 0.1px;
+    position: relative;
+    text-align: center;
+    font-size: 64px;
+  }
+
+  .web-main .text-group.headlinetextGroupforpc {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 0 auto; /* 여기서만 이 거 엄청중요하네.. */
+
+    position: relative;
+    width : 400px;
+  }
+
+  .web-main-headline .label.headlineTextforpc {
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 28px;
+  }
+
+  .web-main-headline .label-2.headlineNewspaperforpc {
+    align-self: stretch;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    height: 16px;
+    letter-spacing: 0;
+    line-height: 0.1px;
+    position: relative;
+    top:7px;
+    padding-left:10px
   }
   
-  .web-main .menu-bar-2 {
-    margin-right: -199.37px !important;
-  }
-  
-  .web-main .menu-bar-3 {
-    height: 1px !important;
-  }
-  
-  .web-main .headline-instance {
-    align-self: stretch !important;
-    flex: 0 0 auto !important;
-    width: 100% !important;
-  }
-  
-  .web-main .headline-3 {
-    width: 74px !important;
-  }
-  
-  .web-main .headline-4 {
-    flex: 1 !important;
-    flex-grow: 1 !important;
-  }
-  
-  .web-main .headline-5 {
-    margin-top: unset !important;
-  }
-  
-  .web-main .headline-6 {
-    margin-right: -16.00px !important;
-  }
-  
-  .web-main .headline-7 {
-    margin-right: -14.00px !important;
-  }
-  
+
   /* PC용 네비게이터 */
   .web-main .frame-51 {
     left: 0 !important;
-    position: fixed !important;
+    position: absolute !important;
     top: 0 !important;
   }
   

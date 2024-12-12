@@ -3,7 +3,7 @@ import { useWindowWidth } from "../../breakpoints";
 import classNames from "classnames";
 import ChangeButton from "../../components/Web_Profile_Password/ChangeButton";
 import Return from "../../components/Web_Profile_Setting/Return";
-import Menu from "../../components/Web_Profile/Menu";
+import MenuForPC from "../../components/MenuForPC/MenuForPC"
 import CompleteButton from "../../components/Web_Profile_Setting/CompleteButton";
 import "./style.css";
 
@@ -12,29 +12,19 @@ export const Web_Profile_Password = () => {
 
   return (
     <div className="profile-password">
-      <div
-        className={classNames("div-3", {  // 반응형 웹 기준 설정
-          "div-for-mobile": screenWidth < 1512,
-          "div-for-web": screenWidth >= 1512,
-        })}         
-        style={{
-          height:
-            screenWidth < 1512
-              ? "844px"
-              : screenWidth >= 1512
-                ? "982px"
-                : undefined,
-          overflow: screenWidth >= 1512 ? "hidden" : undefined,
-          width:
-            screenWidth < 1512
-              ? "390px"
-              : screenWidth >= 1512
-                ? "1512px"
-                : undefined,
-        }}
-      >
+      <div className="div-3">
         {screenWidth < 1512 && ( //모바일 화면
           <>
+          <div className="frame-for-all-mobile-wpp">
+          <div className="frame-7">
+              <div className="frame-50-wrapper">
+                <Return divClassName="frame-50" />
+              </div>
+
+              <div className="title-wrapper">
+                <div className="title-2">비밀번호 재설정</div>
+              </div>
+            </div>
             <div className="frame-wrapper">
               <div className="frame-2">
                 <div className="frame-3">
@@ -42,7 +32,11 @@ export const Web_Profile_Password = () => {
                     <div className="view">
                       <div className="text-wrapper-7">현재 비밀번호</div>
 
-                      <div className="text-wrapper-8">현재 비밀번호 입력</div>
+                      <input 
+                        className="text-input" 
+                        type="password"
+                        placeholder="현재 비밀번호 입력"
+                      />
 
                       <img
                         className="line"
@@ -58,7 +52,11 @@ export const Web_Profile_Password = () => {
                     <div className="view-2">
                       <div className="text-wrapper-9">새 비밀번호</div>
 
-                      <div className="text-wrapper-10">8자 이상 입력</div>
+                      <input 
+                        className="text-input" 
+                        type="password"
+                        placeholder="8자 이상 입력"
+                      />
 
                       <img
                         className="line"
@@ -74,7 +72,11 @@ export const Web_Profile_Password = () => {
                     <div className="view-2">
                       <div className="text-wrapper-11">새 비밀번호 재입력</div>
 
-                      <div className="text-wrapper-10">8자 이상 입력</div>
+                      <input 
+                        className="text-input" 
+                        type="password"
+                        placeholder="8자 이상 입력"
+                      />
 
                       <img
                         className="line"
@@ -87,21 +89,12 @@ export const Web_Profile_Password = () => {
               </div>
             </div>
 
-            <div className="frame-7">
-              <div className="frame-50-wrapper">
-                <Return divClassName="frame-50" />
-              </div>
-
-              <div className="title-wrapper">
-                <div className="title-2">비밀번호 재설정</div>
-              </div>
-            </div>
-
             <CompleteButton
               className="component-174"
               disabled
               text="완료"
             />
+            </div>
           </>
         )}
 
@@ -119,7 +112,11 @@ export const Web_Profile_Password = () => {
                 <div className="div-4">
                   <div className="text-wrapper-12">현재 비밀번호</div>
 
-                  <input className="text-input" />
+                  <input 
+                    className="text-input-for-pc" 
+                    type="password"
+                    placeholder="현재 비밀번호 입력"
+                  />
 
                   <img
                     className="line-2"
@@ -129,9 +126,13 @@ export const Web_Profile_Password = () => {
                 </div>
 
                 <div className="div-4">
-                  <div className="text-wrapper-13">새 비밀번호</div>
+                  <div className="text-wrapper-12">새 비밀번호</div>
 
-                  <input className="element" />
+                  <input 
+                    className="text-input-for-pc" 
+                    type="password"
+                    placeholder="8자 이상 입력"
+                  />
 
                   <img
                     className="line-2"
@@ -141,9 +142,13 @@ export const Web_Profile_Password = () => {
                 </div>
 
                 <div className="div-4">
-                  <div className="text-wrapper-14">새 비밀번호 재입력</div>
+                  <div className="text-wrapper-12">새 비밀번호 재입력</div>
 
-                  <input className="element" />
+                  <input 
+                    className="text-input-for-pc" 
+                    type="password"
+                    placeholder="8자 이상 입력"
+                  />
 
                   <img
                     className="line-2"
@@ -160,13 +165,10 @@ export const Web_Profile_Password = () => {
               />
             </div>
 
-            <Menu
+            <MenuForPC 
               className="menu-instance"
-              homeTabDivClassName="instance-node"
-              homeTabIcon="https://c.animaapp.com/saL1Q9gz/img/icon-9@2x.png"
-              profileTabDivClassName="menu-2"
-              profileTabIcon="https://c.animaapp.com/saL1Q9gz/img/icon-11@2x.png"
-            />
+              IsActivated="yesprofileis"
+              ProfileTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-4@2x.png" />
           </>
         )}
       </div>

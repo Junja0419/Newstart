@@ -2,93 +2,26 @@ import React from "react";
 import { useWindowWidth } from "../../breakpoints";
 import ReadOriginalButton from "../../components/Web_Summary/ReadOriginalButton";
 import Frame from "../../components/Web_Summary/Frame";
-import Menu from "../../components/Web_Main/Menu";
+import MenuForPC from "../../components/MenuForPC/MenuForPC"
 import ReturnIcon from "../../components/Web_Summary/ReturnIcon";
 import "./style.css";
 
 export const Web_Summary = () => {
   const screenWidth = useWindowWidth();
-
   return (
     <div
-      className="summary"
-      style={{
-        backgroundColor:
-          screenWidth < 1512
-            ? "#f5f5f5"
-            : screenWidth >= 1512
-              ? "#ffffff"
-              : undefined,
-      }}
-    >
-      <div
-        className="div-3"
-        style={{
-          backgroundColor:
-            screenWidth < 1512
-              ? "#f5f5f5"
-              : screenWidth >= 1512
-                ? "#ffffff"
-                : undefined,
-          height:
-            screenWidth < 1512
-              ? "844px"
-              : screenWidth >= 1512
-                ? "982px"
-                : undefined,
-          overflow: screenWidth >= 1512 ? "hidden" : undefined,
-          width:
-            screenWidth < 1512
-              ? "390px"
-              : screenWidth >= 1512
-                ? "1512px"
-                : undefined,
-        }}
-      >
-        {screenWidth < 1512 && (
-          <img
-            className="summary-icon-3"
-            alt="Icon"
-            src="https://c.animaapp.com/UCp2MqVE/img/icon-10@2x.png"
-          />
-        )}
-
-        <div
-          className="frame-2"
-          style={{
-            height:
-              screenWidth < 1512
-                ? "409px"
-                : screenWidth >= 1512
-                  ? "941px"
-                  : undefined,
-            left:
-              screenWidth < 1512
-                ? "21px"
-                : screenWidth >= 1512
-                  ? "639px"
-                  : undefined,
-            top:
-              screenWidth < 1512
-                ? "164px"
-                : screenWidth >= 1512
-                  ? "41px"
-                  : undefined,
-            width:
-              screenWidth < 1512
-                ? "353px"
-                : screenWidth >= 1512
-                  ? "591px"
-                  : undefined,
-          }}
-        >
-          {screenWidth < 1512 && (
+      className="summary">
+      <div className="div-3">
+          {screenWidth < 1512 && ( // 모바일 화면
             <div className="overlap">
+              <ReturnIcon className="outline-interface-caret-left"/>
               <div className="overlap-group-2">
-                <div className="rectangle" />
-
-                <div className="frame-wrapper">
                   <div className="frame-3">
+                  <img
+                    className="free-icon-quote"
+                    alt="Free icon quote"
+                    src="https://c.animaapp.com/UCp2MqVE/img/free-icon-quote-9298522-1@2x.png"
+                  />
                     <p className="text-wrapper-6">
                       ‘상설특검 여당 추천 배제’ <br />
                       개정안이 국회를 통과했어요.
@@ -105,32 +38,33 @@ export const Web_Summary = () => {
                       예정이에요.
                     </p>
                   </div>
-                </div>
-
-                <div className="text-wrapper-7">MBCNEWS</div>
-
-                <img
-                  className="free-icon-quote"
-                  alt="Free icon quote"
-                  src="https://c.animaapp.com/UCp2MqVE/img/free-icon-quote-9298522-1@2x.png"
+                  <div className="under-text-button-wrapper">
+                  <div className="text-wrapper-7">MBCNEWS</div>
+                
+                <ReadOriginalButton
+                  className="button-instance"
+                  hasSymbol={false}
+                  label="원문 읽기"
+                  labelClassName="instance-node"
+                  labelType="symbol-text"
+                  onMaterial={false}
+                  size="small"
+                  state="enabled"
+                  style="filled"
                 />
+                </div>
               </div>
 
-              <ReadOriginalButton
-                className="button-instance"
-                hasSymbol={false}
-                label="원문 읽기"
-                labelClassName="instance-node"
-                labelType="symbol-text"
-                onMaterial={false}
-                size="small"
-                state="enabled"
-                style="filled"
+              
+              <img
+                className="summary-icon-3"
+                alt="Icon"
+                src="https://c.animaapp.com/UCp2MqVE/img/icon-10@2x.png"
               />
             </div>
           )}
 
-          {screenWidth >= 1512 && (
+          {screenWidth >= 1512 && ( // PC 화면
             <>
               <div className="frame-4">
                 <div className="overlap-group-wrapper">
@@ -168,22 +102,20 @@ export const Web_Summary = () => {
                     />
                   </div>
                 </div>
+                <img
+                  className="icon-4"
+                  alt="Icon"
+                  src="https://c.animaapp.com/UCp2MqVE/img/icon-10@2x.png"
+                />
               </div>
 
-              <img
-                className="icon-4"
-                alt="Icon"
-                src="https://c.animaapp.com/UCp2MqVE/img/icon-10@2x.png"
-              />
+             
+              <MenuForPC 
+                  className="frame-51"
+                  IsActivated="yeshomeis"
+                  HomeTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png" />
             </>
           )}
-        </div>
-
-        {screenWidth < 1512 && (
-          <ReturnIcon className="outline-interface-caret-left" />
-        )}
-
-        {screenWidth >= 1512 && <Menu className="frame-51" />}
       </div>
     </div>
   );

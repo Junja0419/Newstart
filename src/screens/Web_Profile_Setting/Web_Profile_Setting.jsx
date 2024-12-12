@@ -2,7 +2,7 @@ import React from "react";
 import { useWindowWidth } from "../../breakpoints";
 import classNames from "classnames";
 import Return from "../../components/Web_Profile_Setting/Return";
-import Menu from "../../components/Web_Profile/Menu";
+import MenuForPC from "../../components/MenuForPC/MenuForPC"
 import CompleteButton from "../../components/Web_Profile_Setting/CompleteButton";
 import User from "../../components/Web_Profile_Setting/User";
 import "./style.css";
@@ -13,38 +13,37 @@ export const Web_Profile_Setting = () => {
   return (
     <div className="web-profile-set">
       <div                                 // 반응형 웹 기준 설정
-        className={classNames("div-3", {
-          "div-for-mobile": screenWidth < 1512,
-          "div-for-web": screenWidth >= 1512,
-        })}
-        style={{
-          height:
-            screenWidth < 1512
-              ? "844px"
-              : screenWidth >= 1512
-                ? "982px"
-                : undefined,
-          overflow: screenWidth >= 1512 ? "hidden" : undefined,
-          width:
-            screenWidth < 1512
-              ? "390px"
-              : screenWidth >= 1512
-                ? "1512px"
-                : undefined,
-        }}
+        className="div-3"
+        // {classNames(, {
+        //   "div-for-mobile": screenWidth < 1512,
+        //   "div-for-web": screenWidth >= 1512,
+        // })}
+        // style={{
+        //   height:
+        //     screenWidth < 1512
+        //       ? "844px"
+        //       : screenWidth >= 1512
+        //         ? "982px"
+        //         : undefined,
+        //   overflow: screenWidth >= 1512 ? "hidden" : undefined,
+        //   width:
+        //     screenWidth < 1512
+        //       ? "390px"
+        //       : screenWidth >= 1512
+        //         ? "1512px"
+        //         : undefined,
+        // }}
       >
          { screenWidth >= 1512 && (       // PC용 화면 
           <>
-            <div className="frame-2"
-                //  style={{
-                //   height: "605px",
-                //   left: "638px",
-                //   top: "84px",
-                //   width: "514px"
-                //  }}
-            >
+            <div className="frame-2">
+              <div className="frame-3">
+                <Return />
+                <div className="frame-4">
+                  <div className="text-wrapper-8">프로필 편집</div>
+                </div>
+              </div>
               <div className="overlap">
-                <div className="rectangle" />
                 <div className="email-frame">
                   <div className="profile">
                     <div className="overlap-group-2">
@@ -78,13 +77,20 @@ export const Web_Profile_Setting = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+                <div className="nickname">
+                <div className="text-wrapper-9">닉네임</div>
 
-              <div className="frame-3">
-                <Return />
-                <div className="frame-4">
-                  <div className="text-wrapper-8">프로필 편집</div>
-                </div>
+                <input 
+                  className="text-input" 
+                  placeholder="아무개"
+                />
+
+                <img
+                  className="line"
+                  alt="Line"
+                  src="https://c.animaapp.com/G4E98Tez/img/line-3-4@2x.png"
+                />
+              </div>
               </div>
 
               <CompleteButton
@@ -93,32 +99,27 @@ export const Web_Profile_Setting = () => {
                 divClassName="button"
                 text="완료"
               />
-              <div className="nickname">
-                <div className="text-wrapper-9">닉네임</div>
-
-                <input className="text-input" />
-
-                <img
-                  className="line"
-                  alt="Line"
-                  src="https://c.animaapp.com/G4E98Tez/img/line-3-4@2x.png"
-                />
-              </div>
             </div>
-            <Menu
+            <MenuForPC 
               className="menu-instance"
-              homeTabDivClassName="instance-node"
-              homeTabIcon="https://c.animaapp.com/KaiTeIt5/img/icon-12@2x.png"
-              profileTabDivClassName="menu-2"
-              profileTabIcon="https://c.animaapp.com/KaiTeIt5/img/icon-14@2x.png"
-            />
+              IsActivated="yesprofileis"
+              ProfileTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-4@2x.png" />
           </>
         )}
           
         
 
         {screenWidth < 1512 && (     // 모바일용 화면
-          <>
+          <div className = "frame-for-all-mobile-wps">
+            <div className="frame-7">
+              <div className="frame-50-wrapper">
+                <Return divClassName="frame-50" />
+              </div>
+
+              <div className="title-wrapper">
+                <div className="title-2">프로필 편집</div>
+              </div>
+            </div>
             <div className="frame-5">
               <div className="overlap-group-wrapper">
                 <div className="overlap-group-3">
@@ -139,8 +140,10 @@ export const Web_Profile_Setting = () => {
               <div className="frame-6">
                 <div className="view-2">
                   <div className="text-wrapper-11">닉네임</div>
-
-                  <div className="text-wrapper-12">아무개</div>
+                  <input 
+                    className="text-wrapper-12" 
+                    placeholder="아무개"
+                  />
 
                   <img
                     className="line-2"
@@ -163,22 +166,12 @@ export const Web_Profile_Setting = () => {
               </div>
             </div>
 
-            <div className="frame-7">
-              <div className="frame-50-wrapper">
-                <Return divClassName="frame-50" />
-              </div>
-
-              <div className="title-wrapper">
-                <div className="title-2">프로필 편집</div>
-              </div>
-            </div>
-
             <CompleteButton
               className="component-210-instance"
               disabled
               text="완료"
             />
-          </>
+          </div>
         )}
                                 
       </div>

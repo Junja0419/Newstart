@@ -9,59 +9,55 @@ import React from "react";
 import "./style.css";
 
 export const MenuForMobile = ({
-    srcformainicon = "https://c.animaapp.com/nzh65NNa/img/icon-13@2x.png",
+    srcformainicon = "https://c.animaapp.com/WStZlVhZ/img/icon-12@2x.png",
     srcforbookmarkicon ="https://c.animaapp.com/nzh65NNa/img/bookmark-3@2x.png",
     srcforsearchicon="https://c.animaapp.com/WStZlVhZ/img/icon-13@2x.png",
     srcforprofileicon="https://c.animaapp.com/nzh65NNa/img/icon-18@2x.png",
     activeTab = "main",
 }) => {
   return (
-    <div className="wsmfm-navigation-bottom">
-            <div className="tab-bar-buttons">
-              <Link className="tab" to="/main">
+    <div className="navigation-bottom-for-all-mobile">
+            <div className="tab-bar-buttons-for-all-mobile">
+              <Link className="tab-for-all-mobile" to="/main">
                 <img
-                  className="mobile-navigator-icon"
-                  alt="Icon"
+                  className="mobile-navigator-icon-for-all-mobile"
                   src={srcformainicon}
                 />
 
                 <div className=
-                {`navigator-label ${activeTab === "main" ? "clicked" : ""
+                {`navigator-label-for-all-mobile ${activeTab === "main" ? "clicked-for-all-mobile" : ""
                 }`}>Home</div>
               </Link>
 
-              <Link className="tab" to="/bookmark">
+              <Link className="tab-for-all-mobile" to="/bookmark">
                 <img
-                  className="mobile-navigator-icon"
-                  alt="Icon"
+                  className="mobile-navigator-icon-for-all-mobile"
                   src={srcforbookmarkicon}
                 />
                 <div className=
-                {`navigator-label ${activeTab === "bookmark" ? "clicked" : ""
+                {`navigator-label-for-all-mobile ${activeTab === "bookmark" ? "clicked-for-all-mobile" : ""
                 }`}>Bookmark</div>
               </Link>
 
-              <Link className="tab" to="/search">
+              <Link className="tab-for-all-mobile" to="/search">
                 <img
-                  className="mobile-navigator-icon"
-                  alt="Icon"
+                  className="mobile-navigator-icon-for-all-mobile"
                   src={srcforsearchicon}
                 />
 
                 <div className=
-                {`navigator-label ${activeTab === "search" ? "clicked" : ""
+                {`navigator-label-for-all-mobile ${activeTab === "search" ? "clicked-for-all-mobile" : ""
                 }`}>Search</div>
               </Link>
 
-              <Link className="tab" to="/profile">
+              <Link className="tab-for-all-mobile" to="/profile">
                 <img
-                  className="mobile-navigator-icon"
-                  alt="Icon"
+                  className="mobile-navigator-icon-for-all-mobile"
                   src={srcforprofileicon}
                 />
 
                 <div className=
-                {`navigator-label ${activeTab === "profile" ? "clicked" : ""
+                {`navigator-label-for-all-mobile ${activeTab === "profile" ? "clicked-for-all-mobile" : ""
                 }`}>Profile</div>
               </Link>
             </div>

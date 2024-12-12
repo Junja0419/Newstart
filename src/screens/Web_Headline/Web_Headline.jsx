@@ -1,6 +1,7 @@
 import React from "react";
 import { useWindowWidth } from "../../breakpoints";
-import Menu from "../../components/Web_Main/Menu";
+import MenuForPC from "../../components/MenuForPC/MenuForPC"
+import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import BookmarkIconForMobileTab from "../../components/Web_Headline/BookmarkIconForMobileTab";
 import FrameForMobile from "../../components/Web_Headline/FrameForMobile";
 import Frame from "../../components/Web_Headline/Frame";
@@ -11,25 +12,10 @@ export const Web_Headline = () => {
 
   return ( 
     <div className="headline">
-      <div                         // 반응형 웹 기준 설정 
-        className="div-3" 
-        style={{
-          height:
-            screenWidth < 1512
-              ? "844px"
-              : screenWidth >= 1512
-                ? "982px"
-                : undefined,
-          width:
-            screenWidth < 1512
-              ? "390px"
-              : screenWidth >= 1512
-                ? "1512px"
-                : undefined,
-        }}
-      >
+      <div className="div-3">
         {screenWidth < 1512 && ( //모바일용 화면
           <>
+          <div className="frame-for-all-mobile-headline">
           <FrameForMobile
               newspaper = "MBCNEWS"
               title = "국회 외통위, 한미 방위비분담금협정 비준동의안 통과"
@@ -43,46 +29,9 @@ export const Web_Headline = () => {
 한편, 외통위는 가자지구에 대한 인도적 지원 촉구 결의안, 가자지구에서의 즉각적이고 영구적인 휴전 촉구 결의안도 의결했습니다.`} />
 
             {/* 모바일용 네비게이터 */}
-            <div className="navigation-bottom"> 
-              <div className="tab-bar-buttons">
-                <div className="tab">
-                  <img
-                    className="icon-4"
-                    alt="Icon"
-                    src="https://c.animaapp.com/JmVmo2aX/img/icon-9@2x.png"
-                  />
-
-                  <div className="label">Home</div>
-                </div>
-
-                <div className="tab">
-                  <BookmarkIconForMobileTab
-                    bookmark="https://c.animaapp.com/JmVmo2aX/img/bookmark-5@2x.png"
-                    className="bookmark-2"
-                  />
-                  <div className="label-2">Bookmark</div>
-                </div>
-
-                <div className="tab">
-                  <img
-                    className="icon-4"
-                    alt="Icon"
-                    src="https://c.animaapp.com/JmVmo2aX/img/icon-13@2x.png"
-                  />
-
-                  <div className="label-3">Search</div>
-                </div>
-
-                <div className="tab">
-                  <img
-                    className="icon-5"
-                    alt="Icon"
-                    src="https://c.animaapp.com/JmVmo2aX/img/icon-14@2x.png"
-                  />
-
-                  <div className="label-4">Profile</div>
-                </div>
-              </div>
+            <MenuForMobile 
+              srcformainicon = "https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png"
+            />
             </div>
           </>
         )}
@@ -100,7 +49,10 @@ export const Web_Headline = () => {
 외통위는 정부에 방위비분담금 결정 방식을 총액형에서 소요형으로 전환하고, 주한미군 한국인 근로자를 직접고용해 국내 노동법이 적용받을 수 있게 제도개선을 논의해달라고 요구하는 내용을 부대의견으로 적었습니다.
 
 한편, 외통위는 가자지구에 대한 인도적 지원 촉구 결의안, 가자지구에서의 즉각적이고 영구적인 휴전 촉구 결의안도 의결했습니다.`} />
-            <Menu className="frame-51" />
+            <MenuForPC 
+              className="frame-51"
+              IsActivated="yeshomeis"
+              HomeTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png" />
           </>
         )}
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useWindowWidth } from "../../breakpoints";
-import Frame from "../../components/Web_Main/Menu";
+import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
+import MenuForPC from "../../components/MenuForPC/MenuForPC"
 import Headline from "../../components/Web_Main/Headline";
 import Category from "../../components/Web_Main/Category";
 import ToSummaryButton from "../../components/Web_Main/ToSummaryButton";
@@ -9,6 +10,7 @@ import "./style.css";
 
 export const Web_Main = () => {
   const screenWidth = useWindowWidth();
+  const navigate = useNavigate(); // navigate 함수 정의
   return (
     <div className="web-main">
       <div className="div-3">
@@ -27,7 +29,9 @@ export const Web_Main = () => {
               />
             </div>
 
-            <div className="main-folder-for-mobile" />
+            <div className="main-folder-for-mobile" 
+              onClick={() => navigate("/summary")} // 클릭 시 "/summary" 경로로 이동
+            />
 
             <img
               className="line-2"
@@ -44,49 +48,25 @@ export const Web_Main = () => {
 
           <div className="main-category-wrapper-for-mobile">
             <Category
-              className="menu-bar-instance"
-              frameClassNameOverride="menu-bar-2"
-              img="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              imgClassName="menu-bar-3"
-              imgClassNameOverride="menu-bar-3"
-              line="https://c.animaapp.com/zuoomGM9/img/line-13-36@2x.png"
-              line1="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              line2="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              line3="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              line4="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              lineClassName="menu-bar-3"
-              lineClassName1="menu-bar-3"
-              lineClassName2="menu-bar-3"
-              lineClassNameOverride="menu-bar-3"
               stateProp="politics"
             />
           </div>
 
           <Headline
-            className="headline-instance"
-            divClassName="headline-3"
-            labelClassName="headline-5"
             stateProp="default"
             text="01"
-            textGroupClassName="headline-4"
           />
           <Headline
-            className="headline-instance"
-            divClassName="headline-3"
             stateProp="default"
             text="02"
             text1="텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트"
           />
           <Headline
-            className="headline-instance"
-            frameClassName="headline-6"
             stateProp="default"
             text="03"
             text1="엔비디아 젠슨 황 “삼성 HBM 승인 위해 가능한 빠르게 작업 중”"
           />
           <Headline
-            className="headline-instance"
-            frameClassName="headline-6"
             stateProp="default"
             text="04"
             text1={
@@ -98,19 +78,18 @@ export const Web_Main = () => {
             }
           />
           <Headline
-            className="headline-instance"
-            frameClassName="headline-7"
             stateProp="default"
             text="05"
             text1="텍스트텍스트텍스트텍스트텍스트텍스트"
           />
         </div>
+        {/* 모바일용 네비게이터 */}
+        <MenuForMobile 
+              srcformainicon = "https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png"
+            />
         </div>
 
-            {/* 모바일용 네비게이터 */}
-            <MenuForMobile 
-              srcformainicon = "https://c.animaapp.com/JmVmo2aX/img/icon-9@2x.png"
-            />
+            
           </>
         )}
 
@@ -128,7 +107,9 @@ export const Web_Main = () => {
               />
             </div>
 
-            <div className="folder" />
+            <div className="folder" 
+              onClick={() => navigate("/summary")} // 클릭 시 "/summary" 경로로 이동
+            />
 
             <img
               className="line-2"
@@ -137,6 +118,7 @@ export const Web_Main = () => {
             />
           </div>
 
+         <div className="headlinewrapperforpc">
           <div className="headline-2">
             <div className="title-3">최신 헤드라인</div>
 
@@ -145,51 +127,45 @@ export const Web_Main = () => {
 
           <div className="menu-bar-wrapper">
             <Category
-              className="menu-bar-instance"
-              frameClassNameOverride="menu-bar-2"
-              img="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              imgClassName="menu-bar-3"
-              imgClassNameOverride="menu-bar-3"
-              line="https://c.animaapp.com/zuoomGM9/img/line-13-36@2x.png"
-              line1="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              line2="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              line3="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              line4="https://c.animaapp.com/zuoomGM9/img/line-13-41@2x.png"
-              lineClassName="menu-bar-3"
-              lineClassName1="menu-bar-3"
-              lineClassName2="menu-bar-3"
-              lineClassNameOverride="menu-bar-3"
               stateProp="politics"
             />
           </div>
 
           <Headline
-            className="headline-instance"
-            divClassName="headline-3"
-            labelClassName="headline-5"
+            className="headlineforpc"
+            headlinenumber="headlinenumberforpc"
             stateProp="default"
             text="01"
-            textGroupClassName="headline-4"
+            headlinetextGroup="headlinetextGroupforpc"
+            headlineText="headlineTextforpc"
+            headlineNewspaper="headlineNewspaperforpc"
           />
           <Headline
-            className="headline-instance"
-            divClassName="headline-3"
+            className="headlineforpc"
+            headlinenumber="headlinenumberforpc"
             stateProp="default"
             text="02"
+            headlinetextGroup="headlinetextGroupforpc"
             text1="텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트"
+            headlineText="headlineTextforpc"
+            headlineNewspaper="headlineNewspaperforpc"
           />
           <Headline
-            className="headline-instance"
-            frameClassName="headline-6"
+            className="headlineforpc"
+            headlinenumber="headlinenumberforpc"
             stateProp="default"
             text="03"
+            headlinetextGroup="headlinetextGroupforpc"
             text1="엔비디아 젠슨 황 “삼성 HBM 승인 위해 가능한 빠르게 작업 중”"
+            headlineText="headlineTextforpc"
+            headlineNewspaper="headlineNewspaperforpc"
           />
           <Headline
-            className="headline-instance"
-            frameClassName="headline-6"
+            className="headlineforpc"
+            headlinenumber="headlinenumberforpc"
             stateProp="default"
             text="04"
+            headlinetextGroup="headlinetextGroupforpc"
             text1={
               <>
                 텍스트텍스트텍스트텍스트텍스트텍스트
@@ -197,17 +173,26 @@ export const Web_Main = () => {
                 가나다라마바사
               </>
             }
+            headlineText="headlineTextforpc"
+            headlineNewspaper="headlineNewspaperforpc"
           />
           <Headline
-            className="headline-instance"
-            frameClassName="headline-7"
+            className="headlineforpc"
+            headlinenumber="headlinenumberforpc"
             stateProp="default"
             text="05"
+            headlinetextGroup="headlinetextGroupforpc"
             text1="텍스트텍스트텍스트텍스트텍스트텍스트"
+            headlineText="headlineTextforpc"
+            headlineNewspaper="headlineNewspaperforpc"
           />
         </div>
+        </div>
 
-        <Frame className="frame-51" />
+        <MenuForPC 
+          className="frame-51"
+          IsActivated="yeshomeis"
+          HomeTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png" />
         </>
         )}
       </div>

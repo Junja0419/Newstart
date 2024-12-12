@@ -9,7 +9,10 @@ import { useReducer } from "react";
 import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
 import "./style.css";
 
-export const SearchTab = ({ stateProp }) => {
+export const SearchTab = ({ 
+  stateProp, 
+  srcforactivate="https://c.animaapp.com/zuoomGM9/img/icon-10@2x.png",
+  activated, }) => {
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "default",
   });
@@ -17,7 +20,7 @@ export const SearchTab = ({ stateProp }) => {
 
   return (
     <div
-      className={`web-main-search-tab state-5-${state.state}`}
+      className={`for-pc-menu-search-tab state-5-${state.state}`}
       onMouseLeave={() => {
         dispatch("mouse_leave");
       }}
@@ -26,17 +29,21 @@ export const SearchTab = ({ stateProp }) => {
       }}
       onClick={() => navigate("/search")} // 클릭 시 "/search" 경로로 이동
     >
-      <img
-        className="icon-2"
-        alt="Icon"
-        src={
-          state.state === "hover"
-            ? "https://c.animaapp.com/zuoomGM9/img/icon-6@2x.png"
-            : "https://c.animaapp.com/zuoomGM9/img/icon-10@2x.png"
-        }
-      />
+      {state.state === "default" && (
+        <img
+          src={srcforactivate}
+          className="for-pc-menu-search-tab-icon"
+        />
+      )}
 
-      <div className="text-wrapper-10">Search</div>
+      {state.state === "hover" && (
+        <img
+          className="for-pc-menu-search-tab-icon"
+          src="https://c.animaapp.com/zuoomGM9/img/icon-4@2x.png"
+        />
+      )}
+
+      <div className={`for-pc-menu-search-tab-text-wrapper ${activated}`}>Search</div>
     </div>
   );
 };

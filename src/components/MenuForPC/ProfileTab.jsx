@@ -7,41 +7,44 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useReducer } from "react";
 import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
-import Bookmark from "./Bookmark";
 import "./style.css";
 
-export const BookmarkTab = ({ stateProp }) => {
+export const ProfileTab = ({ 
+  stateProp, 
+  srcforactivate="https://c.animaapp.com/zuoomGM9/img/icon-11@2x.png",
+  activated, }) => {
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "default",
   });
   const navigate = useNavigate(); // navigate 함수 정의
+
   return (
     <div
-      className={`web-main-bookmark-tab state-4-${state.state}`}
+      className={`for-pc-menu-profile-tab state-6-${state.state}`}
       onMouseLeave={() => {
         dispatch("mouse_leave");
       }}
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/bookmark")} // 클릭 시 "/bookmark" 경로로 이동
+      onClick={() => navigate("/profile")} // 클릭 시 "/profile" 경로로 이동
+      
     >
       {state.state === "default" && (
-        <Bookmark
-          bookmark="https://c.animaapp.com/zuoomGM9/img/bookmark-3@2x.png"
-          className="bookmark-instance"
+        <img
+          src={srcforactivate}
+          className="for-pc-menu-profile-icon"
         />
       )}
 
       {state.state === "hover" && (
         <img
-          className="bookmark-filled"
-          alt="Bookmark filled"
-          src="https://c.animaapp.com/zuoomGM9/img/bookmark-filled@2x.png"
+          className="for-pc-menu-profile-icon"
+          src="https://c.animaapp.com/zuoomGM9/img/icon-4@2x.png"
         />
       )}
 
-      <div className="text-wrapper-9">Bookmark</div>
+      <div className={`for-pc-menu-profile-text-wrapper ${activated}`}>Profile</div>
     </div>
   );
 };
@@ -64,8 +67,8 @@ function reducer(state, action) {
   return state;
 }
 
-BookmarkTab.propTypes = {
+ProfileTab.propTypes = {
   stateProp: PropTypes.oneOf(["hover", "default"]),
 };
 
-export default BookmarkTab;
+export default ProfileTab;

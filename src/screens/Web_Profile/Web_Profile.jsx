@@ -3,9 +3,8 @@ import { useWindowWidth } from "../../breakpoints";
 import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
 import ProfileEdit from "../../components/Web_Profile/ProfileEdit";
 import Logout from "../../components/Web_Profile/Logout";
-import Menu from "../../components/Web_Profile/Menu";
+import MenuForPC from "../../components/MenuForPC/MenuForPC"
 import ToggleButton from "../../components/Web_Profile/ToggleButton";
-import Toggle from "../../components/Web_Profile/Toggle";
 import User from "../../components/Web_Profile/User";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import "./style.css";
@@ -15,32 +14,13 @@ export const Web_Profile = () => {
   const navigate = useNavigate(); // navigate 함수 정의
   return (
     <div className="web-profile">
-      <div                        // 반응형 웹 기준 설정
-        className="div-3"
-        style={{
-          height:
-            screenWidth < 1512
-              ? "844px"
-              : screenWidth >= 1512
-                ? "982px"
-                : undefined,
-          overflow: screenWidth >= 1512 ? "hidden" : undefined,
-          width:
-            screenWidth < 1512
-              ? "390px"
-              : screenWidth >= 1512
-                ? "1512px"
-                : undefined,
-        }}
-      >
+      <div className="div-3">
         {screenWidth < 1512 && ( //모바일용 화면
           <>
-            <img
-              className="line"
-              alt="Line"
-              src="https://c.animaapp.com/KaiTeIt5/img/line-7@2x.png"
-            />
-
+          <div className="mobile-screen-for-web-profile">
+            <div className="title-wrapper">
+              <div className="title-2">프로필</div>
+            </div>
             <div className="frame-2">
               <div className="frame-3">
                 <div className="user-wrapper">
@@ -55,13 +35,18 @@ export const Web_Profile = () => {
                   </div>
                 </div>
               </div>
-
+              
               <div className="button-wrapper">
                 <ProfileEdit
                   className="button-instance"
                   divClassName="instance-node"
                 />
               </div>
+              <img
+                className="line"
+                alt="Line"
+                src="https://c.animaapp.com/KaiTeIt5/img/line-7@2x.png"
+              />
             </div>
 
             <div className="frame-5">
@@ -73,12 +58,8 @@ export const Web_Profile = () => {
                     매일 08:00 알림을 전송합니다.
                   </div>
                 </div>
-
-                <Toggle
-                  className="toggle-instance"
-                  knobClassName="toggle-2"
-                  state="on"
-                />
+                <ToggleButton
+                 />
               </div>
 
               <div className="frame-wrapper">
@@ -92,56 +73,12 @@ export const Web_Profile = () => {
               <Logout className="frame-16" divClassName="frame-instance" />
             </div>
 
-            <div className="title-wrapper">
-              <div className="title-2">프로필</div>
-            </div>
-
             {/* 모바일용 네비게이터 */}
             <MenuForMobile
               srcforprofileicon="https://c.animaapp.com/KaiTeIt5/img/icon-14@2x.png"
               activeTab="profile"
             />
-            {/* <div className="navigation-bottom"> 
-              <div className="tab-bar-buttons">
-                <div className="tab">
-                  <img
-                    className="icon-3"
-                    alt="Icon"
-                    src="https://c.animaapp.com/KaiTeIt5/img/icon-9@2x.png"
-                  />
-
-                  <div className="label">Home</div>
-                </div>
-
-                <div className="tab">
-                  <Bookmark
-                    bookmark="https://c.animaapp.com/KaiTeIt5/img/bookmark-3@2x.png"
-                    className="bookmark-2"
-                  />
-                  <div className="label-2">Bookmark</div>
-                </div>
-
-                <div className="tab">
-                  <img
-                    className="icon-4"
-                    alt="Icon"
-                    src="https://c.animaapp.com/KaiTeIt5/img/icon-13@2x.png"
-                  />
-
-                  <div className="label-3">Search</div>
-                </div>
-
-                <Link className="tab" to="/profile">
-                  <img
-                    className="icon-4"
-                    alt="Icon"
-                    src="https://c.animaapp.com/KaiTeIt5/img/icon-14@2x.png"
-                  />
-
-                  <div className="label-4">Profile</div>
-                </Link>
-              </div>
-            </div> */}
+            </div>
           </>
         )}
 
@@ -154,6 +91,7 @@ export const Web_Profile = () => {
 
               <div className="div-4">
                 <div className="frame-9">
+                  <div className="frame-for-profileicon-web-profile">
                   <div className="user-instance-wrapper">
                     <User style="solid" />
                   </div>
@@ -166,14 +104,22 @@ export const Web_Profile = () => {
                       placeholder="newstart1234@gmail.com"
                       type="email"
                     />
-
-                    <ProfileEdit className="button-2" />
                   </div>
+                  </div>
+                  <div className="frame-for-setbutton-web-profile">
+                  <ProfileEdit className="button-2" />
+                  </div>
+                  <img
+                    className="line-2"
+                    alt="Line"
+                    src="https://c.animaapp.com/KaiTeIt5/img/line-7-1@2x.png"
+                  />
                 </div>
 
                 <div className="button-frame">
                   <div className="button-menu">
                     <div className="alram-button">
+                      <div className= "alram-button-text-for-web-profile">
                       <div className="alram-set">
                         <div className="text-wrapper-11">알림 설정</div>
                       </div>
@@ -183,6 +129,9 @@ export const Web_Profile = () => {
                           매일 08:00 알림을 전송합니다.
                         </div>
                       </div>
+                      </div>
+                      <ToggleButton
+                      />
                     </div>
 
                     <div className="button-3"
@@ -196,24 +145,12 @@ export const Web_Profile = () => {
                     </div>
                   </div>
                 </div>
-
-                <img
-                  className="line-2"
-                  alt="Line"
-                  src="https://c.animaapp.com/KaiTeIt5/img/line-7-1@2x.png"
-                />
-
-                <ToggleButton className="toggle-3" stateProp="off" />
               </div>
             </div>
-
-            <Menu
+            <MenuForPC 
               className="menu-instance"
-              homeTabDivClassName="menu-2"
-              homeTabIcon="https://c.animaapp.com/KaiTeIt5/img/icon-12@2x.png"
-              profileTabDivClassName="menu-3"
-              profileTabIcon="https://c.animaapp.com/KaiTeIt5/img/icon-14@2x.png"
-            />
+              IsActivated="yesprofileis"
+              ProfileTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-4@2x.png" />
           </>
         )}
       </div>

@@ -40,7 +40,9 @@ export const SearchBar = ({
               <div className="frame-4">
                 <div className="rectangle-3" />
 
-                <div className="text-wrapper-2">궁금한 아티클을 찾아보세요</div>
+                <input 
+                  className="text-wrapper-2"
+                  placeholder="궁금한 아티클을 찾아보세요" />
               </div>
             </div>
 

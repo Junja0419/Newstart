@@ -1,21 +1,45 @@
   .profile-password {
     background-color: #ffffff;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     width: 100%;
+    min-height: 100vh;
   }
   
   /* 반응형 웹 */
   .profile-password .div-3 {
     background-color: #ffffff;
-    position: relative;
-  }
-
-  .web-profile-set .div-for-mobile { 
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  @media (max-width: 1511px) {
+    .profile-password .div-3  { width: 100%; max-width: 390px; }
+  }
+  
+  @media (min-width: 1512px) {
+    .profile-password .div-3  { width: 100%; max-width: 1512px; }
+  }
+
+  .profile-password .frame-for-all-mobile-wpp { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 390px;
+    width: 100%;
+    min-height:94vh;
+    position: relative;
+    top:3vh;
+    gap: 10vh;
+  }
+  
+  .profile-password .frame-7 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 390px;
   }
   
   /* 모바일 화면 (일부분은 PC 화면에서도 재사용됨) */
@@ -24,10 +48,6 @@
     display: flex;
     flex-direction: column;
     gap: 78px;
-    left: 16px;
-    position: absolute;
-    top: 213px;
-    width: 350px;
   }
   
   .profile-password .frame-2 {
@@ -87,17 +107,6 @@
     width: 120px;
   }
   
-  .profile-password .text-wrapper-8 {
-    color: #a09cab;
-    font-family: "Inter", Helvetica;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 24px;
-    position: relative;
-    width: 198px;
-  }
-  
   .profile-password .line {
     height: 1px;
     margin-bottom: -0.20px;
@@ -150,17 +159,41 @@
     width: 101px;
   }
   
-  .profile-password .text-wrapper-10 {
+  .profile-password .text-input::placeholder {
     color: #a09cab;
     font-family: "Inter", Helvetica;
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 24px;
+  }
+
+  .profile-password .text-input-for-pc {
+    background-color: transparent;
+    border: 0;
+    color: #a09cab;
+    flex: 0 0 auto;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    padding: 0;
     position: relative;
-    width: 137.74px;
+    width: 100%;
   }
   
+    
+  .profile-password .text-input-for-pc::placeholder {
+    color: #a09cab;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+  
+
   .profile-password .frame-6 {
     align-items: flex-start;
     align-self: stretch;
@@ -182,16 +215,6 @@
     margin-top: -1.00px;
     position: relative;
     width: 160px;
-  }
-  
-  .profile-password .frame-7 {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    left: 0;
-    position: absolute;
-    top: 26px;
-    width: 390px;
   }
   
   .profile-password .frame-50-wrapper {
@@ -239,25 +262,21 @@
     
   /* PC용 화면 */
   .profile-password .frame-8 {
-    align-items: flex-start;
+    position : absolute;
+    top: 5vh;
+
     display: flex;
     flex-direction: column;
-    height: 553px;
-    justify-content: space-between;
-    left: 638px;
-    position: absolute;
-    top: 84px;
-    width: 497px;
+    align-items: center;
+    gap : 5vh;
   }
 
   .profile-password .title-box {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    height: 99px;
     position: relative;
-    width: 452px;
+    width: 100%;
   }
   
   .profile-password .title-frame {
@@ -312,7 +331,7 @@
     line-height: 24px;
     margin-top: -1.00px;
     position: relative;
-    width: 120px;
+    width: fit-content;
   }
   
   .profile-password .text-input {
@@ -327,7 +346,7 @@
     line-height: 24px;
     padding: 0;
     position: relative;
-    width: 198px;
+    width: 100%;
   }
   
   .profile-password .line-2 {
@@ -335,45 +354,6 @@
     margin-bottom: -0.20px;
     position: relative;
     width: 497px;
-  }
-  
-  .profile-password .text-wrapper-13 {
-    color: #1c1b1f;
-    font-family: "Inter", Helvetica;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: 24px;
-    margin-top: -1.00px;
-    position: relative;
-    width: 101px;
-  }
-  
-  .profile-password .element {
-    background-color: transparent;
-    border: 0;
-    color: #a09cab;
-    flex: 0 0 auto;
-    font-family: "Inter", Helvetica;
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 24px;
-    padding: 0;
-    position: relative;
-    width: 137.74px;
-  }
-  
-  .profile-password .text-wrapper-14 {
-    color: #1c1b1f;
-    font-family: "Inter", Helvetica;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: 24px;
-    margin-top: -1.00px;
-    position: relative;
-    width: 160px;
   }
   
   .profile-password .button {

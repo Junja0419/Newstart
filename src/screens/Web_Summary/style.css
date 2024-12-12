@@ -1,40 +1,54 @@
   .summary {
+    background-color: #ffffff;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     width: 100%;
+    min-height: 100vh;
   }
-  
+
+  /* 반응형 웹 */
   .summary .div-3 {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  @media (max-width: 1511px) {
+    .summary .div-3  { width: 100%; max-width: 390px; background-color: #f5f5f5;}
+  }
+  
+  @media (min-width: 1512px) {
+    .summary .div-3  { width: 100%; max-width: 1512px; }
+  }
+  
+  /* 모바일 화면 시작 */
+  .summary .overlap { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 390px;
+    width: 100%;
+    min-height: 100vh;
     position: relative;
   }
   
-  .summary .summary-icon-3 {
-    height: 17px;
-    left: 177px;
+  .summary .outline-interface-caret-left {
     position: absolute;
-    top: 710px;
-    width: 37px;
-  }
-  
-  .summary .frame-2 {
-    position: absolute;
-  }
-  
-  .summary .overlap {
-    height: 409px;
-    position: relative;
+    left: 10px !important;
+    top: 11px !important;
   }
   
   .summary .overlap-group-2 {
+    position: relative;
+    bottom:3vh;
     height: 394px;
-    left: 0;
-    position: absolute;
-    top: 0;
     width: 347px;
   }
   
-  .summary .rectangle {
+  /* .summary .rectangle {
     background-color: #ffffff;
     box-shadow: -2px 2px 11.3px #00000040;
     height: 347px;
@@ -42,82 +56,20 @@
     position: absolute;
     top: 19px;
     width: 347px;
-  }
-  
-  /* .summary .frame-wrapper {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: 349px;
-    justify-content: center;
-    left: 16px;
-    padding: 25px 0px;
-    position: absolute;
-    top: 22px;
-    width: 316px;
-  }
-  
-  .summary .frame-3 {
-    align-items: center;
-    display: inline-flex;
-    flex: 0 0 auto;
-    flex-direction: column;
-    gap: 20px;
-    justify-content: center;
-    margin-left: -21.00px;
-    margin-right: -21.00px;
-    position: relative;
-  }
-  
-  .summary .text-wrapper-6 {
-    color: #267bf1;
-    font-family: "Inter", Helvetica;
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 0;
-    line-height: 44px;
-    margin-top: -1.00px;
-    position: relative;
-    text-align: center;
-    width: 358px;
-  }
-  
-  .summary .element-2 {
-    color: #000000;
-    font-family: "Inter", Helvetica;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 22px;
-    position: relative;
-    text-align: center;
-    width: 308px;
   } */
-
-  .summary .frame-wrapper {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    height: 349px;
-    justify-content: center;
-    left: 16px;
-    padding: 25px 0px;
-    position: absolute;
-    top: 22px;
-    width: 316px;
-  }
   
   .summary .frame-3 {
+    background-color: #ffffff;
+    box-shadow: -2px 2px 11.3px #00000040;
+    height: 347px;
+    width: 347px;
+
     align-items: center;
     display: inline-flex;
     flex: 0 0 auto;
     flex-direction: column;
     gap: 20px;
     justify-content: center;
-    margin-left: -21.00px;
-    margin-right: -21.00px;
     position: relative;
   }
   
@@ -151,12 +103,9 @@
     font-family: "Inter", Helvetica;
     font-size: 11px;
     font-weight: 400;
-    left: 0;
     letter-spacing: 0;
     line-height: 24px;
-    position: absolute;
     text-shadow: 0px 1px 4.2px #000000bf;
-    top: 370px;
     white-space: nowrap;
   }
   
@@ -165,7 +114,7 @@
     left: 13px;
     object-fit: cover;
     position: absolute;
-    top: 0;
+    top: -10px;
     width: 41px;
   }
   
@@ -174,12 +123,10 @@
     box-shadow: 0px 2px 5px #00000026 !important;
     display: flex !important;
     height: 28px !important;
-    left: 268px !important;
-    position: absolute !important;
-    top: 381px !important;
     width: 85px !important;
   }
-  
+
+
   .summary .instance-node {
     font-family: "Inter", Helvetica !important;
     font-size: 15px !important;
@@ -188,14 +135,25 @@
     letter-spacing: -0.23px !important;
     line-height: 20px !important;
   }
+
+  .summary .under-text-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .summary .summary-icon-3 {
+    position: fixed;
+    bottom: 5vh;
+    height: 17px;
+    width: 37px;
+  }
   
   .summary .frame-4 {
-    height: 941px;
-    left: 0;
-    /* overflow-y: scroll; */
-    position: absolute;
-    top: 0;
-    width: 591px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
   }
   
   .summary .overlap-group-wrapper {
@@ -295,16 +253,8 @@
   
   .summary .icon-4 {
     height: 17px;
-    left: 268px;
     position: absolute;
-    top: 855px;
     width: 37px;
-  }
-  
-  .summary .outline-interface-caret-left {
-    left: 10px !important;
-    position: fixed !important;
-    top: 11px !important;
   }
   
   .summary .frame-51 {

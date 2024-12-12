@@ -1,81 +1,67 @@
   /* headlinestyle */
   .web-main-headline {
+    display: flex;
+    justify-content: center;
     align-items: center;
+
     border: 1px solid;
     border-color: #b1b1b1;
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    max-height: 211px;
-    max-width: 537px;
-    min-height: 133px;
-    padding: 6px 14px 6px 10px;
-    position: relative;
-    width: 537px;
+    width: 100%;
+    height: 133px;
+
+    margin-top : 10.5px;
+    margin-bottom : 10.5px;
   }
-  
-  .web-main-headline .frame-3 {
-    align-items: center;
-    display: flex;
-    gap: 15px;
-    position: relative;
-    width: 501px;
-  }
-  
-  .web-main-headline .element {
+
+  .web-main-headline .number {
     font-family: "Inter", Helvetica;
-    font-size: 64px;
     font-weight: 300;
     letter-spacing: -5.12px;
     line-height: 0.1px;
     position: relative;
     text-align: center;
-    width: fit-content;
-  }
-  
-  .web-main-headline .text-group-wrapper {
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    height: 121px;
-    justify-content: center;
-    margin-right: -15.00px;
-    position: relative;
-    width: 427px;
+    width: 66px;
+    font-size: 48px;
   }
   
   .web-main-headline .text-group {
-    align-items: flex-start;
-    align-self: stretch;
     display: flex;
-    flex: 0 0 auto;
     flex-direction: column;
-    gap: 10px;
-    justify-content: center;
+    align-items: flex-start;
+    flex: 0 0 auto; /* 여기서만 이 거 엄청중요하네.. */
+
     position: relative;
-    width: 100%;
+    width : 290px;
+  }
+
+  .web-main-headline .headlinetextwrapper {
+    display:flex;
+    align-items: center;
+  
+    padding-left:10px;
+    height: 85px;
   }
   
   .web-main-headline .label {
-    align-self: stretch;
     font-family: "Inter", Helvetica;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: 0;
     line-height: 28px;
-    margin-top: -1.00px;
-    position: relative;
   }
   
   .web-main-headline .label-2 {
     align-self: stretch;
     font-family: "Inter", Helvetica;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     height: 16px;
     letter-spacing: 0;
     line-height: 0.1px;
     position: relative;
+    top:7px;
+    padding-left:10px
   }
   
   .web-main-headline.state-0-click {
@@ -91,15 +77,15 @@
     background-color: #267bf1;
   }
   
-  .web-main-headline.state-0-click .element {
+  .web-main-headline.state-0-click .number {
     color: #ffffff;
   }
   
-  .web-main-headline.state-0-default .element {
+  .web-main-headline.state-0-default .number {
     color: #267bf1;
   }
   
-  .web-main-headline.state-0-hover .element {
+  .web-main-headline.state-0-hover .number {
     color: #ffffff;
   }
   
