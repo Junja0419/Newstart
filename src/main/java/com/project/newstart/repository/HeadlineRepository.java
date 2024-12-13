@@ -11,7 +11,7 @@ public interface HeadlineRepository extends JpaRepository<Headline, Long> {
 
     //최신순으로 정렬 후 반환 -> 개수 지정 필요
     @Query(
-            value="SELECT * FROM headline ORDER BY date DESC",
+            value="SELECT * FROM headline ORDER BY date DESC LIMIT 0,18",
             nativeQuery = true
     )
     List<Headline> getHeadlinesByDate();

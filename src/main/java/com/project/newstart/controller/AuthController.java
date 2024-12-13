@@ -6,9 +6,7 @@ import com.project.newstart.dto.ProfileDTO;
 import com.project.newstart.entity.UserEntity;
 import com.project.newstart.service.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -21,8 +19,16 @@ public class AuthController {
         this.authService = authService;
     }
 
+    @GetMapping("/email/login")
+    public ModelAndView loginform() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login.html");
+
+        return modelAndView;
+    }
+
     @PostMapping("/join")
-    public ModelAndView joinProcess(JoinDTO joinDTO) {
+    public ModelAndView joinProcess(@RequestBody JoinDTO joinDTO) {
 
         authService.joinProcess(joinDTO);
 
@@ -34,14 +40,14 @@ public class AuthController {
     }
 
     @PostMapping("/password")
-    public ResponseEntity<UserEntity> password(PasswordDTO passwordDTO) {
+    public ResponseEntity<UserEntity> password(@RequestBody PasswordDTO passwordDTO) {
         UserEntity userEntity = authService.passwordProcess(passwordDTO);
 
         return ResponseEntity.ok().body(userEntity);
     }
 
     @PostMapping("/user_delete")
-    public String user_delete(ProfileDTO profileDTO) {
+    public String user_delete(@RequestBody ProfileDTO profileDTO) {
         authService.deleteProcess(profileDTO);
 
         return "ok";

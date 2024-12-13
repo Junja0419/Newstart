@@ -28,7 +28,7 @@ public class ProfileController {
 
     //프로필 편집
     @PostMapping("/updateProcess")
-    public ResponseEntity<UserEntity> profile_update(ProfileDTO profileDTO) {
+    public ResponseEntity<UserEntity> profile_update(@RequestBody ProfileDTO profileDTO) {
 
         UserEntity userEntity = profileService.profile_update(profileDTO);
 

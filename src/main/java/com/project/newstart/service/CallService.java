@@ -1,12 +1,11 @@
 package com.project.newstart.service;
 
-import com.project.newstart.dto.CallDTO;
 import com.project.newstart.dto.HeadlineDTO;
 import com.project.newstart.dto.SummaryDTO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.json.simple.parser.JSONParser;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,31 +25,34 @@ public class CallService {
         this.summaryService = summaryService;
     }
 
-    //Sechduling 어노테이션 붙여서 매 시간마다 메서드가 실행되게끔 코드 추가
-    public void call_api() throws ParseException {
+    @Scheduled(cron = "0 0 8,12,18 * * ?")//매일 8시 12시 18시마다 실행
+    public void call_api() throws ParseException, org.json.simple.parser.ParseException {
 
         //요청 보낼 URL
-        String apiUrl = "https://newstart-968487038692.asia-northeast3.run.app/crawl_and_summarize_all";
+        String apiUrl = "https://newstart-project-444411-7eac6k6zia-du.a.run.app/crawl_and_summarize_all";
 
         //restTemplate
         RestTemplate restTemplate = new RestTemplate();
+        JSONParser parser = new JSONParser();
 
         //날짜 포맷
         SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd. a h:mm");
 
-        //HTTP post 요청 보내기
-        ResponseEntity<CallDTO> result = restTemplate.exchange(
-                apiUrl,
-                HttpMethod.POST,
-                null,
-                CallDTO.class
-        );
+        //문자열로 일단 다 가져오기
+        String resultString = restTemplate.postForObject(apiUrl, null, String.class);
 
-        //result에서 헤드라인만 추출
-        Map<String, Object> object = result.getBody().getResult();
-        for(String category: object.keySet()) {
-            JSONObject category_object = (JSONObject) object.get(category);
+        //json parser로 json 형태로 파싱
+        JSONObject object = (JSONObject) parser.parse(resultString);
+
+        //results 가져오기
+        Map<String, Object> results = (Map<String, Object>) object.get("results");
+        
+        //카테고리별 순회
+        for(String category: results.keySet()) {
+            JSONObject category_object = (JSONObject) results.get(category);
             JSONArray summaries = (JSONArray) category_object.get("summaries");
+            
+            //카테고리별 기사 순회
             for(int i=0; i<summaries.size(); i++) {
                 JSONObject element = (JSONObject) summaries.get(i);
                 String title = (String) element.get("title");

@@ -27,7 +27,7 @@ public class BookmarkController {
 
     //북마크 등록
     @PostMapping("/create")
-    public ResponseEntity<UserEntity> create_bookmark(BookmarkDTO bookmarkDTO) {
+    public ResponseEntity<UserEntity> create_bookmark(@RequestBody BookmarkDTO bookmarkDTO) {
         //사용자 정보
         CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity userEntity = userRepository.findByUsername(user.getUsername());

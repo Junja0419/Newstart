@@ -9,6 +9,7 @@ import com.project.newstart.repository.SearchRepository;
 import com.project.newstart.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,6 +33,12 @@ public class SearchService {
     }
 
     public List<Headline> getSearchResult(String keyword) {
+
+        //검색 api url
+        String apiUrl = "";
+
+        RestTemplate restTemplate = new RestTemplate();
+
         List<Headline> headlines = headlineRepository.findByKeyword(keyword);
         
         //검색db에 기록 저장하는 코드 추가 content, user
