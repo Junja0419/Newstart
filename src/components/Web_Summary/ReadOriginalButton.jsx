@@ -18,6 +18,7 @@ export const ReadOriginalButton = ({
     <div
       className={`web-summary-button ${labelType} ${state} ${style} ${size} on-material-${onMaterial} ${className}`}
       onClick={onClick}
+      style={{ cursor: "pointer" }} // 클릭 가능 표시
     >
       {labelType === "symbol-text" && (
         <>

@@ -1,20 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useWindowWidth } from "../../breakpoints";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
-import MenuForPC from "../../components/MenuForPC/MenuForPC"
+import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import FrameForMobile from "../../components/Web_Bookmark/FrameForMobile";
-import Frame from "../../components/Web_Bookmark/Frame"
+import Frame from "../../components/Web_Bookmark/Frame";
 import "./style.css";
 
 export const Web_Bookmark = () => {
   const screenWidth = useWindowWidth();
+  const { id } = useParams(); // url에서 id를 가져옴
+  const [bookmarks, setBookmarks] = useState([]);
+
+  /***** 데이터 로드 *****/
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const response = await fetch(`/bookmark/${id}`);
+        const data = await response.json();
+        setBookmarks(data.bookmark);
+      } catch (error) {
+        console.error("Error fetching bookmarks:", error);
+      }
+    };
+
+    fetchBookmarks();
+  }, [id]);
+
+  /***** 북마크 삭제 *****/
+  const handleDeleteBookmark = async (bookmark_id) => {
+    try {
+      const response = await fetch(`/bookmark/delete/${bookmark_id}`, {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        // 삭제 성공 시 해당 bookmark_id를 제외한 북마크 목록으로 업데이트
+        setBookmarks((prevBookmarks) =>
+          prevBookmarks.filter(
+            (bookmark) => bookmark.bookmark_id !== bookmark_id
+          )
+        );
+      } else {
+        console.error("Failed to delete bookmark");
+      }
+    } catch (error) {
+      console.error("Error deleting bookmark:", error);
+    }
+  };
 
   return (
     <div className="bookmark-screen">
       <div className="bookmark-2">
         {screenWidth < 1512 && ( // 모바일용 화면
           <>
-        <div className="formobilescreen">
+            <div className="formobilescreen">
               <div className="title-wrapper">
                 <div className="title-2">북마크</div>
               </div>
@@ -24,24 +64,22 @@ export const Web_Bookmark = () => {
 
               <div className="div-3" />
 
+              {bookmarks.map((bookmark) => (
+                <FrameForMobile
+                  bookmark_id={bookmark.bookmark_id}
+                  title={bookmark.headline.title}
+                  category={bookmark.headline.category}
+                  press={bookmark.headline.press}
+                  onDelete={() => handleDeleteBookmark(bookmark.bookmark_id)}
+                />
+              ))}
 
-            <FrameForMobile 
-                text = {`세줄텍스트입니다\n세줄\n텍스트입니다`}
-                category = "경제"
-                newspaper = "한국일보" />
-              
-            <FrameForMobile 
-              text = {`세줄텍스트입니다\n세줄\n텍스트입니다`}
-              category = "경제"
-              newspaper = "한국일보" />    
               {/* 모바일용 탭 메뉴 */}
-            <MenuForMobile 
-              srcforbookmarkicon = "https://c.animaapp.com/WStZlVhZ/img/bookmark-filled-2@2x.png"
-              activeTab="bookmark"
-            /> 
-        </div>
-
-            
+              <MenuForMobile
+                srcforbookmarkicon="https://c.animaapp.com/WStZlVhZ/img/bookmark-filled-2@2x.png"
+                activeTab="bookmark"
+              />
+            </div>
           </>
         )}
 
@@ -66,22 +104,22 @@ export const Web_Bookmark = () => {
                 </div>
               </div>
 
-              <Frame 
-                text = {'세줄텍스트입니다\n세줄\n텍스트입니다'}
-                category = "경제"
-                newspaper = "한국일보" />
-              
-              <Frame 
-                text = {'세줄텍스트입니다\n세줄\n텍스트입니다'}
-                category = "경제"
-                newspaper = "한국일보" />     
-              
+              {bookmarks.map((bookmark) => (
+                <Frame
+                  bookmark_id={bookmark.bookmark_id}
+                  title={bookmark.headline.title}
+                  category={bookmark.headline.category}
+                  press={bookmark.headline.press}
+                  onDelete={() => handleDeleteBookmark(bookmark.bookmark_id)}
+                />
+              ))}
             </div>
 
-            <MenuForPC 
+            <MenuForPC
               className="menu-instance"
               IsActivated="yesbookmarkis"
-              BookmarkTabActivated="https://c.animaapp.com/WStZlVhZ/img/bookmark-3@2x.png" />
+              BookmarkTabActivated="https://c.animaapp.com/WStZlVhZ/img/bookmark-3@2x.png"
+            />
           </>
         )}
       </div>
