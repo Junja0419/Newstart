@@ -37,8 +37,7 @@ public class Headline {
 
     //기사 등록 날짜
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private String date;
 
     //기사 분야
     @Column(nullable = false)

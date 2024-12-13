@@ -12,6 +12,6 @@ public class HeadlineDTO {
     private String content;
     private String link;
     private String press;
-    private Date date;
+    private String date;
     private String category;
 }

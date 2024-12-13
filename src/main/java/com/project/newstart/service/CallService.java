@@ -58,7 +58,7 @@ public class CallService {
                 String title = (String) element.get("title");
                 String link = (String) element.get("link");
                 String press = (String) element.get("press");
-                Date datetime = format.parse((String) element.get("datetime"));
+                String datetime = (String) element.get("datetime");
                 String content = (String) element.get("content");
                 String summary = (String) element.get("summary");
 

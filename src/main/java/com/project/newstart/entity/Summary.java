@@ -28,7 +28,6 @@ public class Summary {
     private String link;
 
     //디비 저장 시간
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date date;
+    private String date;
 }
