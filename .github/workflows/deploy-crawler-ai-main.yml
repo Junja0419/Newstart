@@ -37,7 +37,7 @@ jobs:
       # 5. Docker 이미지 빌드
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.ARTIFACT_REPO }}/crawler-ai-main:${{ github.sha }} ./crawler-ai
+          docker build -t ${{ secrets.ARTIFACT_REPO }}/crawler-ai-main:${{ github.sha }} ./crawler-ai-main
 
       # 6. Docker 이미지 푸시
       - name: Push Docker image to Artifact Registry
