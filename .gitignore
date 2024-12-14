@@ -23,13 +23,21 @@
 hs_err_pid*
 replay_pid*
 
-## junja ##
-# 환경 변수 파일
-.env
+# IDE
+.idea/
+.vscode/
 
-# 테스트 로그 파일
-data
-search_data
+# env files
+.env
+.env.local
+.env.*.local
+
+# Additional compressed files
+*.7z
+
+# test log files
+crawler-ai-main/data
+crawler-ai-search/search_data
 
 # 기타
 .DS_Store
