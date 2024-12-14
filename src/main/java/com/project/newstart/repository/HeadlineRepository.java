@@ -11,21 +11,21 @@ public interface HeadlineRepository extends JpaRepository<Headline, Long> {
 
     //최신순으로 정렬 후 반환 -> 개수 지정 필요
     @Query(
-            value="SELECT * FROM headline ORDER BY length(date) DESC, date DESC LIMIT 0,18",
+            value="SELECT * FROM Headline ORDER BY length(date) DESC, date DESC LIMIT 0,18",
             nativeQuery = true
     )
     List<Headline> getHeadlinesByDate();
 
     //검색 결과용 쿼리
     @Query(
-            value="SELECT * FROM headline WHERE title LIKE %:keyword% OR content LIKE %:keyword%",
+            value="SELECT * FROM Headline WHERE title LIKE %:keyword% OR content LIKE %:keyword%",
             nativeQuery = true
     )
     List<Headline> findByKeyword(@Param("keyword") String keyword);
 
     //헤드라인 기사 detail용 쿼리
     @Query(
-            value="SELECT * FROM headline WHERE headline_id=:headline_id",
+            value="SELECT * FROM Headline WHERE headline_id=:headline_id",
             nativeQuery = true
     )
     Headline findByHeadline_id(@Param("headline_id") Long headline_id);
