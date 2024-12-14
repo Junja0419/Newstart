@@ -251,30 +251,6 @@ def crawl_article(request: CrawlRequest):
     return crawl_result
 
 
-# /summarize 엔드포인트
-@app.post("/summarize", response_model=CrawlResponse)
-def summarize_article(request: CrawlRequest):
-    article_url = request.article_url
-    logging.info(f"뉴스 요약을 위한 크롤링 URL: {article_url}")
-
-    # 크롤링
-    crawl_result = crawl(article_url)
-
-    if "error" in crawl_result:
-        raise HTTPException(status_code=500, detail=crawl_result["error"])
-
-    content = crawl_result.get("content", "")
-    if not content:
-        logging.error("크롤링된 콘텐츠가 없습니다.")
-        raise HTTPException(status_code=500, detail="크롤링된 콘텐츠가 없습니다.")
-
-    # 요약
-    summary = summarize_content(content)
-    crawl_result["summary"] = summary
-
-    return crawl_result
-
-
 # /crawl_and_summarize 엔드포인트
 @app.post("/crawl_and_summarize", response_model=CrawlResponse)
 def crawl_and_summarize_article(request: CrawlRequest):
@@ -301,4 +277,5 @@ def crawl_and_summarize_article(request: CrawlRequest):
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8080)
