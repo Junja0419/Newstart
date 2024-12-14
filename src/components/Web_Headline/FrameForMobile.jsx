@@ -9,10 +9,14 @@ import BookmarkHover from "./BookmarkHover";
 import "./style.css";
 
 export const Frame = ({ 
-    newspaper, 
+    press, 
     title,
     date,
-    text
+    content,
+    isBookmarked, 
+    onBookmarkChange, 
+    category,
+    link
 }) => {
   return (
     <div className="mobile-headline-frame">
@@ -20,12 +24,17 @@ export const Frame = ({
                 <p className="mobile-headline-title">
                     {title}
                 </p>
+                <div className="mobile-headline-newspaper">{press}</div>
+
+                <div className="time-bookmark-wrapper-for-headline-frame-for-mobile">
                 <div className="mobile-headline-date">{date}</div>
-                <div className="mobile-headline-newspaper">{newspaper}</div>
+                
                 <BookmarkHover
                   stateDefaultClassName="mobile-headline-bookmark-button"
-                  stateProp="default"
+                  stateProp={isBookmarked ? "bookmark-filled" : "default"}
+                  onBookmarkChange={onBookmarkChange}
                 />
+                </div>
               </div>
               <img
                     className="mobile-headline-line-image"
@@ -33,17 +42,19 @@ export const Frame = ({
                     src="https://c.animaapp.com/JmVmo2aX/img/line-7.png"
                   />
                 <p className="mobile-headline-article-text">
-                  {text}
+                  {content}
                 </p>
+                <div className="web-headline-link">{link}</div>
     </div>
   );
 };
 
 Frame.propTypes = {
-    newspaper: PropTypes.string,
+    press: PropTypes.string,
     title: PropTypes.string,
     date: PropTypes.string,
-    text: PropTypes.string,
+    content: PropTypes.string,
+    link: PropTypes.string,
   };
 
 export default Frame;

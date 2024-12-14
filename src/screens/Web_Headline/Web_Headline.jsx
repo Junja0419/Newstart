@@ -1,14 +1,173 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useWindowWidth } from "../../breakpoints";
+import { useParams, useLocation } from "react-router-dom";
 import MenuForPC from "../../components/MenuForPC/MenuForPC"
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
-import BookmarkIconForMobileTab from "../../components/Web_Headline/BookmarkIconForMobileTab";
 import FrameForMobile from "../../components/Web_Headline/FrameForMobile";
 import Frame from "../../components/Web_Headline/Frame";
 import "./style.css";
 
 export const Web_Headline = () => {
+  const { headline_id } = useParams(); // URL에서 headline id 추출
+  const [headline, setHeadline] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const screenWidth = useWindowWidth();
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const handleBookmarkChange = (status) => {
+    // status가 "bookmark"면 북마크 설정, "unbookmark"면 해제
+    setIsBookmarked(status === "bookmark");
+  };
+  const [bookmarkId, setBookmarkId] = useState(null); // 북마크 ID 저장
+  const [userId, setUserId] = useState(null);
+
+  console.log("Headline ID from web headlinejsx:", headline_id);
+  console.log("user ID from web headlinejsx:", userId);
+
+  // // 유저 ID 가져오기
+  // const fetchUserEntity = async () => {
+  //   try {
+  //     const response = await fetch("/"); // 백엔드에서 현재 유저 정보 가져오기
+  //     if (!response.ok) throw new Error("Failed to fetch user entity");
+  //     const data = await response.json();
+  //     setUserId(data.userentity.id); // user_id 저장
+  //   } catch (err) {
+  //     console.error("Error fetching user entity:", err);
+  //     setError(err.message);
+  //   }
+  // };
+
+  // // 북마크 상태 가져오기
+  // const fetchBookmarkStatus = async () => {
+  //   try {
+  //     const response = await fetch(`/bookmark/${userId}`); // 유저 ID로 북마크 상태 조회
+  //     if (!response.ok) throw new Error("Failed to fetch bookmark status");
+  //     const data = await response.json();
+
+  //     const bookmark = data.bookmark.find(
+  //       (b) => b.headline.headline_id === parseInt(headline_id) //북마크 배열을 순회하면서 헤드라인 아이디 일치 찾음
+  //     );
+
+  //     if (bookmark) {
+  //       setIsBookmarked(true);
+  //       setBookmarkId(bookmark.bookmark_id);
+  //     } else {
+  //       setIsBookmarked(false);
+  //       setBookmarkId(null);
+  //     }
+  //   } catch (err) {
+  //     console.error("Error fetching bookmark status:", err);
+  //     setError(err.message);
+  //   }
+  // };
+
+  // // 헤드라인 데이터 및 북마크 상태 가져오기
+  // useEffect(() => {
+  //   const fetchHeadlineAndBookmark = async () => {
+  //     try {
+  //       //헤드라인 데이터 가져오기
+  //       const headlineResponse = await fetch(`/headline/${headline_id}`);
+  //       if (!headlineResponse.ok) throw new Error("Failed to fetch headline data");
+  //       const data = await headlineResponse.json();
+  //       setHeadline(data.headline); // 단일 headline 객체 설정
+
+  //       // 3. 북마크 상태 조회
+  //       await fetchBookmarkStatus();
+  //     } catch (err) {
+  //       console.error("Error fetching data:", err);
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchHeadlineAndBookmark();
+  // }, [headline_id, userId]); // userId가 업데이트될 때마다 다시 호출
+
+  // // 북마크 등록/삭제 처리
+  // const handleBookmarkToggle = async () => {
+  //   try {
+  //     if (isBookmarked) {
+  //       // 북마크 삭제
+  //       const response = await fetch(`/bookmark/delete/${bookmarkId}`, {
+  //         method: "POST",
+  //       });
+  //       if (!response.ok) throw new Error("Failed to delete bookmark");
+  //       console.log("Bookmark deleted");
+  //     } else {
+  //       // 북마크 등록
+  //       const response = await fetch("/bookmark/create", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({
+  //           user_id: userId,
+  //           headline_id: parseInt(headline_id),
+  //         }),
+  //       });
+  //       if (!response.ok) throw new Error("Failed to create bookmark");
+  //       const result = await response.json();
+  //       console.log("Bookmark created:", result);
+  //     }
+
+  //     // 최신 북마크 상태 다시 조회
+  //     await fetchBookmarkStatus();
+  //   } catch (err) {
+  //     console.error("Bookmark toggle error:", err);
+  //     setError(err.message);
+  //   }
+  // };
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
+
+  // if (!headline) {
+  //   return <div>No headline found.</div>;
+  // }
+
+  // 로컬에서 메인 데이터 가져오기
+  useEffect(() => {
+    const fetchHeadlines = async () => {
+      try {
+        const response = await fetch("/headlines.json");
+        if (!response.ok) throw new Error("Failed to load data");
+        const data = await response.json();
+        console.log("Fetched data:", data);
+
+        // JSON 데이터 구조 확인 및 상태 저장
+        if (data.headline && Array.isArray(data.headline)) {
+          setHeadline(data.headline); // headline 배열 설정
+          setUserId(data.userentity.id); // userentity 저장
+        } else {
+          throw new Error("Invalid data structure");
+        }
+      } catch (err) {
+        console.error("Error fetching headlines:", err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHeadlines();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  // 첫 번째 요소 접근, headline_id.json 파일도 어차피 큰 headline 안에 []로 시작한다고 가정함, 만약 그렇지 않으면 그냥 접근 하면 됨
+  const headline0 = headline[0];
+  if (!headline) {
+    return <div>No headline found.</div>;
+  }
 
   return ( 
     <div className="headline">
@@ -17,17 +176,15 @@ export const Web_Headline = () => {
           <>
           <div className="frame-for-all-mobile-headline">
           <FrameForMobile
-              newspaper = "MBCNEWS"
-              title = "국회 외통위, 한미 방위비분담금협정 비준동의안 통과"
-              date = "2024.11.28"
-              text = {` 국회 외교통일위원회가 한미 방위비분담 특별협정 비준동의안을 통과시켰습니다.
-
-정부는 미국 정부와의 8차례 협의 끝에 지난달, 2026년부터 2030년까지 5년간 유효한 제12차 한미 방위분감금 특별협정을 타결했고, 이에 따라 2026년 주한미군 방위비분담금은 1조5천192억원으로, 2025년보다 8.3％ 늘게 됐습니다.
-
-외통위는 정부에 방위비분담금 결정 방식을 총액형에서 소요형으로 전환하고, 주한미군 한국인 근로자를 직접고용해 국내 노동법이 적용받을 수 있게 제도개선을 논의해달라고 요구하는 내용을 부대의견으로 적었습니다.
-
-한편, 외통위는 가자지구에 대한 인도적 지원 촉구 결의안, 가자지구에서의 즉각적이고 영구적인 휴전 촉구 결의안도 의결했습니다.`} />
-
+              press = {headline0.press}
+              title = {headline0.title}
+              date = {headline0.date}
+              content = {headline0.content} 
+              link = {headline0.link}
+              // 상위에서 관리하는 북마크 상태와 콜백 전달
+                isBookmarked={isBookmarked}
+                onBookmarkChange={handleBookmarkChange}
+                />
             {/* 모바일용 네비게이터 */}
             <MenuForMobile 
               srcformainicon = "https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png"
@@ -39,16 +196,15 @@ export const Web_Headline = () => {
         {screenWidth >= 1512 && ( //PC용 화면
           <>
             <Frame 
-              newspaper = "MBCNEWS"
-              title = "국회 외통위, 한미 방위비분담금협정 비준동의안 통과"
-              date = "2024.11.28"
-              text = {` 국회 외교통일위원회가 한미 방위비분담 특별협정 비준동의안을 통과시켰습니다.
-
-정부는 미국 정부와의 8차례 협의 끝에 지난달, 2026년부터 2030년까지 5년간 유효한 제12차 한미 방위분감금 특별협정을 타결했고, 이에 따라 2026년 주한미군 방위비분담금은 1조5천192억원으로, 2025년보다 8.3％ 늘게 됐습니다.
-
-외통위는 정부에 방위비분담금 결정 방식을 총액형에서 소요형으로 전환하고, 주한미군 한국인 근로자를 직접고용해 국내 노동법이 적용받을 수 있게 제도개선을 논의해달라고 요구하는 내용을 부대의견으로 적었습니다.
-
-한편, 외통위는 가자지구에 대한 인도적 지원 촉구 결의안, 가자지구에서의 즉각적이고 영구적인 휴전 촉구 결의안도 의결했습니다.`} />
+              press = {headline0.press}
+              title = {headline0.title}
+              date = {headline0.date}
+              content = {headline0.content} 
+              link = {headline0.link}
+              // 북마크 상태와 콜백 전달
+              isBookmarked={isBookmarked}
+              onBookmarkChange={handleBookmarkChange}
+            />
             <MenuForPC 
               className="frame-51"
               IsActivated="yeshomeis"

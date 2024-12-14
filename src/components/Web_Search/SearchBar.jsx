@@ -1,141 +1,154 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import PropTypes from "prop-types";
-import React from "react";
-import { useReducer } from "react";
-import SearchIcon from "./SearchIcon";
+import React, { useReducer, useRef, useEffect, useState  } from "react";
+import FrameForSearchBar from "./FrameForSearchBar"
 import "./style.css";
 
 export const SearchBar = ({
   property1,
+  classNameForSearchIcon,
+  recordsCount = 10,
   className,
-  frameClassName,
-  frameClassNameOverride,
-  searchSize = "https://c.animaapp.com/nzh65NNa/img/search-4@2x.png",
+  onSearch, // 검색어를 외부로 전달하기 위한 콜백 함수
 }) => {
   const [state, dispatch] = useReducer(reducer, {
     property1: property1 || "default",
   });
+  const searchBarRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 관리
+
+  useEffect(() => {
+    // click 상태일 때 외부 클릭을 감지
+    if (state.property1 === "click") {
+      const handleClickOutside = (event) => {
+        if (
+          searchBarRef.current &&
+          !searchBarRef.current.contains(event.target)
+        ) {
+          dispatch("reset");
+        }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [state.property1]);
+
+  // recordsCount에 따른 동적 검색 기록 div 생성
+  const dynamicDivs = Array.from({ length: recordsCount }).map((_, index) => (
+  <div key={index} className="dynamic-div-creator-for-searchbar">
+      <img src="https://c.animaapp.com/nzh65NNa/img/icon-12@2x.png" className="record-timer-icon"/>
+      search result
+  </div>
+  ));
+
+  // 엔터키 이벤트 처리 함수
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      onSearch(searchQuery); // 검색어를 외부로 전달
+      setSearchQuery(""); // 검색어 초기화
+      dispatch("reset"); // 상태를 default로 전환
+    }
+  };
 
   return (
     <div
+      ref={searchBarRef}
       className={`search-bar property-1-0-${state.property1} ${className}`}
       onMouseEnter={() => {
-        dispatch("mouse_enter");
+        if (state.property1 === "default") {
+          dispatch("mouse_enter");
+        }
       }}
       onMouseLeave={() => {
-        dispatch("mouse_leave");
+        if (state.property1 === "hover") {
+          dispatch("mouse_leave");
+        }
       }}
       onClick={() => {
-        dispatch("click");
+        // 클릭 시 click 상태로 유지
+        if (state.property1 === "hover") {
+          dispatch("click");
+        }
       }}
     >
-      <div className="overlap-group-3">
-        {["default", "hover"].includes(state.property1) && (
-          <>
-            <div className={`frame-wrapper ${frameClassName}`}>
-              <div className="frame-4">
-                <div className="rectangle-3" />
-
-                <input 
-                  className="text-wrapper-2"
-                  placeholder="궁금한 아티클을 찾아보세요" />
-              </div>
-            </div>
-
-            <div
-              className={`search-instance-wrapper ${frameClassNameOverride}`}
-            >
-              <SearchIcon
-                className="instance-node"
-                size="twenty-four"
-                size1={searchSize}
+      {["default", "hover"].includes(state.property1) && (
+        <>
+          <div className="rectangle-3">
+            <div className="searchbar-contents-for-first">
+              <input
+                className="text-wrapper-2"
+                placeholder="궁금한 아티클을 찾아보세요"
               />
-            </div>
-          </>
-        )}
-
-        {state.property1 === "click" && (
-          <>
-            <div className="div-wrapper">
-              <div className="frame-5">
-                <div className="rectangle-4" />
-              </div>
-            </div>
-
-            <div className="frame-6">
-              <SearchIcon
-                className="instance-node"
-                size="twenty-four"
-                size1="https://c.animaapp.com/nzh65NNa/img/search-5@2x.png"
-              />
-            </div>
-
-            <div className="frame-7">
               <img
-                className="img"
-                alt="Icon"
-                src="https://c.animaapp.com/nzh65NNa/img/icon-12@2x.png"
+                src="https://c.animaapp.com/nzh65NNa/img/search-5@2x.png"
+                className={`search-icon-for-search-bar ${classNameForSearchIcon}`}
               />
-
-              <div className="text-wrapper-3">search result</div>
             </div>
+            
+          </div>
+        </>
+      )}
 
-            <div className="frame-8">
+      {state.property1 === "click" && (
+        <>
+            <div className="rectangle-3">
+            <div className="searchbar-contents-for-first">
+              <input
+                className="text-wrapper-2"
+                placeholder="궁금한 아티클을 찾아보세요"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleKeyDown} // 엔터키 이벤트 처리
+              />
               <img
-                className="img"
-                alt="Icon"
-                src="https://c.animaapp.com/nzh65NNa/img/icon-12@2x.png"
+                src="https://c.animaapp.com/nzh65NNa/img/search-5@2x.png"
+                className={`search-icon-for-search-bar ${classNameForSearchIcon}`}
               />
-
-              <div className="text-wrapper-3">search result</div>
             </div>
-
-            <img
-              className="line-2"
-              alt="Line"
-              src="https://c.animaapp.com/nzh65NNa/img/line-11-1@2x.png"
-            />
-          </>
-        )}
-      </div>
+            <div className="searchbar-search-record-box">
+              <img src="https://c.animaapp.com/nzh65NNa/img/line-11-1@2x.png" className="search-record-line"/>
+              {dynamicDivs}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
 function reducer(state, action) {
-  if (state.property1 === "default") {
-    switch (action) {
-      case "mouse_enter":
-        return {
-          property1: "hover",
-        };
-    }
+  switch (state.property1) {
+    case "default":
+      if (action === "mouse_enter") {
+        return { property1: "hover" };
+      }
+      break;
+    case "hover":
+      if (action === "mouse_leave") {
+        return { property1: "default" };
+      }
+      if (action === "click") {
+        return { property1: "click" };
+      }
+      break;
+    case "click":
+      // 외부 클릭 시 default로 돌아가는 reset 액션 추가
+      if (action === "reset") {
+        return { property1: "default" };
+      }
+      break;
+    default:
+      return state;
   }
-
-  if (state.property1 === "hover") {
-    switch (action) {
-      case "mouse_leave":
-        return {
-          property1: "default",
-        };
-
-      case "click":
-        return {
-          property1: "click",
-        };
-    }
-  }
-
   return state;
 }
 
 SearchBar.propTypes = {
   property1: PropTypes.oneOf(["click", "hover", "default"]),
   searchSize: PropTypes.string,
+  recordsCount: PropTypes.number,
 };
 
 export default SearchBar;

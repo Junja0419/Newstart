@@ -10,16 +10,19 @@ import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 us
 import "./styleforheadline.css";
 
 export const Headline = ({
+  headline_id,
   stateProp,
   className,
   headlinenumber,
   text = "02",
   headlinetextGroup,
   headlineText,
-  text1 = "텍스트텍스트텍스트텍스트텍스트텍스트<br/>가나다라마바사",
+  title = "텍스트텍스트텍스트텍스트텍스트텍스트<br/>가나다라마바사",
   headlineNewspaper,
-  textofpress="안준석일보",
-  textofcategory="경제",
+  press="안준석일보",
+  category="경제",
+  onClick,
+  useridfromeachcomponents,
 }) => {
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "default",
@@ -31,7 +34,11 @@ export const Headline = ({
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/headline/:headline_id")} // 클릭 시 "/headline" 경로로 이동
+      onClick={() =>
+        navigate(`/headline/${headline_id}`, {
+          state: { useridfromeachcomponents }, // userid를 state로 전달
+        })
+      }
       onMouseLeave={() => {
         dispatch("mouse_leave");
       }}
@@ -40,9 +47,9 @@ export const Headline = ({
         <div className={`number ${headlinenumber}`}>{text}</div>
         <div className={`text-group ${headlinetextGroup}`}>
           <div className="headlinetextwrapper">
-            <div className={`label ${headlineText}`}>{text1}</div>
+            <div className={`label ${headlineText}`}>{title}</div>
           </div>
-          <div className={`label-2 ${headlineNewspaper}`}>{textofcategory} | {textofpress}</div>
+          <div className={`label-2 ${headlineNewspaper}`}>{category} | {press}</div>
         </div>
     </div>
   );

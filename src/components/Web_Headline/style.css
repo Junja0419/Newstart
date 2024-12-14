@@ -1,52 +1,21 @@
-  /* BookmarkHover Style */
-  .web-headline-bookmark.state-default {
-    background-image: url(https://c.animaapp.com/JmVmo2aX/img/bookmark-6@2x.png);
-    background-size: 100% 100%;
-    height: 30px;
-    width: 30px;
-  }
-  
-  .web-headline-bookmark.state-bookmark {
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 30px;
-  }
-  
-  .web-headline-bookmark.web-headline-bookmark-filled {
-    height: 30px;
-  }
-  
-  .web-headline-bookmark.default {
-    height: 30px;
-  }
-  
-  .web-headline-bookmark.hover {
-    height: 30px;
-  }
-  
-  /* BookmarkIconForMobileTab Style */
-  .web-headline-bookmark-wrapper {
-    height: 24px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 24px;
-  }
-  
+  /* 북마크 호버 스타일일  
+  .web-headline-bookmark.state-hover {
+    position: relative;
+    top : 4px;
+  } */
+
   /* Frame Style */
   .web-headline-frame {
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 66px;
+    gap: 3vh;
     
     position : absolute;
     top: 5vh;
-    
   }
   
-  .web-headline-title {
+  .web-headline-frame .web-headline-title {
     align-items: flex-start;
     display: flex;
     flex: 0 0 auto;
@@ -55,7 +24,7 @@
     width: 537px;
   }
   
-  .web-headline-newspaper {
+  .web-headline-frame .web-headline-newspaper {
     align-items: flex-end;
     align-self: stretch;
     display: flex;
@@ -67,7 +36,7 @@
     width: 100%;
   }
   
-  .web-headline-newspaper-text {
+  .web-headline-frame .web-headline-newspaper-text {
     color: #267bf1;
     font-family: "Inter", Helvetica;
     font-size: 16px;
@@ -80,7 +49,7 @@
     width: fit-content;
   }
   
-  .web-headline-newspaper-title {
+  .web-headline-frame .web-headline-newspaper-title {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 36px;
@@ -91,7 +60,7 @@
     width: 537px;
   }
   
-  .web-headline-newspaper-title-date {
+  .web-headline-frame .web-headline-newspaper-title-date {
     color: #a09cab;
     font-family: "Inter", Helvetica;
     font-size: 16px;
@@ -102,33 +71,34 @@
     white-space: nowrap;
     width: fit-content;
   }
-  
-  .web-headline-bookmark-button {
-    position: relative !important;
-  }
-  
-  .web-headline-line-wrapper {
-    align-items: flex-start;
-    align-self: stretch;
+
+  .web-headline-frame .time-bookmark-wrapper-for-headline-frame {
     display: flex;
-    flex: 0 0 auto;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: -1.00px;
-    margin-top: -25px;
-    position: relative;
+    justify-content: space-between;
     width: 100%;
   }
   
-  .web-headline-line-image {
+  /* .web-headline-frame .web-headline-bookmark-button-img {
+    width: 40px; 얘 건들라면 고정 픽셀 다 손봐야 하는데 그냥 안 하겠습니다
+  } */
+
+  .web-headline-frame .web-headline-line-image {
     align-self: stretch;
     height: 2px;
     margin-top: -2.00px;
     position: relative;
     width: 100%;
   }
-  
-  .web-headline-article {
+    
+  .web-headline-frame .web-headline-line-wrapper {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+
+  .web-headline-frame .web-headline-article {
     align-items: center;
     display: flex;
     flex: 0 0 auto;
@@ -138,7 +108,7 @@
     width: 537px;
   }
   
-  .web-headline-article-text {
+  .web-headline-frame .web-headline-article-text {
     white-space: pre-wrap; /* 줄바꿈과 공백을 반영 */
     align-self: stretch;
     color: #000000;
@@ -150,22 +120,29 @@
     margin-top: -1.00px;
     position: relative;
   }
+
+  .web-headline-frame .web-headline-link {
+    position: relative;
+    margin-top:15px;
+    margin-bottom:75px;
+    font-size: 20px;
+  }
   
   /* FrameForMobile Style */
   .mobile-headline-frame {
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 27px;
+    gap: 13.5px;
   }
   
-  .mobile-headline-title-wrapper {
+  .mobile-headline-frame .mobile-headline-title-wrapper {
     height: 105px;
     position: relative;
     width: 348px;
   }
   
-  .mobile-headline-title {
+  .mobile-headline-frame .mobile-headline-title {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 20px;
@@ -177,21 +154,28 @@
     top: 27px;
     width: 346px;
   }
-  
-  .mobile-headline-date {
+    
+  .mobile-headline-frame .time-bookmark-wrapper-for-headline-frame-for-mobile {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position : relative;
+    top: 80px;
+  }
+
+  .mobile-headline-frame .mobile-headline-date {
     color: #a09cab;
     font-family: "Inter", Helvetica;
     font-size: 11px;
     font-weight: 400;
-    left: 0;
     letter-spacing: 0;
     line-height: 24px;
-    position: absolute;
-    top: 80px;
     white-space: nowrap;
+    position: relative;
+    top:10px;
   }
   
-  .mobile-headline-newspaper {
+  .mobile-headline-frame .mobile-headline-newspaper {
     color: #267bf1;
     font-family: "Inter", Helvetica;
     font-size: 11px;
@@ -204,8 +188,7 @@
     white-space: nowrap;
   }
   
-  .mobile-headline-bookmark-button {
-    background-image: url(https://c.animaapp.com/JmVmo2aX/img/bookmark-4@2x.png) !important;
+  .mobile-headline-frame .mobile-headline-bookmark-button {
     height: 20px !important;
     left: 328px !important;
     position: absolute !important;
@@ -213,14 +196,14 @@
     width: 20px !important;
   }
   
-  .mobile-headline-line-image {
+  .mobile-headline-frame .mobile-headline-line-image {
     height: 1px;
     object-fit: cover;
     position: relative;
     width: 350px;
   }
   
-  .mobile-headline-article-text {
+  .mobile-headline-frame .mobile-headline-article-text {
     white-space: pre-wrap; /* 줄바꿈과 공백을 반영 */
     color: #000000;
     font-family: "Inter", Helvetica;
@@ -232,3 +215,9 @@
     width: 319px;
   }
   
+  .mobile-headline-frame .web-headline-link {
+    position: relative;
+    margin-top:17.5px;
+    margin-bottom:95px;
+    font-size: 14px;
+  }

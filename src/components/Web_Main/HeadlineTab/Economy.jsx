@@ -1,100 +1,30 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import Headline from "../Headline";
-import { axiosHeadlines } from "../axiosHeadlines";
 
 export const Economy = ({ 
-    newspaper, 
-    title,
-    date,
-    text
+  headlines,
+  user_id, 
 }) => {
-  const [headlines, setHeadlines] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await axiosHeadlines(1, 25); // ID 1부터 25까지 데이터 가져오기
-        setHeadlines(data);
-      } catch (error) {
-        console.error("Error fetching headlines:", error);
-        setError(error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-  // 가져오는 설정은 끝... 가져온 것들 {headline.title}, {headline.press}와 같은 형식으로 아래에서 쓰면 됨...
   return (
-    <div>
-        <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="01"
-            headlinetextGroup="headlinetextGroupforpc"
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-            textofcategory="경제"
-          />
+      <div>
+          {headlines.map((headline, index) => (
           <Headline
+            headline_id={headline.headline_id} // 고유 ID 사용
+            stateProp="default"
+            text={(index + 1).toString().padStart(2, "0")} // 번호 포맷
+            title={headline.title} // API에서 가져온 제목
+            category={headline.category} // API에서 가져온 카테고리
+            press={headline.press} // API에서 가져온 언론사
+            headlinetextGroup="headlinetextGroupforpc"
             className="headlineforpc"
             headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="02"
-            headlinetextGroup="headlinetextGroupforpc"
-            text1="텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트"
             headlineText="headlineTextforpc"
             headlineNewspaper="headlineNewspaperforpc"
-            textofcategory="경제"
+            user_id_to_headline = {user_id}
           />
-          <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="03"
-            headlinetextGroup="headlinetextGroupforpc"
-            text1="엔비디아 젠슨 황 “삼성 HBM 승인 위해 가능한 빠르게 작업 중”"
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-            textofcategory="경제"
-          />
-          <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="04"
-            headlinetextGroup="headlinetextGroupforpc"
-            text1={
-              <>
-                텍스트텍스트텍스트텍스트텍스트텍스트
-                <br />
-                가나다라마바사
-              </>
-            }
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-            textofcategory="경제"
-          />
-          <Headline
-            className="headlineforpc"
-            headlinenumber="headlinenumberforpc"
-            stateProp="default"
-            text="05"
-            headlinetextGroup="headlinetextGroupforpc"
-            text1="텍스트텍스트텍스트텍스트텍스트텍스트"
-            headlineText="headlineTextforpc"
-            headlineNewspaper="headlineNewspaperforpc"
-            textofcategory="경제"
-          />
-    </div>
-  );
-};
-
-
+         ))}
+      </div>
+    );
+  };
+  
 export default Economy;

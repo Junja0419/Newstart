@@ -3,33 +3,41 @@ We're constantly improving the code you see.
 Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
 */
 
-import React from "react";
+import React , { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import PropTypes from "prop-types";
 import BookmarkHover from "./BookmarkHover";
 import "./style.css";
 
 export const Frame = ({ 
-    newspaper, 
+    press, 
     title,
     date,
-    text
+    content,
+    isBookmarked, 
+    onBookmarkChange, 
+    category,
+    link
 }) => {
   return (
     <div className="web-headline-frame">
               <div className="web-headline-title">
                 <div className="web-headline-newspaper">
-                  <div className="web-headline-newspaper-text">{newspaper}</div>
+                  <div className="web-headline-newspaper-text">{press}</div>
 
                   <p className="web-headline-newspaper-title">
                     {title}
                   </p>
-
+                <div className="time-bookmark-wrapper-for-headline-frame">
                   <div className="web-headline-newspaper-title-date">{date}</div>
 
                   <BookmarkHover
-                    stateDefaultClassName="web-headline-bookmark-button"
-                    stateProp="default"
+                    classNameForBookmarkImg="web-headline-bookmark-button-img"
+                    stateProp={isBookmarked ? "bookmark-filled" : "default"}
+                    onBookmarkChange={onBookmarkChange}
+                    className="bookmark-button-for-web-headline"
                   />
+                </div>
                 </div>
 
                 <div className="web-headline-line-wrapper">
@@ -43,18 +51,22 @@ export const Frame = ({
 
               <div className="web-headline-article">
                 <p className="web-headline-article-text">
-                  {text}
+                  {content}
                 </p>
               </div>
+          <div className="web-headline-link">
+            {link}
+          </div>
     </div>
   );
 };
 
 Frame.propTypes = {
-    newspaper: PropTypes.string,
+    press: PropTypes.string,
     title: PropTypes.string,
     date: PropTypes.string,
-    text: PropTypes.string,
+    content: PropTypes.string,
+    link: PropTypes.string,
   };
 
 export default Frame;

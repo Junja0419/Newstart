@@ -12,7 +12,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     min-height: 100vh;
   }
   @media (max-width: 1511px) {
@@ -26,13 +25,13 @@
   
   /* PC용 화면 */
   .search-screen .for-pc-screen {
-    position : absolute;
+    position : relative;
     top: 5vh;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap : 5vh;
+    gap : 4vh;
   }
   
   .search-screen .title-frame {
@@ -55,19 +54,50 @@
     white-space: nowrap;
     width: fit-content;
   }
+
+  .search-screen .search-result-frame-web-search {
+    gap : 10px;
+    display: flex;
+    
+    flex-direction: column;
+    align-items: center;
+  }
+
   
-  .search-screen .search-bar {
-    width: 566px !important;
+  .search-screen .text-wrapper-for-web-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .search-screen .text-wrapper-2-for-web-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap:10px;
+  }
+
+  .search-screen .text-wrapper-6-for-bookmark {
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    white-space: nowrap;
   }
   
-  .search-screen .search-bar-instance {
-    width: 566px !important;
+  .search-screen .div-3 {
+      align-self: center;
+      background-color: #267bf1;
+      height: 5px;
+      position: relative;
+      width: 93%;
   }
-  
-  .search-screen .search-bar-2 {
-    width: 33px !important;
-  }
-  
+
   .search-screen .menu-instance {
     left: 0 !important;
     position: fixed !important;
@@ -84,7 +114,7 @@
     min-height:94vh;
     position: relative;
     top:3vh;
-
+    margin-bottom: 5vh;
   }
 
   .search-screen .for-mobile-title-2 {
@@ -95,6 +125,9 @@
     justify-content: space-between;
     width: 100%;
     max-width: 390px;
+  }
+
+  .search-screen .for-mobile-title-wrapper {
   }
   
   .search-screen .title-wrapper {
@@ -118,10 +151,34 @@
     margin-top: -1.00px;
     position: relative;
   }
-  
-  .search-screen .phone-search-bar-instance {
+  .search-screen .search-bar-for-mobile {
     width: 90%;
   }
-  
-  
+
+  .search-screen .text-wrapper-6-for-bookmark-for-mobile {
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .search-screen .search-result-frame-web-search-for-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .search-screen .text-wrapper-2-for-web-search-for-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
 

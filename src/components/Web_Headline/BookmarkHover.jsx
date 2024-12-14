@@ -1,67 +1,98 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import PropTypes from "prop-types";
-import React from "react";
-import { useReducer } from "react";
+import React, { useReducer } from "react";
+import bookmark from "./bookmark.png";
+import state_hover from "./state_hover.png";
+import state_bookmark_filled from "./state_bookmark_filled.png";
+
 import "./style.css";
 
-export const BookmarkHover = ({ stateProp, stateDefaultClassName }) => {
+export const BookmarkHover = ({ 
+  classNameForBookmarkImg,
+  stateProp, 
+  onBookmarkChange, // 상태 변화를 부모에게 알릴 콜백
+}) => {
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "default",
   });
 
+  const handleClick = () => {
+    if (state.state === "bookmark-filled") {
+      dispatch({ type: "unbookmark" });
+      if (onBookmarkChange) onBookmarkChange("unbookmark");
+    } else {
+      dispatch({ type: "bookmark" });
+      if (onBookmarkChange) onBookmarkChange("bookmark");
+    }
+  };
+
   return (
     <>
-      {state.state === "default" && (
-        <div
-          className={`web-headline-bookmark state-default ${stateDefaultClassName}`}
-          onMouseEnter={() => {
-            dispatch("mouse_enter");
-          }}
-          onMouseLeave={() => {
-            dispatch("mouse_leave");
-          }}
-        />
-      )}
-
-      {["bookmark-filled", "hover"].includes(state.state) && (
+      <div
+        className={`web-headline-bookmark ${
+          state.state === "hover"
+            ? "state-hover"
+            : state.state === "bookmark-filled"
+            ? "state-bookmark-filled"
+            : "state-default"
+        }`}
+        onMouseEnter={() => {
+          if (state.state !== "bookmark-filled") {
+            dispatch({ type: "mouse_enter" });
+          }
+        }}
+        onMouseLeave={() => {
+          if (state.state !== "bookmark-filled") {
+            dispatch({ type: "mouse_leave" });
+          }
+        }}
+        onClick={handleClick}
+      >
         <img
-          className={`web-headline-bookmark state-bookmark ${state.state} ${stateDefaultClassName}`}
           alt="State bookmark"
+          className={`${classNameForBookmarkImg}`}
           src={
             state.state === "hover"
-              ? "https://c.animaapp.com/JmVmo2aX/img/state-hover@2x.png"
-              : "https://c.animaapp.com/JmVmo2aX/img/state-bookmark-filled@2x.png"
+              ? state_hover
+              : state.state === "bookmark-filled"
+              ? state_bookmark_filled
+              : bookmark
           }
         />
-      )}
+      </div>
     </>
   );
 };
 
 function reducer(state, action) {
-  switch (action) {
+  switch (action.type) {
     case "mouse_enter":
       return {
         ...state,
         state: "hover",
       };
-
     case "mouse_leave":
       return {
         ...state,
         state: "default",
       };
+    case "bookmark":
+      return {
+        ...state,
+        state: "bookmark-filled",
+      };
+    case "unbookmark":
+      return {
+        ...state,
+        state: "default",
+      };
+    default:
+      return state;
   }
-
-  return state;
 }
 
 BookmarkHover.propTypes = {
   stateProp: PropTypes.oneOf(["bookmark-filled", "hover", "default"]),
+  stateDefaultClassName: PropTypes.string,
 };
 
 export default BookmarkHover;

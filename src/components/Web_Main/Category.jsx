@@ -4,7 +4,8 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 */
 
 import PropTypes from "prop-types";
-import React, { useReducer, useRef, useState } from "react";
+import axios from "axios";
+import React, { useReducer, useRef, useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import "./styleforcategory.css";
 
@@ -32,6 +33,11 @@ export const Category = ({
     state: stateProp || "politics",
   });
   const isMobile = useMediaQuery({ query: "(max-width: 1511px)" });
+  const [headlines, setHeadlines] = useState([]);
+  const [userentity, setUserentity] = useState(null); // userentity 초기 상태는 null
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   // 드래그 스크롤 관련 상태
   const categoryRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -74,21 +80,140 @@ export const Category = ({
 
   const onTouchEnd = () => setIsDragging(false);
 
-  // 렌더링할 컴포넌트 선택
+   
+  
+  // // 데이터 호출
+  // useEffect(() => {
+  //   const fetchHeadlines = async () => {
+  //     try {
+  //       const response = await axios.get("/"); // 백엔드 API 호출
+  //       setHeadlines(response.data.headline);
+  //     } catch (err) {
+  //       setError(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchHeadlines();
+  // }, []);
+
+  //  // 로딩 상태 처리
+  //  if (loading) return <div>Loading...</div>;
+
+  //  // 에러 상태 처리
+  //  if (error) return <div>Error: {error.message}</div>;
+ 
+  //  // headlines 데이터가 없을 경우 처리
+  //  if (!headlines || headlines.length === 0) {
+  //    return (
+  //      <div className="empty-category">
+  //        데이터가 없습니다. <br />
+  //        다른 탭을 선택해주세요.
+  //      </div>
+  //    );
+  //  }
+  
+  //로컬 데이터 호출
+  useEffect(() => {
+    const fetchHeadlines = async () => {
+      try {
+        const response = await fetch("/headlines.json");
+        if (!response.ok) throw new Error("Failed to load data");
+        const data = await response.json();
+        console.log("Fetched data:", data);
+        setHeadlines(data.headline);
+        setUserentity(data.userentity);
+      } catch (err) {
+        console.error("Error fetching headlines:", err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHeadlines();
+  }, []);
+
+  // 로딩 상태 처리
+  if (loading) return <div>Loading...</div>;
+
+  // 에러 상태 처리
+  if (error) return <div>Error: {error.message}</div>;
+
+  // headlines 데이터가 없을 경우 처리
+  if (!headlines || headlines.length === 0) {
+    return (
+      <div className="empty-category">
+        데이터가 없습니다. <br />
+        다른 탭을 선택해주세요.
+      </div>
+    );
+  }
+  
+  // 카테고리별 데이터 필터링
+  const filteredHeadlines = headlines.length > 0 ? {
+    politics: headlines.filter((headline) => headline.category === "politics"),
+    economy: headlines.filter((headline) => headline.category === "economy"),
+    social: headlines.filter((headline) => headline.category === "society"),
+    life: headlines.filter((headline) => headline.category === "lifestyle_culture"),
+    it: headlines.filter((headline) => headline.category === "it_science"),
+    world: headlines.filter((headline) => headline.category === "world"),
+  } : {
+    politics: [],
+    economy: [],
+    social: [],
+    life: [],
+    it: [],
+    world: [],
+  };
+  
+  console.log("User ID:", userentity.id);
+  console.log("Filtered Headlines - Politics:", filteredHeadlines.politics);
+  console.log("Filtered Headlines - Economy:", filteredHeadlines.economy);
+  console.log("Filtered Headlines - Social:", filteredHeadlines.social);
+  console.log("Filtered Headlines - Life:", filteredHeadlines.life);
+  console.log("Filtered Headlines - IT:", filteredHeadlines.it);
+  console.log("Filtered Headlines - World:", filteredHeadlines.world);
+  console.log("All Categories in Data:", headlines.map(h => h.category)); // 모든 카테고리 출력
+
+  // 렌더링할 컴포넌트
   const renderComponent = () => {
     switch (state.state) {
       case "politics":
-        return isMobile ? <PoliticsM /> : <Politics />;
+        return isMobile ? (
+          <PoliticsM userid={userentity.id} headlines={filteredHeadlines.politics} />
+        ) : (
+          <Politics userid={userentity.id} headlines={filteredHeadlines.politics} />
+        );
       case "economy":
-        return isMobile ? <EconomyM /> : <Economy />;
+        return isMobile ? (
+          <EconomyM userid={userentity.id} headlines={filteredHeadlines.economy} />
+        ) : (
+          <Economy userid={userentity.id} headlines={filteredHeadlines.economy} />
+        );
       case "social":
-        return isMobile ? <SocietyM /> : <Society />;
+        return isMobile ? (
+          <SocietyM userid={userentity.id} headlines={filteredHeadlines.social} />
+        ) : (
+          <Society userid={userentity.id} headlines={filteredHeadlines.social} />
+        );
       case "life":
-        return isMobile ? <LifeM /> : <Life />;
+        return isMobile ? (
+          <LifeM userid={userentity.id} headlines={filteredHeadlines.life} />
+        ) : (
+          <Life userid={userentity.id} headlines={filteredHeadlines.life} />
+        );
       case "it":
-        return isMobile ? <ITM /> : <IT />;
+        return isMobile ? (
+          <ITM userid={userentity.id} headlines={filteredHeadlines.it} />
+        ) : (
+          <IT userid={userentity.id} headlines={filteredHeadlines.it} />
+        );
       case "world":
-        return isMobile ? <WorldM /> : <World />;
+        return isMobile ? (
+          <WorldM userid={userentity.id} headlines={filteredHeadlines.world} />
+        ) : (
+          <World userid={userentity.id} headlines={filteredHeadlines.world} />
+        );
       default:
         return null;
     }

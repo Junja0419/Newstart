@@ -1,13 +1,39 @@
 import React from "react";
 import { useWindowWidth } from "../../breakpoints";
 import MenuForPC from "../../components/MenuForPC/MenuForPC"
-import PhoneSearchBar from "../../components/Web_Search/PhoneSearchBar";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import SearchBar from "../../components/Web_Search/SearchBar";
+import FrameForSearchBar from "../../components/Web_Search/FrameForSearchBar";
+import FrameForMobileSearchBar from "../../components/Web_Search/FrameForMobileSearchBar";
 import "./style.css";
 
-export const Web_Search = () => {
+export const Web_Search = ({
+  searchCount = 5,
+}) => {
   const screenWidth = useWindowWidth();
+  // searchCount에 따른 동적 검색 결과 div 생성
+  const dynamicDivs2 = Array.from({ length: searchCount }).map((_, index) => (
+    <div key={index} className="dynamic-div-creator-for-searchbar">
+        <FrameForSearchBar 
+          text = {'세줄텍스트입니다\n세줄\n텍스트입니다'}
+          category = "경제"
+          newspaper = "한국일보" />
+    </div>
+    ));
+
+  const dynamicDivs3 = Array.from({ length: searchCount }).map((_, index) => (
+    <div key={index} className="dynamic-div-creator-for-searchbar">
+        <FrameForMobileSearchBar 
+          text = {'세줄텍스트입니다\n세줄\n텍스트입니다'}
+          category = "경제"
+          newspaper = "한국일보" />
+    </div>
+    ));
+
+  const handleSearch = (query) => {
+    console.log("검색어:", query); // 여기서 검색어를 처리하거나 상태를 업데이트
+  };
+
 
   return (
     <div className="search-screen">
@@ -20,17 +46,23 @@ export const Web_Search = () => {
               </div>
 
               <SearchBar
-                className="search-bar"
-                frameClassName="search-bar-instance"
-                frameClassNameOverride="search-bar-2"
                 property1="default"
-                searchSize="https://c.animaapp.com/nzh65NNa/img/search-7@2x.png"
+                onSearch={handleSearch}
               />
+              <div className="search-result-frame-web-search">
+              <div className="text-wrapper-for-web-search">
+                <div className="text-wrapper-2-for-web-search">
+                  <div className="text-wrapper-6-for-bookmark">아티클</div>
+                  <div className="div-3" />
+                </div>
+                </div>
+                {dynamicDivs2}
+              </div>
+            </div>
               <MenuForPC 
                 className="menu-instance"
                 IsActivated="yessearchis"
                 SearchTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-6@2x.png" />
-            </div>
           </>
         )}
 
@@ -42,11 +74,20 @@ export const Web_Search = () => {
                 <div className="title-3">검색</div>
               </div>
 
-              <PhoneSearchBar
-                className="phone-search-bar-instance"
+              <SearchBar
                 property1="default"
+                className="search-bar-for-mobile"
+                onSearch={handleSearch}
               />
-
+              <div className="search-result-frame-web-search-for-mobile">
+              <div className="text-wrapper-for-web-search">
+                <div className="text-wrapper-2-for-web-search-for-mobile">
+                  <div className="text-wrapper-6-for-bookmark-for-mobile">아티클</div>
+                  <div className="div-3" />
+                </div>
+                </div>
+              {dynamicDivs3}
+             </div> 
             </div>
               <MenuForMobile 
               srcforsearchicon = "https://c.animaapp.com/nzh65NNa/img/icon-17@2x.png"
