@@ -1,57 +1,57 @@
 name: Deploy crawler-ai-main to Cloud Run
 
 on:
-  push:
-    paths:
-      - 'crawler-ai-main/**'
-    branches:
-      - main  # main 브랜치에 푸시될 때 트리거
+    push:
+        paths:
+            - "crawler-ai-main/**"
+        branches:
+            - main # main 브랜치에 푸시될 때 트리거
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+    build-and-deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      # 1. 코드 체크아웃
-      - name: Checkout repository
-        uses: actions/checkout@v3
+        steps:
+            # 1. 코드 체크아웃
+            - name: Checkout repository
+              uses: actions/checkout@v3
 
-      # 2. Google Cloud 인증
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+            # 2. Google Cloud 인증
+            - name: Authenticate to Google Cloud
+              uses: google-github-actions/auth@v1
+              with:
+                  credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      # 3. Cloud SDK 설정
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          install_components: ''  # 'docker' 제거
+            # 3. Cloud SDK 설정
+            - name: Set up Cloud SDK
+              uses: google-github-actions/setup-gcloud@v2
+              with:
+                  project_id: ${{ secrets.GCP_PROJECT_ID }}
+                  install_components: "" # 'docker' 제거
 
-      # 4. Docker 인증 설정
-      - name: Configure Docker authentication
-        run: |
-          gcloud auth configure-docker asia-northeast3-docker.pkg.dev
+            # 4. Docker 인증 설정
+            - name: Configure Docker authentication
+              run: |
+                  gcloud auth configure-docker asia-northeast3-docker.pkg.dev
 
-      # 5. Docker 이미지 빌드
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.ARTIFACT_REPO }}/crawler-ai-main:${{ github.sha }} ./crawler-ai-main
+            # 5. Docker 이미지 빌드
+            - name: Build Docker image
+              run: |
+                  docker build -t ${{ secrets.ARTIFACT_REPO }}/crawler-ai-main:${{ github.sha }} ./crawler-ai-main
 
-      # 6. Docker 이미지 푸시
-      - name: Push Docker image to Artifact Registry
-        run: |
-          docker push ${{ secrets.ARTIFACT_REPO }}/crawler-ai-main:${{ github.sha }}
+            # 6. Docker 이미지 푸시
+            - name: Push Docker image to Artifact Registry
+              run: |
+                  docker push ${{ secrets.ARTIFACT_REPO }}/crawler-ai-main:${{ github.sha }}
 
-      # 7. Cloud Run에 배포
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy crawler-ai-main \
-            --image ${{ secrets.ARTIFACT_REPO }}/crawler-ai-main:${{ github.sha }} \
-            --region ${{ secrets.GCP_REGION }} \
-            --set-env-vars GROQ_API_KEY_MAIN="${{ secrets.GROQ_API_KEY_MAIN }}" \
-            --platform managed \
-            --allow-unauthenticated \
-            --port=8080 \
-            --timeout=300 \
+            # 7. Cloud Run에 배포
+            - name: Deploy to Cloud Run
+              run: |
+                  gcloud run deploy crawler-ai-main \
+                    --image ${{ secrets.ARTIFACT_REPO }}/crawler-ai-main:${{ github.sha }} \
+                    --region ${{ secrets.GCP_REGION }} \
+                    --set-env-vars GROQ_API_KEY_MAIN="${{ secrets.GROQ_API_KEY_MAIN }}" \
+                    --platform managed \
+                    --allow-unauthenticated \
+                    --port=8080 \
+                    --timeout=300 \
