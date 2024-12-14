@@ -29,6 +29,7 @@ replay_pid*
 
 # 테스트 로그 파일
 data
+search_data
 
 # 기타
 .DS_Store
