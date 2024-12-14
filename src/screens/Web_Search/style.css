@@ -98,6 +98,14 @@
       width: 93%;
   }
 
+  
+  .search-screen .for-pc-screen .div-3 {
+    align-self: center;
+    background-color: #267bf1;
+    height: 5px;
+    width: 550px;
+}
+
   .search-screen .menu-instance {
     left: 0 !important;
     position: fixed !important;

@@ -15,7 +15,7 @@ export const Web_Headline = () => {
   const screenWidth = useWindowWidth();
   const [isBookmarked, setIsBookmarked] = useState(false);
   const handleBookmarkChange = (status) => {
-    // status가 "bookmark"면 북마크 설정, "unbookmark"면 해제
+    // status가 "bookmark"면 북마크 설정, "unbookmark"면 해제, 로컬용
     setIsBookmarked(status === "bookmark");
   };
   const [bookmarkId, setBookmarkId] = useState(null); // 북마크 ID 저장

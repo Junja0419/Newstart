@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import React, { useReducer, useRef, useEffect, useState  } from "react";
-import FrameForSearchBar from "./FrameForSearchBar"
 import "./style.css";
 
 export const SearchBar = ({
   property1,
   classNameForSearchIcon,
-  recordsCount = 10,
+  searchRecords = [], // 부모로부터 전달받은 검색 기록
+  onFetchRecords, // 부모에게 API 호출 요청
+  // recordsCount = 10,
   className,
   onSearch, // 검색어를 외부로 전달하기 위한 콜백 함수
 }) => {
@@ -14,7 +15,14 @@ export const SearchBar = ({
     property1: property1 || "default",
   });
   const searchBarRef = useRef(null);
-  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 관리
+  const [searchQuery, setSearchQuery] = useState(""); // 검색창의 상태 관리
+
+  useEffect(() => {
+    // 클릭 상태일 때 부모에게 검색 기록 요청
+    if (state.property1 === "click") {
+      onFetchRecords(); // 부모에게 검색 기록 요청
+    }
+  }, [state.property1, onFetchRecords]);
 
   useEffect(() => {
     // click 상태일 때 외부 클릭을 감지
@@ -36,10 +44,14 @@ export const SearchBar = ({
   }, [state.property1]);
 
   // recordsCount에 따른 동적 검색 기록 div 생성
-  const dynamicDivs = Array.from({ length: recordsCount }).map((_, index) => (
-  <div key={index} className="dynamic-div-creator-for-searchbar">
+  const dynamicDivs = searchRecords.map((content, index)  => (
+  <div 
+    key={index} 
+    className="dynamic-div-creator-for-searchbar"
+    onClick={() => onSearch(content)} // 컨텐츠에 해당하는 내용을 클릭하면 바로 검색을 실행함!
+    >
       <img src="https://c.animaapp.com/nzh65NNa/img/icon-12@2x.png" className="record-timer-icon"/>
-      search result
+      {content}
   </div>
   ));
 

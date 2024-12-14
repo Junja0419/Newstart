@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
 import { useWindowWidth } from "../../breakpoints";
 import MenuForPC from "../../components/MenuForPC/MenuForPC"
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
@@ -11,29 +12,85 @@ export const Web_Search = ({
   searchCount = 5,
 }) => {
   const screenWidth = useWindowWidth();
-  // searchCount에 따른 동적 검색 결과 div 생성
-  const dynamicDivs2 = Array.from({ length: searchCount }).map((_, index) => (
-    <div key={index} className="dynamic-div-creator-for-searchbar">
-        <FrameForSearchBar 
-          text = {'세줄텍스트입니다\n세줄\n텍스트입니다'}
-          category = "경제"
-          newspaper = "한국일보" />
-    </div>
-    ));
+  const [results, setResults] = useState([]); // 검색 결과 상태
+  const [searchRecords, setSearchRecords] = useState([]); // 검색 기록 상태
+  const [userId, setUserId] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
 
-  const dynamicDivs3 = Array.from({ length: searchCount }).map((_, index) => (
-    <div key={index} className="dynamic-div-creator-for-searchbar">
-        <FrameForMobileSearchBar 
-          text = {'세줄텍스트입니다\n세줄\n텍스트입니다'}
-          category = "경제"
-          newspaper = "한국일보" />
-    </div>
-    ));
+  // 메인 데이터 호출
+  useEffect(() => {
+    const fetchHeadlines = async () => {
+      try {
+        const response = await axios.get("/"); // 백엔드 API 호출
+        setUserId(response.data.userentity.id);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHeadlines();
+  }, []);
 
-  const handleSearch = (query) => {
-    console.log("검색어:", query); // 여기서 검색어를 처리하거나 상태를 업데이트
+   // 로딩 상태 처리
+   if (loading) return <div>Loading...</div>;
+
+   // 에러 상태 처리
+   if (error) return <div>Error: {error.message}</div>;
+
+  // 검색 API 호출 함수
+  const handleSearch = async (query) => {
+    if (!query || query.trim() === "") {
+      console.warn("검색어가 없습니다."); // 빈 검색어 경고
+      return;
+    }
+  
+    try {
+      const response = await fetch(`/search/result/${query}`);
+      if (!response.ok) {
+        throw new Error("API 요청 실패");
+      }
+  
+      const data = await response.json();
+      setResults(data.results); // 검색 결과 상태 업데이트
+    } catch (error) {
+      console.error("검색 실패:", error);
+    }
   };
 
+  // 검색 기록 가져오기
+  const fetchSearchRecords  = async () => {
+    try {
+      const response = await fetch(`/search/${userId}`); //id 받아오는 요청 또 해야 되네 위에서 ㅋ
+      if (!response.ok) throw new Error("API 요청 실패");
+
+      const data = await response.json();
+      setSearchRecords(data.search); // 검색 기록 업데이트
+    } catch (error) {
+      console.error("검색 기록 불러오기 실패:", error);
+    }
+  };
+
+  // 동적으로 검색 결과 div 생성, 실험해 보고 싶으면 배열 자리에 Array.from({ length: searchCount }) 입력 ㄱㄱ
+  const dynamicDivs2 = results.map((item, index) => (
+    <div key={index} className="dynamic-div-creator-for-searchbar">
+        <FrameForSearchBar 
+          text = {item.title}
+          category = "경제"
+          newspaper = {item.link} />
+    </div>
+    ));
+
+  const dynamicDivs3 = results.map((item, index) => (
+    <div key={index} className="dynamic-div-creator-for-searchbar">
+        <FrameForMobileSearchBar 
+          text = {item.title}
+          category = "경제"
+          newspaper = {item.link} />
+    </div>
+    ));
 
   return (
     <div className="search-screen">
@@ -48,6 +105,8 @@ export const Web_Search = ({
               <SearchBar
                 property1="default"
                 onSearch={handleSearch}
+                onFetchRecords={fetchSearchRecords} // 검색 기록 API 호출 함수 전달
+                searchRecords={searchRecords} // 동적 생성을 위한 검색 기록 전달
               />
               <div className="search-result-frame-web-search">
               <div className="text-wrapper-for-web-search">
@@ -78,6 +137,8 @@ export const Web_Search = ({
                 property1="default"
                 className="search-bar-for-mobile"
                 onSearch={handleSearch}
+                onFetchRecords={fetchSearchRecords} // 검색 기록 API 호출 함수 전달
+                searchRecords={searchRecords} // 동적 생성을 위한 자식으로 검색 기록 전달
               />
               <div className="search-result-frame-web-search-for-mobile">
               <div className="text-wrapper-for-web-search">
