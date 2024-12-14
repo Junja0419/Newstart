@@ -1,9 +1,6 @@
 package com.project.newstart.service;
 
-import com.project.newstart.dto.CustomUserDetails;
-import com.project.newstart.dto.SearchDTO;
-import com.project.newstart.dto.SearchDetailRequest;
-import com.project.newstart.dto.SearchDetailResponse;
+import com.project.newstart.dto.*;
 import com.project.newstart.entity.Headline;
 import com.project.newstart.entity.Search;
 import com.project.newstart.entity.UserEntity;
@@ -44,19 +41,23 @@ public class SearchService {
     public List<SearchDTO> getSearchResult(String keyword) throws ParseException {
 
         //검색 api url
-        String keywordApiUrl = "https://newstart-project-444411-7eac6k6zia-du.a.run.app/search";
+        String keywordApiUrl = "https://crawler-ai-search-7eac6k6zia-du.a.run.app/search";
 
         RestTemplate restTemplate = new RestTemplate();
         JSONParser parser = new JSONParser();
 
+        //keyword object 형태로 파싱
+        SearchResultRequest request = new SearchResultRequest();
+        request.setKeyword(keyword);
+
         //키워드 api 호출
-        String resultString = restTemplate.postForObject(keywordApiUrl, keyword, String.class);
+        String resultString = restTemplate.postForObject(keywordApiUrl, request, String.class);
 
         //JSONObject로 파싱
-        JSONObject object = (JSONObject) parser.parse(resultString);
+        JSONArray items = (JSONArray) parser.parse(resultString);
 
         //items array 가져오기
-        JSONArray items = (JSONArray) object.get("items");
+        //JSONArray items = (JSONArray) object.get("items");
 
         //기사 담을 리스트 변수 선언
         List<SearchDTO> searchDTOS = new ArrayList<>();
@@ -102,14 +103,13 @@ public class SearchService {
 
     public SearchDetailResponse getSearchDetail(SearchDetailRequest request) throws ParseException {
 
-        String detailApiUrl = "https://newstart-project-444411-7eac6k6zia-du.a.run.app/crawl_and_summarize";
-        String link = request.getLink();
+        String detailApiUrl = "https://crawler-ai-search-7eac6k6zia-du.a.run.app/crawl_and_summarize";
 
         RestTemplate restTemplate = new RestTemplate();
         JSONParser parser = new JSONParser();
 
         //키워드 api 호출
-        String resultString = restTemplate.postForObject(detailApiUrl, link, String.class);
+        String resultString = restTemplate.postForObject(detailApiUrl, request, String.class);
 
         //JSONObject로 파싱
         JSONObject object = (JSONObject) parser.parse(resultString);

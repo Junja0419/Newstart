@@ -23,11 +23,15 @@ public class Summary {
     @Column(columnDefinition="TEXT", nullable = false)
     private String content;
 
+    //기사 카테고리
+    @Column(nullable = false)
+    private String category;
+
     //원본 기사 링크(네이버 뉴스)
     @Column(nullable = false)
     private String link;
 
-    //디비 저장 시간
+    //기사 등록 시간
     @Column(nullable = false)
     private String date;
 }

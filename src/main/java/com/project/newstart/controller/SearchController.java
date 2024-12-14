@@ -13,6 +13,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,18 +66,12 @@ public class SearchController {
 
     //검색 결과 디테일
     @PostMapping("/result/detail")
-    public ResponseEntity<Map<String, Object>> search_detail(@RequestBody SearchDetailRequest request) throws ParseException {
-        //사용자 정보
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
+    public ModelAndView search_detail(@RequestBody SearchDetailRequest request) throws ParseException {
+        ModelAndView modelAndView = new ModelAndView();
 
-        Map<String, Object> entitys = new HashMap<>();
+        String url = request.getArticle_url();
 
-        SearchDetailResponse response = searchService.getSearchDetail(request);
-
-        entitys.put("userentity", userEntity);
-        entitys.put("result", response);
-
-        return ResponseEntity.ok().body(entitys);
+        modelAndView.setViewName("redirect:"+url);
+        return modelAndView;
     }
 }

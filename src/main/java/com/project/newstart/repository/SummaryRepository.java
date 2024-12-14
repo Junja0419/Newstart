@@ -9,7 +9,7 @@ import java.util.List;
 public interface SummaryRepository extends JpaRepository<Summary, Long> {
 
     @Query(
-            value="SELECT * FROM summary ORDER BY length(date) DESC, date DESC LIMIT 0,18",
+            value="SELECT * FROM (SELECT summary_id, category, title, content, link, date, row_number() OVER (PARTITION BY category ORDER BY length(date) DESC,date DESC) as RankNo FROM summary) T WHERE RankNo = 1",
             nativeQuery = true
     )
     List<Summary> getSummaryByCount();

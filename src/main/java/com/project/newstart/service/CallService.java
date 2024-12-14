@@ -29,7 +29,7 @@ public class CallService {
     public void call_api() throws ParseException, org.json.simple.parser.ParseException {
 
         //요청 보낼 URL
-        String apiUrl = "https://newstart-project-444411-7eac6k6zia-du.a.run.app/crawl_and_summarize_all";
+        String apiUrl = "https://crawler-ai-main-7eac6k6zia-du.a.run.app/crawl_and_summarize_all";
 
         //restTemplate
         RestTemplate restTemplate = new RestTemplate();
@@ -80,6 +80,7 @@ public class CallService {
                 summaryDTO.setLink(link);
                 summaryDTO.setDate(datetime);
                 summaryDTO.setContent(summary);
+                summaryDTO.setCategory(category);
 
                 //요약 서비스 호출
                 summaryService.save_summary(summaryDTO);

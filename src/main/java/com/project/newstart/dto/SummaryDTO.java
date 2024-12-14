@@ -11,6 +11,7 @@ public class SummaryDTO {
 
     private String title;
     private String content;
+    private String category;
     private String link;
     private String date;
 }

@@ -19,14 +19,6 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @GetMapping("/email/login")
-    public ModelAndView loginform() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login.html");
-
-        return modelAndView;
-    }
-
     @PostMapping("/join")
     public ModelAndView joinProcess(@RequestBody JoinDTO joinDTO) {
 
@@ -35,8 +27,6 @@ public class AuthController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/auth/email/login");
         return modelAndView;
-        
-        //view 리턴하려면 ModelAndView 클래스 이용하기
     }
 
     @PostMapping("/password")

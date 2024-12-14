@@ -30,6 +30,7 @@ public class SummaryService {
         summary.setLink(summaryDTO.getLink());
         summary.setDate(summaryDTO.getDate());
         summary.setContent(summaryDTO.getContent());
+        summary.setCategory(summaryDTO.getCategory());
 
         summaryRepository.save(summary);
     }

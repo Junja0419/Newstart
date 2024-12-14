@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchDetailRequest {
-    private String link;
+    private String article_url;
 }
