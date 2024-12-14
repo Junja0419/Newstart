@@ -11,7 +11,7 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-app = FastAPI()
+app = FastAPI(title="newstart-article-update API")
 
 DATA_DIRECTORY = "./data"  # JSON 파일 저장 경로
 
@@ -184,4 +184,3 @@ if __name__ == "__main__":
     if not os.path.exists(DATA_DIRECTORY):
         os.makedirs(DATA_DIRECTORY)
     uvicorn.run(app, host="0.0.0.0", port=8080)
-

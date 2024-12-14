@@ -9,14 +9,14 @@ logging.basicConfig(
 )
 
 # 환경 변수 로드 및 API 키 설정
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+GROQ_API_KEY_MAIN = os.environ.get("GROQ_API_KEY_MAIN")
 
-if not GROQ_API_KEY:
-    logging.error("GROQ_API_KEY가 환경 변수에 설정되어 있지 않습니다.")
-    raise ValueError("GROQ_API_KEY가 환경 변수에 설정되어 있지 않습니다.")
+if not GROQ_API_KEY_MAIN:
+    logging.error("GROQ_API_KEY_MAIN가 환경 변수에 설정되어 있지 않습니다.")
+    raise ValueError("GROQ_API_KEY_MAIN가 환경 변수에 설정되어 있지 않습니다.")
 
 # Groq 클라이언트 초기화
-client = Groq(api_key=GROQ_API_KEY)
+client = Groq(api_key=GROQ_API_KEY_MAIN)
 
 # 프롬프트 설정 (한국어로 변경)
 prompt_kr = (
