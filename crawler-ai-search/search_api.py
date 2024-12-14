@@ -47,7 +47,7 @@ def api_search(keyword):
         )
 
     encText = urllib.parse.quote(keyword)
-    url = f"https://openapi.naver.com/v1/search/news.json?query={encText}&sort=date"  # JSON 결과
+    url = f"https://openapi.naver.com/v1/search/news.json?query={encText}&display=5&sort=date"  # JSON 결과
     request = urllib.request.Request(url)
     request.add_header("X-Naver-Client-Id", client_id)
     request.add_header("X-Naver-Client-Secret", client_secret)
