@@ -12,7 +12,7 @@ import Web_Profile_Password from "./screens/Web_Profile_Password/Web_Profile_Pas
 import Web_Headline from "./screens/Web_Headline/Web_Headline";
 import Web_Summary from "./screens/Web_Summary/Web_Summary";
 
-function App () {
+function App() {
   return (
     <Router>
       <Routes>
@@ -25,7 +25,7 @@ function App () {
         <Route path="/search/:id" element={<Web_Search />} />
         <Route path="/profile/:id" element={<Web_Profile />} />
         <Route path="/profile/update" element={<Web_Profile_Setting />} />
-        <Route path="/auth/password" element={<Web_Profile_Password />} />
+        <Route path="/profile/password" element={<Web_Profile_Password />} />
         <Route path="/headline/:headline_id" element={<Web_Headline />} />
         <Route path="/summary/view" element={<Web_Summary />} />
       </Routes>

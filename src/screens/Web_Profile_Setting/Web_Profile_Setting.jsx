@@ -1,40 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useWindowWidth } from "../../breakpoints";
-import classNames from "classnames";
 import Return from "../../components/Web_Profile_Setting/Return";
-import MenuForPC from "../../components/MenuForPC/MenuForPC"
+import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import CompleteButton from "../../components/Web_Profile_Setting/CompleteButton";
 import User from "../../components/Web_Profile_Setting/User";
 import "./style.css";
 
 export const Web_Profile_Setting = () => {
   const screenWidth = useWindowWidth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { profileData } = location.state; // profile 페이지에서 전달된 데이터
+  const [nickname, setNickname] = useState(profileData.nickname); // 닉네임 관리
+
+  /**** 닉네임 변경 핸들러 ****/
+  const handleNickname = (e) => {
+    setNickname(e.target.value);
+  };
+
+  /**** 완료 버튼 클릭 핸들러 ****/
+  const handleCompleteClick = async () => {
+    const requestData = {
+      username: profileData.username,
+      nickname,
+      image_url: "test",
+      noti_yn: "N",
+    };
+
+    console.log("전송할 데이터:", JSON.stringify(requestData));
+
+    try {
+      const response = await fetch("/profile/updateProcess", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        // 성공적으로 업데이트되면 리다이렉트
+        navigate(`/profile/${profileData.id}`);
+      } else {
+        console.error("Failed to update profile");
+      }
+    } catch (error) {
+      console.error("Error while updating profile:", error);
+    }
+  };
 
   return (
     <div className="web-profile-set">
-      <div                                 // 반응형 웹 기준 설정
+      <div // 반응형 웹 기준 설정
         className="div-3"
-        // {classNames(, {
-        //   "div-for-mobile": screenWidth < 1512,
-        //   "div-for-web": screenWidth >= 1512,
-        // })}
-        // style={{
-        //   height:
-        //     screenWidth < 1512
-        //       ? "844px"
-        //       : screenWidth >= 1512
-        //         ? "982px"
-        //         : undefined,
-        //   overflow: screenWidth >= 1512 ? "hidden" : undefined,
-        //   width:
-        //     screenWidth < 1512
-        //       ? "390px"
-        //       : screenWidth >= 1512
-        //         ? "1512px"
-        //         : undefined,
-        // }}
       >
-         { screenWidth >= 1512 && (       // PC용 화면 
+        {screenWidth >= 1512 && ( // PC용 화면
           <>
             <div className="frame-2">
               <div className="frame-3">
@@ -65,11 +84,13 @@ export const Web_Profile_Setting = () => {
                     <div className="frame-wrapper">
                       <div className="view-wrapper">
                         <div className="view">
-                          <div className="web-profile-text-wrapper-6">이메일</div>
+                          <div className="web-profile-text-wrapper-6">
+                            이메일
+                          </div>
 
                           <div className="web-profile-div-wrapper">
                             <div className="web-profile-text-wrapper-7">
-                              newstart1234@gmail.com
+                              {profileData.username}
                             </div>
                           </div>
                         </div>
@@ -78,39 +99,43 @@ export const Web_Profile_Setting = () => {
                   </div>
                 </div>
                 <div className="nickname">
-                <div className="text-wrapper-9">닉네임</div>
+                  <div className="text-wrapper-9">닉네임</div>
 
-                <input 
-                  className="text-input" 
-                  placeholder="아무개"
-                />
+                  <input
+                    className="text-input"
+                    value={nickname}
+                    onChange={handleNickname}
+                    placeholder={profileData.nickname}
+                  />
 
-                <img
-                  className="line"
-                  alt="Line"
-                  src="https://c.animaapp.com/G4E98Tez/img/line-3-4@2x.png"
-                />
-              </div>
+                  <img
+                    className="line"
+                    alt="Line"
+                    src="https://c.animaapp.com/G4E98Tez/img/line-3-4@2x.png"
+                  />
+                </div>
               </div>
 
               <CompleteButton
                 className="component-210"
-                disabled
+                disabled={!nickname.trim()}
                 divClassName="button"
                 text="완료"
+                onClick={() => {
+                  handleCompleteClick();
+                }}
               />
             </div>
-            <MenuForPC 
+            <MenuForPC
               className="menu-instance"
               IsActivated="yesprofileis"
-              ProfileTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-4@2x.png" />
+              ProfileTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-4@2x.png"
+            />
           </>
         )}
-          
-        
 
-        {screenWidth < 1512 && (     // 모바일용 화면
-          <div className = "frame-for-all-mobile-wps">
+        {screenWidth < 1512 && ( // 모바일용 화면
+          <div className="frame-for-all-mobile-wps">
             <div className="frame-7">
               <div className="frame-50-wrapper">
                 <Return divClassName="frame-50" />
@@ -140,9 +165,11 @@ export const Web_Profile_Setting = () => {
               <div className="frame-6">
                 <div className="view-2">
                   <div className="text-wrapper-11">닉네임</div>
-                  <input 
-                    className="text-wrapper-12" 
-                    placeholder="아무개"
+                  <input
+                    className="text-wrapper-12"
+                    value={nickname}
+                    onChange={handleNickname}
+                    placeholder={profileData.nickname}
                   />
 
                   <img
@@ -159,7 +186,7 @@ export const Web_Profile_Setting = () => {
                     <div className="text-wrapper-11">이메일</div>
 
                     <div className="text-wrapper-13">
-                      newstart1234@gmail.com
+                      {profileData.username}
                     </div>
                   </div>
                 </div>
@@ -168,12 +195,12 @@ export const Web_Profile_Setting = () => {
 
             <CompleteButton
               className="component-210-instance"
-              disabled
+              disabled={!nickname.trim()}
               text="완료"
+              onClick={() => handleCompleteClick()}
             />
           </div>
         )}
-                                
       </div>
     </div>
   );

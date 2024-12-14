@@ -1,8 +1,3 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import React from "react";
 import ArrowLeft from "./ArrowLeft";
 import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
@@ -11,8 +6,10 @@ import "./style.css";
 export const Return = ({ divClassName }) => {
   const navigate = useNavigate(); // navigate 함수 정의
   return (
-    <div className="wps-frame"
-    onClick={() => navigate("/profile/:id")} // 클릭 시 "/profile" 경로로 이동
+    <div
+      className="wps-frame"
+      onClick={() => navigate("/profile/:id")} // 클릭 시 "/profile" 경로로 이동
+      style={{ cursor: "pointer" }}
     >
       <div className={`text-wrapper ${divClassName}`}>프로필로 돌아가기</div>
 

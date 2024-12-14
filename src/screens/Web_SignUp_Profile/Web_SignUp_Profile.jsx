@@ -9,7 +9,7 @@ import "./style.css";
 export const Web_SignUp_Profile = () => {
   const screenWidth = useWindowWidth();
   const location = useLocation();
-  const { email, password } = location.state || {}; // 전달된 state에서 email과 password 추출
+  const { email, password } = location.state; // signUp 페이지에서 email과 password 전달받음
   const [nickname, setNickname] = useState(""); // 닉네임 상태 관리
   const [nicknameError, setNicknameError] = useState("");
 

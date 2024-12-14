@@ -1,8 +1,3 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import PropTypes from "prop-types";
 import React from "react";
 import "./style.css";
@@ -17,10 +12,13 @@ export const ReadOriginalButton = ({
   className,
   hasSymbol = true,
   labelClassName,
+  onClick,
 }) => {
   return (
     <div
       className={`web-summary-button ${labelType} ${state} ${style} ${size} on-material-${onMaterial} ${className}`}
+      onClick={onClick}
+      style={{ cursor: "pointer" }} // 클릭 가능 표시
     >
       {labelType === "symbol-text" && (
         <>
@@ -49,6 +47,7 @@ ReadOriginalButton.propTypes = {
   onMaterial: PropTypes.bool,
   labelType: PropTypes.oneOf(["text", "symbol-text", "symbol"]),
   hasSymbol: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default ReadOriginalButton;
