@@ -54,6 +54,17 @@ dependencies {
     testImplementation 'com.h2database:h2'
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['backend/src/main/java']
+        }
+        resources {
+            srcDirs = ['backend/src/main/resources']
+        }
+    }
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
