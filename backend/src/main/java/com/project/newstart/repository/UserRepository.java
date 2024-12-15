@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByUsername(String username);
 
     @Query(
-            value="SELECT * FROM userentity WHERE id=:id",
+            value="SELECT * FROM UserEntity WHERE id=:id",
             nativeQuery = true
     )
     UserEntity findByUserId(@Param("id") Long id);
