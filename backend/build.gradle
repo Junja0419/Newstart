@@ -55,7 +55,7 @@ dependencies {
 }
 
 springBoot {
-    mainClass = 'com.project.ProjectApplication'
+    mainClass = 'com.project.newstart.NewstartApplication'
 }
 
 tasks.named('test') {
