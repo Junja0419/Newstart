@@ -63,6 +63,14 @@ sourceSets {
             srcDirs = ['backend/src/main/resources']
         }
     }
+    test {
+        java {
+            srcDirs = ['backend/src/test/java']
+        }
+        resources {
+            srcDirs = ['backend/src/test/resources']
+        }
+    }
 }
 
 tasks.named('test') {
