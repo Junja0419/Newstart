@@ -56,10 +56,13 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOriginPatterns(List.of("*")); // React 배포 URL 허용
+        config.setAllowedOriginPatterns(List.of(
+                "https://siyeon-3faf5.web.app",
+                "https://newstart-project-444411.du.r.appspot.com"
+        )); // React 배포 URL 허용
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")); // 모든 HTTP 메서드 허용
-        config.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
-        config.setExposedHeaders(List.of("*")); // 모든 응답 헤더 허용
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin")); // 모든 헤더 허용
+        config.setExposedHeaders(List.of("Authorization", "Content-Type")); // 모든 응답 헤더 허용
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config); // 모든 경로에 대해 CORS 설정 적용
@@ -103,7 +106,12 @@ public class SecurityConfig {
                 .formLogin((auth) -> auth
                         .loginPage("https://siyeon-3faf5.web.app/auth/email/login")
                         .loginProcessingUrl("/auth/email/loginProcess")
-                        .defaultSuccessUrl("https://siyeon-3faf5.web.app/")
+                        .successHandler((request, response, authentication) -> {
+                            response.sendRedirect("https://siyeon-3faf5.web.app/"); // 성공 시 React 앱으로 리디렉션
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            response.sendRedirect("https://siyeon-3faf5.web.app/auth/email/login?error"); // 실패 시 React 로그인 페이지로 리디렉션
+                        })
                         .permitAll());
 
         //logout
