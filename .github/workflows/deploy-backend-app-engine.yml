@@ -42,13 +42,13 @@ jobs:
       # 5. application.properties 생성
       - name: Create application.properties
         run: |
-          mkdir -p ./src/main/resources
-          touch ./src/main/resources/application.properties
+          mkdir -p ./backend/src/main/resources
+          touch ./backend/src/main/resources/application.properties
         shell: bash
 
       # 6. application.properties 전달
       - name: Deliver application.properties
-        run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.properties
+        run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./backend/src/main/resources/application.properties
         shell: bash
 
       # 7. Gradle 빌드
@@ -80,6 +80,6 @@ jobs:
       # 11. 디버깅: back 디렉토리 파일 목록 및 application.properties 내용 확인
       - name: List back directory files and check application.properties
         run: |
-          ls -la ./src/main/resources
-          cat ./src/main/resources/application.properties
+          ls -la ./backend/src/main/resources
+          cat ./backend/src/main/resources/application.properties
         shell: bash
