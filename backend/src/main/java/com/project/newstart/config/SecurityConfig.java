@@ -55,7 +55,10 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of("https://siyeon-3faf5.web.app")); // React 배포 URL 허용
+        config.setAllowedOrigins(List.of(
+                "https://siyeon-3faf5.web.app", //front-end URL
+                "https://newstart-project-444411.du.r.appspot.com" //back-end URL
+        )); // React 배포 URL 허용
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")); // 모든 HTTP 메서드 허용
         config.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
         config.setExposedHeaders(List.of("*")); // 모든 응답 헤더 허용
@@ -68,57 +71,52 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        // CSRF 비활성화
+        //csrf disable
         http
-                .csrf(csrf -> csrf.disable());
+                .csrf((auth) -> auth
+                        .disable());
 
-        // HTTP Basic 인증 비활성화
+        //http basic 인증 방식 disable
         http
-                .httpBasic(httpBasic -> httpBasic.disable());
+                .httpBasic((auth) -> auth.disable());
 
-        // CORS 설정
+        //cors
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
-        // 인증 요청 설정
+        //a
         http
-                .authorizeHttpRequests(auth -> auth
+                .authorizeHttpRequests((auth) -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers(
-                                "/login/**", "/oauth2/**", "/auth/**",
-                                "/css/**", "/images/**", "/js/**",
-                                "/login/*", "/logout/*",
-                                "/posts/**", "/comments/**", "/error"
-                        ).permitAll()
-                        .anyRequest().authenticated());
+                        .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() //login, /, join 경로 요청이 오면 모든 권한 허용
+                        .requestMatchers("/css/**", "images/**", "/js/**", "/login/*", "/logout/*", "/posts/**", "/comments/**", "/error").permitAll()
+                        .anyRequest().authenticated()); //위 경로 외의 요청이 오면 로그인 후 이용 가능
 
-        // OAuth2 로그인 설정
+        //OAuth2.0
         http
-                .oauth2Login(oauth2 -> oauth2
+                .oauth2Login((oauth2) -> oauth2
                         .loginPage("/login")
-                        .userInfoEndpoint(userInfo -> userInfo
+                        .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService)));
 
-        // Form 로그인 방식 설정
+        //form 로그인 방식
         http
-                .formLogin(form -> form
+                .formLogin((auth) -> auth
                         .loginPage("/auth/email/login")
                         .loginProcessingUrl("/auth/email/loginProcess")
                         .defaultSuccessUrl("/")
                         .permitAll());
 
-        // 로그아웃 설정
-        http
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .deleteCookies("JSESSIONID", "remember-me")
-                        .permitAll());
+        //logout
+        http.logout(customizer -> customizer
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID", "remember-me")
+                .permitAll());
 
-        // 세션 설정
+        //세션 설정
         http
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                        .sessionFixation(sessionFixation -> sessionFixation.newSession())
+                .sessionManagement((session) -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation) -> sessionFixation.newSession())
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true));
 
