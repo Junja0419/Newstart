@@ -83,6 +83,7 @@ public class SecurityConfig {
         //a
         http
                 .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() //login, /, join 경로 요청이 오면 모든 권한 허용
                         .requestMatchers("/css/**", "images/**", "/js/**", "/login/**", "/logout/**", "/posts/**", "/comments/**", "/error").permitAll()
@@ -92,6 +93,7 @@ public class SecurityConfig {
         http
                 .oauth2Login((oauth2) -> oauth2
                         .loginPage("https://siyeon-3faf5.web.app/login")
+                        .defaultSuccessUrl("https://siyeon-3faf5.web.app/") //로그인 성공 후 / 리다이렉트
                         .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService)));
 
