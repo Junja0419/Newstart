@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@CrossOrigin(origins = "https://siyeon-3faf5.web.app")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin(origins = "https://siyeon-3faf5.web.app")
 @RestController
 public class HeadlineController {
 

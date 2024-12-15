@@ -6,7 +6,6 @@ import com.project.newstart.service.ProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://siyeon-3faf5.web.app")
 @RestController
 @RequestMapping("/profile")
 public class ProfileController {
