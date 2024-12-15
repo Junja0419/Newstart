@@ -7,7 +7,7 @@ import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.List;
+import java.util.Arrays;
 
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -19,11 +19,11 @@ public class CustomCorsFilter extends CorsFilter {
 
     private static UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true); // 쿠키 허용
-        config.setAllowedOrigins(List.of("https://siyeon-3faf5.web.app")); // React 프론트엔드 URL
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // HTTP 메서드
-        config.setAllowedHeaders(List.of("*")); // 모든 요청 헤더 허용
-        config.setExposedHeaders(List.of("Authorization", "Content-Type")); // 필요한 응답 헤더
+        config.setAllowCredentials(true);
+        config.setAllowedOriginPatterns(Arrays.asList("https://siyeon-3faf5.web.app")); // 필요에 따라 패턴 추가
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(Arrays.asList("*"));
+        config.setExposedHeaders(Arrays.asList("Authorization", "Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

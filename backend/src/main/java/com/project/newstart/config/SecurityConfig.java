@@ -3,7 +3,6 @@ package com.project.newstart.config;
 import com.project.newstart.service.CustomOAuth2UserService;
 import com.project.newstart.service.CustomUserDetailsService;
 import jakarta.servlet.DispatcherType;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,12 +56,11 @@ public class SecurityConfig {
 
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of(
-                "https://siyeon-3faf5.web.app",
-                "https://newstart-project-444411.du.r.appspot.com"
-        )); // React 배포 URL 허용
+                "https://siyeon-3faf5.web.app"
+        ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")); // 모든 HTTP 메서드 허용
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin")); // 모든 헤더 허용
-        config.setExposedHeaders(List.of("Authorization", "Content-Type")); // 모든 응답 헤더 허용
+        config.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
+        config.setExposedHeaders(List.of("Authorization", "Content-Type")); // 필요한 응답 헤더 허용
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config); // 모든 경로에 대해 CORS 설정 적용
@@ -72,38 +70,37 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        //csrf disable
+        // CSRF 비활성화
         http
-                .csrf((auth) -> auth
-                        .disable());
+                .csrf(csrf -> csrf.disable());
 
-        //http basic 인증 방식 disable
+        // HTTP Basic 인증 비활성화
         http
-                .httpBasic((auth) -> auth.disable());
+                .httpBasic(httpBasic -> httpBasic.disable());
 
-        //cors
+        // CORS 설정
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
-        //a
+        // 권한 설정
         http
-                .authorizeHttpRequests((auth) -> auth
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() //login, /, join 경로 요청이 오면 모든 권한 허용
-                        .requestMatchers("/css/**", "images/**", "/js/**", "/login/**", "/logout/**", "/posts/**", "/comments/**", "/error").permitAll()
-                        .anyRequest().authenticated()); //위 경로 외의 요청이 오면 로그인 후 이용 가능
+                        .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() // 특정 경로 허용
+                        .requestMatchers("/css/**", "/images/**", "/js/**", "/login/**", "/logout/**", "/posts/**", "/comments/**", "/error").permitAll()
+                        .anyRequest().authenticated()); // 그 외 요청은 인증 필요
 
-        //OAuth2.0
+        // OAuth2.0 로그인 설정
         http
-                .oauth2Login((oauth2) -> oauth2
+                .oauth2Login(oauth2 -> oauth2
                         .loginPage("https://siyeon-3faf5.web.app/login")
-                        .defaultSuccessUrl("https://siyeon-3faf5.web.app/") //로그인 성공 후 / 리다이렉트
-                        .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
+                        .defaultSuccessUrl("https://siyeon-3faf5.web.app/") // 로그인 성공 시 리다이렉트 URL
+                        .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)));
 
-        //form 로그인 방식
+        // Form 로그인 설정
         http
-                .formLogin((auth) -> auth
+                .formLogin(form -> form
                         .loginPage("https://siyeon-3faf5.web.app/auth/email/login")
                         .loginProcessingUrl("/auth/email/loginProcess")
                         .successHandler((request, response, authentication) -> {
@@ -114,17 +111,18 @@ public class SecurityConfig {
                         })
                         .permitAll());
 
-        //logout
-        http.logout(customizer -> customizer
+        // 로그아웃 설정
+        http.logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("https://siyeon-3faf5.web.app/")
                 .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll());
 
-        //세션 설정
+        // 세션 관리 설정
         http
-                .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation)->sessionFixation.newSession())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                        .sessionFixation(sessionFixation -> sessionFixation.newSession())
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true));
 
