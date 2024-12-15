@@ -1,11 +1,13 @@
 package com.project.newstart.config;
 
 import com.project.newstart.service.CustomOAuth2UserService;
+import com.project.newstart.service.CustomUserDetailsService;
 import jakarta.servlet.DispatcherType;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -18,9 +20,16 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomUserDetailsService customUserDetailsService;
 
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomUserDetailsService customUserDetailsService) {
         this.customOAuth2UserService = customOAuth2UserService;
+        this.customUserDetailsService = customUserDetailsService;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
@@ -37,53 +46,58 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        
-        //csrf disable
-        http
-                .csrf((auth) -> auth
-                        .disable());
-        
-        //http basic 인증 방식 disable
-        http
-                .httpBasic((auth) -> auth.disable());
 
-        //a
+        // CSRF 비활성화
         http
-                .authorizeHttpRequests((auth) -> auth
+                .csrf(csrf -> csrf.disable());
+
+        // HTTP Basic 인증 비활성화
+        http
+                .httpBasic(httpBasic -> httpBasic.disable());
+
+        // 인증 요청 설정
+        http
+                .authorizeHttpRequests(auth -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() //login, /, join 경로 요청이 오면 모든 권한 허용
-                        .requestMatchers("/css/**", "images/**", "/js/**", "/login/*", "/logout/*", "/posts/**", "/comments/**", "/error").permitAll()
-                        .anyRequest().authenticated()); //위 경로 외의 요청이 오면 로그인 후 이용 가능
+                        .requestMatchers(
+                                "/login/**", "/oauth2/**", "/auth/**",
+                                "/css/**", "/images/**", "/js/**",
+                                "/login/*", "/logout/*",
+                                "/posts/**", "/comments/**", "/error"
+                        ).permitAll()
+                        .anyRequest().authenticated());
 
-        //OAuth2.0
+        // OAuth2 로그인 설정
         http
-                .oauth2Login((oauth2) -> oauth2
+                .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")
-                        .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
+                        .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService)));
 
-        //form 로그인 방식
+        // Form 로그인 방식 설정
         http
-                .formLogin((auth) -> auth
+                .formLogin(form -> form
                         .loginPage("/auth/email/login")
                         .loginProcessingUrl("/auth/email/loginProcess")
                         .defaultSuccessUrl("/")
                         .permitAll());
 
-        //logout
-        http.logout(customizer -> customizer
+        // 로그아웃 설정
+        http
+                .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .deleteCookies("JSESSIONID", "remember-me")
-                .permitAll());
+                        .permitAll());
 
-        //세션 설정
+        // 세션 설정
         http
-                .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation)->sessionFixation.newSession())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                        .sessionFixation(sessionFixation -> sessionFixation.newSession())
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true));
-        
+
         return http.build();
     }
 }
