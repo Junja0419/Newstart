@@ -47,7 +47,7 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-	// Google Cloud SQL Connector (optional, for auto-configuring a connection)
+	// Google Cloud SQL Connector
 	implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.5.2'
 }
 
