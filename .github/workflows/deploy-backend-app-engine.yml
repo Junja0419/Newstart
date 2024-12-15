@@ -48,7 +48,10 @@ jobs:
 
       # 6. application.properties 전달
       - name: Deliver application.properties
-        run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./backend/src/main/resources/application.properties
+        run: |
+          cat <<EOF > ./backend/src/main/resources/application.properties
+          ${{ secrets.APPLICATION_PROPERTIES }}
+          EOF
         shell: bash
 
       # 7. Gradle 빌드
