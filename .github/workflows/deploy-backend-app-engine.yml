@@ -73,10 +73,3 @@ jobs:
         run: |
           cd backend
           gcloud app deploy --quiet
-
-      # 10. 디버깅: back 디렉토리 파일 목록 및 application.properties 내용 확인
-      - name: List back directory files and check application.properties
-        run: |
-          ls -la ./backend/src/main/resources
-          cat ./backend/src/main/resources/application.properties
-        shell: bash

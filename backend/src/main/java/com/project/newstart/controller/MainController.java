@@ -35,24 +35,29 @@ public class MainController {
     @GetMapping("/")
     public ResponseEntity<Map<String, Object>> mainPage() {
 
-        Map<String, Object> entitys = new HashMap<>();
+        Map<String, Object> entities = new HashMap<>();
 
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
-        
-        //사용자 정보를 찾을 수 없다면
-        if(userEntity == null) {
-            return ResponseEntity.notFound().build();
-        } else {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof CustomUserDetails) {
+            CustomUserDetails user = (CustomUserDetails) principal;
+            UserEntity userEntity = userRepository.findByUsername(user.getUsername());
+
+            if (userEntity == null) {
+                return ResponseEntity.notFound().build();
+            }
+
             List<Headline> headline = headlineService.views();
-
             List<Summary> summary = summaryService.views();
 
-            entitys.put("userentity", userEntity);
-            entitys.put("headline", headline);
-            entitys.put("summary", summary);
+            entities.put("userentity", userEntity);
+            entities.put("headline", headline);
+            entities.put("summary", summary);
 
-            return ResponseEntity.ok().body(entitys);
+            return ResponseEntity.ok().body(entities);
+
+        } else {
+            return ResponseEntity.status(401).body(Map.of("error", "Unauthorized access"));
         }
     }
 }
