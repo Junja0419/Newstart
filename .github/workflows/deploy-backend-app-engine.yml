@@ -39,23 +39,23 @@ jobs:
         run: chmod +x ./backend/gradlew
         shell: bash
 
-      # 5. Gradle 빌드
-      - name: Build with Gradle
-        run: |
-          cd backend
-          ./gradlew clean build --stacktrace
-        shell: bash
-
-      # 6. application.properties 생성
+      # 5. application.properties 생성
       - name: Create application.properties
         run: |
           mkdir -p ./src/main/resources
           touch ./src/main/resources/application.properties
         shell: bash
 
-      # 7. application.properties 전달
+      # 6. application.properties 전달
       - name: Deliver application.properties
         run: echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application.properties
+        shell: bash
+
+      # 7. Gradle 빌드
+      - name: Build with Gradle
+        run: |
+          cd backend
+          ./gradlew clean build
         shell: bash
 
       # 8. Google Cloud 인증
