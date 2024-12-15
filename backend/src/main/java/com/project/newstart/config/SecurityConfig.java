@@ -56,8 +56,8 @@ public class SecurityConfig {
 
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of(
-                "https://siyeon-3faf5.web.app",
-                ));
+                "https://siyeon-3faf5.web.app"
+        ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
         config.setExposedHeaders(List.of("Authorization", "Content-Type")); // 필요한 응답 헤더 허용
