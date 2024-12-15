@@ -94,7 +94,7 @@ public class SecurityConfig {
         //OAuth2.0
         http
                 .oauth2Login((oauth2) -> oauth2
-                        .loginPage("/login")
+                        .loginPage("https://siyeon-3faf5.web.app/login")
                         .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService)));
 
