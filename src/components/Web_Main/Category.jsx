@@ -82,49 +82,13 @@ export const Category = ({
 
    
   
-  // // 데이터 호출
-  // useEffect(() => {
-  //   const fetchHeadlines = async () => {
-  //     try {
-  //       const response = await axios.get("/"); // 백엔드 API 호출
-  //       setHeadlines(response.data.headline);
-  //     } catch (err) {
-  //       setError(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchHeadlines();
-  // }, []);
-
-  //  // 로딩 상태 처리
-  //  if (loading) return <div>Loading...</div>;
-
-  //  // 에러 상태 처리
-  //  if (error) return <div>Error: {error.message}</div>;
- 
-  //  // headlines 데이터가 없을 경우 처리
-  //  if (!headlines || headlines.length === 0) {
-  //    return (
-  //      <div className="empty-category">
-  //        데이터가 없습니다. <br />
-  //        다른 탭을 선택해주세요.
-  //      </div>
-  //    );
-  //  }
-  
-  //로컬 데이터 호출
+  // 데이터 호출
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await fetch("/headlines.json");
-        if (!response.ok) throw new Error("Failed to load data");
-        const data = await response.json();
-        console.log("Fetched data:", data);
-        setHeadlines(data.headline);
-        setUserentity(data.userentity);
+        const response = await axios.get("/"); // 백엔드 API 호출
+        setHeadlines(response.data.headline);
       } catch (err) {
-        console.error("Error fetching headlines:", err);
         setError(err);
       } finally {
         setLoading(false);
@@ -133,21 +97,57 @@ export const Category = ({
     fetchHeadlines();
   }, []);
 
-  // 로딩 상태 처리
-  if (loading) return <div>Loading...</div>;
+   // 로딩 상태 처리
+   if (loading) return <div>Loading...</div>;
 
-  // 에러 상태 처리
-  if (error) return <div>Error: {error.message}</div>;
+   // 에러 상태 처리
+   if (error) return <div>Error: {error.message}</div>;
+ 
+   // headlines 데이터가 없을 경우 처리
+   if (!headlines || headlines.length === 0) {
+     return (
+       <div className="empty-category">
+         데이터가 없습니다. <br />
+         다른 탭을 선택해주세요.
+       </div>
+     );
+   }
+  
+  // //로컬 데이터 호출
+  // useEffect(() => {
+  //   const fetchHeadlines = async () => {
+  //     try {
+  //       const response = await fetch("/headlines.json");
+  //       if (!response.ok) throw new Error("Failed to load data");
+  //       const data = await response.json();
+  //       console.log("Fetched data:", data);
+  //       setHeadlines(data.headline);
+  //       setUserentity(data.userentity);
+  //     } catch (err) {
+  //       console.error("Error fetching headlines:", err);
+  //       setError(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchHeadlines();
+  // }, []);
 
-  // headlines 데이터가 없을 경우 처리
-  if (!headlines || headlines.length === 0) {
-    return (
-      <div className="empty-category">
-        데이터가 없습니다. <br />
-        다른 탭을 선택해주세요.
-      </div>
-    );
-  }
+  // // 로딩 상태 처리
+  // if (loading) return <div>Loading...</div>;
+
+  // // 에러 상태 처리
+  // if (error) return <div>Error: {error.message}</div>;
+
+  // // headlines 데이터가 없을 경우 처리
+  // if (!headlines || headlines.length === 0) {
+  //   return (
+  //     <div className="empty-category">
+  //       데이터가 없습니다. <br />
+  //       다른 탭을 선택해주세요.
+  //     </div>
+  //   );
+  // }
   
   // 카테고리별 데이터 필터링
   const filteredHeadlines = headlines.length > 0 ? {
@@ -180,39 +180,39 @@ export const Category = ({
     switch (state.state) {
       case "politics":
         return isMobile ? (
-          <PoliticsM userid={userentity.id} headlines={filteredHeadlines.politics} />
+          <PoliticsM headlines={filteredHeadlines.politics} />
         ) : (
-          <Politics userid={userentity.id} headlines={filteredHeadlines.politics} />
+          <Politics headlines={filteredHeadlines.politics} />
         );
       case "economy":
         return isMobile ? (
-          <EconomyM userid={userentity.id} headlines={filteredHeadlines.economy} />
+          <EconomyM headlines={filteredHeadlines.economy} />
         ) : (
-          <Economy userid={userentity.id} headlines={filteredHeadlines.economy} />
+          <Economy headlines={filteredHeadlines.economy} />
         );
       case "social":
         return isMobile ? (
-          <SocietyM userid={userentity.id} headlines={filteredHeadlines.social} />
+          <SocietyM headlines={filteredHeadlines.social} />
         ) : (
-          <Society userid={userentity.id} headlines={filteredHeadlines.social} />
+          <Society headlines={filteredHeadlines.social} />
         );
       case "life":
         return isMobile ? (
-          <LifeM userid={userentity.id} headlines={filteredHeadlines.life} />
+          <LifeM headlines={filteredHeadlines.life} />
         ) : (
-          <Life userid={userentity.id} headlines={filteredHeadlines.life} />
+          <Life headlines={filteredHeadlines.life} />
         );
       case "it":
         return isMobile ? (
-          <ITM userid={userentity.id} headlines={filteredHeadlines.it} />
+          <ITM headlines={filteredHeadlines.it} />
         ) : (
-          <IT userid={userentity.id} headlines={filteredHeadlines.it} />
+          <IT headlines={filteredHeadlines.it} />
         );
       case "world":
         return isMobile ? (
-          <WorldM userid={userentity.id} headlines={filteredHeadlines.world} />
+          <WorldM headlines={filteredHeadlines.world} />
         ) : (
-          <World userid={userentity.id} headlines={filteredHeadlines.world} />
+          <World headlines={filteredHeadlines.world} />
         );
       default:
         return null;

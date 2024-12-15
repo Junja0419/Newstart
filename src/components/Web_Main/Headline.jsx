@@ -22,7 +22,6 @@ export const Headline = ({
   press="안준석일보",
   category="경제",
   onClick,
-  useridfromeachcomponents,
 }) => {
   const [state, dispatch] = useReducer(reducer, {
     state: stateProp || "default",
@@ -35,9 +34,7 @@ export const Headline = ({
         dispatch("mouse_enter");
       }}
       onClick={() =>
-        navigate(`/headline/${headline_id}`, {
-          state: { useridfromeachcomponents }, // userid를 state로 전달
-        })
+        navigate(`/headline/${headline_id}`)
       }
       onMouseLeave={() => {
         dispatch("mouse_leave");

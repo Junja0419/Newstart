@@ -21,147 +21,147 @@ export const Web_Headline = () => {
   const [bookmarkId, setBookmarkId] = useState(null); // 북마크 ID 저장
   const [userId, setUserId] = useState(null);
 
-  console.log("Headline ID from web headlinejsx:", headline_id);
-  console.log("user ID from web headlinejsx:", userId);
+  console.log("Headline ID from useparams:", headline_id);
+  console.log("user ID from server:", userId);
 
-  // // 유저 ID 가져오기
-  // const fetchUserEntity = async () => {
-  //   try {
-  //     const response = await fetch("/"); // 백엔드에서 현재 유저 정보 가져오기
-  //     if (!response.ok) throw new Error("Failed to fetch user entity");
-  //     const data = await response.json();
-  //     setUserId(data.userentity.id); // user_id 저장
-  //   } catch (err) {
-  //     console.error("Error fetching user entity:", err);
-  //     setError(err.message);
-  //   }
-  // };
+  // 유저 ID 가져오기
+  const fetchUserEntity = async () => {
+    try {
+      const response = await fetch("/"); // 백엔드에서 현재 유저 정보 가져오기
+      if (!response.ok) throw new Error("Failed to fetch user entity");
+      const data = await response.json();
+      setUserId(data.userentity.id); // user_id 저장
+    } catch (err) {
+      console.error("Error fetching user entity:", err);
+      setError(err.message);
+    }
+  };
 
-  // // 북마크 상태 가져오기
-  // const fetchBookmarkStatus = async () => {
-  //   try {
-  //     const response = await fetch(`/bookmark/${userId}`); // 유저 ID로 북마크 상태 조회
-  //     if (!response.ok) throw new Error("Failed to fetch bookmark status");
-  //     const data = await response.json();
+  // 북마크 상태 가져오기
+  const fetchBookmarkStatus = async () => {
+    try {
+      const response = await fetch(`/bookmark/${userId}`); // 유저 ID로 북마크 상태 조회
+      if (!response.ok) throw new Error("Failed to fetch bookmark status");
+      const data = await response.json();
 
-  //     const bookmark = data.bookmark.find(
-  //       (b) => b.headline.headline_id === parseInt(headline_id) //북마크 배열을 순회하면서 헤드라인 아이디 일치 찾음
-  //     );
+      const bookmark = data.bookmark.find(
+        (b) => b.headline.headline_id === parseInt(headline_id) //북마크 배열을 순회하면서 헤드라인 아이디 일치 찾음
+      );
 
-  //     if (bookmark) {
-  //       setIsBookmarked(true);
-  //       setBookmarkId(bookmark.bookmark_id);
-  //     } else {
-  //       setIsBookmarked(false);
-  //       setBookmarkId(null);
-  //     }
-  //   } catch (err) {
-  //     console.error("Error fetching bookmark status:", err);
-  //     setError(err.message);
-  //   }
-  // };
+      if (bookmark) {
+        setIsBookmarked(true);
+        setBookmarkId(bookmark.bookmark_id);
+      } else {
+        setIsBookmarked(false);
+        setBookmarkId(null);
+      }
+    } catch (err) {
+      console.error("Error fetching bookmark status:", err);
+      setError(err.message);
+    }
+  };
 
-  // // 헤드라인 데이터 및 북마크 상태 가져오기
-  // useEffect(() => {
-  //   const fetchHeadlineAndBookmark = async () => {
-  //     try {
-  //       //헤드라인 데이터 가져오기
-  //       const headlineResponse = await fetch(`/headline/${headline_id}`);
-  //       if (!headlineResponse.ok) throw new Error("Failed to fetch headline data");
-  //       const data = await headlineResponse.json();
-  //       setHeadline(data.headline); // 단일 headline 객체 설정
-
-  //       // 3. 북마크 상태 조회
-  //       await fetchBookmarkStatus();
-  //     } catch (err) {
-  //       console.error("Error fetching data:", err);
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchHeadlineAndBookmark();
-  // }, [headline_id, userId]); // userId가 업데이트될 때마다 다시 호출
-
-  // // 북마크 등록/삭제 처리
-  // const handleBookmarkToggle = async () => {
-  //   try {
-  //     if (isBookmarked) {
-  //       // 북마크 삭제
-  //       const response = await fetch(`/bookmark/delete/${bookmarkId}`, {
-  //         method: "POST",
-  //       });
-  //       if (!response.ok) throw new Error("Failed to delete bookmark");
-  //       console.log("Bookmark deleted");
-  //     } else {
-  //       // 북마크 등록
-  //       const response = await fetch("/bookmark/create", {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify({
-  //           user_id: userId,
-  //           headline_id: parseInt(headline_id),
-  //         }),
-  //       });
-  //       if (!response.ok) throw new Error("Failed to create bookmark");
-  //       const result = await response.json();
-  //       console.log("Bookmark created:", result);
-  //     }
-
-  //     // 최신 북마크 상태 다시 조회
-  //     await fetchBookmarkStatus();
-  //   } catch (err) {
-  //     console.error("Bookmark toggle error:", err);
-  //     setError(err.message);
-  //   }
-  // };
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
-
-  // if (!headline) {
-  //   return <div>No headline found.</div>;
-  // }
-
-  // 로컬에서 메인 데이터 가져오기
+  // 헤드라인 데이터 및 북마크 상태 가져오기
   useEffect(() => {
-    const fetchHeadlines = async () => {
+    const fetchHeadlineAndBookmark = async () => {
       try {
-        const response = await fetch("/headlines.json");
-        if (!response.ok) throw new Error("Failed to load data");
-        const data = await response.json();
-        console.log("Fetched data:", data);
+        //헤드라인 데이터 가져오기
+        const headlineResponse = await fetch(`/headline/${headline_id}`);
+        if (!headlineResponse.ok) throw new Error("Failed to fetch headline data");
+        const data = await headlineResponse.json();
+        setHeadline(data.headline); // 단일 headline 객체 설정
 
-        // JSON 데이터 구조 확인 및 상태 저장
-        if (data.headline && Array.isArray(data.headline)) {
-          setHeadline(data.headline); // headline 배열 설정
-          setUserId(data.userentity.id); // userentity 저장
-        } else {
-          throw new Error("Invalid data structure");
-        }
+        // 3. 북마크 상태 조회
+        await fetchBookmarkStatus();
       } catch (err) {
-        console.error("Error fetching headlines:", err);
-        setError(err);
+        console.error("Error fetching data:", err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-    fetchHeadlines();
-  }, []);
+
+    fetchHeadlineAndBookmark();
+  }, [headline_id, userId]); // userId가 업데이트될 때마다 다시 호출
+
+  // 북마크 등록/삭제 처리
+  const handleBookmarkToggle = async () => {
+    try {
+      if (isBookmarked) {
+        // 북마크 삭제
+        const response = await fetch(`/bookmark/delete/${bookmarkId}`, {
+          method: "POST",
+        });
+        if (!response.ok) throw new Error("Failed to delete bookmark");
+        console.log("Bookmark deleted");
+      } else {
+        // 북마크 등록
+        const response = await fetch("/bookmark/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user_id: userId,
+            headline_id: parseInt(headline_id),
+          }),
+        });
+        if (!response.ok) throw new Error("Failed to create bookmark");
+        const result = await response.json();
+        console.log("Bookmark created:", result);
+      }
+
+      // 최신 북마크 상태 다시 조회
+      await fetchBookmarkStatus();
+    } catch (err) {
+      console.error("Bookmark toggle error:", err);
+      setError(err.message);
+    }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: {error}</div>;
   }
+
+  if (!headline) {
+    return <div>No headline found.</div>;
+  }
+
+  // // 로컬에서 메인 데이터 가져오기
+  // useEffect(() => {
+  //   const fetchHeadlines = async () => {
+  //     try {
+  //       const response = await fetch("/headlines.json");
+  //       if (!response.ok) throw new Error("Failed to load data");
+  //       const data = await response.json();
+  //       console.log("Fetched data:", data);
+
+  //       // JSON 데이터 구조 확인 및 상태 저장
+  //       if (data.headline && Array.isArray(data.headline)) {
+  //         setHeadline(data.headline); // headline 배열 설정
+  //         setUserId(data.userentity.id); // userentity 저장
+  //       } else {
+  //         throw new Error("Invalid data structure");
+  //       }
+  //     } catch (err) {
+  //       console.error("Error fetching headlines:", err);
+  //       setError(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchHeadlines();
+  // }, []);
+
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (error) {
+  //   return <div>Error: {error.message}</div>;
+  // }
 
   // 첫 번째 요소 접근, headline_id.json 파일도 어차피 큰 headline 안에 []로 시작한다고 가정함, 만약 그렇지 않으면 그냥 접근 하면 됨
   const headline0 = headline[0];

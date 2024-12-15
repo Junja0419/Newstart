@@ -5,7 +5,6 @@ import Headline from "../Headline";
 
 export const Politics = ({ 
   headlines,
-  user_id, 
 }) => {
   return (
       <div>
@@ -22,7 +21,6 @@ export const Politics = ({
             headlinenumber="headlinenumberforpc"
             headlineText="headlineTextforpc"
             headlineNewspaper="headlineNewspaperforpc"
-            user_id_to_headline = {user_id}
           />
          ))}
       </div>

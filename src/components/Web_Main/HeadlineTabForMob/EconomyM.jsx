@@ -3,7 +3,6 @@ import Headline from "../Headline";
 
 export const EconomyM = ({ 
   headlines,
-  user_id,
 }) => {
   return (
       <div>
@@ -15,7 +14,6 @@ export const EconomyM = ({
             title={headline.title} // API에서 가져온 제목
             category={headline.category} // API에서 가져온 카테고리
             press={headline.press} // API에서 가져온 언론사
-            user_id_to_headline = {user_id}
           />
          ))}
       </div>

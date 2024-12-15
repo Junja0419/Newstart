@@ -39,7 +39,7 @@ export const SearchTab = ({
       {state.state === "hover" && (
         <img
           className="for-pc-menu-search-tab-icon"
-          src="https://c.animaapp.com/zuoomGM9/img/icon-4@2x.png"
+          src="https://c.animaapp.com/nzh65NNa/img/icon-17@2x.png"
         />
       )}
 
