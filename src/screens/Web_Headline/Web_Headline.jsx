@@ -14,20 +14,20 @@ export const Web_Headline = () => {
   const [error, setError] = useState(null);
   const screenWidth = useWindowWidth();
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const handleBookmarkChange = (status) => {
-    // status가 "bookmark"면 북마크 설정, "unbookmark"면 해제, 로컬용
-    setIsBookmarked(status === "bookmark");
-  };
+  // const handleBookmarkChange = (status) => { // 단순히 동작 확인만을 위해 존재하던 녀석임...
+  //   // status가 "bookmark"면 북마크 설정, "unbookmark"면 해제, 로컬용
+  //   setIsBookmarked(status === "bookmark");
+  // };
   const [bookmarkId, setBookmarkId] = useState(null); // 북마크 ID 저장
   const [userId, setUserId] = useState(null);
 
   console.log("Headline ID from useparams:", headline_id);
   console.log("user ID from server:", userId);
 
-  // 유저 ID 가져오기
+  // 유저 ID 가져오기 (맨 처음 한 번만 실행)
   const fetchUserEntity = async () => {
     try {
-      const response = await fetch("/"); // 백엔드에서 현재 유저 정보 가져오기
+      const response = await fetch(`${process.env.API__URL}/`); // 백엔드에서 현재 유저 정보 가져오기
       if (!response.ok) throw new Error("Failed to fetch user entity");
       const data = await response.json();
       setUserId(data.userentity.id); // user_id 저장
@@ -37,10 +37,10 @@ export const Web_Headline = () => {
     }
   };
 
-  // 북마크 상태 가져오기
+  // 북마크 상태 가져오는 함수 (수시로 써야 함)
   const fetchBookmarkStatus = async () => {
     try {
-      const response = await fetch(`/bookmark/${userId}`); // 유저 ID로 북마크 상태 조회
+      const response = await fetch(`${process.env.API__URL}/bookmark/${userId}`); // 유저 ID로 북마크 상태 조회
       if (!response.ok) throw new Error("Failed to fetch bookmark status");
       const data = await response.json();
 
@@ -66,7 +66,7 @@ export const Web_Headline = () => {
     const fetchHeadlineAndBookmark = async () => {
       try {
         //헤드라인 데이터 가져오기
-        const headlineResponse = await fetch(`/headline/${headline_id}`);
+        const headlineResponse = await fetch(`${process.env.API__URL}/headline/${headline_id}`);
         if (!headlineResponse.ok) throw new Error("Failed to fetch headline data");
         const data = await headlineResponse.json();
         setHeadline(data.headline); // 단일 headline 객체 설정
@@ -89,14 +89,14 @@ export const Web_Headline = () => {
     try {
       if (isBookmarked) {
         // 북마크 삭제
-        const response = await fetch(`/bookmark/delete/${bookmarkId}`, {
+        const response = await fetch(`${process.env.API__URL}/bookmark/delete/${bookmarkId}`, {
           method: "POST",
         });
         if (!response.ok) throw new Error("Failed to delete bookmark");
         console.log("Bookmark deleted");
       } else {
         // 북마크 등록
-        const response = await fetch("/bookmark/create", {
+        const response = await fetch(`${process.env.API__URL}/bookmark/create`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -163,12 +163,6 @@ export const Web_Headline = () => {
   //   return <div>Error: {error.message}</div>;
   // }
 
-  // 첫 번째 요소 접근, headline_id.json 파일도 어차피 큰 headline 안에 []로 시작한다고 가정함, 만약 그렇지 않으면 그냥 접근 하면 됨
-  const headline0 = headline[0];
-  if (!headline) {
-    return <div>No headline found.</div>;
-  }
-
   return ( 
     <div className="headline">
       <div className="div-3">
@@ -176,14 +170,14 @@ export const Web_Headline = () => {
           <>
           <div className="frame-for-all-mobile-headline">
           <FrameForMobile
-              press = {headline0.press}
-              title = {headline0.title}
-              date = {headline0.date}
-              content = {headline0.content} 
-              link = {headline0.link}
+              press = {headline.press}
+              title = {headline.title}
+              date = {headline.date}
+              content = {headline.content} 
+              link = {headline.link}
               // 상위에서 관리하는 북마크 상태와 콜백 전달
                 isBookmarked={isBookmarked}
-                onBookmarkChange={handleBookmarkChange}
+                onBookmarkChange={handleBookmarkToggle}
                 />
             {/* 모바일용 네비게이터 */}
             <MenuForMobile 
@@ -196,14 +190,14 @@ export const Web_Headline = () => {
         {screenWidth >= 1512 && ( //PC용 화면
           <>
             <Frame 
-              press = {headline0.press}
-              title = {headline0.title}
-              date = {headline0.date}
-              content = {headline0.content} 
-              link = {headline0.link}
+              press = {headline.press}
+              title = {headline.title}
+              date = {headline.date}
+              content = {headline.content} 
+              link = {headline.link}
               // 북마크 상태와 콜백 전달
               isBookmarked={isBookmarked}
-              onBookmarkChange={handleBookmarkChange}
+              onBookmarkChange={handleBookmarkToggle}
             />
             <MenuForPC 
               className="frame-51"

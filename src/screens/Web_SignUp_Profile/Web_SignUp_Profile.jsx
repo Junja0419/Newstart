@@ -27,7 +27,7 @@ export const Web_SignUp_Profile = () => {
       // body 내용을 console로 출력
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
-      const response = await fetch("/auth/join", {
+      const response = await fetch(`${process.env.API__URL}/auth/join`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyData),

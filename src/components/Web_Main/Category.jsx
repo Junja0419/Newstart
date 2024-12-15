@@ -86,7 +86,7 @@ export const Category = ({
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get("/"); // 백엔드 API 호출
+        const response = await axios.get(`${process.env.API__URL}/`); // 백엔드 API 호출
         setHeadlines(response.data.headline);
       } catch (err) {
         setError(err);

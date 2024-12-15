@@ -23,7 +23,7 @@ export const Web_Search = ({
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get("/"); // 백엔드 API 호출
+        const response = await axios.get(`${process.env.API__URL}/`); // 백엔드 API 호출
         setUserId(response.data.userentity.id);
       } catch (err) {
         setError(err);
@@ -48,7 +48,7 @@ export const Web_Search = ({
     }
   
     try {
-      const response = await fetch(`/search/result/${query}`);
+      const response = await fetch(`${process.env.API__URL}/search/result/${query}`);
       if (!response.ok) {
         throw new Error("API 요청 실패");
       }
@@ -63,7 +63,7 @@ export const Web_Search = ({
   // 검색 기록 가져오기
   const fetchSearchRecords  = async () => {
     try {
-      const response = await fetch(`/search/${userId}`); //id 받아오는 요청 또 해야 되네 위에서 ㅋ
+      const response = await fetch(`${process.env.API__URL}/search/${userId}`); //id 받아오는 요청 또 해야 되네 위에서 ㅋ
       if (!response.ok) throw new Error("API 요청 실패");
 
       const data = await response.json();

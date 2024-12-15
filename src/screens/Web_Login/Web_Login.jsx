@@ -30,13 +30,13 @@ export const Web_Login = () => {
 
       const bodyData = {
         username: email,
-        password: password,
+        password: password,  
       };
 
       // body 내용을 console로 출력
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
-      const response = await fetch("/auth/email/loginProcess", {
+      const response = await fetch(`${process.env.API__URL}/auth/email/loginProcess`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyData)
