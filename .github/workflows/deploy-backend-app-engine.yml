@@ -55,7 +55,7 @@ jobs:
       - name: Build with Gradle
         run: |
           cd backend
-          ./gradlew clean build
+          ./gradlew clean build --stacktrace
         shell: bash
 
       # 8. Google Cloud 인증
