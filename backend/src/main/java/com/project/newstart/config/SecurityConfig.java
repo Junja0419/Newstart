@@ -56,9 +56,9 @@ public class SecurityConfig {
 
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of(
-                "https://siyeon-3faf5.web.app"
-        ));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")); // 모든 HTTP 메서드 허용
+                "https://siyeon-3faf5.web.app",
+                ));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
         config.setExposedHeaders(List.of("Authorization", "Content-Type")); // 필요한 응답 헤더 허용
 
@@ -71,45 +71,46 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         // CSRF 비활성화
-        http
-                .csrf(csrf -> csrf.disable());
+        http.csrf(csrf -> csrf.disable());
 
         // HTTP Basic 인증 비활성화
-        http
-                .httpBasic(httpBasic -> httpBasic.disable());
+        http.httpBasic(httpBasic -> httpBasic.disable());
 
         // CORS 설정
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         // 권한 설정
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
-                        .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() // 특정 경로 허용
-                        .requestMatchers("/css/**", "/images/**", "/js/**", "/login/**", "/logout/**", "/posts/**", "/comments/**", "/error").permitAll()
-                        .anyRequest().authenticated()); // 그 외 요청은 인증 필요
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
+                .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() // 특정 경로 허용
+                .requestMatchers("/css/**", "/images/**", "/js/**", "/login/**", "/logout/**", "/posts/**", "/comments/**", "/error").permitAll()
+                .anyRequest().authenticated()); // 그 외 요청은 인증 필요
 
         // OAuth2.0 로그인 설정
-        http
-                .oauth2Login(oauth2 -> oauth2
-                        .loginPage("https://siyeon-3faf5.web.app/login")
-                        .defaultSuccessUrl("https://siyeon-3faf5.web.app/") // 로그인 성공 시 리다이렉트 URL
-                        .userInfoEndpoint(userInfo -> userInfo
-                                .userService(customOAuth2UserService)));
+        http.oauth2Login(oauth2 -> oauth2
+                .loginPage("https://siyeon-3faf5.web.app/login")
+                .defaultSuccessUrl("https://siyeon-3faf5.web.app/") // 로그인 성공 시 리다이렉트 URL
+                .userInfoEndpoint(userInfo -> userInfo
+                        .userService(customOAuth2UserService)));
 
         // Form 로그인 설정
-        http
-                .formLogin(form -> form
-                        .loginPage("https://siyeon-3faf5.web.app/auth/email/login")
-                        .loginProcessingUrl("/auth/email/loginProcess")
-                        .successHandler((request, response, authentication) -> {
-                            response.sendRedirect("https://siyeon-3faf5.web.app/"); // 성공 시 React 앱으로 리디렉션
-                        })
-                        .failureHandler((request, response, exception) -> {
-                            response.sendRedirect("https://siyeon-3faf5.web.app/auth/email/login?error"); // 실패 시 React 로그인 페이지로 리디렉션
-                        })
-                        .permitAll());
+        http.formLogin(form -> form
+                .loginPage("https://siyeon-3faf5.web.app/auth/email/login")
+                .loginProcessingUrl("/auth/email/loginProcess")
+                .successHandler((request, response, authentication) -> {
+                    // 성공 시 CORS 헤더 추가
+                    response.setHeader("Access-Control-Allow-Origin", "https://siyeon-3faf5.web.app");
+                    response.setHeader("Access-Control-Allow-Credentials", "true");
+                    response.sendRedirect("https://siyeon-3faf5.web.app/");
+                })
+                .failureHandler((request, response, exception) -> {
+                    // 실패 시 CORS 헤더 추가
+                    response.setHeader("Access-Control-Allow-Origin", "https://siyeon-3faf5.web.app");
+                    response.setHeader("Access-Control-Allow-Credentials", "true");
+                    response.sendRedirect("https://siyeon-3faf5.web.app/auth/email/login?error");
+                })
+                .permitAll());
 
         // 로그아웃 설정
         http.logout(logout -> logout
@@ -119,12 +120,11 @@ public class SecurityConfig {
                 .permitAll());
 
         // 세션 관리 설정
-        http
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                        .sessionFixation(sessionFixation -> sessionFixation.newSession())
-                        .maximumSessions(1)
-                        .maxSessionsPreventsLogin(true));
+        http.sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .sessionFixation(sessionFixation -> sessionFixation.newSession())
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true));
 
         return http.build();
     }
