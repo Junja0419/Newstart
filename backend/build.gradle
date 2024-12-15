@@ -54,23 +54,8 @@ dependencies {
     testImplementation 'com.h2database:h2'
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['backend/src/main/java']
-        }
-        resources {
-            srcDirs = ['backend/src/main/resources']
-        }
-    }
-    test {
-        java {
-            srcDirs = ['backend/src/test/java']
-        }
-        resources {
-            srcDirs = ['backend/src/test/resources']
-        }
-    }
+springBoot {
+    mainClass = 'com.project.ProjectApplication'
 }
 
 tasks.named('test') {
