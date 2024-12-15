@@ -61,4 +61,3 @@ springBoot {
 tasks.named('test') {
     useJUnitPlatform()
 }
-
