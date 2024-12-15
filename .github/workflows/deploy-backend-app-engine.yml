@@ -55,7 +55,7 @@ jobs:
       - name: Build with Gradle
         run: |
           cd backend
-          ./gradlew clean build --stacktrace
+          ./gradlew clean build
         shell: bash
 
       # 8. Google Cloud 인증
@@ -76,18 +76,10 @@ jobs:
         run: |
           cd backend
           gcloud app deploy --quiet
-          
+
       # 11. 디버깅: back 디렉토리 파일 목록 및 application.properties 내용 확인
       - name: List back directory files and check application.properties
         run: |
-          ls -la ./backend/src/main/resources
-          cat ./backend/src/main/resources/application.properties
+          ls -la ./src/main/resources
+          cat ./src/main/resources/application.properties
         shell: bash
-
-      # 12. 테스트 보고서 업로드
-      - name: Upload Test Report
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report
-          path: backend/build/reports/tests/test/
