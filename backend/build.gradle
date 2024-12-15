@@ -48,7 +48,7 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
 	// Google Cloud SQL Connector
-	implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.5.2'
+	implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.21.0'
 }
 
 tasks.named('test') {
