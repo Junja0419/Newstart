@@ -49,6 +49,9 @@ dependencies {
 
 	// Google Cloud SQL Connector
 	implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.21.0'
+
+	// H2 Database
+	testImplementation 'com.h2database:h2'
 }
 
 tasks.named('test') {
