@@ -88,7 +88,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() //login, /, join 경로 요청이 오면 모든 권한 허용
-                        .requestMatchers("/css/**", "images/**", "/js/**", "/login/**", "/logout/*", "/posts/**", "/comments/**", "/error").permitAll()
+                        .requestMatchers("/css/**", "images/**", "/js/**", "/login/**", "/logout/**", "/posts/**", "/comments/**", "/error").permitAll()
                         .anyRequest().authenticated()); //위 경로 외의 요청이 오면 로그인 후 이용 가능
 
         //OAuth2.0
@@ -103,13 +103,13 @@ public class SecurityConfig {
                 .formLogin((auth) -> auth
                         .loginPage("https://siyeon-3faf5.web.app/auth/email/login")
                         .loginProcessingUrl("/auth/email/loginProcess")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("https://siyeon-3faf5.web.app/")
                         .permitAll());
 
         //logout
         http.logout(customizer -> customizer
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("https://siyeon-3faf5.web.app/")
                 .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll());
 
