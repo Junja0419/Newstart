@@ -55,10 +55,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.setAllowedOrigins(List.of(
-                "https://siyeon-3faf5.web.app", //front-end URL
-                "https://newstart-project-444411.du.r.appspot.com" //back-end URL
-        )); // React 배포 URL 허용
+        config.setAllowedOrigins(List.of("*")); // React 배포 URL 허용
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")); // 모든 HTTP 메서드 허용
         config.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
         config.setExposedHeaders(List.of("*")); // 모든 응답 헤더 허용
