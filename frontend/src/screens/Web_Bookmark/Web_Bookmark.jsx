@@ -16,7 +16,10 @@ export const Web_Bookmark = () => {
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
-        const response = await fetch(`${process.env.API__URL}/bookmark/${id}`);
+        const response = await fetch(`${process.env.API__URL}/bookmark/${id}`, {
+          method: "GET",
+          credentials: "include",
+        });
         const data = await response.json();
         setBookmarks(data.bookmark);
       } catch (error) {
@@ -30,9 +33,13 @@ export const Web_Bookmark = () => {
   /***** 북마크 삭제 *****/
   const handleDeleteBookmark = async (bookmark_id) => {
     try {
-      const response = await fetch(`${process.env.API__URL}/bookmark/delete/${bookmark_id}`, {
-        method: "POST",
-      });
+      const response = await fetch(
+        `${process.env.API__URL}/bookmark/delete/${bookmark_id}`,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         // 삭제 성공 시 해당 bookmark_id를 제외한 북마크 목록으로 업데이트

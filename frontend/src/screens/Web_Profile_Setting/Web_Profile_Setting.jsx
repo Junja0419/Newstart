@@ -31,11 +31,15 @@ export const Web_Profile_Setting = () => {
     console.log("전송할 데이터:", JSON.stringify(requestData));
 
     try {
-      const response = await fetch(`${process.env.API__URL}/profile/updateProcess`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestData),
-      });
+      const response = await fetch(
+        `${process.env.API__URL}/profile/updateProcess`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData),
+          credentials: "include",
+        }
+      );
 
       if (response.ok) {
         // 성공적으로 업데이트되면 리다이렉트

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useWindowWidth } from "../../breakpoints";
 import LoginButton from "../../components/Web_Login/LoginButton";
-import { validateEmail, validatePassword } from "../../components/Web_Login/validation";
+import {
+  validateEmail,
+  validatePassword,
+} from "../../components/Web_Login/validation";
 import "./style.css";
 
 export const Web_Login = () => {
@@ -27,101 +30,102 @@ export const Web_Login = () => {
   // 로그인 요청
   const onClickLoginBtn = async () => {
     try {
-
       const bodyData = {
         username: email,
-        password: password,  
+        password: password,
       };
 
       // body 내용을 console로 출력
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
-      const response = await fetch(`${process.env.API__URL}/auth/email/loginProcess`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bodyData)
-      });
+      const response = await fetch(
+        `${process.env.API__URL}/auth/email/loginProcess`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(bodyData),
+          credentials: "include",
+        }
+      );
 
-      const data = await response.json();
-      const { token } = data; 
-      if (!token) {
-        throw new Error("토큰이 포함되지 않은 응답입니다.");
+      if (!response.ok) {
+        throw new Error("로그인 요청 실패");
       }
 
-      // JWT 토큰을 LocalStorage에 저장
-      localStorage.setItem("jwt", token);
-
+      const data = await response.json();
       console.log("로그인 성공:", data);
     } catch (error) {
       console.error("로그인 오류:", error);
     }
-  }
+  };
 
   return (
     <div className="login">
       <div className="div">
         {screenWidth < 1512 && ( // 모바일용 화면
           <>
-          <div className="frame">
-            <div className="frame-for-top-5vh">
-              <div className="title-wrapper">
-                <div className="title">이메일 로그인</div>
-              </div>
+            <div className="frame">
+              <div className="frame-for-top-5vh">
+                <div className="title-wrapper">
+                  <div className="title">이메일 로그인</div>
+                </div>
 
-              <div className="frame-wrapper">
-                <div className="div-2">
-                  <div className="view">
-                    <div className="text-wrapper-2">이메일</div>
+                <div className="frame-wrapper">
+                  <div className="div-2">
+                    <div className="view">
+                      <div className="text-wrapper-2">이메일</div>
 
-                    <input 
-                      className="text-input" 
-                      placeholder="이메일을 입력해주세요."
-                      value={email}
-                      onChange={(e) => emailValidation(e.target.value)}
-                    /> 
+                      <input
+                        className="text-input"
+                        placeholder="이메일을 입력해주세요."
+                        value={email}
+                        onChange={(e) => emailValidation(e.target.value)}
+                      />
 
-                    <img
-                      className="line"
-                      alt="Line"
-                      src="https://c.animaapp.com/2w9FzD4H/img/line-3-5@2x.png"
-                    />
-                    {/* 이메일 오류 메시지 출력 */}
-                   {emailError && <div className="error-message">{emailError}</div>}
-                  </div>
+                      <img
+                        className="line"
+                        alt="Line"
+                        src="https://c.animaapp.com/2w9FzD4H/img/line-3-5@2x.png"
+                      />
+                      {/* 이메일 오류 메시지 출력 */}
+                      {emailError && (
+                        <div className="error-message">{emailError}</div>
+                      )}
+                    </div>
 
-                  <div className="view">
-                    <div className="text-wrapper-2">비밀번호</div>
+                    <div className="view">
+                      <div className="text-wrapper-2">비밀번호</div>
 
-                    <input className="element" 
-                      placeholder="비밀번호를 입력해주세요." 
-                      type="password"
-                      value={password}
-                      onChange={(e) => passwordValidation(e.target.value)}
-                    />
+                      <input
+                        className="element"
+                        placeholder="비밀번호를 입력해주세요."
+                        type="password"
+                        value={password}
+                        onChange={(e) => passwordValidation(e.target.value)}
+                      />
 
-                    <img
-                      className="line"
-                      alt="Line"
-                      src="https://c.animaapp.com/2w9FzD4H/img/line-3-5@2x.png"
-                    />
-                    {/* 비밀번호 오류 메시지 출력 */}
-                    {passwordError && <div className="error-message">{passwordError}</div>} 
-                    
+                      <img
+                        className="line"
+                        alt="Line"
+                        src="https://c.animaapp.com/2w9FzD4H/img/line-3-5@2x.png"
+                      />
+                      {/* 비밀번호 오류 메시지 출력 */}
+                      {passwordError && (
+                        <div className="error-message">{passwordError}</div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-              <LoginButton 
-                className="component-87" 
-                text="로그인" 
-                emailValid={validateEmail(email)} 
-                passwordValid={validatePassword(password)} 
+              <LoginButton
+                className="component-87"
+                text="로그인"
+                emailValid={validateEmail(email)}
+                passwordValid={validatePassword(password)}
                 disabled={isButtonDisabled}
                 onClick={onClickLoginBtn}
               />
             </div>
-
-            
           </>
         )}
 
@@ -137,7 +141,8 @@ export const Web_Login = () => {
               <div className="view">
                 <div className="text-wrapper-2">이메일</div>
 
-                <input className="text-input" 
+                <input
+                  className="text-input"
                   placeholder="이메일을 입력해주세요."
                   value={email}
                   onChange={(e) => emailValidation(e.target.value)}
@@ -148,14 +153,17 @@ export const Web_Login = () => {
                   alt="Line"
                   src="https://c.animaapp.com/2w9FzD4H/img/line-3-7@2x.png"
                 />
-              {/* 이메일 오류 메시지 출력 */}
-              {emailError && <div className="error-message">{emailError}</div>} 
+                {/* 이메일 오류 메시지 출력 */}
+                {emailError && (
+                  <div className="error-message">{emailError}</div>
+                )}
               </div>
 
               <div className="view">
                 <div className="text-wrapper-2">비밀번호</div>
 
-                <input className="element" 
+                <input
+                  className="element"
                   placeholder="비밀번호를 입력해주세요."
                   type="password"
                   value={password}
@@ -167,16 +175,18 @@ export const Web_Login = () => {
                   alt="Line"
                   src="https://c.animaapp.com/2w9FzD4H/img/line-3-7@2x.png"
                 />
-                  {/* 비밀번호 오류 메시지 출력 */}
-                  {passwordError && <div className="error-message">{passwordError}</div>}                
+                {/* 비밀번호 오류 메시지 출력 */}
+                {passwordError && (
+                  <div className="error-message">{passwordError}</div>
+                )}
               </div>
             </div>
 
             <LoginButton
               className="component-87-instance"
               text="로그인"
-              emailValid={validateEmail(email)} 
-              passwordValid={validatePassword(password)} 
+              emailValid={validateEmail(email)}
+              passwordValid={validatePassword(password)}
               disabled={isButtonDisabled}
               onClick={onClickLoginBtn}
             />

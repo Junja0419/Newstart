@@ -40,6 +40,7 @@ export const Web_Profile_Password = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestData),
+        credentials: "include",
       });
 
       if (response.ok) {

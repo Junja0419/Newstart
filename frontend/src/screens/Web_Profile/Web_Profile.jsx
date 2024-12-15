@@ -27,7 +27,10 @@ export const Web_Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${process.env.API__URL}/profile/${id}`);
+        const response = await fetch(`${process.env.API__URL}/profile/${id}`, {
+          method: "GET",
+          credentials: "include",
+        });
         const data = await response.json();
         setProfileData(data.userentity); // userentity의 데이터를 상태로 설정
       } catch (error) {
@@ -50,10 +53,10 @@ export const Web_Profile = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
       });
 
       if (response.ok) {
-        localStorage.removeItem("jwt"); // 로컬 스토리지에서 jwt 토큰 삭제
         navigate("/login"); // 로그인 페이지로 리디렉션
       } else {
         console.error("Failed to log out");
