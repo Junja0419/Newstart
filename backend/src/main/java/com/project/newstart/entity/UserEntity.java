@@ -22,7 +22,7 @@ public class UserEntity {
     private String password;
 
     @Column(nullable = false)
-    private String role;
+    private String role = "ROLE_USER";
 
     //닉네임
     @Column(nullable = false)
@@ -38,7 +38,7 @@ public class UserEntity {
 
     //알림설정 여부
     @ColumnDefault("'N'") //default
-    private String noti_yn;
+    private String noti_yn = "N";
 
     @OneToMany
     @JoinTable(name="userentity_search",
