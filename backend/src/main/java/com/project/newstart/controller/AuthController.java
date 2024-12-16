@@ -25,7 +25,7 @@ public class AuthController {
         authService.joinProcess(joinDTO);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:https://siyeon-3faf5.web.app/auth/email/login");
+        modelAndView.setViewName("redirect:https://newstart-project-444411.web.app/auth/email/login");
         return modelAndView;
     }
 

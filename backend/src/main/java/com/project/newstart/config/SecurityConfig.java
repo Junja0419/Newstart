@@ -57,7 +57,7 @@ public class SecurityConfig {
 
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of(
-                "https://siyeon-3faf5.web.app",
+                "https://newstart-project-444411.web.app",
                 "https://newstart-project-444411.du.r.appspot.com"
         )); // React 배포 URL 허용
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")); // 모든 HTTP 메서드 허용
@@ -96,32 +96,32 @@ public class SecurityConfig {
         //OAuth2.0
         http
                 .oauth2Login((oauth2) -> oauth2
-                        .loginPage("https://siyeon-3faf5.web.app/login")
-                        .defaultSuccessUrl("https://siyeon-3faf5.web.app/") //로그인 성공 후 / 리다이렉트
+                        .loginPage("https://newstart-project-444411.web.app/login")
+                        .defaultSuccessUrl("https://newstart-project-444411.web.app/") //로그인 성공 후 / 리다이렉트
                         .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
                                 .userService(customOAuth2UserService)));
 
         //form 로그인 방식
         http
                 .formLogin((auth) -> auth
-                        .loginPage("https://siyeon-3faf5.web.app/auth/email/login")
+                        .loginPage("https://newstart-project-444411.web.app/login")
                         .loginProcessingUrl("/auth/email/loginProcess")
                         .successHandler((request, response, authentication) -> {
-                            response.setHeader("Access-Control-Allow-Origin", "https://siyeon-3faf5.web.app");
+                            response.setHeader("Access-Control-Allow-Origin", "https://newstart-project-444411.web.app");
                             response.setHeader("Access-Control-Allow-Credentials", "true");
-                            response.sendRedirect("https://siyeon-3faf5.web.app/"); // 성공 시 React 앱으로 리디렉션
+                            response.sendRedirect("https://newstart-project-444411.web.app/"); // 성공 시 React 앱으로 리디렉션
                         })
                         .failureHandler((request, response, exception) -> {
-                            response.setHeader("Access-Control-Allow-Origin", "https://siyeon-3faf5.web.app");
+                            response.setHeader("Access-Control-Allow-Origin", "https://newstart-project-444411.web.app");
                             response.setHeader("Access-Control-Allow-Credentials", "true");
-                            response.sendRedirect("https://siyeon-3faf5.web.app/auth/email/login?error"); // 실패 시 React 로그인 페이지로 리디렉션
+                            response.sendRedirect("https://newstart-project-444411.web.app/auth/email/login?error"); // 실패 시 React 로그인 페이지로 리디렉션
                         })
                         .permitAll());
 
         //logout
         http.logout(customizer -> customizer
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("https://siyeon-3faf5.web.app/")
+                .logoutSuccessUrl("https://newstart-project-444411.web.app/")
                 .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll());
 
