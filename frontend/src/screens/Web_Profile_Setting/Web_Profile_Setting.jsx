@@ -31,7 +31,7 @@ export const Web_Profile_Setting = () => {
     console.log("전송할 데이터:", JSON.stringify(requestData));
 
     try {
-      const response = await fetch(`/profile/updateProcess`, {
+      const response = await fetch(`/api/profile/updateProcess`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestData),

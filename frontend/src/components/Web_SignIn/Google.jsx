@@ -16,7 +16,7 @@ export const Google = ({
   const navigate = useNavigate(); 
 
   const handleClick = () => {
-    navigate(`/login/oauth2/code/google`); // 구글 api 로그인 경로로 이동
+    navigate(`/api/login/oauth2/code/google`); // 구글 api 로그인 경로로 이동
   };
 
   return (

@@ -14,7 +14,7 @@ export const Naver = ({
   const navigate = useNavigate(); 
 
   const handleClick = () => {
-    navigate(`/login/oauth2/code/naver`); // 네이버 api 로그인 경로로 이동
+    navigate(`/api/login/oauth2/code/naver`); // 네이버 api 로그인 경로로 이동
   };
 
   return (

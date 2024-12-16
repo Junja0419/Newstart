@@ -24,7 +24,7 @@ public class HeadlineController {
     }
 
     //헤드라인 기사 조회
-    @GetMapping("/headline/{headline_id}")
+    @GetMapping("/api/headline/{headline_id}")
     public ResponseEntity<Map<String, Object>> headlineDetail(@PathVariable("headline_id") Long headline_id) {
 
         //사용자 정보
