@@ -1,16 +1,23 @@
 {
-    "hosting": {
-        "public": "build",
-        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-        "rewrites": [
-            {
-                "source": "/api/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/**"
-            },
-            {
-                "source": "**",
-                "destination": "/index.html"
-            }
-        ]
-    }
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/**",
+        "run": {
+          "serviceId": "backend",
+          "region": "asia-northeast3"
+        }
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }
