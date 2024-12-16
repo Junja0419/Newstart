@@ -20,7 +20,7 @@ export const Web_Summary = () => {
     // API 호출
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.API__URL}/summary/view`);
+        const response = await fetch(`/summary/view`);
         if (!response.ok) throw new Error("데이터를 가져오는 데 실패했습니다.");
         const result = await response.json();
         setSummaryData(result.summary); // summary 데이터 설정

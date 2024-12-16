@@ -27,7 +27,7 @@ export const Web_Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${process.env.API__URL}/profile/${id}`);
+        const response = await fetch(`/profile/${id}`);
         const data = await response.json();
         setProfileData(data.userentity); // userentity의 데이터를 상태로 설정
       } catch (error) {
@@ -45,7 +45,7 @@ export const Web_Profile = () => {
   const handleLogout = async () => {
     try {
       // 서버로 로그아웃 요청 전송
-      const response = await fetch(`${process.env.API__URL}/logout`, {
+      const response = await fetch(`/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
