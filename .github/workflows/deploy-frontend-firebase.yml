@@ -22,17 +22,16 @@ jobs:
               with:
                   node-version: "20.5.0" # 프로젝트에 맞는 Node.js 버전 설정
 
-            # 3. 의존성 설치
-            - name: Install dependencies
-              run: npm install
-              working-directory: ./frontend # 프론트엔드 디렉토리 경로
+            # 3. 프론트엔드 의존성 설치 및 빌드
+            - name: Install and Build Frontend
+              run: |
+                  cd frontend
+                  npm install
+                  CI=false npm run build  # CI=false 설정 추가
+              env:
+                  CI: false # 환경 변수 덮어쓰기
 
-            # 4. 빌드
-            - name: Build frontend
-              run: npm run build
-              working-directory: ./frontend # 프론트엔드 디렉토리 경로
-
-            # 5. Firebase CLI 설정
+            # 4. Firebase CLI 설정
             - name: Setup Firebase
               uses: w9jds/firebase-action@v2.2.0
               with:
