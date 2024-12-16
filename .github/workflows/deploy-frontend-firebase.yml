@@ -45,6 +45,5 @@ jobs:
               uses: w9jds/firebase-action@v13.29.1
               with:
                   args: deploy --only hosting --debug
-                  working-directory: frontend
               env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
