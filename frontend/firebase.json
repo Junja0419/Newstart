@@ -1,16 +1,82 @@
 {
-  "hosting": {
-    "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+    "hosting": {
+        "public": "build",
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+        "rewrites": [
+            {
+                "source": "/",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/login",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/auth/**",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/oauth2/**",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/bookmark/**",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/headline/**",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/profile/**",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/search/**",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/summary/**",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "/logout",
+                "run": {
+                    "serviceId": "default",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ]
+    }
 }
