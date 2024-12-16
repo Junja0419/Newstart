@@ -35,7 +35,7 @@ export const Web_Profile_Password = () => {
     };
 
     try {
-      const response = await fetch(`/auth/password`, {
+      const response = await fetch(`/api/auth/password`, {
 
         method: "POST",
         headers: {
