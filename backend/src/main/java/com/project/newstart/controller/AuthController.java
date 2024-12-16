@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -25,7 +25,7 @@ public class AuthController {
         authService.joinProcess(joinDTO);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/auth/email/login");
+        modelAndView.setViewName("redirect:https://newstart-project-444411.web.app/auth/email/login");
         return modelAndView;
     }
 

@@ -33,6 +33,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
 
         const data = await response.json();
         setUserId(data.userentity.id);
+
       } catch (err) {
         setError(err);
       } finally {
@@ -64,6 +65,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
           mode: "cors",
         }
       );
+
       if (!response.ok) {
         throw new Error("API 요청 실패");
       }
@@ -82,6 +84,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
         credentials: "include",
         mode: "cors",
       }); //id 받아오는 요청 또 해야 되네 위에서 ㅋ
+
       if (!response.ok) throw new Error("API 요청 실패");
 
       const data = await response.json();

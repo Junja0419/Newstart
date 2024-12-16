@@ -29,6 +29,7 @@ export const Web_SignUp_Profile = () => {
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
       const response = await fetch(`${REACT_APP_API__URL}/auth/join`, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyData),
