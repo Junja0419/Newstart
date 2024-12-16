@@ -4,7 +4,6 @@ WORKDIR /app
 # Gradle Wrapper 및 소스 복사
 COPY gradlew ./
 COPY gradle gradle
-COPY build.gradle settings.gradle ./
 COPY src src
 
 # 실행권한 부여(필요시)
