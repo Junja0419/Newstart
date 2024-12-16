@@ -40,6 +40,12 @@ jobs:
               env:
                   CI: false # 환경 변수 덮어쓰기
 
+            # 4-1. 디렉토리 목록 출력 (디버깅 용도)
+            - name: List frontend directory
+              run: |
+                  cd frontend
+                  ls -la
+
             # 5. Firebase CLI 설정
             - name: Setup Firebase
               uses: w9jds/firebase-action@v13.29.1
