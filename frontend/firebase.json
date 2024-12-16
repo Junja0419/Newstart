@@ -5,43 +5,43 @@
         "rewrites": [
             {
                 "source": "/",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/"
             },
             {
                 "source": "/login",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/login"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/login"
             },
             {
                 "source": "/auth/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/auth/**"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/auth/**"
             },
             {
                 "source": "/oauth2/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/oauth2/**"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/oauth2/**"
             },
             {
                 "source": "/bookmark/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/bookmark/**"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/bookmark/**"
             },
             {
                 "source": "/headline/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/headline/**"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/headline/**"
             },
             {
                 "source": "/profile/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/profile/**"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/profile/**"
             },
             {
                 "source": "/search/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/search/**"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/search/**"
             },
             {
                 "source": "/summary/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/summary/**"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/summary/**"
             },
             {
                 "source": "/logout",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/logout"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/api/logout"
             }
         ]
     }
