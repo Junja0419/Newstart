@@ -109,7 +109,7 @@ public class SecurityConfig {
 
         // Form 로그인 방식 설정
         http.formLogin(form -> form
-                .loginPage("https://newstart-project-444411.web.app/login")
+                .loginPage("https://newstart-project-444411.web.app/auth/email/login")
                 .loginProcessingUrl("/api/auth/email/loginProcess") // /api 경로로 변경
                 .successHandler((request, response, authentication) -> {
                     // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)
