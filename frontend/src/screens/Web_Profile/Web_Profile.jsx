@@ -8,6 +8,7 @@ import ToggleButton from "../../components/Web_Profile/ToggleButton";
 import User from "../../components/Web_Profile/User";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Profile = () => {
   const screenWidth = useWindowWidth();
@@ -27,9 +28,10 @@ export const Web_Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${process.env.API__URL}/profile/${id}`, {
+        const response = await fetch(`${REACT_APP_API__URL}/profile/${id}`, {
           method: "GET",
           credentials: "include",
+          mode: "cors",
         });
         const data = await response.json();
         setProfileData(data.userentity); // userentity의 데이터를 상태로 설정
@@ -48,12 +50,13 @@ export const Web_Profile = () => {
   const handleLogout = async () => {
     try {
       // 서버로 로그아웃 요청 전송
-      const response = await fetch(`${process.env.API__URL}/logout`, {
+      const response = await fetch(`${REACT_APP_API__URL}/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
+        mode: "cors",
       });
 
       if (response.ok) {

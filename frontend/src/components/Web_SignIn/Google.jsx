@@ -1,28 +1,15 @@
 import React from "react";
 import GoogleIcon from "./GoogleIcon";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Google = ({
   className,
   classNameforpadding,
   classNameformobiletext,
 }) => {
-  const handleClick = async () => {
-    try {
-      const response = await fetch(
-        `${process.env.API__URL}/oauth2/authorization/google`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch (err) {
-      console.error("Error fetching naver api login: ", err);
-    }
+  const handleClick = () => {
+    window.location.href = `${REACT_APP_API__URL}/login/oauth2/code/google`; // 구글 api 로그인 경로로 이동
   };
 
   return (

@@ -7,6 +7,7 @@ import SearchBar from "../../components/Web_Search/SearchBar";
 import FrameForSearchBar from "../../components/Web_Search/FrameForSearchBar";
 import FrameForMobileSearchBar from "../../components/Web_Search/FrameForMobileSearchBar";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Search = ({ searchCount = 5 }) => {
   const screenWidth = useWindowWidth();
@@ -20,16 +21,25 @@ export const Web_Search = ({ searchCount = 5 }) => {
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get(`${process.env.API__URL}/`, {
-          withCredentials: true,
-        }); // 백엔드 API 호출
-        setUserId(response.data.userentity.id);
+        const response = await fetch(`${REACT_APP_API__URL}/`, {
+          method: "GET",
+          credentials: "include", // 쿠키 포함 설정
+          mode: "cors",
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setUserId(data.userentity.id);
       } catch (err) {
         setError(err);
       } finally {
         setLoading(false);
       }
     };
+
     fetchHeadlines();
   }, []);
 
@@ -48,9 +58,10 @@ export const Web_Search = ({ searchCount = 5 }) => {
 
     try {
       const response = await fetch(
-        `${process.env.API__URL}/search/result/${query}`,
+        `${REACT_APP_API__URL}/search/result/${query}`,
         {
           credentials: "include",
+          mode: "cors",
         }
       );
       if (!response.ok) {
@@ -67,8 +78,9 @@ export const Web_Search = ({ searchCount = 5 }) => {
   // 검색 기록 가져오기
   const fetchSearchRecords = async () => {
     try {
-      const response = await fetch(`${process.env.API__URL}/search/${userId}`, {
+      const response = await fetch(`${REACT_APP_API__URL}/search/${userId}`, {
         credentials: "include",
+        mode: "cors",
       }); //id 받아오는 요청 또 해야 되네 위에서 ㅋ
       if (!response.ok) throw new Error("API 요청 실패");
 
@@ -84,8 +96,11 @@ export const Web_Search = ({ searchCount = 5 }) => {
     <div key={index} className="dynamic-div-creator-for-searchbar">
       <FrameForSearchBar
         text={item.title}
-        category="경제"
-        newspaper={item.link}
+        newspaper={
+          <a href={item.link} target="_blank" rel="noopener noreferrer">
+            링크 클릭
+          </a>
+        }
       />
     </div>
   ));
@@ -94,8 +109,11 @@ export const Web_Search = ({ searchCount = 5 }) => {
     <div key={index} className="dynamic-div-creator-for-searchbar">
       <FrameForMobileSearchBar
         text={item.title}
-        category="경제"
-        newspaper={item.link}
+        newspaper={
+          <a href={item.link} target="_blank" rel="noopener noreferrer">
+            링크 클릭
+          </a>
+        }
       />
     </div>
   ));

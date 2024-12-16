@@ -6,6 +6,7 @@ import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import FrameForMobile from "../../components/Web_Headline/FrameForMobile";
 import Frame from "../../components/Web_Headline/Frame";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Headline = () => {
   const { headline_id } = useParams(); // URL에서 headline id 추출
@@ -27,9 +28,10 @@ export const Web_Headline = () => {
   // 유저 ID 가져오기 (맨 처음 한 번만 실행)
   const fetchUserEntity = async () => {
     try {
-      const response = await fetch(`${process.env.API__URL}/`, {
+      const response = await fetch(`${REACT_APP_API__URL}/`, {
         method: "GET",
         credentials: "include",
+        mode: "cors",
       }); // 백엔드에서 현재 유저 정보 가져오기
       if (!response.ok) throw new Error("Failed to fetch user entity");
       const data = await response.json();
@@ -43,13 +45,11 @@ export const Web_Headline = () => {
   // 북마크 상태 가져오는 함수 (수시로 써야 함)
   const fetchBookmarkStatus = async () => {
     try {
-      const response = await fetch(
-        `${process.env.API__URL}/bookmark/${userId}`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      ); // 유저 ID로 북마크 상태 조회
+      const response = await fetch(`${REACT_APP_API__URL}/bookmark/${userId}`, {
+        method: "GET",
+        credentials: "include",
+        mode: "cors",
+      }); // 유저 ID로 북마크 상태 조회
       if (!response.ok) throw new Error("Failed to fetch bookmark status");
       const data = await response.json();
 
@@ -76,10 +76,11 @@ export const Web_Headline = () => {
       try {
         //헤드라인 데이터 가져오기
         const headlineResponse = await fetch(
-          `${process.env.API__URL}/headline/${headline_id}`,
+          `${REACT_APP_API__URL}/headline/${headline_id}`,
           {
             method: "GET",
             credentials: "include",
+            mode: "cors",
           }
         );
         if (!headlineResponse.ok)
@@ -106,10 +107,11 @@ export const Web_Headline = () => {
       if (isBookmarked) {
         // 북마크 삭제
         const response = await fetch(
-          `${process.env.API__URL}/bookmark/delete/${bookmarkId}`,
+          `${REACT_APP_API__URL}/bookmark/delete/${bookmarkId}`,
           {
             method: "POST",
             credentials: "include",
+            mode: "cors",
           }
         );
         if (!response.ok) throw new Error("Failed to delete bookmark");
@@ -117,7 +119,8 @@ export const Web_Headline = () => {
       } else {
         // 북마크 등록
         const response = await fetch(
-          `${process.env.API__URL}/bookmark/create`,
+          `${REACT_APP_API__URL}/bookmark/create`,
+
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -126,6 +129,7 @@ export const Web_Headline = () => {
               headline_id: parseInt(headline_id),
             }),
             credentials: "include",
+            mode: "cors",
           }
         );
         if (!response.ok) throw new Error("Failed to create bookmark");

@@ -10,6 +10,7 @@ import {
   validateConfirmPassword,
 } from "../../components/Web_Profile_Password/validation";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Profile_Password = () => {
   const screenWidth = useWindowWidth();
@@ -34,13 +35,14 @@ export const Web_Profile_Password = () => {
     };
 
     try {
-      const response = await fetch(`${process.env.API__URL}/auth/password`, {
+      const response = await fetch(`${REACT_APP_API__URL}/auth/password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(requestData),
         credentials: "include",
+        mode: "cors",
       });
 
       if (response.ok) {

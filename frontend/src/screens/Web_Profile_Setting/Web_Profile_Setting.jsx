@@ -6,6 +6,7 @@ import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import CompleteButton from "../../components/Web_Profile_Setting/CompleteButton";
 import User from "../../components/Web_Profile_Setting/User";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Profile_Setting = () => {
   const screenWidth = useWindowWidth();
@@ -32,12 +33,13 @@ export const Web_Profile_Setting = () => {
 
     try {
       const response = await fetch(
-        `${process.env.API__URL}/profile/updateProcess`,
+        `${REACT_APP_API__URL}/profile/updateProcess`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(requestData),
           credentials: "include",
+          mode: "cors",
         }
       );
 

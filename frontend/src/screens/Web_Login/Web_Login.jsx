@@ -6,6 +6,7 @@ import {
   validatePassword,
 } from "../../components/Web_Login/validation";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Login = () => {
   const screenWidth = useWindowWidth();
@@ -39,12 +40,13 @@ export const Web_Login = () => {
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
       const response = await fetch(
-        `${process.env.API__URL}/auth/email/loginProcess`,
+        `${REACT_APP_API__URL}/auth/email/loginProcess`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(bodyData),
           credentials: "include",
+          mode: "cors",
         }
       );
 

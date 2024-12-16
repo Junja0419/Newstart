@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useReducer, useRef, useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import "./styleforcategory.css";
+import REACT_APP_API__URL from "../../config";
 
 import Economy from "./HeadlineTab/Economy";
 import IT from "./HeadlineTab/IT";
@@ -79,17 +80,26 @@ export const Category = ({
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get(`${process.env.API__URL}/`, {
+        const response = await fetch(`${REACT_APP_API__URL}/`, {
           method: "GET",
-          withCredentials: true,
-        }); // 백엔드 API 호출
-        setHeadlines(response.data.headline);
+          credentials: "include",
+          mode: "cors",
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json(); // JSON 응답 파싱
+        setHeadlines(data.headline);
+        setUserentity(data.userentity);
       } catch (err) {
         setError(err);
       } finally {
         setLoading(false);
       }
     };
+
     fetchHeadlines();
   }, []);
 
@@ -128,22 +138,15 @@ export const Category = ({
   //   };
   //   fetchHeadlines();
   // }, []);
-
-  // // 로딩 상태 처리
-  // if (loading) return <div>Loading...</div>;
-
-  // // 에러 상태 처리
-  // if (error) return <div>Error: {error.message}</div>;
-
-  // // headlines 데이터가 없을 경우 처리
-  // if (!headlines || headlines.length === 0) {
-  //   return (
-  //     <div className="empty-category">
-  //       데이터가 없습니다. <br />
-  //       다른 탭을 선택해주세요.
-  //     </div>
-  //   );
-  // }
+  // headlines 데이터가 없을 경우 처리
+  if (!headlines || headlines.length === 0) {
+    return (
+      <div className="empty-category">
+        데이터가 없습니다. <br />
+        다른 탭을 선택해주세요.
+      </div>
+    );
+  }
 
   // 카테고리별 데이터 필터링
   const filteredHeadlines =

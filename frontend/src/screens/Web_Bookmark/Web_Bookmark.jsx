@@ -6,6 +6,7 @@ import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import FrameForMobile from "../../components/Web_Bookmark/FrameForMobile";
 import Frame from "../../components/Web_Bookmark/Frame";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Bookmark = () => {
   const screenWidth = useWindowWidth();
@@ -16,9 +17,10 @@ export const Web_Bookmark = () => {
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
-        const response = await fetch(`${process.env.API__URL}/bookmark/${id}`, {
+        const response = await fetch(`${REACT_APP_API__URL}/bookmark/${id}`, {
           method: "GET",
           credentials: "include",
+          mode: "cors",
         });
         const data = await response.json();
         setBookmarks(data.bookmark);
@@ -34,10 +36,11 @@ export const Web_Bookmark = () => {
   const handleDeleteBookmark = async (bookmark_id) => {
     try {
       const response = await fetch(
-        `${process.env.API__URL}/bookmark/delete/${bookmark_id}`,
+        `${REACT_APP_API__URL}/bookmark/delete/${bookmark_id}`,
         {
           method: "POST",
           credentials: "include",
+          mode: "cors",
         }
       );
 
