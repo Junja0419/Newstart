@@ -3,7 +3,6 @@ package com.project.newstart.config;
 import com.project.newstart.service.CustomOAuth2UserService;
 import com.project.newstart.service.CustomUserDetailsService;
 import jakarta.servlet.DispatcherType;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,65 +71,72 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        //csrf disable
-        http
-                .csrf((auth) -> auth
-                        .disable());
+        // CSRF 비활성화
+        http.csrf(csrf -> csrf.disable());
 
-        //http basic 인증 방식 disable
-        http
-                .httpBasic((auth) -> auth.disable());
+        // HTTP Basic 인증 방식 비활성화
+        http.httpBasic(httpBasic -> httpBasic.disable());
 
-        //cors
+        // CORS 설정 적용
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
-        //a
-        http
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
-                        .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/login/**", "/oauth2/**", "/auth/**").permitAll() //login, /, join 경로 요청이 오면 모든 권한 허용
-                        .requestMatchers("/css/**", "images/**", "/js/**", "/login/**", "/logout/**", "/posts/**", "/comments/**", "/error").permitAll()
-                        .anyRequest().authenticated()); //위 경로 외의 요청이 오면 로그인 후 이용 가능
+        // 권한 설정
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
+                .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                .requestMatchers(
+                        "/api/login/**",
+                        "/api/oauth2/**",
+                        "/api/auth/**",
+                        "/api/css/**",
+                        "/api/images/**",
+                        "/api/js/**",
+                        "/api/logout/**",
+                        "/api/posts/**",
+                        "/api/comments/**",
+                        "/api/error/**"
+                ).permitAll() // /api 경로에 대한 모든 요청 허용
+                .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
+        );
 
-        //OAuth2.0
-        http
-                .oauth2Login((oauth2) -> oauth2
-                        .loginPage("https://newstart-project-444411.web.app/login")
-                        .defaultSuccessUrl("https://newstart-project-444411.web.app/") //로그인 성공 후 / 리다이렉트
-                        .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
-                                .userService(customOAuth2UserService)));
+        // OAuth2.0 설정
+        http.oauth2Login(oauth2 -> oauth2
+                .loginPage("https://newstart-project-444411.web.app/login")
+                .defaultSuccessUrl("https://newstart-project-444411.web.app/") // 로그인 성공 후 리다이렉트
+                .userInfoEndpoint(userInfo -> userInfo
+                        .userService(customOAuth2UserService))
+        );
 
-        //form 로그인 방식
-        http
-                .formLogin((auth) -> auth
-                        .loginPage("https://newstart-project-444411.web.app/login")
-                        .loginProcessingUrl("/auth/email/loginProcess")
-                        .successHandler((request, response, authentication) -> {
-                            response.setHeader("Access-Control-Allow-Origin", "https://newstart-project-444411.web.app");
-                            response.setHeader("Access-Control-Allow-Credentials", "true");
-                            response.sendRedirect("https://newstart-project-444411.web.app/"); // 성공 시 React 앱으로 리디렉션
-                        })
-                        .failureHandler((request, response, exception) -> {
-                            response.setHeader("Access-Control-Allow-Origin", "https://newstart-project-444411.web.app");
-                            response.setHeader("Access-Control-Allow-Credentials", "true");
-                            response.sendRedirect("https://newstart-project-444411.web.app/auth/email/login?error"); // 실패 시 React 로그인 페이지로 리디렉션
-                        })
-                        .permitAll());
+        // Form 로그인 방식 설정
+        http.formLogin(form -> form
+                .loginPage("https://newstart-project-444411.web.app/login")
+                .loginProcessingUrl("/api/auth/email/loginProcess") // /api 경로로 변경
+                .successHandler((request, response, authentication) -> {
+                    // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)
+                    response.sendRedirect("https://newstart-project-444411.web.app/"); // 성공 시 React 앱으로 리디렉션
+                })
+                .failureHandler((request, response, exception) -> {
+                    // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)
+                    response.sendRedirect("https://newstart-project-444411.web.app/auth/email/login?error"); // 실패 시 React 로그인 페이지로 리디렉션
+                })
+                .permitAll()
+        );
 
-        //logout
-        http.logout(customizer -> customizer
-                .logoutUrl("/logout")
+        // Logout 설정
+        http.logout(logout -> logout
+                .logoutUrl("/api/logout") // /api 경로로 변경
                 .logoutSuccessUrl("https://newstart-project-444411.web.app/")
                 .deleteCookies("JSESSIONID", "remember-me")
-                .permitAll());
+                .permitAll()
+        );
 
-        //세션 설정
-        http
-                .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation) -> sessionFixation.newSession())
-                        .maximumSessions(1)
-                        .maxSessionsPreventsLogin(true));
+        // 세션 관리 설정
+        http.sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .sessionFixation(sessionFixation -> sessionFixation.newSession())
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true)
+        );
 
         return http.build();
     }
