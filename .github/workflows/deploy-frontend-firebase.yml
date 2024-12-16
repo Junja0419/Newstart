@@ -37,6 +37,7 @@ jobs:
                   cd frontend
                   npm install
                   CI=false npm run build  # CI=false 설정 추가
+                  cp firebase.json build/ # firebase.json을 build 디렉토리로 복사
               env:
                   CI: false # 환경 변수 덮어쓰기
 
