@@ -36,7 +36,7 @@ crawler-ai-search/search_data
 __pycache__
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
 
