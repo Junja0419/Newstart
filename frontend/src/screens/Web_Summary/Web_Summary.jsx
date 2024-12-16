@@ -6,6 +6,7 @@ import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import ReturnIcon from "../../components/Web_Summary/ReturnIcon";
 import "./style.css";
 import MobileForFrame from "../../components/Web_Summary/FrameForMobile";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Summary = () => {
   const [summaryData, setSummaryData] = useState([]); // 데이터를 저장할 곳
@@ -20,7 +21,11 @@ export const Web_Summary = () => {
     // API 호출
     const fetchData = async () => {
       try {
-        const response = await fetch(`/summary/view`);
+        const response = await fetch(`${REACT_APP_API__URL}/summary/view`, {
+          method: "GET",
+          credentials: "include",
+          mode: "cors",
+        });
         if (!response.ok) throw new Error("데이터를 가져오는 데 실패했습니다.");
         const result = await response.json();
         setSummaryData(result.summary); // summary 데이터 설정

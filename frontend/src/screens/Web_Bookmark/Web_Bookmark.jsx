@@ -6,6 +6,7 @@ import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import FrameForMobile from "../../components/Web_Bookmark/FrameForMobile";
 import Frame from "../../components/Web_Bookmark/Frame";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Bookmark = () => {
   const screenWidth = useWindowWidth();
@@ -16,7 +17,11 @@ export const Web_Bookmark = () => {
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
-        const response = await fetch(`/bookmark/${id}`);
+        const response = await fetch(`${REACT_APP_API__URL}/bookmark/${id}`, {
+          method: "GET",
+          credentials: "include",
+          mode: "cors",
+        });
         const data = await response.json();
         setBookmarks(data.bookmark);
       } catch (error) {
@@ -30,9 +35,14 @@ export const Web_Bookmark = () => {
   /***** 북마크 삭제 *****/
   const handleDeleteBookmark = async (bookmark_id) => {
     try {
-      const response = await fetch(`/bookmark/delete/${bookmark_id}`, {
-        method: "POST",
-      });
+      const response = await fetch(
+        `${REACT_APP_API__URL}/bookmark/delete/${bookmark_id}`,
+        {
+          method: "POST",
+          credentials: "include",
+          mode: "cors",
+        }
+      );
 
       if (response.ok) {
         // 삭제 성공 시 해당 bookmark_id를 제외한 북마크 목록으로 업데이트

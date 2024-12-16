@@ -8,6 +8,7 @@ import ToggleButton from "../../components/Web_Profile/ToggleButton";
 import User from "../../components/Web_Profile/User";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Profile = () => {
   const screenWidth = useWindowWidth();
@@ -27,7 +28,11 @@ export const Web_Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`/profile/${id}`);
+        const response = await fetch(`${REACT_APP_API__URL}/profile/${id}`, {
+          method: "GET",
+          credentials: "include",
+          mode: "cors",
+        });
         const data = await response.json();
         setProfileData(data.userentity); // userentity의 데이터를 상태로 설정
       } catch (error) {
@@ -45,15 +50,17 @@ export const Web_Profile = () => {
   const handleLogout = async () => {
     try {
       // 서버로 로그아웃 요청 전송
-      const response = await fetch(`/logout`, {
+      const response = await fetch(`${REACT_APP_API__URL}/logout`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
+        mode: "cors",
       });
 
       if (response.ok) {
-        localStorage.removeItem("jwt"); // 로컬 스토리지에서 jwt 토큰 삭제
         navigate("/login"); // 로그인 페이지로 리디렉션
       } else {
         console.error("Failed to log out");

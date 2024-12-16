@@ -5,6 +5,7 @@ import CompleteButton from "../../components/Web_SignUp_Profile/CompleteButton";
 import User from "../../components/Web_SignUp_Profile/User";
 import { validateNickname } from "../../components/Web_SignUp_Profile/validation";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_SignUp_Profile = () => {
   const screenWidth = useWindowWidth();
@@ -27,10 +28,13 @@ export const Web_SignUp_Profile = () => {
       // body 내용을 console로 출력
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
-      const response = await fetch(`/auth/join`, {
+      const response = await fetch(`${REACT_APP_API__URL}/auth/join`, {
+
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(bodyData),
+        credentials: "include",
+        mode: "cors",
       });
 
       const data = await response.json();

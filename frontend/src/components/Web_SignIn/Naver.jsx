@@ -1,20 +1,11 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import React from "react";
-import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
-export const Naver = ({
-  className,
-  classNameformobiletext,
- }) => {
-  const navigate = useNavigate(); 
-
+export const Naver = ({ className, classNameformobiletext }) => {
   const handleClick = () => {
-    navigate(`/login/oauth2/code/naver`); // 네이버 api 로그인 경로로 이동
+    window.location.href = `${REACT_APP_API__URL}/login/oauth2/code/naver`; // 네이버 api 로그인 경로로 이동
+
   };
 
   return (
@@ -33,8 +24,6 @@ export const Naver = ({
         </div>
       </div>
       <div className={`div ${classNameformobiletext}`}>네이버로 로그인</div>
-
-      
     </div>
   );
 };

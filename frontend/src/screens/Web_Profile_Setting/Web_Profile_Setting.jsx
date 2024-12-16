@@ -6,6 +6,7 @@ import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import CompleteButton from "../../components/Web_Profile_Setting/CompleteButton";
 import User from "../../components/Web_Profile_Setting/User";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Profile_Setting = () => {
   const screenWidth = useWindowWidth();
@@ -31,11 +32,16 @@ export const Web_Profile_Setting = () => {
     console.log("전송할 데이터:", JSON.stringify(requestData));
 
     try {
-      const response = await fetch(`/profile/updateProcess`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestData),
-      });
+      const response = await fetch(
+        `${REACT_APP_API__URL}/profile/updateProcess`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData),
+          credentials: "include",
+          mode: "cors",
+        }
+      );
 
       if (response.ok) {
         // 성공적으로 업데이트되면 리다이렉트

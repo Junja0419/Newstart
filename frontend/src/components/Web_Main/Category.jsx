@@ -1,27 +1,23 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import PropTypes from "prop-types";
 import axios from "axios";
 import React, { useReducer, useRef, useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import "./styleforcategory.css";
+import REACT_APP_API__URL from "../../config";
 
 import Economy from "./HeadlineTab/Economy";
 import IT from "./HeadlineTab/IT";
 import Society from "./HeadlineTab/Society";
-import Life from "./HeadlineTab/Life"
-import Politics from "./HeadlineTab/Politics"
-import World from "./HeadlineTab/World"
+import Life from "./HeadlineTab/Life";
+import Politics from "./HeadlineTab/Politics";
+import World from "./HeadlineTab/World";
 
 import EconomyM from "./HeadlineTabForMob/EconomyM";
 import ITM from "./HeadlineTabForMob/ITM";
 import SocietyM from "./HeadlineTabForMob/SocietyM";
-import LifeM from "./HeadlineTabForMob/LifeM"
-import PoliticsM from "./HeadlineTabForMob/PoliticsM"
-import WorldM from "./HeadlineTabForMob/WorldM"
+import LifeM from "./HeadlineTabForMob/LifeM";
+import PoliticsM from "./HeadlineTabForMob/PoliticsM";
+import WorldM from "./HeadlineTabForMob/WorldM";
 
 export const Category = ({
   classNameForMobileCategoryFrame,
@@ -80,39 +76,49 @@ export const Category = ({
 
   const onTouchEnd = () => setIsDragging(false);
 
-   
-  
   // 데이터 호출
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get(`/`); // 백엔드 API 호출
-        setHeadlines(response.data.headline);
+        const response = await fetch(`${REACT_APP_API__URL}/`, {
+          method: "GET",
+          credentials: "include",
+          mode: "cors",
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json(); // JSON 응답 파싱
+        setHeadlines(data.headline);
+        setUserentity(data.userentity);
       } catch (err) {
         setError(err);
       } finally {
         setLoading(false);
       }
     };
+
     fetchHeadlines();
   }, []);
 
-   // 로딩 상태 처리
-   if (loading) return <div>Loading...</div>;
+  // 로딩 상태 처리
+  if (loading) return <div>Loading...</div>;
 
-   // 에러 상태 처리
-   if (error) return <div>Error: {error.message}</div>;
- 
-   // headlines 데이터가 없을 경우 처리
-   if (!headlines || headlines.length === 0) {
-     return (
-       <div className="empty-category">
-         데이터가 없습니다. <br />
-         다른 탭을 선택해주세요.
-       </div>
-     );
-   }
-  
+  // 에러 상태 처리
+  if (error) return <div>Error: {error.message}</div>;
+
+  // headlines 데이터가 없을 경우 처리
+  if (!headlines || headlines.length === 0) {
+    return (
+      <div className="empty-category">
+        데이터가 없습니다. <br />
+        다른 탭을 선택해주세요.
+      </div>
+    );
+  }
+
   // //로컬 데이터 호출
   // useEffect(() => {
   //   const fetchHeadlines = async () => {
@@ -132,40 +138,46 @@ export const Category = ({
   //   };
   //   fetchHeadlines();
   // }, []);
+  // headlines 데이터가 없을 경우 처리
+  if (!headlines || headlines.length === 0) {
+    return (
+      <div className="empty-category">
+        데이터가 없습니다. <br />
+        다른 탭을 선택해주세요.
+      </div>
+    );
+  }
 
-  // // 로딩 상태 처리
-  // if (loading) return <div>Loading...</div>;
-
-  // // 에러 상태 처리
-  // if (error) return <div>Error: {error.message}</div>;
-
-  // // headlines 데이터가 없을 경우 처리
-  // if (!headlines || headlines.length === 0) {
-  //   return (
-  //     <div className="empty-category">
-  //       데이터가 없습니다. <br />
-  //       다른 탭을 선택해주세요.
-  //     </div>
-  //   );
-  // }
-  
   // 카테고리별 데이터 필터링
-  const filteredHeadlines = headlines.length > 0 ? {
-    politics: headlines.filter((headline) => headline.category === "politics"),
-    economy: headlines.filter((headline) => headline.category === "economy"),
-    social: headlines.filter((headline) => headline.category === "society"),
-    life: headlines.filter((headline) => headline.category === "lifestyle_culture"),
-    it: headlines.filter((headline) => headline.category === "it_science"),
-    world: headlines.filter((headline) => headline.category === "world"),
-  } : {
-    politics: [],
-    economy: [],
-    social: [],
-    life: [],
-    it: [],
-    world: [],
-  };
-  
+  const filteredHeadlines =
+    headlines.length > 0
+      ? {
+          politics: headlines.filter(
+            (headline) => headline.category === "politics"
+          ),
+          economy: headlines.filter(
+            (headline) => headline.category === "economy"
+          ),
+          social: headlines.filter(
+            (headline) => headline.category === "society"
+          ),
+          life: headlines.filter(
+            (headline) => headline.category === "lifestyle_culture"
+          ),
+          it: headlines.filter(
+            (headline) => headline.category === "it_science"
+          ),
+          world: headlines.filter((headline) => headline.category === "world"),
+        }
+      : {
+          politics: [],
+          economy: [],
+          social: [],
+          life: [],
+          it: [],
+          world: [],
+        };
+
   console.log("User ID:", userentity.id);
   console.log("Filtered Headlines - Politics:", filteredHeadlines.politics);
   console.log("Filtered Headlines - Economy:", filteredHeadlines.economy);
@@ -173,7 +185,10 @@ export const Category = ({
   console.log("Filtered Headlines - Life:", filteredHeadlines.life);
   console.log("Filtered Headlines - IT:", filteredHeadlines.it);
   console.log("Filtered Headlines - World:", filteredHeadlines.world);
-  console.log("All Categories in Data:", headlines.map(h => h.category)); // 모든 카테고리 출력
+  console.log(
+    "All Categories in Data:",
+    headlines.map((h) => h.category)
+  ); // 모든 카테고리 출력
 
   // 렌더링할 컴포넌트
   const renderComponent = () => {
@@ -344,7 +359,14 @@ function reducer(state, action) {
 }
 
 Category.propTypes = {
-  stateProp: PropTypes.oneOf(["social", "world", "politics", "it", "life", "economy"]),
+  stateProp: PropTypes.oneOf([
+    "social",
+    "world",
+    "politics",
+    "it",
+    "life",
+    "economy",
+  ]),
   line: PropTypes.string,
 };
 

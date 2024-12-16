@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useWindowWidth } from "../../breakpoints";
 import { useParams, useLocation } from "react-router-dom";
-import MenuForPC from "../../components/MenuForPC/MenuForPC"
+import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import FrameForMobile from "../../components/Web_Headline/FrameForMobile";
 import Frame from "../../components/Web_Headline/Frame";
 import "./style.css";
+import REACT_APP_API__URL from "../../config";
 
 export const Web_Headline = () => {
   const { headline_id } = useParams(); // URL에서 headline id 추출
@@ -27,7 +28,12 @@ export const Web_Headline = () => {
   // 유저 ID 가져오기 (맨 처음 한 번만 실행)
   const fetchUserEntity = async () => {
     try {
-      const response = await fetch(`/`); // 백엔드에서 현재 유저 정보 가져오기
+      const response = await fetch(`${REACT_APP_API__URL}/`, {
+        method: "GET",
+        credentials: "include",
+        mode: "cors",
+      }); // 백엔드에서 현재 유저 정보 가져오기
+
       if (!response.ok) throw new Error("Failed to fetch user entity");
       const data = await response.json();
       setUserId(data.userentity.id); // user_id 저장
@@ -40,7 +46,12 @@ export const Web_Headline = () => {
   // 북마크 상태 가져오는 함수 (수시로 써야 함)
   const fetchBookmarkStatus = async () => {
     try {
-      const response = await fetch(`/bookmark/${userId}`); // 유저 ID로 북마크 상태 조회
+      const response = await fetch(`${REACT_APP_API__URL}/bookmark/${userId}`, {
+        method: "GET",
+        credentials: "include",
+        mode: "cors",
+      }); // 유저 ID로 북마크 상태 조회
+
       if (!response.ok) throw new Error("Failed to fetch bookmark status");
       const data = await response.json();
 
@@ -66,8 +77,16 @@ export const Web_Headline = () => {
     const fetchHeadlineAndBookmark = async () => {
       try {
         //헤드라인 데이터 가져오기
-        const headlineResponse = await fetch(`/headline/${headline_id}`);
-        if (!headlineResponse.ok) throw new Error("Failed to fetch headline data");
+        const headlineResponse = await fetch(
+          `${REACT_APP_API__URL}/headline/${headline_id}`,
+          {
+            method: "GET",
+            credentials: "include",
+            mode: "cors",
+          }
+        );
+        if (!headlineResponse.ok)
+          throw new Error("Failed to fetch headline data");
         const data = await headlineResponse.json();
         setHeadline(data.headline); // 단일 headline 객체 설정
 
@@ -89,21 +108,32 @@ export const Web_Headline = () => {
     try {
       if (isBookmarked) {
         // 북마크 삭제
-        const response = await fetch(`/bookmark/delete/${bookmarkId}`, {
-          method: "POST",
-        });
+        const response = await fetch(
+          `${REACT_APP_API__URL}/bookmark/delete/${bookmarkId}`,
+          {
+            method: "POST",
+            credentials: "include",
+            mode: "cors",
+          }
+        );
         if (!response.ok) throw new Error("Failed to delete bookmark");
         console.log("Bookmark deleted");
       } else {
         // 북마크 등록
-        const response = await fetch(`/bookmark/create`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            user_id: userId,
-            headline_id: parseInt(headline_id),
-          }),
-        });
+        const response = await fetch(
+          `${REACT_APP_API__URL}/bookmark/create`,
+
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              user_id: userId,
+              headline_id: parseInt(headline_id),
+            }),
+            credentials: "include",
+            mode: "cors",
+          }
+        );
         if (!response.ok) throw new Error("Failed to create bookmark");
         const result = await response.json();
         console.log("Bookmark created:", result);
@@ -163,46 +193,45 @@ export const Web_Headline = () => {
   //   return <div>Error: {error.message}</div>;
   // }
 
-  return ( 
+  return (
     <div className="headline">
       <div className="div-3">
         {screenWidth < 1512 && ( //모바일용 화면
           <>
-          <div className="frame-for-all-mobile-headline">
-          <FrameForMobile
-              press = {headline.press}
-              title = {headline.title}
-              date = {headline.date}
-              content = {headline.content} 
-              link = {headline.link}
-              // 상위에서 관리하는 북마크 상태와 콜백 전달
+            <div className="frame-for-all-mobile-headline">
+              <FrameForMobile
+                press={headline.press}
+                title={headline.title}
+                date={headline.date}
+                content={headline.content}
+                link={headline.link}
+                // 상위에서 관리하는 북마크 상태와 콜백 전달
                 isBookmarked={isBookmarked}
                 onBookmarkChange={handleBookmarkToggle}
-                />
-            {/* 모바일용 네비게이터 */}
-            <MenuForMobile 
-              srcformainicon = "https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png"
-            />
+              />
+              {/* 모바일용 네비게이터 */}
+              <MenuForMobile srcformainicon="https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png" />
             </div>
           </>
         )}
 
         {screenWidth >= 1512 && ( //PC용 화면
           <>
-            <Frame 
-              press = {headline.press}
-              title = {headline.title}
-              date = {headline.date}
-              content = {headline.content} 
-              link = {headline.link}
+            <Frame
+              press={headline.press}
+              title={headline.title}
+              date={headline.date}
+              content={headline.content}
+              link={headline.link}
               // 북마크 상태와 콜백 전달
               isBookmarked={isBookmarked}
               onBookmarkChange={handleBookmarkToggle}
             />
-            <MenuForPC 
+            <MenuForPC
               className="frame-51"
               IsActivated="yeshomeis"
-              HomeTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png" />
+              HomeTabActivated="https://c.animaapp.com/zuoomGM9/img/icon-9@2x.png"
+            />
           </>
         )}
       </div>
