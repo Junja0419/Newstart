@@ -66,7 +66,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          install_components: cloud-run, gke-gcloud-auth-plugin
+          install_components: gke-gcloud-auth-plugin
 
       # 9. Docker 이미지 빌드 및 Artifact Registry 푸시
       - name: Build & Push Docker Image
