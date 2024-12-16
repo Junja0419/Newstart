@@ -107,9 +107,13 @@ public class SecurityConfig {
                         .loginPage("https://siyeon-3faf5.web.app/auth/email/login")
                         .loginProcessingUrl("/auth/email/loginProcess")
                         .successHandler((request, response, authentication) -> {
+                            response.setHeader("Access-Control-Allow-Origin", "https://siyeon-3faf5.web.app");
+                            response.setHeader("Access-Control-Allow-Credentials", "true");
                             response.sendRedirect("https://siyeon-3faf5.web.app/"); // 성공 시 React 앱으로 리디렉션
                         })
                         .failureHandler((request, response, exception) -> {
+                            response.setHeader("Access-Control-Allow-Origin", "https://siyeon-3faf5.web.app");
+                            response.setHeader("Access-Control-Allow-Credentials", "true");
                             response.sendRedirect("https://siyeon-3faf5.web.app/auth/email/login?error"); // 실패 시 React 로그인 페이지로 리디렉션
                         })
                         .permitAll());
