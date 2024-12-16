@@ -5,77 +5,43 @@
         "rewrites": [
             {
                 "source": "/",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/"
             },
             {
                 "source": "/login",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/login"
             },
             {
                 "source": "/auth/**",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/auth/**"
             },
             {
                 "source": "/oauth2/**",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/oauth2/**"
             },
             {
                 "source": "/bookmark/**",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/bookmark/**"
             },
             {
                 "source": "/headline/**",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/headline/**"
             },
             {
                 "source": "/profile/**",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/profile/**"
             },
             {
                 "source": "/search/**",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/search/**"
             },
             {
                 "source": "/summary/**",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
+                "destination": "https://newstart-project-444411.du.r.appspot.com/summary/**"
             },
             {
                 "source": "/logout",
-                "run": {
-                    "serviceId": "default",
-                    "region": "asia-northeast3"
-                }
-            },
-            {
-                "source": "**",
-                "destination": "/index.html"
+                "destination": "https://newstart-project-444411.du.r.appspot.com/logout"
             }
         ]
     }
