@@ -128,7 +128,7 @@ public class SecurityConfig {
         //세션 설정
         http
                 .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation)->sessionFixation.newSession())
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).sessionFixation((sessionFixation) -> sessionFixation.newSession())
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(true));
 
