@@ -27,7 +27,7 @@ export const Web_Headline = () => {
   // 유저 ID 가져오기 (맨 처음 한 번만 실행)
   const fetchUserEntity = async () => {
     try {
-      const response = await fetch(`/api/`); // 백엔드에서 현재 유저 정보 가져오기
+      const response = await fetch(`/`); // 백엔드에서 현재 유저 정보 가져오기
       if (!response.ok) throw new Error("Failed to fetch user entity");
       const data = await response.json();
       setUserId(data.userentity.id); // user_id 저장
@@ -40,7 +40,7 @@ export const Web_Headline = () => {
   // 북마크 상태 가져오는 함수 (수시로 써야 함)
   const fetchBookmarkStatus = async () => {
     try {
-      const response = await fetch(`/api/bookmark/${userId}`); // 유저 ID로 북마크 상태 조회
+      const response = await fetch(`/bookmark/${userId}`); // 유저 ID로 북마크 상태 조회
       if (!response.ok) throw new Error("Failed to fetch bookmark status");
       const data = await response.json();
 
@@ -66,7 +66,7 @@ export const Web_Headline = () => {
     const fetchHeadlineAndBookmark = async () => {
       try {
         //헤드라인 데이터 가져오기
-        const headlineResponse = await fetch(`/api/headline/${headline_id}`);
+        const headlineResponse = await fetch(`/headline/${headline_id}`);
         if (!headlineResponse.ok) throw new Error("Failed to fetch headline data");
         const data = await headlineResponse.json();
         setHeadline(data.headline); // 단일 headline 객체 설정
@@ -89,14 +89,14 @@ export const Web_Headline = () => {
     try {
       if (isBookmarked) {
         // 북마크 삭제
-        const response = await fetch(`/api/bookmark/delete/${bookmarkId}`, {
+        const response = await fetch(`/bookmark/delete/${bookmarkId}`, {
           method: "POST",
         });
         if (!response.ok) throw new Error("Failed to delete bookmark");
         console.log("Bookmark deleted");
       } else {
         // 북마크 등록
-        const response = await fetch(`/api/bookmark/create`, {
+        const response = await fetch(`/bookmark/create`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

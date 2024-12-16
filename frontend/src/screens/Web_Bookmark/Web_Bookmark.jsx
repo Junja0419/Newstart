@@ -16,7 +16,7 @@ export const Web_Bookmark = () => {
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
-        const response = await fetch(`/api/bookmark/${id}`);
+        const response = await fetch(`/bookmark/${id}`);
         const data = await response.json();
         setBookmarks(data.bookmark);
       } catch (error) {
@@ -30,7 +30,7 @@ export const Web_Bookmark = () => {
   /***** 북마크 삭제 *****/
   const handleDeleteBookmark = async (bookmark_id) => {
     try {
-      const response = await fetch(`/api/bookmark/delete/${bookmark_id}`, {
+      const response = await fetch(`/bookmark/delete/${bookmark_id}`, {
         method: "POST",
       });
 
