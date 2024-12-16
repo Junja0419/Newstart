@@ -9,7 +9,7 @@ export const Google = ({
   classNameformobiletext,
 }) => {
   const handleClick = () => {
-    window.location.href = `${REACT_APP_API__URL}/login/oauth2/code/google`; // 구글 api 로그인 경로로 이동
+    window.location.href = `/login/oauth2/code/google`; // 구글 api 로그인 경로로 이동
 
   };
 

@@ -33,7 +33,7 @@ export const Web_Profile_Setting = () => {
 
     try {
       const response = await fetch(
-        `${REACT_APP_API__URL}/profile/updateProcess`,
+        `/profile/updateProcess`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
