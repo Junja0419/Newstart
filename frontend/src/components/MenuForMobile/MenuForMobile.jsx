@@ -5,7 +5,7 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import "./style.css";
 
 export const MenuForMobile = ({
