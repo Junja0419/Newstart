@@ -12,7 +12,10 @@
         "rewrites": [
             {
                 "source": "/",
-                "destination": "/"
+                "run": {
+                    "serviceId": "backend",
+                    "region": "asia-northeast3"
+                }
             },
             {
                 "source": "/api/**",
