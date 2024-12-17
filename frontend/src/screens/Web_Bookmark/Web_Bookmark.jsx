@@ -10,14 +10,24 @@ import REACT_APP_API__URL from "../../config";
 
 export const Web_Bookmark = () => {
   const screenWidth = useWindowWidth();
-  const { id } = useParams(); // url에서 id를 가져옴
   const [bookmarks, setBookmarks] = useState([]);
+  const [userId, setUserId] = useState();
+
+  /***** userId 초기화 *****/
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.error("userId가 localStorage에 없습니다.");
+    }
+  }, []);
 
   /***** 데이터 로드 *****/
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
-        const response = await fetch(`/api/bookmark/${id}`, {
+        const response = await fetch(`/api/bookmark/${userId}`, {
           method: "GET",
           credentials: "include",
           mode: "cors",
@@ -30,20 +40,17 @@ export const Web_Bookmark = () => {
     };
 
     fetchBookmarks();
-  }, [id]);
+  }, [userId]);
 
   /***** 북마크 삭제 *****/
   const handleDeleteBookmark = async (bookmark_id) => {
     try {
-      const response = await fetch(
-        `/api/bookmark/delete/${bookmark_id}`,
-        {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          credentials: "include",
-          mode: "cors",
-        }
-      );
+      const response = await fetch(`/api/bookmark/delete/${bookmark_id}`, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        credentials: "include",
+        mode: "cors",
+      });
 
       if (response.ok) {
         // 삭제 성공 시 해당 bookmark_id를 제외한 북마크 목록으로 업데이트

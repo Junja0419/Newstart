@@ -30,7 +30,6 @@ export const Category = ({
   });
   const isMobile = useMediaQuery({ query: "(max-width: 1511px)" });
   const [headlines, setHeadlines] = useState([]);
-  const [userentity, setUserentity] = useState(null); // userentity 초기 상태는 null
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -80,7 +79,7 @@ export const Category = ({
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await fetch(`/api/`, {
+        const response = await fetch(`/api`, {
           method: "GET",
           headers: {
             Accept: "application/json",
@@ -97,7 +96,6 @@ export const Category = ({
         console.log("서버 응답 데이터: ", data);
 
         setHeadlines(data.headline);
-        setUserentity(data.userentity);
       } catch (err) {
         setError(err);
       } finally {
@@ -144,14 +142,14 @@ export const Category = ({
   //   fetchHeadlines();
   // }, []);
   // headlines 데이터가 없을 경우 처리
-  if (!headlines || headlines.length === 0) {
-    return (
-      <div className="empty-category">
-        데이터가 없습니다. <br />
-        다른 탭을 선택해주세요.
-      </div>
-    );
-  }
+  // if (!headlines || headlines.length === 0) {
+  //   return (
+  //     <div className="empty-category">
+  //       데이터가 없습니다. <br />
+  //       다른 탭을 선택해주세요.
+  //     </div>
+  //   );
+  // }
 
   // 카테고리별 데이터 필터링
   const filteredHeadlines =
@@ -183,7 +181,6 @@ export const Category = ({
           world: [],
         };
 
-  console.log("User ID:", userentity.id);
   console.log("Filtered Headlines - Politics:", filteredHeadlines.politics);
   console.log("Filtered Headlines - Economy:", filteredHeadlines.economy);
   console.log("Filtered Headlines - Social:", filteredHeadlines.social);

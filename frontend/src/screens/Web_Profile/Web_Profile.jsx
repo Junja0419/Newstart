@@ -13,7 +13,7 @@ import REACT_APP_API__URL from "../../config";
 export const Web_Profile = () => {
   const screenWidth = useWindowWidth();
   const navigate = useNavigate(); // navigate 함수 정의
-  const { id } = useParams(); // URL에서 id 가져오기
+  const [userId, setUserId] = useState();
   const [profileData, setProfileData] = useState({
     id: "",
     username: "",
@@ -24,11 +24,21 @@ export const Web_Profile = () => {
     noti_yn: "N",
   });
 
+  /***** userId 초기화 *****/
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.error("userId가 localStorage에 없습니다.");
+    }
+  }, []);
+
   /**** 프로필 데이터 로드 ****/
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`/api/profile/${id}`, {
+        const response = await fetch(`/api/profile/${userId}`, {
           method: "GET",
           headers: { Accept: "application/json" },
           credentials: "include",
@@ -42,7 +52,7 @@ export const Web_Profile = () => {
     };
 
     fetchProfile();
-  }, [id]);
+  }, [userId]);
 
   /**** 비밀번호 재설정 버튼 렌더링 여부 ****/
   const showResetPasswordButton = profileData.platformName === "email";
@@ -52,11 +62,10 @@ export const Web_Profile = () => {
     try {
       // 서버로 로그아웃 요청 전송
       const response = await fetch(`/api/logout`, {
-
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
         },
         credentials: "include",
         mode: "cors",

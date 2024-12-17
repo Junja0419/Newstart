@@ -52,7 +52,16 @@ export const Web_Login = () => {
 
       if (responseData.statusCode === "OK") {
         console.log("로그인 성공");
-        window.location.href = "/";
+
+        // userId localStorage에 저장
+        if (responseData.userId) {
+          localStorage.setItem("userId", responseData.userId);
+          console.log(`userId ${responseData.userId} 저장`);
+        }
+
+        window.location.href = "/"; // 페이지 이동
+      } else {
+        console.error("로그인 실패: ", responseData);
       }
     } catch (error) {
       console.error("로그인 오류:", error);
