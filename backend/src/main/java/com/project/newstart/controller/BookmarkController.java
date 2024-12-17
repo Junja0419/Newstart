@@ -27,15 +27,12 @@ public class BookmarkController {
 
     //북마크 등록
     @PostMapping("/create")
-    public ResponseEntity<UserEntity> create_bookmark(@RequestBody BookmarkDTO bookmarkDTO) {
-        //사용자 정보
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
+    public ResponseEntity<String> create_bookmark(@RequestBody BookmarkDTO bookmarkDTO) {
 
         //기사 북마크 db에 저장
         bookmarkService.create_bookmark(bookmarkDTO);
 
-        return ResponseEntity.ok().body(userEntity);
+        return ResponseEntity.ok().body("ok");
     }
 
     //북마크 조회
