@@ -23,6 +23,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
       try {
         const response = await fetch(`/api/`, {
           method: "GET",
+          headers: { Accept: "application/json" },
           credentials: "include", // 쿠키 포함 설정
           mode: "cors",
         });
@@ -62,6 +63,8 @@ export const Web_Search = ({ searchCount = 5 }) => {
         `/api/search/result/${query}`,
         {
           credentials: "include",
+          method: "GET",
+          headers: { Accept: "application/json" },
           mode: "cors",
         }
       );
@@ -81,6 +84,8 @@ export const Web_Search = ({ searchCount = 5 }) => {
   const fetchSearchRecords = async () => {
     try {
       const response = await fetch(`/api/search/${userId}`, {
+        method: "GET",
+        headers: { Accept: "application/json" },
         credentials: "include",
         mode: "cors",
       }); //id 받아오는 요청 또 해야 되네 위에서 ㅋ

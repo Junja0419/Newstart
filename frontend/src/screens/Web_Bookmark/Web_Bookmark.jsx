@@ -39,6 +39,7 @@ export const Web_Bookmark = () => {
         `/api/bookmark/delete/${bookmark_id}`,
         {
           method: "POST",
+          headers: { Accept: "application/json" },
           credentials: "include",
           mode: "cors",
         }

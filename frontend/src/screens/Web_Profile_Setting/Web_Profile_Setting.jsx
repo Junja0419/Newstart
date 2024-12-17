@@ -36,7 +36,9 @@ export const Web_Profile_Setting = () => {
         `/api/profile/updateProcess`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+          Accept: "application/json"
+           },
           body: JSON.stringify(requestData),
           credentials: "include",
           mode: "cors",

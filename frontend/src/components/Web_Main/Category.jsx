@@ -82,6 +82,9 @@ export const Category = ({
       try {
         const response = await fetch(`/api/`, {
           method: "GET",
+          headers: {
+          Accept: "application/json"
+           },
           credentials: "include",
           mode: "cors",
         });

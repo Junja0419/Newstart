@@ -30,6 +30,7 @@ export const Web_Headline = () => {
     try {
       const response = await fetch(`/api/`, {
         method: "GET",
+        headers: { Accept: "application/json" },
         credentials: "include",
         mode: "cors",
       }); // 백엔드에서 현재 유저 정보 가져오기
@@ -48,6 +49,7 @@ export const Web_Headline = () => {
     try {
       const response = await fetch(`/api/bookmark/${userId}`, {
         method: "GET",
+        headers: { Accept: "application/json" },
         credentials: "include",
         mode: "cors",
       }); // 유저 ID로 북마크 상태 조회
@@ -81,6 +83,7 @@ export const Web_Headline = () => {
           `/api/headline/${headline_id}`,
           {
             method: "GET",
+            headers: { Accept: "application/json" },
             credentials: "include",
             mode: "cors",
           }
@@ -112,6 +115,7 @@ export const Web_Headline = () => {
           `/api/bookmark/delete/${bookmarkId}`,
           {
             method: "POST",
+            headers: { Accept: "application/json" },
             credentials: "include",
             mode: "cors",
           }
@@ -122,10 +126,12 @@ export const Web_Headline = () => {
         // 북마크 등록
         const response = await fetch(
           `/api/bookmark/create`,
-
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+              "Content-Type": "application/json",
+              Accept: "application/json"
+             },
             body: JSON.stringify({
               user_id: userId,
               headline_id: parseInt(headline_id),

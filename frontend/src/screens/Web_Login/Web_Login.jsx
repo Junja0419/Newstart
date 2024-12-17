@@ -43,7 +43,9 @@ export const Web_Login = () => {
         `/api/auth/email/loginProcess`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            Accept: "application/json" },
           body: JSON.stringify(bodyData),
           credentials: "include",
           mode: "cors",

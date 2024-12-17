@@ -31,7 +31,9 @@ export const Web_SignUp_Profile = () => {
       const response = await fetch(`/api/auth/join`, {
 
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+        Accept: "application/json"
+         },
         body: JSON.stringify(bodyData),
         credentials: "include",
         mode: "cors",
