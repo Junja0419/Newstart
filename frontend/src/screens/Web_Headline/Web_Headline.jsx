@@ -20,7 +20,7 @@ export const Web_Headline = () => {
   //   setIsBookmarked(status === "bookmark");
   // };
   const [bookmarkId, setBookmarkId] = useState(null); // 북마크 ID 저장
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState(null);
 
   /***** userId 초기화 *****/
   useEffect(() => {
