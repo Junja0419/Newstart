@@ -31,33 +31,23 @@ export const Web_Login = () => {
   // 로그인 요청
   const onClickLoginBtn = async () => {
     try {
-      const bodyData = {
-        username: email,
-        password: password,
-      };
+      const formData = new FormData();
+      formData.append("username", email);
+      formData.append("password", password);
 
-      // body 내용을 console로 출력
-      console.log("전송할 데이터:", JSON.stringify(bodyData));
-
-      const response = await fetch(
-        `/api/auth/email/loginProcess`,
-        {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-            Accept: "application/json" },
-          body: JSON.stringify(bodyData),
-          credentials: "include",
-          mode: "cors",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("로그인 요청 실패");
+      // FormData console로 출력
+      for (let pair of formData.entries()) {
+        console.log(`${pair[0]}: ${pair[1]}`);
       }
 
-      const data = await response.json();
-      console.log("로그인 성공:", data);
+      const response = await fetch(`/api/auth/email/loginProcess`, {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+        mode: "cors",
+      });
+
+      console.log("응답 상태 코드:", response.status);
     } catch (error) {
       console.error("로그인 오류:", error);
     }
