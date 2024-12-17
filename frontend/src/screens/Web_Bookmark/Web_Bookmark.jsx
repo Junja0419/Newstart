@@ -67,7 +67,7 @@ export const Web_Bookmark = () => {
     };
 
     fetchBookmarks();
-  }, [id]);
+  }, [userentity.id]);
 
   /***** 북마크 삭제 *****/
   const handleDeleteBookmark = async (bookmark_id) => {
