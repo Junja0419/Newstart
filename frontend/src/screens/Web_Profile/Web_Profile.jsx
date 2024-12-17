@@ -31,7 +31,7 @@ export const Web_Profile = () => {
     useEffect(() => {
       const fetchHeadlines = async () => {
         try {
-          const response = await fetch(`/api/`, {
+          const response = await fetch(`/api`, {
             method: "GET",
             headers: {
             Accept: "application/json"

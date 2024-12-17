@@ -28,7 +28,7 @@ export const Web_Headline = () => {
   // 유저 ID 가져오기 (맨 처음 한 번만 실행)
   const fetchUserEntity = async () => {
     try {
-      const response = await fetch(`/api/`, {
+      const response = await fetch(`/api`, {
         method: "GET",
         headers: { Accept: "application/json" },
         credentials: "include",
