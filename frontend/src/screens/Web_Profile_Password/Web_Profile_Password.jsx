@@ -17,6 +17,7 @@ export const Web_Profile_Password = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { profileData } = location.state;
+  const [userId, setUserId] = useState();
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [currentPasswordError, setCurrentPasswordError] = useState("");
@@ -27,6 +28,16 @@ export const Web_Profile_Password = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
+  /***** userId 초기화 *****/
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.error("userId가 localStorage에 없습니다.");
+    }
+  }, []);
+
   const handleChangePassword = async () => {
     const requestData = {
       username: profileData.username, // 사용자 이름
@@ -36,11 +47,10 @@ export const Web_Profile_Password = () => {
 
     try {
       const response = await fetch(`/api/auth/password`, {
-
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify(requestData),
         credentials: "include",
@@ -48,7 +58,7 @@ export const Web_Profile_Password = () => {
       });
 
       if (response.ok) {
-        navigate(`/profile/${profileData.id}`);
+        navigate(`/profile/${userId}`);
       }
     } catch (error) {
       console.error("비밀번호 변경 요청 중 오류 발생:", error);
