@@ -36,6 +36,24 @@ public class MainController {
 
         Map<String, Object> entities = new HashMap<>();
 
+        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
+
+        if(userEntity == null) {
+            return ResponseEntity.status(401)
+                    .header(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .body(Map.of("error", "not found user"));
+        } else {
+            List<Headline> headline = headlineService.views();
+            List<Summary> summary = summaryService.views();
+
+            entitys.put("userentity", userEntity);
+            entitys.put("headline", headline);
+            entitys.put("summary", summary);
+
+            return ResponseEntity.ok().body(entitys);
+        }
+/**
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof CustomUserDetails) {
@@ -64,5 +82,6 @@ public class MainController {
                     .header(HttpHeaders.CONTENT_TYPE, "application/json")
                     .body(Map.of("error", "Unauthorized access"));
         }
+ **/
     }
 }
