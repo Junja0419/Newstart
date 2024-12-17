@@ -18,6 +18,13 @@
                 }
             },
             {
+                "source": "/",
+                "run": {
+                    "serviceId": "backend",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
                 "source": "/login/oauth2/code/**",
                 "run": {
                     "serviceId": "backend",
