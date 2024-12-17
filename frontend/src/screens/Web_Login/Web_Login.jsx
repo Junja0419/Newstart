@@ -40,13 +40,20 @@ export const Web_Login = () => {
         console.log(`${pair[0]}: ${pair[1]}`);
       }
 
-      // fetch를 사용한 POST 요청
       const response = await fetch(`/api/auth/email/loginProcess`, {
         method: "POST",
-        body: formData, // FormData 객체를 body에 추가
-        credentials: "include", // 쿠키 포함
-        mode: "cors", // CORS 요청
+        body: formData,
+        credentials: "include",
+        mode: "cors",
       });
+
+      const responseData = await response.json();
+      console.log("서버 응답 데이터: ", responseData);
+
+      if (responseData.statusCode === "OK") {
+        console.log("로그인 성공");
+        window.location.href = "/";
+      }
     } catch (error) {
       console.error("로그인 오류:", error);
     }
