@@ -44,16 +44,28 @@ export const Web_Summary = () => {
 
   /***** 스크롤 *****/
   useEffect(() => {
+    let isScrolling = false; // 플래그 변수: 스크롤 중인지 여부
+
     const handleScroll = (e) => {
+      if (isScrolling) return; // 이미 스크롤 중이라면 이벤트 무시
       e.preventDefault(); // 기본 스크롤 방지
+      isScrolling = true; // 스크롤 시작
       const pageCount = summaryData.length; // 총 페이지 수
 
+      // deltaY 값에 따라 페이지 변경
       if (e.deltaY > 0) {
         setCurrentPage((prev) => Math.min(prev + 1, pageCount - 1));
       } else if (e.deltaY < 0) {
         setCurrentPage((prev) => Math.max(prev - 1, 0));
       }
-    };
+      
+    // 일정 시간 후 스크롤 허용 (페이지가 넘어가는 시간만큼 대기)
+    setTimeout(() => {
+      isScrolling = false; // 스크롤 가능 상태로 변경
+    }, 500); // 0.5초 동안 스크롤 잠금
+  };
+
+    
 
     window.addEventListener("wheel", handleScroll, { passive: false }); // 스크롤 이벤트 등록
 
