@@ -37,12 +37,14 @@ public class BookmarkController {
 
     //북마크 조회
     @GetMapping("/view/{id}")
-    public ResponseEntity<Map<String, Object>> view_bookmark(@PathVariable("id") Long id) {
+    public ResponseEntity<Map<String, Object>> view_bookmark(@PathVariable("id") String id) {
+        //형 변환
+        Long user_id = Long.parseLong(id);
         //사용자 정보
-        UserEntity userEntity = userRepository.findByUserId(id);
+        UserEntity userEntity = userRepository.findByUserId(user_id);
 
         //북마크 조회
-        List<Bookmark> bookmarks = bookmarkService.view_bookmark(id);
+        List<Bookmark> bookmarks = bookmarkService.view_bookmark(user_id);
 
         Map<String, Object> entitys = new HashMap<>();
 
@@ -55,15 +57,15 @@ public class BookmarkController {
 
     //북마크 삭제
     @PostMapping("/delete/{bookmark_id}")
-    public ResponseEntity<UserEntity> delete_bookmark(@PathVariable("bookmark_id") Long bookmark_id) {
-        //사용자 정보
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
+    public ResponseEntity<String> delete_bookmark(@PathVariable("bookmark_id") String bookmark_id) {
+
+        //형 변환
+        Long b_id = Long.parseLong(bookmark_id);
 
         //북마크 삭제
-        bookmarkService.delete_bookmark(bookmark_id);
+        bookmarkService.delete_bookmark(b_id);
 
-        return ResponseEntity.ok().body(userEntity);
+        return ResponseEntity.ok().body("ok");
     }
 
 }
