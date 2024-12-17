@@ -4,8 +4,7 @@ Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcN
 */
 
 import PropTypes from "prop-types";
-import React from "react";
-import { useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
 import "./style.css";
 export const BookmarkTab = ({ 
