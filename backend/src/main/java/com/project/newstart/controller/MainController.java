@@ -47,11 +47,11 @@ public class MainController {
             List<Headline> headline = headlineService.views();
             List<Summary> summary = summaryService.views();
 
-            entitys.put("userentity", userEntity);
-            entitys.put("headline", headline);
-            entitys.put("summary", summary);
+            entities.put("userentity", userEntity);
+            entities.put("headline", headline);
+            entities.put("summary", summary);
 
-            return ResponseEntity.ok().body(entitys);
+            return ResponseEntity.ok().body(entities);
         }
 /**
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
