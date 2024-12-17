@@ -5,43 +5,21 @@
         "rewrites": [
             {
                 "source": "/",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/"
+                "run": {
+                    "serviceId": "backend",
+                    "region": "asia-northeast3"
+                }
             },
             {
-                "source": "/login",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/login"
+                "source": "/api/**",
+                "run": {
+                    "serviceId": "backend",
+                    "region": "asia-northeast3"
+                }
             },
             {
-                "source": "/auth/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/auth/**"
-            },
-            {
-                "source": "/oauth2/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/oauth2/**"
-            },
-            {
-                "source": "/bookmark/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/bookmark/**"
-            },
-            {
-                "source": "/headline/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/headline/**"
-            },
-            {
-                "source": "/profile/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/profile/**"
-            },
-            {
-                "source": "/search/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/search/**"
-            },
-            {
-                "source": "/summary/**",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/summary/**"
-            },
-            {
-                "source": "/logout",
-                "destination": "https://newstart-project-444411.du.r.appspot.com/api/logout"
+                "source": "**",
+                "destination": "/index.html"
             }
         ]
     }

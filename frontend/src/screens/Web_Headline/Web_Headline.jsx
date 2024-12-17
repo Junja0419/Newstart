@@ -28,7 +28,7 @@ export const Web_Headline = () => {
   // 유저 ID 가져오기 (맨 처음 한 번만 실행)
   const fetchUserEntity = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API__URL}/`, {
+      const response = await fetch(`/api/`, {
         method: "GET",
         credentials: "include",
         mode: "cors",
@@ -46,7 +46,7 @@ export const Web_Headline = () => {
   // 북마크 상태 가져오는 함수 (수시로 써야 함)
   const fetchBookmarkStatus = async () => {
     try {
-      const response = await fetch(`${REACT_APP_API__URL}/bookmark/${userId}`, {
+      const response = await fetch(`/api/bookmark/${userId}`, {
         method: "GET",
         credentials: "include",
         mode: "cors",
@@ -78,7 +78,7 @@ export const Web_Headline = () => {
       try {
         //헤드라인 데이터 가져오기
         const headlineResponse = await fetch(
-          `${REACT_APP_API__URL}/headline/${headline_id}`,
+          `/api/headline/${headline_id}`,
           {
             method: "GET",
             credentials: "include",
@@ -109,7 +109,7 @@ export const Web_Headline = () => {
       if (isBookmarked) {
         // 북마크 삭제
         const response = await fetch(
-          `${REACT_APP_API__URL}/bookmark/delete/${bookmarkId}`,
+          `/api/bookmark/delete/${bookmarkId}`,
           {
             method: "POST",
             credentials: "include",
@@ -121,7 +121,7 @@ export const Web_Headline = () => {
       } else {
         // 북마크 등록
         const response = await fetch(
-          `${REACT_APP_API__URL}/bookmark/create`,
+          `/api/bookmark/create`,
 
           {
             method: "POST",
