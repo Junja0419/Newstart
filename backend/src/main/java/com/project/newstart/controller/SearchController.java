@@ -50,15 +50,10 @@ public class SearchController {
     @GetMapping("/result/{keyword}")
     public ResponseEntity<Map<String, Object>> search_result(@PathVariable("keyword") String keyword) throws ParseException {
 
-        //사용자 정보
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
-
         Map<String, Object> entitys = new HashMap<>();
 
         List<SearchDTO> searchDTOS = searchService.getSearchResult(keyword);
 
-        entitys.put("userentity", userEntity);
         entitys.put("results", searchDTOS);
 
         return ResponseEntity.ok().body(entitys);

@@ -30,15 +30,11 @@ public class SummaryController {
     //요약 기사 조회
     @GetMapping("/view")
     public ResponseEntity<Map<String, Object>> view_summary() {
-        //사용자 정보
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
 
         //요약 기사 가져오기
         List<Summary> summaries = summaryService.views();
 
         Map<String, Object> entitys = new HashMap<>();
-        entitys.put("userentity", userEntity);
         entitys.put("summary", summaries);
 
         return ResponseEntity.ok().body(entitys);

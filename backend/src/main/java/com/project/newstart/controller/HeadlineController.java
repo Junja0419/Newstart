@@ -24,23 +24,18 @@ public class HeadlineController {
     }
 
     //헤드라인 기사 조회
-    @GetMapping("/api/headline/{headline_id}")
-    public ResponseEntity<Map<String, Object>> headlineDetail(@PathVariable("headline_id") Long headline_id) {
-
-        //사용자 정보
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserEntity userEntity = userRepository.findByUsername(user.getUsername());
+    @GetMapping("/api/headline/{headline_id}/{user_id}")
+    public ResponseEntity<Map<String, Object>> headlineDetail(@PathVariable("headline_id") Long headline_id, @PathVariable("user_id") Long user_id) {
 
         //헤드라인 기사 정보
         Headline headline = headlineService.view_detail(headline_id);
 
         Map<String, Object> entitys = new HashMap<>();
 
-        entitys.put("userentity", userEntity);
         entitys.put("headline", headline);
         
         //사용자가 해당 기사를 북마크했는지 여부 전달
-        String bookmark_yn = headlineService.bookmarkYN(userEntity.getId(), headline_id);
+        String bookmark_yn = headlineService.bookmarkYN(user_id, headline_id);
         entitys.put("bookmark_yn", bookmark_yn);
 
         return ResponseEntity.ok().body(entitys);
