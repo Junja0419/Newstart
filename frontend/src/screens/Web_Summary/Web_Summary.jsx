@@ -44,26 +44,38 @@ export const Web_Summary = () => {
 
   /***** 스크롤 *****/
   useEffect(() => {
-    let isScrolling = false; // 플래그 변수: 스크롤 중인지 여부
+    let isAnimating = false; // 애니메이션 중인지 여부 플래그
 
     const handleScroll = (e) => {
-      if (isScrolling) return; // 이미 스크롤 중이라면 이벤트 무시
+      if (isAnimating) return; // 애니메이션 중이면 이벤트 무시
       e.preventDefault(); // 기본 스크롤 방지
-      isScrolling = true; // 스크롤 시작
       const pageCount = summaryData.length; // 총 페이지 수
 
       // deltaY 값에 따라 페이지 변경
       if (e.deltaY > 0) {
-        setCurrentPage((prev) => Math.min(prev + 1, pageCount - 1));
+        setCurrentPage((prev) => {
+          const nextPage = Math.min(prev + 1, pageCount - 1);
+          if (prev !== nextPage) isAnimating = true; // 페이지 변경 시 애니메이션 시작
+          return nextPage; 
+        });
       } else if (e.deltaY < 0) {
-        setCurrentPage((prev) => Math.max(prev - 1, 0));
+        setCurrentPage((prev) => {
+          const prevPage = Math.max(prev - 1, 0);
+          if (prev !== prevPage) isAnimating = true; // 페이지 변경 시 애니메이션 시작
+          return prevPage;
+        });
       }
-      
-    // 일정 시간 후 스크롤 허용 (페이지가 넘어가는 시간만큼 대기)
-    setTimeout(() => {
-      isScrolling = false; // 스크롤 가능 상태로 변경
-    }, 500); // 0.5초 동안 스크롤 잠금
-  };
+    };
+
+  // 애니메이션 종료 시점 감지 (requestAnimationFrame 사용)
+  useEffect(() => {
+    if (isAnimating) {
+      requestAnimationFrame(() => {
+        // 여기서 현재 화면이 실제로 이동 완료된 후 상태를 해제
+        isAnimating = false;
+      });
+    }
+  }, [currentPage]);
 
     
 
