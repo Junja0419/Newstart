@@ -20,29 +20,20 @@ export const Web_Headline = () => {
   //   setIsBookmarked(status === "bookmark");
   // };
   const [bookmarkId, setBookmarkId] = useState(null); // 북마크 ID 저장
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState();
+
+  /***** userId 초기화 *****/
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.error("userId가 localStorage에 없습니다.");
+    }
+  }, []);
 
   console.log("Headline ID from useparams:", headline_id);
   console.log("user ID from server:", userId);
-
-  // 유저 ID 가져오기 (맨 처음 한 번만 실행)
-  const fetchUserEntity = async () => {
-    try {
-      const response = await fetch(`/api`, {
-        method: "GET",
-        headers: { Accept: "application/json" },
-        credentials: "include",
-        mode: "cors",
-      }); // 백엔드에서 현재 유저 정보 가져오기
-
-      if (!response.ok) throw new Error("Failed to fetch user entity");
-      const data = await response.json();
-      setUserId(data.userentity.id); // user_id 저장
-    } catch (err) {
-      console.error("Error fetching user entity:", err);
-      setError(err.message);
-    }
-  };
 
   // 북마크 상태 가져오는 함수 (수시로 써야 함)
   const fetchBookmarkStatus = async () => {
@@ -80,7 +71,7 @@ export const Web_Headline = () => {
       try {
         //헤드라인 데이터 가져오기
         const headlineResponse = await fetch(
-          `/api/headline/${headline_id}`,
+          `/api/headline/${headline_id}/${userId}`,
           {
             method: "GET",
             headers: { Accept: "application/json" },
@@ -111,42 +102,42 @@ export const Web_Headline = () => {
     try {
       if (isBookmarked) {
         // 북마크 삭제
-        const response = await fetch(
-          `/api/bookmark/delete/${bookmarkId}`,
-          {
-            method: "POST",
-            headers: { Accept: "application/json" },
-            credentials: "include",
-            mode: "cors",
-          }
-        );
-        if (!response.ok) throw new Error("Failed to delete bookmark");
-        console.log("Bookmark deleted");
+        const response = await fetch(`/api/bookmark/delete/${bookmarkId}`, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          credentials: "include",
+          mode: "cors",
+        });
+        const responseData = await response.json();
+        if (responseData.statusCode === "ok") {
+          console.log("Bookmark deleted");
+          setIsBookmarked(false);
+          setBookmarkId(null);
+        }
       } else {
         // 북마크 등록
-        const response = await fetch(
-          `/api/bookmark/create`,
-          {
-            method: "POST",
-            headers: { 
-              "Content-Type": "application/json",
-              Accept: "application/json"
-             },
-            body: JSON.stringify({
-              user_id: userId,
-              headline_id: parseInt(headline_id),
-            }),
-            credentials: "include",
-            mode: "cors",
-          }
-        );
-        if (!response.ok) throw new Error("Failed to create bookmark");
-        const result = await response.json();
-        console.log("Bookmark created:", result);
+        const response = await fetch(`/api/bookmark/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            headline_id: parseInt(headline_id),
+          }),
+          credentials: "include",
+          mode: "cors",
+        });
+        const responseData = await response.json();
+        if (responseData.statusCode === "ok") {
+          console.log("Bookmark created");
+          setIsBookmarked(true);
+          await fetchBookmarkStatus();
+        } else {
+          throw new Error("Failed to create bookmark");
+        }
       }
-
-      // 최신 북마크 상태 다시 조회
-      await fetchBookmarkStatus();
     } catch (err) {
       console.error("Bookmark toggle error:", err);
       setError(err.message);

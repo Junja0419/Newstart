@@ -17,32 +17,14 @@ export const Web_Search = ({ searchCount = 5 }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 메인 데이터 호출
+  /***** userId 초기화 *****/
   useEffect(() => {
-    const fetchHeadlines = async () => {
-      try {
-        const response = await fetch(`/api`, {
-          method: "GET",
-          headers: { Accept: "application/json" },
-          credentials: "include", // 쿠키 포함 설정
-          mode: "cors",
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setUserId(data.userentity.id);
-
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHeadlines();
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.error("userId가 localStorage에 없습니다.");
+    }
   }, []);
 
   // 로딩 상태 처리
@@ -59,15 +41,12 @@ export const Web_Search = ({ searchCount = 5 }) => {
     }
 
     try {
-      const response = await fetch(
-        `/api/search/result/${query}`,
-        {
-          credentials: "include",
-          method: "GET",
-          headers: { Accept: "application/json" },
-          mode: "cors",
-        }
-      );
+      const response = await fetch(`/api/search/result/${query}`, {
+        credentials: "include",
+        method: "GET",
+        headers: { Accept: "application/json" },
+        mode: "cors",
+      });
 
       if (!response.ok) {
         throw new Error("API 요청 실패");

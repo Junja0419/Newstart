@@ -10,29 +10,19 @@ import REACT_APP_API__URL from "../../config";
 
 export const Web_Bookmark = () => {
   const screenWidth = useWindowWidth();
-  // const { id } = useParams(); // url에서 id를 가져옴
   const [bookmarks, setBookmarks] = useState([]);
-    const [userId, setUserId] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  // 유저 ID 가져오기 (맨 처음 한 번만 실행)
-  const fetchUserEntity = async () => {
-    try {
-      const response = await fetch(`/api`, {
-        method: "GET",
-        headers: { Accept: "application/json" },
-        credentials: "include",
-        mode: "cors",
-      }); // 백엔드에서 현재 유저 정보 가져오기
+  const [userId, setUserId] = useState();
 
-      if (!response.ok) throw new Error("Failed to fetch user entity");
-      const data = await response.json();
-      setUserId(data.userentity.id); // user_id 저장
-    } catch (err) {
-      console.error("Error fetching user entity:", err);
-      setError(err.message);
+  /***** userId 초기화 *****/
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.error("userId가 localStorage에 없습니다.");
     }
-  };
+  }, []);
+
 
   /***** 북마크 데이터 로드 *****/
   useEffect(() => {
@@ -56,15 +46,12 @@ export const Web_Bookmark = () => {
   /***** 북마크 삭제 *****/
   const handleDeleteBookmark = async (bookmark_id) => {
     try {
-      const response = await fetch(
-        `/api/bookmark/delete/${bookmark_id}`,
-        {
-          method: "POST",
-          headers: { Accept: "application/json" },
-          credentials: "include",
-          mode: "cors",
-        }
-      );
+      const response = await fetch(`/api/bookmark/delete/${bookmark_id}`, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        credentials: "include",
+        mode: "cors",
+      });
 
       if (response.ok) {
         // 삭제 성공 시 해당 bookmark_id를 제외한 북마크 목록으로 업데이트
