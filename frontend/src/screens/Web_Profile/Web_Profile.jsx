@@ -13,7 +13,7 @@ import REACT_APP_API__URL from "../../config";
 export const Web_Profile = () => {
   const screenWidth = useWindowWidth();
   const navigate = useNavigate(); // navigate 함수 정의
-  const { id } = useParams(); // URL에서 id 가져오기
+  // const { id } = useParams(); // URL에서 id 가져오기
   const [profileData, setProfileData] = useState({
     id: "",
     username: "",
@@ -23,12 +23,59 @@ export const Web_Profile = () => {
     image_url: "",
     noti_yn: "N",
   });
+  const [userentity, setUserentity] = useState(null); // userentity 초기 상태는 null
+
+  // 메인 경로 데이터 호출 for 프로필 조회 api 호출
+    useEffect(() => {
+      const fetchHeadlines = async () => {
+        try {
+          const response = await fetch(`/api/`, {
+            method: "GET",
+            headers: {
+            Accept: "application/json"
+             },
+            credentials: "include",
+            mode: "cors",
+          });
+  
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+  
+          const data = await response.json(); // JSON 응답 파싱
+          setHeadlines(data.headline);
+          setUserentity(data.userentity);
+        } catch (err) {
+          setError(err);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchHeadlines();
+    }, []);
+  
+    // 로딩 상태 처리
+    if (loading) return <div>Loading...</div>;
+  
+    // 에러 상태 처리
+    if (error) return <div>Error: {error.message}</div>;
+  
+    // headlines 데이터가 없을 경우 처리
+    if (!headlines || headlines.length === 0) {
+      return (
+        <div className="empty-category">
+          데이터가 없습니다. <br />
+          다른 탭을 선택해주세요.
+        </div>
+      );
+    }
 
   /**** 프로필 데이터 로드 ****/
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`/api/profile/${id}`, {
+        const response = await fetch(`/api/profile/${userentity.id}`, {
           method: "GET",
           headers: { Accept: "application/json" },
           credentials: "include",
