@@ -4,13 +4,6 @@
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "rewrites": [
             {
-                "source": "/",
-                "run": {
-                    "serviceId": "backend",
-                    "region": "asia-northeast3"
-                }
-            },
-            {
                 "source": "/api/**",
                 "run": {
                     "serviceId": "backend",
