@@ -28,6 +28,7 @@ export const Web_Profile = () => {
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
+      console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
     } else {
       console.error("userId가 localStorage에 없습니다.");
@@ -37,6 +38,7 @@ export const Web_Profile = () => {
   /**** 프로필 데이터 로드 ****/
   useEffect(() => {
     const fetchProfile = async () => {
+      if (!userId) return; // userId가 없으면 함수 실행 중단
       try {
         const response = await fetch(`/api/profile/${userId}`, {
           method: "GET",

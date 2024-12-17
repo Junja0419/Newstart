@@ -17,6 +17,7 @@ export const Web_Bookmark = () => {
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
+      console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
     } else {
       console.error("userId가 localStorage에 없습니다.");
@@ -26,6 +27,8 @@ export const Web_Bookmark = () => {
   /***** 북마크 데이터 로드 *****/
   useEffect(() => {
     const fetchBookmarks = async () => {
+      if (!userId) return; // userId가 없으면 함수 실행 중단
+
       try {
         const response = await fetch(`/api/bookmark/${userId}`, {
           method: "GET",
@@ -44,6 +47,7 @@ export const Web_Bookmark = () => {
 
   /***** 북마크 삭제 *****/
   const handleDeleteBookmark = async (bookmark_id) => {
+    if (!userId) return; // userId가 없으면 함수 실행 중단
     try {
       const response = await fetch(`/api/bookmark/delete/${bookmark_id}`, {
         method: "POST",

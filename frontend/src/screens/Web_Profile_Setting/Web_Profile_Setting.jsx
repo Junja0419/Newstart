@@ -20,6 +20,7 @@ export const Web_Profile_Setting = () => {
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
+      console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
     } else {
       console.error("userId가 localStorage에 없습니다.");
@@ -33,6 +34,7 @@ export const Web_Profile_Setting = () => {
 
   /**** 완료 버튼 클릭 핸들러 ****/
   const handleCompleteClick = async () => {
+    if (!userId) return; // userId가 없으면 함수 실행 중단
     const requestData = {
       username: profileData.username,
       nickname,

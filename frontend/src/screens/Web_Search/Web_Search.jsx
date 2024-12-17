@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useWindowWidth } from "../../breakpoints";
 import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
@@ -21,11 +20,20 @@ export const Web_Search = ({ searchCount = 5 }) => {
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
+      console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
     } else {
       console.error("userId가 localStorage에 없습니다.");
+      setLoading(false); // userId가 없을 때 로딩 해제
     }
   }, []);
+
+  useEffect(() => {
+    if (userId) {
+      setLoading(true);
+      fetchSearchRecords(); // userId가 존재할 때만 실행
+    }
+  }, [userId]); // userId 변경 시 실행
 
   // 로딩 상태 처리
   if (loading) return <div>Loading...</div>;
@@ -35,13 +43,14 @@ export const Web_Search = ({ searchCount = 5 }) => {
 
   // 검색 API 호출 함수
   const handleSearch = async (query) => {
-    if (!query || query.trim() === "") {
-      console.warn("검색어가 없습니다."); // 빈 검색어 경고
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) {
+      console.warn("검색어가 없습니다.");
       return;
     }
 
     try {
-      const response = await fetch(`/api/search/result/${query}`, {
+      const response = await fetch(`/api/search/result/${trimmedQuery}`, {
         credentials: "include",
         method: "GET",
         headers: { Accept: "application/json" },
@@ -67,7 +76,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
         headers: { Accept: "application/json" },
         credentials: "include",
         mode: "cors",
-      }); //id 받아오는 요청 또 해야 되네 위에서 ㅋ
+      });
 
       if (!response.ok) throw new Error("API 요청 실패");
 
@@ -75,6 +84,9 @@ export const Web_Search = ({ searchCount = 5 }) => {
       setSearchRecords(data.search); // 검색 기록 업데이트
     } catch (error) {
       console.error("검색 기록 불러오기 실패:", error);
+      setError(error); // 에러 상태 업데이트
+    } finally {
+      setLoading(false); // 로딩 상태 해제
     }
   };
 
