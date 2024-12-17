@@ -7,11 +7,6 @@
                 "source": "/oauth2/authorization/{*path}",
                 "destination": "/login/oauth2/code/{path}",
                 "type": 301
-            },
-            {
-                "source": "/",
-                "destination": "/api",
-                "type": 301
             }
         ],
         "rewrites": [
@@ -26,7 +21,8 @@
                 "source": "/",
                 "run": {
                     "serviceId": "backend",
-                    "region": "asia-northeast3"
+                    "region": "asia-northeast3",
+                    "relativePath": "/api"
                 }
             },
             {
