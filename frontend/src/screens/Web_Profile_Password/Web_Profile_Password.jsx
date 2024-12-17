@@ -17,7 +17,7 @@ export const Web_Profile_Password = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { profileData } = location.state;
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState(null);
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [currentPasswordError, setCurrentPasswordError] = useState("");

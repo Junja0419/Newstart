@@ -13,7 +13,7 @@ import REACT_APP_API__URL from "../../config";
 export const Web_Profile = () => {
   const screenWidth = useWindowWidth();
   const navigate = useNavigate(); // navigate 함수 정의
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState(null);
   const [profileData, setProfileData] = useState({
     id: "",
     username: "",
@@ -59,6 +59,12 @@ export const Web_Profile = () => {
 
   /**** 로그아웃 처리 ****/
   const handleLogout = async () => {
+    const confirmLogout = window.confirm("정말 로그아웃하시겠습니까?"); // 로그아웃 확인 메시지
+
+    if (!confirmLogout) {
+      // 사용자가 취소를 누르면 로그아웃을 중단
+      return;
+    }
     try {
       // 서버로 로그아웃 요청 전송
       const response = await fetch(`/api/logout`, {
@@ -72,6 +78,9 @@ export const Web_Profile = () => {
       });
 
       if (response.ok) {
+        localStorage.removeItem("userId");
+        console.log("userId가 localStorage에서 제거되었습니다.");
+
         navigate("/login"); // 로그인 페이지로 리디렉션
       } else {
         console.error("Failed to log out");

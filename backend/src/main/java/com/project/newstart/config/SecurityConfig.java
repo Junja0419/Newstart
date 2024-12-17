@@ -104,6 +104,13 @@ public class SecurityConfig {
                 .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
         );
 
+        // 인증되지 않은 사용자의 리다이렉트 설정
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.sendRedirect("https://newstart-project-444411.web.app/login");
+                })
+        );
+
         // OAuth2.0 설정
         http.oauth2Login(oauth2 -> oauth2
                 .loginPage("https://newstart-project-444411.web.app/login")

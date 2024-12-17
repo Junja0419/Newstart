@@ -12,7 +12,7 @@ export const Web_Profile_Setting = () => {
   const screenWidth = useWindowWidth();
   const location = useLocation();
   const navigate = useNavigate();
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState(null);
   const { profileData } = location.state; // profile 페이지에서 전달된 데이터
   const [nickname, setNickname] = useState(profileData.nickname); // 닉네임 관리
 
