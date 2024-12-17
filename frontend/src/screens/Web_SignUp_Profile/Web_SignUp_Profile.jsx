@@ -29,20 +29,23 @@ export const Web_SignUp_Profile = () => {
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
       const response = await fetch(`/api/auth/join`, {
-
         method: "POST",
-        headers: { "Content-Type": "application/json",
-        Accept: "application/json"
-         },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify(bodyData),
         credentials: "include",
         mode: "cors",
       });
 
-      const data = await response.json();
+      const responseData = await response.json();
+      console.log("서버 응답 데이터: ", responseData);
 
-      if (!response.ok && !data.ok) {
-        alert("회원가입 실패: 서버에서 오류가 발생했습니다.");
+      // 서버 statusCode가 OK면 /login으로 리다이렉트
+      if (responseData.statusCode === "OK") {
+        console.log("회원가입 성공");
+        window.location.href = "/login";
       }
     } catch (error) {
       console.error("API 요청 중 오류 발생:", error);
