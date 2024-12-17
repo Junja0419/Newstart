@@ -21,7 +21,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await fetch(`/`, {
+        const response = await fetch(`/api/`, {
           method: "GET",
           headers: { Accept: "application/json" },
           credentials: "include", // 쿠키 포함 설정
@@ -60,7 +60,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
 
     try {
       const response = await fetch(
-        `/search/result/${query}`,
+        `/api/search/result/${query}`,
         {
           credentials: "include",
           method: "GET",
@@ -83,7 +83,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
   // 검색 기록 가져오기
   const fetchSearchRecords = async () => {
     try {
-      const response = await fetch(`/search/${userId}`, {
+      const response = await fetch(`/api/search/${userId}`, {
         method: "GET",
         headers: { Accept: "application/json" },
         credentials: "include",

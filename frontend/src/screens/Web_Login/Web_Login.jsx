@@ -40,7 +40,7 @@ export const Web_Login = () => {
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
       const response = await fetch(
-        `/auth/email/loginProcess`,
+        `/api/auth/email/loginProcess`,
         {
           method: "POST",
           headers: { 

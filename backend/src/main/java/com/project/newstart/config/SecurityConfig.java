@@ -57,7 +57,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of(
                 "https://newstart-project-444411.web.app",
-                "https://newstart-project-444411.du.r.appspot.com"
+                "https://backend-7eac6k6zia-du.a.run.app"
         )); // React 배포 URL 허용
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")); // 모든 HTTP 메서드 허용
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin")); // 모든 헤더 허용
@@ -109,7 +109,7 @@ public class SecurityConfig {
 
         // Form 로그인 방식 설정
         http.formLogin(form -> form
-                .loginPage("https://newstart-project-444411.web.app/login")
+                .loginPage("https://newstart-project-444411.web.app/auth/email/login")
                 .loginProcessingUrl("/api/auth/email/loginProcess") // /api 경로로 변경
                 .successHandler((request, response, authentication) -> {
                     // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)

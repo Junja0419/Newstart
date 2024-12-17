@@ -21,7 +21,7 @@ export const Web_Summary = () => {
     // API 호출
     const fetchData = async () => {
       try {
-        const response = await fetch(`/summary/view`, {
+        const response = await fetch(`/api/summary/view`, {
           method: "GET",
           headers: { 
           Accept: "application/json"
