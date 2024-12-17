@@ -20,6 +20,7 @@ import PoliticsM from "./HeadlineTabForMob/PoliticsM";
 import WorldM from "./HeadlineTabForMob/WorldM";
 
 export const Category = ({
+  headlines,
   classNameForMobileCategoryFrame,
   stateProp,
   lineActivate = "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png",
@@ -75,58 +76,58 @@ export const Category = ({
 
   const onTouchEnd = () => setIsDragging(false);
 
-  // 데이터 호출
-  useEffect(() => {
-    const fetchHeadlines = async () => {
-      try {
-        const response = await fetch(`/api`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
-          credentials: "include",
-          mode: "cors",
-        });
+  // // 데이터 호출
+  // useEffect(() => {
+  //   const fetchHeadlines = async () => {
+  //     try {
+  //       const response = await fetch(`/api`, {
+  //         method: "GET",
+  //         headers: {
+  //           Accept: "application/json",
+  //         },
+  //         credentials: "include",
+  //         mode: "cors",
+  //       });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
 
-        const data = await response.json(); // JSON 응답 파싱
-        console.log("서버 응답 데이터: ", data);
+  //       const data = await response.json(); // JSON 응답 파싱
+  //       console.log("서버 응답 데이터: ", data);
 
-        setHeadlines(data.headline);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //       setHeadlines(data.headline);
+  //     } catch (err) {
+  //       setError(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchHeadlines();
-  }, []);
+  //   fetchHeadlines();
+  // }, []);
 
-  // 로딩 상태 처리
-  if (loading) return <div>Loading...</div>;
+  // // 로딩 상태 처리
+  // if (loading) return <div>Loading...</div>;
 
-  // 에러 상태 처리
-  if (error) return <div>Error: {error.message}</div>;
+  // // 에러 상태 처리
+  // if (error) return <div>Error: {error.message}</div>;
 
-  // headlines 데이터가 없을 경우 처리
-  if (!headlines || headlines.length === 0) {
-    return (
-      <div className="empty-category">
-        데이터가 없습니다. <br />
-        다른 탭을 선택해주세요.
-      </div>
-    );
-  }
+  // // headlines 데이터가 없을 경우 처리
+  // if (!headlines || headlines.length === 0) {
+  //   return (
+  //     <div className="empty-category">
+  //       데이터가 없습니다. <br />
+  //       다른 탭을 선택해주세요.
+  //     </div>
+  //   );
+  // }
 
   // //로컬 데이터 호출
   // useEffect(() => {
   //   const fetchHeadlines = async () => {
   //     try {
-  //       const response = await fetch("/headlines.json");
+  //       const response = await fetch("/response_1734476137842.json");
   //       if (!response.ok) throw new Error("Failed to load data");
   //       const data = await response.json();
   //       console.log("Fetched data:", data);
@@ -368,6 +369,7 @@ Category.propTypes = {
     "economy",
   ]),
   line: PropTypes.string,
+  headlines: PropTypes.array.isRequired, // headlines를 필수 prop으로 지정
 };
 
 export default Category;
