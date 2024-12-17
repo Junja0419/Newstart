@@ -11,6 +11,13 @@
                 }
             },
             {
+                "source": "/login/oauth2/authorization",
+                "run": {
+                    "serviceId": "backend",
+                    "region": "asia-northeast3"
+                }
+            },
+            {
                 "source": "**",
                 "destination": "/index.html"
             }
