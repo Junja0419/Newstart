@@ -26,6 +26,7 @@ export const Web_Headline = () => {
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
+      console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
     } else {
       console.error("userId가 localStorage에 없습니다.");
@@ -37,6 +38,8 @@ export const Web_Headline = () => {
 
   // 북마크 상태 가져오는 함수 (수시로 써야 함)
   const fetchBookmarkStatus = async () => {
+    if (!userId) return; // userId가 없으면 함수 실행 중단
+
     try {
       const response = await fetch(`/api/bookmark/${userId}`, {
         method: "GET",
@@ -68,6 +71,7 @@ export const Web_Headline = () => {
   // 헤드라인 데이터 및 북마크 상태 가져오기
   useEffect(() => {
     const fetchHeadlineAndBookmark = async () => {
+      if (!userId) return; // userId가 없으면 함수 실행 중단
       try {
         //헤드라인 데이터 가져오기
         const headlineResponse = await fetch(
@@ -101,6 +105,7 @@ export const Web_Headline = () => {
   const handleBookmarkToggle = async () => {
     try {
       if (isBookmarked) {
+        if (!bookmarkId) return; // userId가 없으면 함수 실행 중단
         // 북마크 삭제
         const response = await fetch(`/api/bookmark/delete/${bookmarkId}`, {
           method: "POST",

@@ -32,6 +32,7 @@ export const Web_Profile_Password = () => {
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
+      console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
     } else {
       console.error("userId가 localStorage에 없습니다.");
@@ -39,6 +40,8 @@ export const Web_Profile_Password = () => {
   }, []);
 
   const handleChangePassword = async () => {
+    if (!userId) return; // userId가 없으면 함수 실행 중단
+
     const requestData = {
       username: profileData.username, // 사용자 이름
       df_password: currentPassword, // 기존 비밀번호
