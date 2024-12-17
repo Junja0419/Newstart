@@ -21,7 +21,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await fetch(`/api/`, {
+        const response = await fetch(`/api`, {
           method: "GET",
           credentials: "include", // 쿠키 포함 설정
           mode: "cors",
