@@ -27,7 +27,7 @@
             {
                 "source": "/",
                 "run": {
-                    "serviceId": "frontend",
+                    "serviceId": "backend",
                     "region": "asia-northeast3"
                 }
             }
