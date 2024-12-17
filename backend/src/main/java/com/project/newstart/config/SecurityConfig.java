@@ -113,7 +113,12 @@ public class SecurityConfig {
                 .loginProcessingUrl("/api/auth/email/loginProcess") // /api 경로로 변경
                 .successHandler((request, response, authentication) -> {
                     // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)
-                    response.sendRedirect("https://newstart-project-444411.web.app/"); // 성공 시 React 앱으로 리디렉션
+                    //response.sendRedirect("https://newstart-project-444411.web.app/"); // 성공 시 React 앱으로 리디렉션
+                    //성공 시 JSON 형태로 프론트에 OK 반환
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("{\"statusCode\":\"OK\"}");
+                    response.getWriter().flush();
                 })
                 .failureHandler((request, response, exception) -> {
                     // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)

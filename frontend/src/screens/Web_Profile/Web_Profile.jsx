@@ -30,6 +30,7 @@ export const Web_Profile = () => {
       try {
         const response = await fetch(`/api/profile/${id}`, {
           method: "GET",
+          headers: { Accept: "application/json" },
           credentials: "include",
           mode: "cors",
         });
@@ -55,6 +56,7 @@ export const Web_Profile = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json"
         },
         credentials: "include",
         mode: "cors",

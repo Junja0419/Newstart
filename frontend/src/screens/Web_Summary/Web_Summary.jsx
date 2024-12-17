@@ -23,6 +23,9 @@ export const Web_Summary = () => {
       try {
         const response = await fetch(`/api/summary/view`, {
           method: "GET",
+          headers: { 
+          Accept: "application/json"
+           },
           credentials: "include",
           mode: "cors",
         });

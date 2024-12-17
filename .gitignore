@@ -44,6 +44,10 @@ node_modules
 /coverage
 
 # production
+<<<<<<< HEAD
+=======
+/build
+>>>>>>> f5d4ace9c342e0d45ac39afb74898bbf8bb53583
 build
 
 # misc

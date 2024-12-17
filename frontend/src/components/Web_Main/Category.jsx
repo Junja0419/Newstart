@@ -82,6 +82,9 @@ export const Category = ({
       try {
         const response = await fetch(`/api/`, {
           method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
           credentials: "include",
           mode: "cors",
         });
@@ -91,6 +94,8 @@ export const Category = ({
         }
 
         const data = await response.json(); // JSON 응답 파싱
+        console.log("서버 응답 데이터: ", data);
+
         setHeadlines(data.headline);
         setUserentity(data.userentity);
       } catch (err) {

@@ -1,6 +1,7 @@
 package com.project.newstart.controller;
 
 import com.project.newstart.dto.JoinDTO;
+import com.project.newstart.dto.JoinResponse;
 import com.project.newstart.dto.PasswordDTO;
 import com.project.newstart.dto.ProfileDTO;
 import com.project.newstart.entity.UserEntity;
@@ -20,13 +21,14 @@ public class AuthController {
     }
 
     @PostMapping("/join")
-    public ModelAndView joinProcess(@RequestBody JoinDTO joinDTO) {
+    public ResponseEntity<JoinResponse> joinProcess(@RequestBody JoinDTO joinDTO) {
 
         authService.joinProcess(joinDTO);
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:https://newstart-project-444411.web.app/auth/email/login");
-        return modelAndView;
+        JoinResponse response = new JoinResponse();
+        response.setStatusCode("OK");
+
+        return ResponseEntity.ok().body(response);
     }
 
     @PostMapping("/password")
