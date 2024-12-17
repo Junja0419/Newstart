@@ -13,12 +13,13 @@ export const Web_Bookmark = () => {
   // const { id } = useParams(); // url에서 id를 가져옴
   const [bookmarks, setBookmarks] = useState([]);
   const [userentity, setUserentity] = useState(null); // userentity 초기 상태는 null
-  
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
     // 메인 경로 데이터 호출 for 북마크 조회 api 호출
       useEffect(() => {
         const fetchHeadlines = async () => {
           try {
-            const response = await fetch(`/api/`, {
+            const response = await fetch(`/api`, {
               method: "GET",
               headers: {
               Accept: "application/json"
@@ -32,7 +33,6 @@ export const Web_Bookmark = () => {
             }
     
             const data = await response.json(); // JSON 응답 파싱
-            setHeadlines(data.headline);
             setUserentity(data.userentity);
           } catch (err) {
             setError(err);
@@ -49,17 +49,6 @@ export const Web_Bookmark = () => {
     
       // 에러 상태 처리
       if (error) return <div>Error: {error.message}</div>;
-    
-      // headlines 데이터가 없을 경우 처리
-      if (!headlines || headlines.length === 0) {
-        return (
-          <div className="empty-category">
-            데이터가 없습니다. <br />
-            다른 탭을 선택해주세요.
-          </div>
-        );
-      }
-  
 
   /***** 북마크 데이터 로드 *****/
   useEffect(() => {
