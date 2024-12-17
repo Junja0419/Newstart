@@ -12,49 +12,33 @@ export const Web_Bookmark = () => {
   const screenWidth = useWindowWidth();
   // const { id } = useParams(); // url에서 id를 가져옴
   const [bookmarks, setBookmarks] = useState([]);
-  const [userentity, setUserentity] = useState(null); // userentity 초기 상태는 null
+    const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-    // 메인 경로 데이터 호출 for 북마크 조회 api 호출
-      useEffect(() => {
-        const fetchHeadlines = async () => {
-          try {
-            const response = await fetch(`/api`, {
-              method: "GET",
-              headers: {
-              Accept: "application/json"
-               },
-              credentials: "include",
-              mode: "cors",
-            });
-    
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-    
-            const data = await response.json(); // JSON 응답 파싱
-            setUserentity(data.userentity);
-          } catch (err) {
-            setError(err);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchHeadlines();
-      }, []);
-    
-      // 로딩 상태 처리
-      if (loading) return <div>Loading...</div>;
-    
-      // 에러 상태 처리
-      if (error) return <div>Error: {error.message}</div>;
+  // 유저 ID 가져오기 (맨 처음 한 번만 실행)
+  const fetchUserEntity = async () => {
+    try {
+      const response = await fetch(`/api`, {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        credentials: "include",
+        mode: "cors",
+      }); // 백엔드에서 현재 유저 정보 가져오기
+
+      if (!response.ok) throw new Error("Failed to fetch user entity");
+      const data = await response.json();
+      setUserId(data.userentity.id); // user_id 저장
+    } catch (err) {
+      console.error("Error fetching user entity:", err);
+      setError(err.message);
+    }
+  };
 
   /***** 북마크 데이터 로드 *****/
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
-        const response = await fetch(`/api/bookmark/${userentity.id}`, {
+        const response = await fetch(`/api/bookmark/${userId}`, {
           method: "GET",
           credentials: "include",
           mode: "cors",
@@ -67,7 +51,7 @@ export const Web_Bookmark = () => {
     };
 
     fetchBookmarks();
-  }, [userentity.id]);
+  }, [userId]);
 
   /***** 북마크 삭제 *****/
   const handleDeleteBookmark = async (bookmark_id) => {

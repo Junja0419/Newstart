@@ -23,50 +23,34 @@ export const Web_Profile = () => {
     image_url: "",
     noti_yn: "N",
   });
-  const [userentity, setUserentity] = useState(null); // userentity 초기 상태는 null
+  const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 메인 경로 데이터 호출 for 프로필 조회 api 호출
-    useEffect(() => {
-      const fetchHeadlines = async () => {
-        try {
-          const response = await fetch(`/api`, {
-            method: "GET",
-            headers: {
-            Accept: "application/json"
-             },
-            credentials: "include",
-            mode: "cors",
-          });
-  
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-  
-          const data = await response.json(); // JSON 응답 파싱
-          setUserentity(data.userentity);
-        } catch (err) {
-          setError(err);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchHeadlines();
-    }, []);
-  
-    // 로딩 상태 처리
-    if (loading) return <div>Loading...</div>;
-  
-    // 에러 상태 처리
-    if (error) return <div>Error: {error.message}</div>;
+  // 유저 ID 가져오기 (맨 처음 한 번만 실행)
+  const fetchUserEntity = async () => {
+    try {
+      const response = await fetch(`/api`, {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        credentials: "include",
+        mode: "cors",
+      }); // 백엔드에서 현재 유저 정보 가져오기
+
+      if (!response.ok) throw new Error("Failed to fetch user entity");
+      const data = await response.json();
+      setUserId(data.userentity.id); // user_id 저장
+    } catch (err) {
+      console.error("Error fetching user entity:", err);
+      setError(err.message);
+    }
+  };
 
   /**** 프로필 데이터 로드 ****/
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`/api/profile/${userentity.id}`, {
+        const response = await fetch(`/api/profile/${userId}`, {
           method: "GET",
           headers: { Accept: "application/json" },
           credentials: "include",
@@ -80,7 +64,7 @@ export const Web_Profile = () => {
     };
 
     fetchProfile();
-  }, [userentity.id]);
+  }, [userId]);
 
   /**** 비밀번호 재설정 버튼 렌더링 여부 ****/
   const showResetPasswordButton = profileData.platformName === "email";
