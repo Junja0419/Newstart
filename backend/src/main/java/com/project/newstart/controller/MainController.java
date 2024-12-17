@@ -34,7 +34,7 @@ public class MainController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/api/")
+    @GetMapping("/api")
     public ResponseEntity<Map<String, Object>> mainPage() {
 
         Map<String, Object> entities = new HashMap<>();
@@ -46,19 +46,21 @@ public class MainController {
             UserEntity userEntity = userRepository.findByUsername(user.getUsername());
 
             if (userEntity == null) {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(401)
+                        .header(HttpHeaders.CONTENT_TYPE, "application/json")
+                        .body(Map.of("error", "not found user"));
+            } else {
+                List<Headline> headline = headlineService.views();
+                List<Summary> summary = summaryService.views();
+
+                entities.put("userentity", userEntity);
+                entities.put("headline", headline);
+                entities.put("summary", summary);
+
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_TYPE, "application/json")
+                        .body(entities);
             }
-
-            List<Headline> headline = headlineService.views();
-            List<Summary> summary = summaryService.views();
-
-            entities.put("userentity", userEntity);
-            entities.put("headline", headline);
-            entities.put("summary", summary);
-
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_TYPE, "application/json")
-                    .body(entities);
 
         } else {
             return ResponseEntity.status(401)
