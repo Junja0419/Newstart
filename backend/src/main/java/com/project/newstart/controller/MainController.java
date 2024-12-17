@@ -56,10 +56,14 @@ public class MainController {
             entities.put("headline", headline);
             entities.put("summary", summary);
 
-            return ResponseEntity.ok().body(entities);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .body(entities);
 
         } else {
-            return ResponseEntity.status(401).body(Map.of("error", "Unauthorized access"));
+            return ResponseEntity.status(401)
+                    .header(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .body(Map.of("error", "Unauthorized access"));
         }
     }
 }
