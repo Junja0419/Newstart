@@ -51,7 +51,8 @@ export const Web_Profile = () => {
   const handleLogout = async () => {
     try {
       // 서버로 로그아웃 요청 전송
-      const response = await fetch(`/logout`, {
+      const response = await fetch(`${REACT_APP_API__URL}/logout`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",

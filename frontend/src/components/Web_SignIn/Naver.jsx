@@ -4,7 +4,8 @@ import REACT_APP_API__URL from "../../config";
 
 export const Naver = ({ className, classNameformobiletext }) => {
   const handleClick = () => {
-    window.location.href = `/login/oauth2/code/naver`; // 네이버 api 로그인 경로로 이동
+    window.location.href = `${REACT_APP_API__URL}/api/oauth2/authorization/naver`; // 네이버 api 로그인 경로로 이동
+
   };
 
   return (

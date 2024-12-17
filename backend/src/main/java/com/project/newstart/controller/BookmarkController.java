@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/bookmark")
+@RequestMapping("/api/bookmark")
 public class BookmarkController {
     private final UserRepository userRepository;
     private final BookmarkService bookmarkService;

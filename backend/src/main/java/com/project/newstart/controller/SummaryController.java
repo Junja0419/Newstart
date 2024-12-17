@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/summary")
+@RequestMapping("/api/summary")
 public class SummaryController {
 
     private final SummaryService summaryService;

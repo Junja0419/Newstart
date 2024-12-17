@@ -34,6 +34,7 @@ export const Web_Headline = () => {
         credentials: "include",
         mode: "cors",
       }); // 백엔드에서 현재 유저 정보 가져오기
+
       if (!response.ok) throw new Error("Failed to fetch user entity");
       const data = await response.json();
       setUserId(data.userentity.id); // user_id 저장
@@ -52,6 +53,7 @@ export const Web_Headline = () => {
         credentials: "include",
         mode: "cors",
       }); // 유저 ID로 북마크 상태 조회
+
       if (!response.ok) throw new Error("Failed to fetch bookmark status");
       const data = await response.json();
 
