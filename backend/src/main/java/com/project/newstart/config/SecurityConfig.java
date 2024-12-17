@@ -89,6 +89,7 @@ public class SecurityConfig {
         // 권한 설정
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
+                .requestMatchers(HttpMethod.GET, "/api").permitAll() // /api 경로에 대한 GET 요청은 인증 없이 접근 허용
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .requestMatchers(
                         "/**",
