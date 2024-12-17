@@ -92,6 +92,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api").permitAll() // /api 경로에 대한 GET 요청은 인증 없이 접근 허용
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .requestMatchers(
+                        "/",
                         "/**",
                         "/login",
                         "/api/login/**",
@@ -108,19 +109,14 @@ public class SecurityConfig {
                 .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
         );
 
-//        // 인증되지 않은 사용자의 리다이렉트 설정
-//        http.exceptionHandling(exception -> exception
-//                .authenticationEntryPoint((request, response, authException) -> {
-//                    // 사용자가 인증되었는지 확인
-//                    if (request.getUserPrincipal() == null) {
-//                        // 로그인하지 않은 경우에만 리다이렉트
-//                        response.sendRedirect("https://newstart-project-444411.web.app/login");
-//                    } else {
-//                        // 인증된 사용자는 기존 요청 흐름 유지
-//                        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
-//                    }
-//                })
-//        );
+        // 인증되지 않은 사용자의 리다이렉트 설정
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.setContentType("application/json");
+                    response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"인증이 필요합니다.\"}");
+                })
+        );
 
         // OAuth2.0 설정
         http.oauth2Login(oauth2 -> oauth2
