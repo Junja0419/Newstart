@@ -11,7 +11,7 @@ import REACT_APP_API__URL from "../../config";
 export const Web_Bookmark = () => {
   const screenWidth = useWindowWidth();
   const [bookmarks, setBookmarks] = useState([]);
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState(null);
 
   /***** userId 초기화 *****/
   useEffect(() => {
@@ -22,7 +22,6 @@ export const Web_Bookmark = () => {
       console.error("userId가 localStorage에 없습니다.");
     }
   }, []);
-
 
   /***** 북마크 데이터 로드 *****/
   useEffect(() => {

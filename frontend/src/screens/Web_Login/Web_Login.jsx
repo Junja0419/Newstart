@@ -53,10 +53,10 @@ export const Web_Login = () => {
       if (responseData.statusCode === "OK") {
         console.log("로그인 성공");
 
-        // userId localStorage에 저장
         if (responseData.userId) {
-          localStorage.setItem("userId", responseData.userId);
-          console.log(`userId ${responseData.userId} 저장`);
+          const userId = String(responseData.userId);
+          localStorage.setItem("userId", userId);
+          console.log(`userId ${userId} 저장`);
         }
 
         window.location.href = "/"; // 페이지 이동
