@@ -1,5 +1,8 @@
 package com.project.newstart.config;
 
+import com.project.newstart.dto.CustomUserDetails;
+import com.project.newstart.entity.UserEntity;
+import com.project.newstart.repository.UserRepository;
 import com.project.newstart.service.CustomOAuth2UserService;
 import com.project.newstart.service.CustomUserDetailsService;
 import jakarta.servlet.DispatcherType;
@@ -27,10 +30,12 @@ public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomUserDetailsService customUserDetailsService;
+    private final UserRepository userRepository;
 
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomUserDetailsService customUserDetailsService) {
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomUserDetailsService customUserDetailsService, UserRepository userRepository) {
         this.customOAuth2UserService = customOAuth2UserService;
         this.customUserDetailsService = customUserDetailsService;
+        this.userRepository = userRepository;
     }
 
     @Bean
@@ -85,6 +90,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .requestMatchers(
+                        "/**",
                         "/api/login/**",
                         "/api/oauth2/**",
                         "/api/auth/**",
@@ -112,8 +118,22 @@ public class SecurityConfig {
                 .loginPage("https://newstart-project-444411.web.app/auth/email/login")
                 .loginProcessingUrl("/api/auth/email/loginProcess") // /api 경로로 변경
                 .successHandler((request, response, authentication) -> {
+
+                    //유저 아이디
+                    String name = authentication.getName();
+                    //아이디로 유저 엔티디 찾아오기
+                    UserEntity user_entity = userRepository.findByUsername(name);
+                    Long user_id = user_entity.getId();
+
+
                     // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)
-                    response.sendRedirect("https://newstart-project-444411.web.app/"); // 성공 시 React 앱으로 리디렉션
+                    //response.sendRedirect("https://newstart-project-444411.web.app/"); // 성공 시 React 앱으로 리디렉션
+                    //성공 시 JSON 형태로 프론트에 OK 반환
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("{\"statusCode\":\"OK\",\n");
+                    response.getWriter().write("\t\"userId\":"+user_id+"}");
+                    response.getWriter().flush();
                 })
                 .failureHandler((request, response, exception) -> {
                     // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)

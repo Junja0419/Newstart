@@ -23,7 +23,8 @@ export const Web_Bookmark = () => {
     }
   }, []);
 
-  /***** 데이터 로드 *****/
+
+  /***** 북마크 데이터 로드 *****/
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
