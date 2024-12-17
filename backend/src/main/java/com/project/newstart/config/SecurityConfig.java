@@ -57,7 +57,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(List.of(
                 "https://newstart-project-444411.web.app",
-                "https://newstart-project-444411.du.r.appspot.com"
+                "https://newstart-project-444411.du.r.appspot.com" //백엔드URL
         )); // React 배포 URL 허용
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")); // 모든 HTTP 메서드 허용
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin")); // 모든 헤더 허용
@@ -95,7 +95,7 @@ public class SecurityConfig {
                         "/api/posts/**",
                         "/api/comments/**",
                         "/api/error/**"
-                ).permitAll() // /api 경로에 대한 모든 요청 허용
+                ).permitAll() //백엔드URL
                 .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
         );
 
@@ -110,7 +110,7 @@ public class SecurityConfig {
         // Form 로그인 방식 설정
         http.formLogin(form -> form
                 .loginPage("https://newstart-project-444411.web.app/auth/email/login")
-                .loginProcessingUrl("/api/auth/email/loginProcess") // /api 경로로 변경
+                .loginProcessingUrl("/api/auth/email/loginProcess") //백엔드URL
                 .successHandler((request, response, authentication) -> {
                     // CORS 헤더 설정 제거 (rewrites를 통해 동일 출처로 요청 처리)
                     response.sendRedirect("https://newstart-project-444411.web.app/"); // 성공 시 React 앱으로 리디렉션
@@ -124,7 +124,7 @@ public class SecurityConfig {
 
         // Logout 설정
         http.logout(logout -> logout
-                .logoutUrl("/api/logout") // /api 경로로 변경
+                .logoutUrl("/api/logout") //백엔드URL
                 .logoutSuccessUrl("https://newstart-project-444411.web.app/")
                 .deleteCookies("JSESSIONID", "remember-me")
                 .permitAll()
