@@ -35,10 +35,11 @@ export const Web_Profile_Password = () => {
     };
 
     try {
-      const response = await fetch(`${REACT_APP_API__URL}/auth/password`, {
+      const response = await fetch(`/auth/password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json"
         },
         body: JSON.stringify(requestData),
         credentials: "include",

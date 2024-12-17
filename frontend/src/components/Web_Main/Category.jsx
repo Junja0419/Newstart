@@ -80,8 +80,11 @@ export const Category = ({
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await fetch(`${REACT_APP_API__URL}/`, {
+        const response = await fetch(`/`, {
           method: "GET",
+          headers: {
+          Accept: "application/json"
+           },
           credentials: "include",
           mode: "cors",
         });

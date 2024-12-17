@@ -17,7 +17,8 @@ export const Web_Bookmark = () => {
   useEffect(() => {
     const fetchBookmarks = async () => {
       try {
-        const response = await fetch(`${REACT_APP_API__URL}/bookmark/${id}`, {
+        const response = await fetch(`/bookmark/${id}`, {
+          headers: { Accept: "application/json" },
           method: "GET",
           credentials: "include",
           mode: "cors",
@@ -36,9 +37,10 @@ export const Web_Bookmark = () => {
   const handleDeleteBookmark = async (bookmark_id) => {
     try {
       const response = await fetch(
-        `${REACT_APP_API__URL}/bookmark/delete/${bookmark_id}`,
+        `/bookmark/delete/${bookmark_id}`,
         {
           method: "POST",
+          headers: { Accept: "application/json" },
           credentials: "include",
           mode: "cors",
         }

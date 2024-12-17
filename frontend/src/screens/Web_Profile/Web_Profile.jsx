@@ -28,8 +28,9 @@ export const Web_Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`${REACT_APP_API__URL}/profile/${id}`, {
+        const response = await fetch(`/profile/${id}`, {
           method: "GET",
+          headers: { Accept: "application/json" },
           credentials: "include",
           mode: "cors",
         });
@@ -50,10 +51,11 @@ export const Web_Profile = () => {
   const handleLogout = async () => {
     try {
       // 서버로 로그아웃 요청 전송
-      const response = await fetch(`${REACT_APP_API__URL}/logout`, {
+      const response = await fetch(`/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json"
         },
         credentials: "include",
         mode: "cors",

@@ -33,10 +33,12 @@ export const Web_Profile_Setting = () => {
 
     try {
       const response = await fetch(
-        `${REACT_APP_API__URL}/profile/updateProcess`,
+        `/profile/updateProcess`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",
+          Accept: "application/json"
+           },
           body: JSON.stringify(requestData),
           credentials: "include",
           mode: "cors",

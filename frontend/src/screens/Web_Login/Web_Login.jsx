@@ -40,10 +40,12 @@ export const Web_Login = () => {
       console.log("전송할 데이터:", JSON.stringify(bodyData));
 
       const response = await fetch(
-        `${REACT_APP_API__URL}/auth/email/loginProcess`,
+        `/auth/email/loginProcess`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            Accept: "application/json" },
           body: JSON.stringify(bodyData),
           credentials: "include",
           mode: "cors",
