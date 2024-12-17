@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useWindowWidth } from "../../breakpoints";
+import { useNavigate, useParams } from "react-router-dom";
 import MenuForPC from "../../components/MenuForPC/MenuForPC";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import SearchBar from "../../components/Web_Search/SearchBar";
@@ -10,6 +11,8 @@ import REACT_APP_API__URL from "../../config";
 
 export const Web_Search = ({ searchCount = 5 }) => {
   const screenWidth = useWindowWidth();
+  const navigate = useNavigate(); // navigate 함수 정의
+  const { id } = useParams(); // URL에서 id 가져오기
   const [results, setResults] = useState([]); // 검색 결과 상태
   const [searchRecords, setSearchRecords] = useState([]); // 검색 기록 상태
   const [userId, setUserId] = useState(null);
@@ -19,14 +22,15 @@ export const Web_Search = ({ searchCount = 5 }) => {
   /***** userId 초기화 *****/
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
-    if (storedUserId) {
+    if (!id && storedUserId) {
       console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
+      navigate(`/search/${storedUserId}`, { replace: true });
     } else {
       console.error("userId가 localStorage에 없습니다.");
       setLoading(false); // userId가 없을 때 로딩 해제
     }
-  }, []);
+  }, [id, navigate]);
 
   useEffect(() => {
     if (userId) {
@@ -82,6 +86,7 @@ export const Web_Search = ({ searchCount = 5 }) => {
 
       const data = await response.json();
       setSearchRecords(data.search); // 검색 기록 업데이트
+      setError(null);
     } catch (error) {
       console.error("검색 기록 불러오기 실패:", error);
       setError(error); // 에러 상태 업데이트
