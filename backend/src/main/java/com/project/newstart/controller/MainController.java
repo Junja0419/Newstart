@@ -33,7 +33,7 @@ public class MainController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/api")
     public ResponseEntity<Map<String, Object>> mainPage() {
 
         Map<String, Object> entities = new HashMap<>();
