@@ -80,7 +80,7 @@ export const Category = ({
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await fetch(`/api/`, {
+        const response = await fetch(`/api`, {
           method: "GET",
           headers: {
             Accept: "application/json",
