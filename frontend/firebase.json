@@ -14,16 +14,7 @@
                 "source": "/oauth2/authorization/{*path}",
                 "run": {
                     "serviceId": "backend",
-                    "region": "asia-northeast3",
-                    "relativePath": "/login/oauth2/code/{path}"
-                }
-            },
-            {
-                "source": "/",
-                "run": {
-                    "serviceId": "backend",
-                    "region": "asia-northeast3",
-                    "relativePath": "/api"
+                    "region": "asia-northeast3"
                 }
             },
             {
@@ -34,8 +25,18 @@
                 }
             },
             {
-                "source": "**",
-                "destination": "/index.html"
+                "source": "/",
+                "run": {
+                    "serviceId": "frontend",
+                    "region": "asia-northeast3"
+                }
+            }
+        ],
+        "redirects": [
+            {
+                "source": "/oauth2/authorization/{*path}",
+                "destination": "/login/oauth2/code/{path}",
+                "type": 301
             }
         ]
     }

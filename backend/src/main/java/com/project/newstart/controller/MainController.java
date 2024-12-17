@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 public class MainController {
 
     private final HeadlineService headlineService;
@@ -31,7 +32,7 @@ public class MainController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/api")
+    @GetMapping("/")
     public ResponseEntity<Map<String, Object>> mainPage() {
 
         Map<String, Object> entities = new HashMap<>();
