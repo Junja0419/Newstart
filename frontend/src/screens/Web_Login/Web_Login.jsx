@@ -35,7 +35,7 @@ export const Web_Login = () => {
       formData.append("username", email);
       formData.append("password", password);
 
-      // FormData console로 출력
+      // FormData console에 출력
       for (let pair of formData.entries()) {
         console.log(`${pair[0]}: ${pair[1]}`);
       }
@@ -47,7 +47,15 @@ export const Web_Login = () => {
         mode: "cors",
       });
 
-      console.log("응답 상태 코드:", response.status);
+      // 응답 데이터
+      const responseData = await response.json();
+      console.log("서버 응답 데이터:", responseData);
+
+      // 서버에서 statusCode가 "OK"면 /login으로 리다이렉트
+      if (responseData.statusCode === "OK") {
+        console.log("로그인 성공, 리다이렉트합니다.");
+        window.location.href = "/login"; // 리다이렉트
+      }
     } catch (error) {
       console.error("로그인 오류:", error);
     }
