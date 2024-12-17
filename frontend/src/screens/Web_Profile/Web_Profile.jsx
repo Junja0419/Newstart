@@ -80,7 +80,7 @@ export const Web_Profile = () => {
     };
 
     fetchProfile();
-  }, [id]);
+  }, [userentity.id]);
 
   /**** 비밀번호 재설정 버튼 렌더링 여부 ****/
   const showResetPasswordButton = profileData.platformName === "email";
