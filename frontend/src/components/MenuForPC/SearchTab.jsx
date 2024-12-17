@@ -17,7 +17,16 @@ export const SearchTab = ({
     state: stateProp || "default",
   });
   const navigate = useNavigate(); // navigate 함수 정의
-
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+      const storedUserId = localStorage.getItem("userId");
+      if (storedUserId) {
+        console.log("Loaded userId from localStorage:", storedUserId);
+        setUserId(storedUserId);
+      } else {
+        console.error("userId가 localStorage에 없습니다.");
+      }
+    }, []);
   return (
     <div
       className={`for-pc-menu-search-tab state-5-${state.state}`}
@@ -27,7 +36,7 @@ export const SearchTab = ({
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/search/:id")} // 클릭 시 "/search" 경로로 이동
+      onClick={() => navigate(`/search/${userId}`)} // 클릭 시 "/search" 경로로 이동
     >
       {state.state === "default" && (
         <img

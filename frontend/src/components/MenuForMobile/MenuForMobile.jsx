@@ -14,7 +14,20 @@ export const MenuForMobile = ({
     srcforsearchicon="https://c.animaapp.com/WStZlVhZ/img/icon-13@2x.png",
     srcforprofileicon="https://c.animaapp.com/nzh65NNa/img/icon-18@2x.png",
     activeTab = "main",
+    
 }) => {
+  
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+      const storedUserId = localStorage.getItem("userId");
+      if (storedUserId) {
+        console.log("Loaded userId from localStorage:", storedUserId);
+        setUserId(storedUserId);
+      } else {
+        console.error("userId가 localStorage에 없습니다.");
+      }
+    }, []);
   return (
     <div className="navigation-bottom-for-all-mobile">
             <div className="tab-bar-buttons-for-all-mobile">
@@ -29,7 +42,7 @@ export const MenuForMobile = ({
                 }`}>Home</div>
               </Link>
 
-              <Link className="tab-for-all-mobile" to="/bookmark/:id">
+              <Link className="tab-for-all-mobile" to={`/bookmark/${userId}`}>
                 <img
                   className="mobile-navigator-icon-for-all-mobile"
                   src={srcforbookmarkicon}
@@ -39,7 +52,7 @@ export const MenuForMobile = ({
                 }`}>Bookmark</div>
               </Link>
 
-              <Link className="tab-for-all-mobile" to="/search/:id">
+              <Link className="tab-for-all-mobile" to={`/search/${userId}`}>
                 <img
                   className="mobile-navigator-icon-for-all-mobile"
                   src={srcforsearchicon}
@@ -50,7 +63,7 @@ export const MenuForMobile = ({
                 }`}>Search</div>
               </Link>
 
-              <Link className="tab-for-all-mobile" to="/profile/:id">
+              <Link className="tab-for-all-mobile" to={`/profile/${userId}`}>
                 <img
                   className="mobile-navigator-icon-for-all-mobile"
                   src={srcforprofileicon}
