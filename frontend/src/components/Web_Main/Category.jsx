@@ -75,71 +75,44 @@ export const Category = ({
 
   const onTouchEnd = () => setIsDragging(false);
 
-  // 데이터 호출
-  useEffect(() => {
-    const fetchHeadlines = async () => {
-      try {
-        const response = await fetch(`/api`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
-          credentials: "include",
-          mode: "cors",
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json(); // JSON 응답 파싱
-        console.log("서버 응답 데이터: ", data);
-
-        setHeadlines(data.headline);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHeadlines();
-  }, []);
-
-  // 로딩 상태 처리
-  if (loading) return <div>Loading...</div>;
-
-  // 에러 상태 처리
-  if (error) return <div>Error: {error.message}</div>;
-
-  // headlines 데이터가 없을 경우 처리
-  if (!headlines || headlines.length === 0) {
-    return (
-      <div className="empty-category">
-        데이터가 없습니다. <br />
-        다른 탭을 선택해주세요.
-      </div>
-    );
-  }
-
-  // //로컬 데이터 호출
+  // // 데이터 호출
   // useEffect(() => {
   //   const fetchHeadlines = async () => {
   //     try {
-  //       const response = await fetch("/headlines.json");
-  //       if (!response.ok) throw new Error("Failed to load data");
-  //       const data = await response.json();
-  //       console.log("Fetched data:", data);
+  //       const response = await fetch(`/api`, {
+  //         method: "GET",
+  //         headers: {
+  //           Accept: "application/json",
+  //         },
+  //         credentials: "include",
+  //         mode: "cors",
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+
+  //       const data = await response.json(); // JSON 응답 파싱
+  //       console.log("서버 응답 데이터: ", data);
+
   //       setHeadlines(data.headline);
   //     } catch (err) {
-  //       console.error("Error fetching headlines:", err);
   //       setError(err);
   //     } finally {
   //       setLoading(false);
   //     }
   //   };
+
   //   fetchHeadlines();
   // }, []);
+
+  // // 로딩 상태 처리
+  // if (loading) return <div>Loading...</div>;
+
+  // // 에러 상태 처리
+  // if (error) return <div>Error: {error.message}</div>;
+
+  // // headlines 데이터가 없을 경우 처리
   // if (!headlines || headlines.length === 0) {
   //   return (
   //     <div className="empty-category">
@@ -148,6 +121,33 @@ export const Category = ({
   //     </div>
   //   );
   // }
+
+  //로컬 데이터 호출
+  useEffect(() => {
+    const fetchHeadlines = async () => {
+      try {
+        const response = await fetch("/response_1734476137842.json");
+        if (!response.ok) throw new Error("Failed to load data");
+        const data = await response.json();
+        console.log("Fetched data:", data);
+        setHeadlines(data.headline);
+      } catch (err) {
+        console.error("Error fetching headlines:", err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHeadlines();
+  }, []);
+  if (!headlines || headlines.length === 0) {
+    return (
+      <div className="empty-category">
+        데이터가 없습니다. <br />
+        다른 탭을 선택해주세요.
+      </div>
+    );
+  }
 
   // 카테고리별 데이터 필터링
   const filteredHeadlines =
