@@ -12,8 +12,19 @@ export const Web_Profile_Setting = () => {
   const screenWidth = useWindowWidth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [userId, setUserId] = useState();
   const { profileData } = location.state; // profile 페이지에서 전달된 데이터
   const [nickname, setNickname] = useState(profileData.nickname); // 닉네임 관리
+
+  /***** userId 초기화 *****/
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.error("userId가 localStorage에 없습니다.");
+    }
+  }, []);
 
   /**** 닉네임 변경 핸들러 ****/
   const handleNickname = (e) => {
@@ -32,22 +43,20 @@ export const Web_Profile_Setting = () => {
     console.log("전송할 데이터:", JSON.stringify(requestData));
 
     try {
-      const response = await fetch(
-        `/api/profile/updateProcess`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json",
-          Accept: "application/json"
-           },
-          body: JSON.stringify(requestData),
-          credentials: "include",
-          mode: "cors",
-        }
-      );
+      const response = await fetch(`/api/profile/updateProcess`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(requestData),
+        credentials: "include",
+        mode: "cors",
+      });
 
       if (response.ok) {
         // 성공적으로 업데이트되면 리다이렉트
-        navigate(`/profile/${profileData.id}`);
+        navigate(`/profile/${userId}`);
       } else {
         console.error("Failed to update profile");
       }

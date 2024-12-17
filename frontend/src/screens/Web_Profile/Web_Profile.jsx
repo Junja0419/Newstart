@@ -23,28 +23,6 @@ export const Web_Profile = () => {
     image_url: "",
     noti_yn: "N",
   });
-  const [userId, setUserId] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // 유저 ID 가져오기 (맨 처음 한 번만 실행)
-  const fetchUserEntity = async () => {
-    try {
-      const response = await fetch(`/api`, {
-        method: "GET",
-        headers: { Accept: "application/json" },
-        credentials: "include",
-        mode: "cors",
-      }); // 백엔드에서 현재 유저 정보 가져오기
-
-      if (!response.ok) throw new Error("Failed to fetch user entity");
-      const data = await response.json();
-      setUserId(data.userentity.id); // user_id 저장
-    } catch (err) {
-      console.error("Error fetching user entity:", err);
-      setError(err.message);
-    }
-  };
 
   /***** userId 초기화 *****/
   useEffect(() => {
