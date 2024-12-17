@@ -17,7 +17,16 @@ export const ProfileTab = ({
     state: stateProp || "default",
   });
   const navigate = useNavigate(); // navigate 함수 정의
-
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+      const storedUserId = localStorage.getItem("userId");
+      if (storedUserId) {
+        console.log("Loaded userId from localStorage:", storedUserId);
+        setUserId(storedUserId);
+      } else {
+        console.error("userId가 localStorage에 없습니다.");
+      }
+    }, []);
   return (
     <div
       className={`for-pc-menu-profile-tab state-6-${state.state}`}
@@ -27,7 +36,7 @@ export const ProfileTab = ({
       onMouseEnter={() => {
         dispatch("mouse_enter");
       }}
-      onClick={() => navigate("/profile/:id")} // 클릭 시 "/profile" 경로로 이동
+      onClick={() => navigate(`/profile/${userId}`)} // 클릭 시 "/profile" 경로로 이동
       
     >
       {state.state === "default" && (
