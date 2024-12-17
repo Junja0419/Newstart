@@ -7,14 +7,13 @@
                 "source": "/oauth2/authorization/{*path}",
                 "destination": "/login/oauth2/code/{path}",
                 "type": 301
-            },
-            {
-                "source": "/",
-                "destination": "/api",
-                "type": 301
             }
         ],
         "rewrites": [
+            {
+                "source": "/",
+                "destination": "/"
+            },
             {
                 "source": "/api/**",
                 "run": {

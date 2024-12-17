@@ -31,6 +31,13 @@ public class MainController {
         this.userRepository = userRepository;
     }
 
+    @GetMapping("/")
+    public ResponseEntity<Void> redirectToApi() {
+        return ResponseEntity.status(302)
+                .header(HttpHeaders.LOCATION, "/api")
+                .build();
+    }
+
     @GetMapping("/api")
     public ResponseEntity<Map<String, Object>> mainPage() {
 
