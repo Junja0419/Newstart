@@ -6,6 +6,7 @@ import com.project.newstart.repository.UserRepository;
 import com.project.newstart.service.CustomOAuth2UserService;
 import com.project.newstart.service.CustomUserDetailsService;
 import jakarta.servlet.DispatcherType;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -107,7 +108,14 @@ public class SecurityConfig {
         // 인증되지 않은 사용자의 리다이렉트 설정
         http.exceptionHandling(exception -> exception
                 .authenticationEntryPoint((request, response, authException) -> {
-                    response.sendRedirect("https://newstart-project-444411.web.app/login");
+                    // 사용자가 인증되었는지 확인
+                    if (request.getUserPrincipal() == null) {
+                        // 로그인하지 않은 경우에만 리다이렉트
+                        response.sendRedirect("https://newstart-project-444411.web.app/login");
+                    } else {
+                        // 인증된 사용자는 기존 요청 흐름 유지
+                        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
+                    }
                 })
         );
 
