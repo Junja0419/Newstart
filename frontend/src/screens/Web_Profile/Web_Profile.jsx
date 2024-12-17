@@ -13,6 +13,7 @@ import REACT_APP_API__URL from "../../config";
 export const Web_Profile = () => {
   const screenWidth = useWindowWidth();
   const navigate = useNavigate(); // navigate 함수 정의
+  const { id } = useParams(); // URL에서 id 가져오기
   const [userId, setUserId] = useState(null);
   const [profileData, setProfileData] = useState({
     id: "",
@@ -27,13 +28,14 @@ export const Web_Profile = () => {
   /***** userId 초기화 *****/
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
-    if (storedUserId) {
+    if (!id && storedUserId) {
       console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
+      navigate(`/profile/${storedUserId}`, { replace: true });
     } else {
       console.error("userId가 localStorage에 없습니다.");
     }
-  }, []);
+  }, [id, navigate]);
 
   /**** 프로필 데이터 로드 ****/
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useWindowWidth } from "../../breakpoints";
 import MenuForMobile from "../../components/MenuForMobile/MenuForMobile";
 import MenuForPC from "../../components/MenuForPC/MenuForPC";
@@ -9,20 +9,23 @@ import "./style.css";
 import REACT_APP_API__URL from "../../config";
 
 export const Web_Bookmark = () => {
+  const navigate = useNavigate(); // navigate 함수 정의
   const screenWidth = useWindowWidth();
   const [bookmarks, setBookmarks] = useState([]);
   const [userId, setUserId] = useState(null);
+  const { id } = useParams(); // URL에서 id 가져오기
 
   /***** userId 초기화 *****/
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
-    if (storedUserId) {
+    if (!id && storedUserId) {
       console.log("Loaded userId from localStorage:", storedUserId);
       setUserId(storedUserId);
+      navigate(`/bookmark/${storedUserId}`, { replace: true });
     } else {
       console.error("userId가 localStorage에 없습니다.");
     }
-  }, []);
+  }, [id, navigate]);
 
   /***** 북마크 데이터 로드 *****/
   useEffect(() => {
