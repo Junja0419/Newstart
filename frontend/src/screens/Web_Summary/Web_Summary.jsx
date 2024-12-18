@@ -15,6 +15,7 @@ export const Web_Summary = () => {
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
   const screenWidth = useWindowWidth();
   const wrapRef = useRef(null); // wrap 요소 참조
+  const isAnimating = useRef(false);
 
   /***** 데이터 로드 *****/
   useEffect(() => {
@@ -43,42 +44,38 @@ export const Web_Summary = () => {
   }, []);
 
   /***** 스크롤 *****/
-  useEffect(() => {
-    let isAnimating = false; // 애니메이션 중인지 여부 플래그
+  const handleScroll = (e) => {
+    if (isAnimating.current) return; // 애니메이션 중이면 이벤트 무시
+    e.preventDefault(); // 기본 스크롤 방지
+    const pageCount = summaryData.length; // 총 페이지 수
 
-    const handleScroll = (e) => {
-      if (isAnimating) return; // 애니메이션 중이면 이벤트 무시
-      e.preventDefault(); // 기본 스크롤 방지
-      const pageCount = summaryData.length; // 총 페이지 수
-
-      // deltaY 값에 따라 페이지 변경
-      if (e.deltaY > 0) {
-        setCurrentPage((prev) => {
-          const nextPage = Math.min(prev + 1, pageCount - 1);
-          if (prev !== nextPage) isAnimating = true; // 페이지 변경 시 애니메이션 시작
-          return nextPage; 
-        });
-      } else if (e.deltaY < 0) {
-        setCurrentPage((prev) => {
-          const prevPage = Math.max(prev - 1, 0);
-          if (prev !== prevPage) isAnimating = true; // 페이지 변경 시 애니메이션 시작
-          return prevPage;
-        });
-      }
-    };
+    // deltaY 값에 따라 페이지 변경
+    if (e.deltaY > 0) {
+      setCurrentPage((prev) => {
+        const nextPage = Math.min(prev + 1, pageCount - 1);
+        if (prev !== nextPage) isAnimating.current = true; // 페이지 변경 시 애니메이션 시작
+        return nextPage; 
+      });
+    } else if (e.deltaY < 0) {
+      setCurrentPage((prev) => {
+        const prevPage = Math.max(prev - 1, 0);
+        if (prev !== prevPage) isAnimating.current = true; // 페이지 변경 시 애니메이션 시작
+        return prevPage;
+      });
+    }
+  };
 
   // 애니메이션 종료 시점 감지 (requestAnimationFrame 사용)
   useEffect(() => {
-    if (isAnimating) {
+    if (isAnimating.current) {
       requestAnimationFrame(() => {
         // 여기서 현재 화면이 실제로 이동 완료된 후 상태를 해제
-        isAnimating = false;
+        isAnimating.current = false;
       });
     }
   }, [currentPage]);
 
-    
-
+  useEffect(() => {
     window.addEventListener("wheel", handleScroll, { passive: false }); // 스크롤 이벤트 등록
 
     return () => {

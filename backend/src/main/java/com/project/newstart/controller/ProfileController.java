@@ -19,9 +19,12 @@ public class ProfileController {
 
     //프로필 조회
     @GetMapping("/{id}")
-    public ResponseEntity<UserEntity> profile_view(@PathVariable("id") Long id) {
+    public ResponseEntity<UserEntity> profile_view(@PathVariable("id") String id) {
 
-        UserEntity userEntity = profileService.viewProfile(id);
+        //형 변환
+        Long user_id = Long.parseLong(id);
+
+        UserEntity userEntity = profileService.viewProfile(user_id);
 
         return ResponseEntity.ok().body(userEntity);
     }

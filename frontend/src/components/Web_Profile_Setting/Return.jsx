@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ArrowLeft from "./ArrowLeft";
 import { useNavigate } from "react-router-dom"; // 페이지 이동을 위한 useNavigate
 import "./style.css";
