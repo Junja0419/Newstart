@@ -12,56 +12,6 @@ export const Web_Main = () => {
   const screenWidth = useWindowWidth();
   const navigate = useNavigate(); // navigate 함수 정의
   const [time, setTime] = useState("08:00");
-  const [headlines, setHeadlines] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // 데이터 호출
-    useEffect(() => {
-      const fetchHeadlines = async () => {
-        try {
-          const response = await fetch(`/api`, {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-            },
-            credentials: "include",
-            mode: "cors",
-          });
-  
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-  
-          const data = await response.json(); // JSON 응답 파싱
-          console.log("서버 응답 데이터: ", data);
-  
-          setHeadlines(data.headline);
-        } catch (err) {
-          setError(err);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchHeadlines();
-    }, []);
-  
-    // 로딩 상태 처리
-    if (loading) return <div>Loading...</div>;
-  
-    // 에러 상태 처리
-    if (error) return <div>Error: {error.message}</div>;
-  
-    // headlines 데이터가 없을 경우 처리
-    if (!headlines || headlines.length === 0) {
-      return (
-        <div className="empty-category">
-          데이터가 없습니다. <br />
-          다른 탭을 선택해주세요.
-        </div>
-      );
-    }
 
   /**** 업데이트 시각 표시 ****/
   useEffect(() => {
@@ -122,7 +72,6 @@ export const Web_Main = () => {
                   <Category
                     classNameForMobileCategoryFrame="web-main-category-size-jojung"
                     stateProp="politics"
-                    headlines={headlines}
                   />
                 </div>
                 {/* 모바일 헤드라인이 있던 곳... */}
@@ -167,10 +116,7 @@ export const Web_Main = () => {
                 </div>
 
                 <div className="menu-bar-wrapper">
-                  <Category 
-                  stateProp="politics"
-                  headlines={headlines}
-                   />
+                  <Category stateProp="politics" />
                 </div>
                 {/* PC용 헤드라인이 자리하던 곳... */}
               </div>
