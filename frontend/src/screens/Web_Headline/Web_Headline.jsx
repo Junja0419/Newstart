@@ -21,7 +21,9 @@ export const Web_Headline = () => {
   // };
   const [bookmarkId, setBookmarkId] = useState(null); // 북마크 ID 저장
   const [userId, setUserId] = useState(null);
-
+  
+  const [headlines, setHeadlines] = useState([]); // 전체 헤드라인 배열
+  const [selectedHeadline, setSelectedHeadline] = useState(null); // 선택된 헤드라인
   /***** userId 초기화 *****/
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
@@ -172,7 +174,7 @@ export const Web_Headline = () => {
         console.log("Fetched data:", data);
 
         if (data.headline && Array.isArray(data.headline)) {
-          setHeadlines(data.headlines); // 전체 헤드라인 배열 저장
+          setHeadlines(data.headline); // 전체 헤드라인 배열 저장
 
           // URL의 headline_id와 매칭되는 객체 찾기
           const matchedHeadline = data.headline.find(
@@ -214,11 +216,11 @@ export const Web_Headline = () => {
           <>
             <div className="frame-for-all-mobile-headline">
               <FrameForMobile
-                press={headline.press}
-                title={headline.title}
-                date={headline.date}
-                content={headline.content}
-                link={headline.link}
+                press={selectedHeadline.press}
+                title={selectedHeadline.title}
+                date={selectedHeadline.date}
+                content={selectedHeadline.content}
+                link={selectedHeadline.link}
                 // 상위에서 관리하는 북마크 상태와 콜백 전달
                 isBookmarked={isBookmarked}
                 onBookmarkChange={handleBookmarkToggle}
@@ -232,11 +234,11 @@ export const Web_Headline = () => {
         {screenWidth >= 1512 && ( //PC용 화면
           <>
             <Frame
-              press={headline.press}
-              title={headline.title}
-              date={headline.date}
-              content={headline.content}
-              link={headline.link}
+              press={selectedHeadline.press}
+              title={selectedHeadline.title}
+              date={selectedHeadline.date}
+              content={selectedHeadline.content}
+              link={selectedHeadline.link}
               // 북마크 상태와 콜백 전달
               isBookmarked={isBookmarked}
               onBookmarkChange={handleBookmarkToggle}
