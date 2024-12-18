@@ -20,7 +20,6 @@ import PoliticsM from "./HeadlineTabForMob/PoliticsM";
 import WorldM from "./HeadlineTabForMob/WorldM";
 
 export const Category = ({
-  headlinesData,
   classNameForMobileCategoryFrame,
   stateProp,
   lineActivate = "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png",
@@ -123,32 +122,32 @@ export const Category = ({
   //   );
   // }
 
-  // //로컬 데이터 호출
-  // useEffect(() => {
-  //   const fetchHeadlines = async () => {
-  //     try {
-  //       const response = await fetch("/response_1734476137842.json");
-  //       if (!response.ok) throw new Error("Failed to load data");
-  //       const data = await response.json();
-  //       console.log("Fetched data:", data);
-  //       setHeadlines(data.headline);
-  //     } catch (err) {
-  //       console.error("Error fetching headlines:", err);
-  //       setError(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchHeadlines();
-  // }, []);
-  // if (!headlines || headlines.length === 0) {
-  //   return (
-  //     <div className="empty-category">
-  //       데이터가 없습니다. <br />
-  //       다른 탭을 선택해주세요.
-  //     </div>
-  //   );
-  // }
+  //로컬 데이터 호출
+  useEffect(() => {
+    const fetchHeadlines = async () => {
+      try {
+        const response = await fetch("/response_1734476137842.json");
+        if (!response.ok) throw new Error("Failed to load data");
+        const data = await response.json();
+        console.log("Fetched data:", data);
+        setHeadlines(data.headline);
+      } catch (err) {
+        console.error("Error fetching headlines:", err);
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHeadlines();
+  }, []);
+  if (!headlines || headlines.length === 0) {
+    return (
+      <div className="empty-category">
+        데이터가 없습니다. <br />
+        다른 탭을 선택해주세요.
+      </div>
+    );
+  }
 
   // 카테고리별 데이터 필터링
   const filteredHeadlines =
@@ -369,7 +368,6 @@ Category.propTypes = {
     "economy",
   ]),
   line: PropTypes.string,
-  headlines: PropTypes.array.isRequired, // headlines를 필수 prop으로 지정
 };
 
 export default Category;
