@@ -20,7 +20,7 @@ import PoliticsM from "./HeadlineTabForMob/PoliticsM";
 import WorldM from "./HeadlineTabForMob/WorldM";
 
 export const Category = ({
-  headlines,
+  headlinesData,
   classNameForMobileCategoryFrame,
   stateProp,
   lineActivate = "https://c.animaapp.com/zuoomGM9/img/line-13-35@2x.png",
@@ -30,7 +30,7 @@ export const Category = ({
     state: stateProp || "politics",
   });
   const isMobile = useMediaQuery({ query: "(max-width: 1511px)" });
-  const [headlines, setHeadlines] = useState([]);
+  const [headlines, setHeadlines] = useState(headlinesData || []);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

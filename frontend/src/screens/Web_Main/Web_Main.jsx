@@ -16,6 +16,20 @@ export const Web_Main = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  /**** 업데이트 시각 표시 ****/
+  useEffect(() => {
+    const now = new Date();
+    const currentHour = now.getHours(); // 현재 시간(0 ~ 23시)
+
+    if (currentHour >= 8 && currentHour < 12) {
+      setTime("08:00");
+    } else if (currentHour >= 12 && currentHour < 18) {
+      setTime("12:00");
+    } else {
+      setTime("18:00");
+    }
+  }, []);
+
   // 데이터 호출
     useEffect(() => {
       const fetchHeadlines = async () => {
@@ -61,21 +75,7 @@ export const Web_Main = () => {
           다른 탭을 선택해주세요.
         </div>
       );
-    }
-
-  /**** 업데이트 시각 표시 ****/
-  useEffect(() => {
-    const now = new Date();
-    const currentHour = now.getHours(); // 현재 시간(0 ~ 23시)
-
-    if (currentHour >= 8 && currentHour < 12) {
-      setTime("08:00");
-    } else if (currentHour >= 12 && currentHour < 18) {
-      setTime("12:00");
-    } else {
-      setTime("18:00");
-    }
-  }, []);
+  }
 
   return (
     <div className="web-main">
