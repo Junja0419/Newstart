@@ -6,6 +6,7 @@ import com.project.newstart.repository.UserRepository;
 import com.project.newstart.service.CustomOAuth2UserService;
 import com.project.newstart.service.CustomUserDetailsService;
 import jakarta.servlet.DispatcherType;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -88,9 +89,12 @@ public class SecurityConfig {
         // 권한 설정
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // OPTIONS 메서드 허용
+                .requestMatchers(HttpMethod.GET, "/api").permitAll() // /api 경로에 대한 GET 요청은 인증 없이 접근 허용
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                 .requestMatchers(
+                        "/",
                         "/**",
+                        "/login",
                         "/api/login/**",
                         "/api/oauth2/**",
                         "/api/auth/**",
@@ -103,6 +107,15 @@ public class SecurityConfig {
                         "/api/error/**"
                 ).permitAll() // /api 경로에 대한 모든 요청 허용
                 .anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
+        );
+
+        // 인증되지 않은 사용자의 리다이렉트 설정
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.setContentType("application/json");
+                    response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"인증이 필요합니다.\"}");
+                })
         );
 
         // OAuth2.0 설정

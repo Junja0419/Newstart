@@ -2,6 +2,13 @@
     "hosting": {
         "public": "build",
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+        "redirects": [
+            {
+                "source": "/oauth2/authorization/{*path}",
+                "destination": "/login/oauth2/code/{path}",
+                "type": 301
+            }
+        ],
         "rewrites": [
             {
                 "source": "/api/**",
@@ -11,8 +18,11 @@
                 }
             },
             {
-                "source": "**",
-                "destination": "/index.html"
+                "source": "/login/oauth2/code/**",
+                "run": {
+                    "serviceId": "backend",
+                    "region": "asia-northeast3"
+                }
             }
         ]
     }

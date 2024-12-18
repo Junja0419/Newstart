@@ -32,13 +32,17 @@ public class SearchController {
 
     //검색 페이지
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> search_detail(@PathVariable("id") Long id) {
+    public ResponseEntity<Map<String, Object>> search_detail(@PathVariable("id") String id) {
+
+        //형 변환
+        Long user_id = Long.parseLong(id);
+
         //사용자 정보
-        UserEntity userEntity = userRepository.findByUserId(id);
+        UserEntity userEntity = userRepository.findByUserId(user_id);
 
         Map<String, Object> entitys = new HashMap<>();
 
-        List<Search> searches = searchService.getSearchById(id);
+        List<Search> searches = searchService.getSearchById(user_id);
 
         entitys.put("userentity", userEntity);
         entitys.put("search", searches);

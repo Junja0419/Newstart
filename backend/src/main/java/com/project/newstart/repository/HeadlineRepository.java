@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface HeadlineRepository extends JpaRepository<Headline, Long> {
 
-    //최신순으로 정렬 후 반환 -> 개수 지정 필요
+    //마지막에 저장된 순으로 정렬 후 18개
     @Query(
-            value="SELECT * FROM Headline ORDER BY length(date) DESC, date DESC LIMIT 0,18",
+            value="SELECT * FROM Headline ORDER BY headline_id DESC LIMIT 0,18",
             nativeQuery = true
     )
     List<Headline> getHeadlinesByDate();

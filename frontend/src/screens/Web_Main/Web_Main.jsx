@@ -12,7 +12,6 @@ export const Web_Main = () => {
   const screenWidth = useWindowWidth();
   const navigate = useNavigate(); // navigate 함수 정의
   const [time, setTime] = useState("08:00");
-
   /**** 업데이트 시각 표시 ****/
   useEffect(() => {
     const now = new Date();
