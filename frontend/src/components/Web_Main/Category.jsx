@@ -29,7 +29,7 @@ export const Category = ({
     state: stateProp || "politics",
   });
   const isMobile = useMediaQuery({ query: "(max-width: 1511px)" });
-  const [headlines, setHeadlines] = useState(headlinesData || []);
+  const [headlines, setHeadlines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
