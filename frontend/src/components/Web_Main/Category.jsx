@@ -126,7 +126,7 @@ export const Category = ({
   useEffect(() => {
     const fetchHeadlines = async () => {
       try {
-        const response = await fetch("/response_1734476137842.json");
+        const response = await fetch("/1234response.json");
         if (!response.ok) throw new Error("Failed to load data");
         const data = await response.json();
         console.log("Fetched data:", data);
